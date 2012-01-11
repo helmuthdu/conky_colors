@@ -1,0 +1,17 @@
+#!/bin/bash
+#
+#by helmuthdu
+
+level="\${battery_percent BAT0}"
+
+	if [ $level -lt 10 ]; then
+		echo "\${color0}\${font Poky:size=14}1\${font}\${color}\${voffset -1}"
+	elif [ $level -ge 10 ] && [ $level -le 20 ]; then
+		echo "\${color0}\${font Poky:size=14}2\${font}\${color}\${voffset -1}"
+	elif [ $level -ge 21 ] && [ $level -le 60 ]; then
+		echo "\${color0}\${font Poky:size=14}3\${font}\${color}\${voffset -1}"
+	elif [ $level -ge 61 ] && [ $level -le 95 ]; then
+		echo "\${color0}\${font Poky:size=14}4\${font}\${color}\${voffset -1}"
+	else
+		echo "\${color0}\${font Poky:size=14}5\${font}\${color}\${voffset -1}"
+	fi

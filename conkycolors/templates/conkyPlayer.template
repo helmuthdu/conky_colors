@@ -1,0 +1,5 @@
+${image /tmp/conkyCover.png -s 63x55 -p 24,278}${voffset 4}${color0}${font Musicelements:size=18}z${font}${voffset -8}${goto 32}Status:${alignr}${color2}[--datatype=ST]${color}
+${voffset 4}${color}${goto 95}${color2}[--datatype=AR]${color}
+${color2}${goto 95}[--datatype=AL]${color}
+${color2}${goto 95}[--datatype=TI]${color}
+${color2}${goto 95}[--datatype=PT]/[--datatype=LE]${color}

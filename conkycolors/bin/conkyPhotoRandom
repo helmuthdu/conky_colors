@@ -1,0 +1,59 @@
+#!/bin/bash
+#
+# Photo in conky
+# by helmuthdu and paulvictor
+
+source="/usr/share/backgrounds/"
+#source="/home/helmuth/Imagens/deviantART/"
+photo="/tmp/conkyPhoto.png"
+#choose your theme: 1,2 or 3
+theme=1
+filename=`find $source -type f | shuf -n1`
+
+	cp "$filename" "$photo"
+
+	width=`identify -format %w "$photo"`
+	height=`identify -format %h "$photo"`
+	picture_aspect=`echo $width - $height | bc`
+	v_aligh=`echo $height/100 | bc | sed 's/..[0-9]//'`
+
+	if [ $picture_aspect -gt "0" ]; then
+		convert "$photo" -thumbnail 280x175 "$photo"
+		convert "$photo" -gravity center -crop 175x125+0+0 +repage "$photo"
+	else
+		convert "$photo" -thumbnail 175x280 "$photo"
+		convert "$photo" -crop 175x125+0+$v_aligh +repage "$photo"
+	fi
+
+	if [ $theme = "1" ]; then
+	# Theme 1
+		convert "$photo"\
+			-bordercolor snow -border 4.5\
+			-bordercolor gray55 -border 1 \
+			-background  black  \( +clone -shadow 40x2+1+1 \) +swap \
+			-background  none -flatten \
+		"$photo"
+	elif [ $theme = "2" ]; then
+	# Theme 2
+		convert -page +2+2 "$photo"\
+			-bordercolor gray10 -border 1\
+			-background  black  \( +clone -shadow 40x4+2+2 \) +swap \
+			-background  none -flatten \
+		$photo
+	elif [ $theme = "3" ]; then
+	# Theme 3
+		convert "$photo" \
+			-bordercolor snow -border 4.5\
+			-bordercolor gray55 -border 1 \
+			-bordercolor none  -background  none \
+			\( -clone 0 -rotate `convert null: -format '%[fx:rand()*30-15]' info:` \) \
+			\( -clone 0 -rotate `convert null: -format '%[fx:rand()*30-15]' info:` \) \
+			\( -clone 0 -rotate `convert null: -format '%[fx:rand()*30-15]' info:` \) \
+			-delete 0 -border 175x125 -gravity center \
+			-crop 300x185+0+0 +repage -flatten -trim +repage \
+			-background black \( +clone -shadow 40x2+1+1 \) +swap \
+			-background none  -flatten \
+		"$photo"
+	fi
+
+exit 0

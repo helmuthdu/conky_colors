@@ -1,0 +1,31 @@
+#!/bin/bash
+# By helmuthdu
+
+MIN="min"
+MAX="max"
+CUR="cur"
+HUMIDITY="hum"
+UNIT="c"
+
+
+if [ "$3" == "$UNIT" ]; then
+	if [ "$1" == "$CUR" ]; then
+		curl -s --connect-timeout 30 "http://newsrss.bbc.co.uk/weather/forecast/$2/ObservationsRSS.xml" | sed -n '/Temperature/p' | sed -e 's/&#xB0;/ /g' | sed -e 's/&#37;/%/g' | sed 's/^.*Temperature: //' | sed 's/ C.*$//'
+	elif [ "$1" == "$MAX" ]; then
+		curl -s --connect-timeout 30 "http://newsrss.bbc.co.uk/weather/forecast/$2/Next3DaysRSS.xml" | sed -n '/Max Temp/p' | sed '2!d' | sed -e 's/&#xB0;/ /g' | sed -e 's/&#37;/%/g' | sed 's/<[^>]*>//g' | sed 's/^.*Max Temp: //' | sed 's/ C.*$//'
+	elif [ "$1" == "$MIN" ]; then
+		curl -s --connect-timeout 30 "http://newsrss.bbc.co.uk/weather/forecast/$2/Next3DaysRSS.xml" | sed -n '/Max Temp/p' | sed '2!d' | sed -e 's/&#xB0;/ /g' | sed -e 's/&#37;/%/g' | sed 's/<[^>]*>//g' | sed 's/^.*Min Temp: //' | sed 's/ C.*$//'
+	elif [ "$1" == "$HUMIDITY" ]; then
+		curl -s --connect-timeout 30 "http://newsrss.bbc.co.uk/weather/forecast/$2/Next3DaysRSS.xml" | sed -n '/Max Temp/p' | sed '2!d' | sed -e 's/&#xB0;/ /g' | sed -e 's/&#37;/%/g' | sed 's/<[^>]*>//g' | sed 's/^.*Humidity: //' | sed 's/%.*$//'
+	fi
+else
+	if [ "$1" == "$CUR" ]; then
+		curl -s --connect-timeout 30 "http://newsrss.bbc.co.uk/weather/forecast/$2/ObservationsRSS.xml" | sed -n '/Temperature/p' | sed -e 's/&#xB0;/ /g' | sed -e 's/&#37;/%/g' | sed 's/^.*Temperature: [0-9]* C (//' | sed 's/ F.*$//'
+	elif [ "$1" == "$MAX" ]; then
+		curl -s --connect-timeout 30 "http://newsrss.bbc.co.uk/weather/forecast/$2/Next3DaysRSS.xml" | sed -n '/Max Temp/p' | sed '2!d' | sed -e 's/&#xB0;/ /g' | sed -e 's/&#37;/%/g' | sed 's/^.*Max Temp: [0-9]* C (//' | sed 's/ F.*$//'
+	elif [ "$1" == "$MIN" ]; then
+		curl -s --connect-timeout 30 "http://newsrss.bbc.co.uk/weather/forecast/$2/Next3DaysRSS.xml" | sed -n '/Max Temp/p' | sed '2!d' | sed -e 's/&#xB0;/ /g' | sed -e 's/&#37;/%/g' | sed 's/^.*Min Temp: [0-9]* C (//' | sed 's/ F.*$//'
+	elif [ "$1" == "$HUMIDITY" ]; then
+		curl -s --connect-timeout 30 "http://newsrss.bbc.co.uk/weather/forecast/$2/Next3DaysRSS.xml" | sed -n '/Max Temp/p' | sed '2!d' | sed -e 's/&#xB0;/ /g' | sed -e 's/&#37;/%/g' | sed 's/<[^>]*>//g' | sed 's/^.*Humidity: //' | sed 's/%.*$//'
+	fi
+fi

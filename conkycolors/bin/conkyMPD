@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+#by helmuthdu
+
+echo "\${voffset 4}\${color0}\${font Musicelements:size=18}z\${font}\${color}\${voffset -8}\${goto 32}Status:\${alignr}\${color2}\$mpd_status\${color}"
+echo "\${voffset 4}\${goto 32}\${color2}\$mpd_artist\${color}"
+echo "\${goto 32}\${color2}\$mpd_album\${color}"
+echo "\${goto 32}\${color2}\$mpd_title\${color}"
+echo "\${voffset 4}\${goto 32}\${color2}\$mpd_elapsed/\$mpd_length\${color} \${alignr}\${color2}\${mpd_bar 8,60}\${color}"

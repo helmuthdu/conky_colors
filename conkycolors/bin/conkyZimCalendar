@@ -1,0 +1,16 @@
+#! /bin/sh
+DIR=$(conky-colors --finddir=scripts/conkyZimCalendar.py)
+pythoncmd="$DIR/scripts/conkyZimCalendar.py$@"
+
+if [ -f /usr/bin/python2 ]; then
+	cmd="/usr/bin/python2 $pythoncmd"
+elif [ -f /usr/bin/python2.7 ] ; then
+	cmd="/usr/bin/python2.7 $pythoncmd"
+elif [ -f /usr/bin/python2.6 ] ; then
+	cmd="/usr/bin/python2.6 $pythoncmd"
+else
+	# here's hoping!
+	cmd="/usr/bin/python $pythoncmd"
+fi
+
+exec $cmd

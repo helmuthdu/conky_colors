@@ -1,0 +1,119 @@
+#!/bin/bash
+
+TASKLOCATION="${HOME}/.conkycolors"
+TASKFILE="${TASKLOCATION}/tasks"
+TASKFILETEMP="${TASKLOCATION}/tasks.tmp"
+
+ADDTASK="add"
+DONETASK="done"
+REMTASK="del"
+LISTTASK="list"
+SHOWTASK="show"
+NEWTASK="new"
+HELP="help"
+
+function usage() {
+cat << EOF
+Usage: $(basename $0) [new|add <task>|done <num>|del <num>|show <num>|list|help]
+
+Options:
+${LISTTASK} - list all tasks
+${NEWTASK}  - create a new list of tasks
+${ADDTASK}  - <task> add a new task to the list
+${DONETASK} - <task> done the task of the list
+${REMTASK}  - <task> remove the task from the list
+${SHOWTASK} - <task> show selected task
+${HELP} - show this help message
+
+EOF
+exit 0
+}
+
+# check for necessary folders and files
+if [ ! -e ${TASKLOCATION} ]
+then
+	mkdir -p ${TASKLOCATION}
+fi
+
+if [ ! -e ${TASKFILE} ]
+then
+	touch ${TASKFILE}
+fi
+
+# default option is to list all tasks
+if [ $# == 0 -o "$1" == "$LISTTASK" ]
+then
+	cat ${TASKFILE}
+	exit 0
+fi
+
+# help option
+if [ "$1" == "$HELP" ]
+then
+	usage
+	exit 0
+fi
+
+# create a new list of tasks
+if [ $# == 0 -o "$1" == "$NEWTASK" ]
+then
+	rm ${TASKFILE}
+	touch ${TASKFILE}
+	exit 0
+fi
+
+# add task action
+if [ "$1" == "$ADDTASK" ]
+then
+	num=$(tail -1 $TASKFILE | cut -d"." -f1)
+	[[ $? != 0 ]] && num=0
+	((num++))
+	shift
+	echo "$num.[ ] $@" >> $TASKFILE
+	exit 0
+fi
+
+# done task action
+if [ "$1" == "$DONETASK" ]
+then
+	if [[ "$2" -gt "0" ]]
+	then
+		sed -i "$2s/\[ \]/\[X\]/"  $TASKFILE
+	else
+		usage
+	fi
+	exit 0
+fi
+
+# remove task action
+if [ "$1" == "$REMTASK" ]
+then
+	if [[ "$2" -gt "0" ]]
+	then
+		sed -i "s/^$2.*$//" $TASKFILE
+		sed -i '/^\s*$/d' $TASKFILE
+		sed -i 's/^.*\.//' $TASKFILE
+		awk '{ print NR"."$0 }' $TASKFILE >> $TASKFILETEMP
+		mv $TASKFILETEMP $TASKFILE
+	else
+		usage
+	fi
+	exit 0
+fi
+
+# show a task
+if [ "$1" == "$SHOWTASK" ]
+then
+	if [[ "$2" -gt "0" ]]
+	then
+		cat $TASKFILE | grep "$2\."
+		[ $? != 0 ] && echo "No such task" >&2
+	else
+		usage
+	fi
+	exit 0
+fi
+
+echo "Uknown option: $1" >&2 && usage
+
+# vim: nospell

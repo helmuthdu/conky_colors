@@ -1,0 +1,352 @@
+7.0.6(2011-09-14)
+* Updated openlogo.ttf font
+* Fixed wireless signal display
+* Updated translations
+7.0.5(2011-09-09)
+* Fixed bugs in cairo and default mode
+* Added translation support to sls mode
+* New themes
+* More bugfixes
+7.0.4(2011-09-08)
+* Fixes problems with nil values in all cairo scripts
+* Minor changes is SLS mode
+7.0.1(2011-08-10)
+* Fixed themes with --dark option
+* Code clean
+* Bugfixes
+7.0(2011-08-09)
+New sls mode:
+	--sls - Enable SLS-conky mode
+	options avaliable with this mode:
+	--nobg option
+	--weather=(area_id) option
+	--user=<username> - Type your gmail username
+	--passwd=<password> - Type your gmail password
+* Three new themes: agata, sapphire and ruby
+* Lots of improviments in all cairo-scripts
+* Added conkyZimCalendar and conkyZimEvents scripts with zim-wiki support
+* Updated scripts
+* Many bugfixes
+6.1.1(2011-08-1)
+* Fixed max/min values in yahooweather and bbcweather
+* Simplify help
+* New clock style in board mode
+6.1(2011-07-27)
+* Added support to the Clementine player
+* Added conkyYahooWeather and conkyBBCWeather scripts
+* Removed all shiki-themes
+* Calendar-Fix in ubuntu
+* GNOME2 and GNOME3 support
+* Minor changes
+6.0(2011-07-26)
+New slim mode:
+	--slim - Enable slim-conky mode
+	options avaliable with this mode:
+	--w=(width) - Set width of your screen
+	--h=(height) - Set height of your screen
+	--nobg option
+	--weather=(area_id) option
+	--unit=(C|F)- Force output temperature either in Celius or Fahrenheit
+* Refactory all cairo scripts, now its easier to create your own cairo set.
+* Fixed memory leak in all cairo scripts
+* Simplified the name of the themes
+* Ubuntu replace Droid-Sans as default font
+* Minor chances
+5.1.2(2011-06-09)
+* Updated conkyClock scripts (Thanks to samsagax)
+5.1.1(2011-06-06)
+* Added option to create a new task in conkyTask
+* Better display of tasks in terminal and conky
+* Cosmetic changes in calendar
+5.1(2011-06-04)
+* Added --task option
+* Added conkyTask script, type "ct -help" at terminal for info
+* Added --yahooweather option, a simple weather monitor
+* Removed --todo option
+5.0.2(2011-06-03)
+* Fixed bug in all HD scripts (Thanks to samsagax)
+* Update Kaivalagi's scripts
+5.0.1(2011-05-26)
+* Work with gnome 3
+5.0(2011-03-30)
+New board mode:
+	--board - Enable board-conky mode
+	options avaliable with this mode:
+	--w=<width> - Set width of your screen
+	--h=<height> - Set height of your screen
+	--cpu=<number> - Set number of cpu cores [max=2]
+	Quad-core support (but it only looks good with resolution superior than 1280x800)
+	--nobg option
+	--weather=(area_id) option
+	--unit=<C|F>- Force output temperature either in Celius or Fahrenheit
+New ring mode, inspired from conky-gray by hardball
+	You have to manual edit the /usr/share/conkycolors/scripts/conkyRingCPU2.lua file for dark and white themes (just change the first lines)
+* Added --wireless option to the conky-cairo mode
+* Added French language (thanks to actarux)
+* Updated all Kaivalagi's scripts
+* Small changes
+* bugfixes
+4.3.5 (2010-11-19)
+* Added old calendar script and added some new calendar options: --calendar, --calendarm(monday as first day) and --calendarp(python calendar)
+* More Bugfixes
+4.3.4 (2010-11-18)
+* New calendar script writen in python
+* More bugfixes
+4.3.3 (2010-11-17)
+* Changed the track time position in the new cairo-cd, cairo-glassy and cairo-case mode
+* Code changes
+* Bug fixes
+(still no fix for the calendar and covers in fedora/archlinux)
+4.3.2 (2010-11-12)
+* Added cairo-cd, cairo-case and cairo-glassy options for Banshee/Rhythmbox/Exaile players in cairo mode
+4.3.1.1 (2010-11-10)
+* Made some little changes to avoid segmentation falt
+* Auto detect the python2 in all system (Work in arch and ubuntu)
+* Fixed bug with --simpleweather option that doesnt set the area code
+* Little improved in the memory icon
+* Added new calendar icon, now will show the right day instead of always display the number 23.
+* Replaced the liberation font in the calendar
+* Dont need to create a local copy to use conky-colors anymore
+* Fixed bug with conkyCover script
+* --dark option now work with elementary theme
+4.3 (2010-11-04)
+Special thanks to crocket for this release
+* Auto detect wrong options
+* Updated all scripts
+* Added some cool options:
+	--datadir=/path/to/datadir - it overrides default datadir
+	--createlocalcopy - it copies the content of system datadir to ~/.conkycolors
+	--nofilecheck - disables checking the presence of files
+	--default_datadir - prints the order of default datadirs in which files are searched by default.
+	--finddir=FILE - this option makes this program find and print out a directory where FILE is located.
+	--argb-value=0-255 - Set the value of own_window_argb_value, the default is %d\n", ARGB_VALUE);
+	--install=local, system, or custom - install generated configuration files to a chosen datadir.
+Many change in how it works, check the readme!
+Soon will arrive a .deb file
+4.2.2 (2010-10-13)
+* Fixed file names with spaces error in conkyPhotoRandom script (thanks to IamStack)
+* Fixed odd behavior with ls passing in things that were not files in conkyPhotoRandom script (thanks to IamStack)
+4.2.1 (2010-10-10)
+* Fixed problem with coverart in conkyRhythmbox script
+* Auto detect the aspect ratio of a cover in conkyCover script.
+* Improved conkyCairo.lua script
+4.2 (2010-09-3)
+* Added new --shape option, using cairo to render rounded rectangles over the widgets in the cairo mode
+* Added --alldark and --alllight options to the cairo mode
+* Updated rhythmbox, exaile and banshee scrips
+4.0.1 (2010-08-24)
+* Removed the unknow info when banshee/exaile/rhythmbox are not opened, and added a single line with the player's name. (cairo and normal mode)
+* Replaced liberation fonts with Droid in conkyHDs scripts
+* Added Bold font in some system info
+* Updated conkyExaile script
+4.0 (2010-08-20)
+New cairo mode:
+	--cairo - Enable cairo-conky mode
+	options avaliable with this mode:
+	--theme=<theme> - Set default theme color (Don't work with skiki-colors/shikidust/dust themes)
+	--dark - Set Dark Brightness
+	--cpu=<number> - Set number of cpu cores
+	--orcpu - Enable the One-Ring-CPU mod, use this with --cpu=<number> option
+	--swap - Enable SWAP
+	--clock=<cairo|bigcairo> - Enable/disable clock widget
+	--rhythmbox=<cairo|lua> - Enable Rhythmbox widget
+	--banshee=<cairo|lua> - Enable Banshee widget
+	--exaile=<cairo|lua> - Enable Banshee widget
+	--network - Enable network widget
+	--unit=<C|F>- Force output temperature either in Celius or Fahrenheit
+* Added Theme support for conkyPhoto scripts
+* New theme: elementary
+* Updated conkyBanshee, conkyForecast and conkyCairo scripts
+* Small changes
+3.20 (2010-07-30)
+* Replaced Liberation Fonts with Droid Fonts as the default font, you have to install ttf-droid package
+* Added --covergloobus option, u must have covergloobus installed and configure it by yourself.
+* Updated all Kaivalagi's scripts
+* Improved conkyPhoto and conkyPhotoRandom scripts
+* Updated italian translations
+* Some small changes
+3.19.7.1 (2010-03-29)
+* Updated dust and ambiance themes
+3.19.7 (2010-03-23)
+* Fixed network detection
+* Added Radiance and Ambiance themes
+* Added bitrate to the datatypes, --datatype=BR to the conkyRhythmbox, conkyExaile and ConkyBanshee scripts
+* Added coverart support back in for exaile
+3.19.6 (2010-03-08)
+* Added --clock=digital option
+* Updated conkyRhythmbox script
+* Added comments in the conkyrc genereted
+3.19.5 (2010-03-05)
+* Updated conkyBanshee and conkyForecast scripts
+* Added Ukrainian Translation (thanks to Kharts )
+3.19.4 (2009-12-30)
+* Added a custom mode to the themes:
+	--theme=custom and then:
+	--default-color=(value)
+	--color0=(value)
+	--color1=(value)
+	--color2=(value)
+* Added "simple" layout to HD widget
+3.19.3 (2009-12-29)
+* Fixes in calendar with --clock=off option
+* Auto-detect the right position of photo and cover widgets, based on what you choose.
+* Added 3 more cover player themes: case, glassy and vinyl(new)
+3.19.2 (2009-12-23)
+* Added new clock style, --clock=lucky
+* Added new "players" layout, inspired in the new mpd script
+* Added new gnome-carbonite and gnome-tribute themes
+* Removed --cover option
+* Added banshee=<cd|vinyl|simple|default> option
+* Added exaile=<cd|vinyl|simple|default> option
+* Added Rhythmbox=<cd|vinyl|simple|default> option
+* Updated Bulgarian Language (thanks to Dushevadeca)
+3.19.1.1 (2009-12-20)
+* Color fix in bbcweather
+3.19.1 (2009-12-18)
+* New MPD script
+* Improved conkyPhoto script, and now use a widescreen mode instead a square;
+* Improved bbcweater widget, show now the max/min temperatures
+* Improved calendar/date widgets, month abreviation in modern clock and removed the first line in calendar
+* Fixed clock speed in NVIDIA widgets
+* Fixed classic/slim scripts in clock widgets
+3.19 (2009-12-03)
+* Added new nvidia widget, very wanted feature! I also need some users feedback because I can't test it :(
+* Added new bbcweater widget, it's a simple weather monitor and don't need any kind of registration
+* Added photord widget, a new random mode for conkyPhoto, you just have to setup your image folder to see the magic ;) (thanks to paulvictor)
+* More organized directory. Also, the main directory was renamed from .conky to .conkycolor
+3.18.5 (2009-11-13)
+.* Fixed cover art display in rhythmbox widget
+* Fixed wrong resized image in --photo widget
+* Better cpu display with --cpu=1 option
+* Gmail don't depend of pidgin widget anymore
+3.18.4 (2009-09-29)
+* Updated banshee script to v.2.01
+* Updated exaile script, now works with exaile 3.0(Coverart ins't working altought)
+* Now --cover=cd option will show banshee, rhythmbox and exaile images instead a blank cd when the program is not running. Old style still avaliable in conkyCover.sh.
+* Changed icons size in rhythmbox, exaile and banshee widget with no --cover option
+3.18.3 (2009-09-23)
+* Added swap icon
+* Added --clock=default option
+* Changed --hd=classic to --hd=default option
+* Updated Italian translation (thanks to theunnamed)
+* Minor changes
+3.18.2 (2009-09-17)
+* Better makefile, now ask you if you want to replace conkyPlayer.template, conkyCover.sh and conkyForecast.template files and create a backup if yes
+* Fixed bug in hd widget when you have more than 4 partitions
+* Added new hd options: --hd=classic, --hd=meerkat and --hd=mix
+* Added hdtemp1, hdtemp2, hdtemp3 and hdtemp4 options
+* Added Bulgarian Translation (thanks to Dushevadeca)
+* Added weatherplus translation
+* Minor changes in weatherplus widget
+* Updated conkyForecast.py script to v2.09
+3.18.1 (2009-09-08)
+* Fixed "distro" option
+* Updated German Translation
+* Removed WD option in weatherplus widget
+* Minor changes in system, calendar, hd and weather widgets
+3.18
+* New Photo widget with two themes, you have to edit conkyPhoto.sh to define the photo and the theme.
+* Added vinyl theme in cover option, --cover=<cd|vinyl>
+3.17
+* Complete new system widget
+* Improved "players" widget with --cover option
+* Default cpu value is 2 now
+* A LOTS of minor changes
+3.16 (2009-08-18)
+* Complete new cover art with cd theme for banshee, exaile and rhythmbox widget, --cover option.
+* New signal icon in network widget
+* New updates icon
+* Misc changes
+* Bug fixes in shiki colors and dust themes
+3.15 (2009-08-14)
+* Complete new HD widget
+* Complete new Network widget
+* Now conkyForecast work with every distro, don't need to install anything anymore!
+* Removed --powerb option
+* Removed --updates=pacman option, only work with apt-get now. Just type --updates
+* New battery icon
+* New processes icon
+* New calendar icon
+* Misc changes
+* Bugfixes
+3.14
+* Added new banshee widget
+* Added new Exaile widget
+* Added --nodata option
+* Code clean
+3.13
+* Added new gnome-illustrious and shiki-illustrious themes
+* Changes on shiki-colors themes
+* Updated conkyMail script to version 2.07
+* Minor changes
+3.12
+* Added shiki-dust gnome-dust themes
+* Removed Proton theme
+* Added  CPU temperature widget, --cputemp
+* Better processes widget
+* Better weather widget
+* Now you don't have to configure anything to use --updates=apt-get option
+3.11
+* Added HD Temperature widget
+* New --unit=(C|F) option
+* Removed -i option
+3.10
+* Added processes widget
+* Fixed color bug in network widget
+3.9
+* Added analog clock option (thanks to dennord)
+* Added an assistant script (Thanks to mattnick)
+3.8
+* Added Banshee widget
+* Fix updates widget option
+* Better task script
+3.7
+* Added a To Do widget! (--todo)
+* Bugfixes
+3.6
+* Better Conky-colors themes
+* Added Shiki-colors themes
+* Added Dust Theme
+* Added Proton Theme
+* Script changes
+* Changes in --meerkat style
+3.5
+* Removed notify widget, now updates are displayed in System widget and emails in pidgin widget
+* Removed --mail option
+* Change "--hd meerkat" to "--meerkat"
+* Changes size of icons in rhythmbox widget
+* Added --network (on || off) option
+* Added --hd (on || off) option
+* Added --limit (number) option
+* Added --login (username) (password) option
+* Added --gmail option
+* Added --updates (apt-get || pacman) option
+* Added Polish Language (Thanks to mattnick)
+* Updated all translations
+* Rhythmbox and Pidgin widget are set to auto-hide when they are not running(thanks to HarshReality)
+3.4
+* Add Rhythmbox widget (--rhythmbox on)
+* Add Pidgin widget, default value show only 10 online users, just read the README-conkyPidgin for more info. (--pidgin on)
+* Add Imperial metric option (--imperial)
+* Add powerbattery script (--powerbattery) (thanks to mattnick)
+3.3
+* Integrate help (-h or --help)
+* Add a notification widget that show mail and updates (for debian/ubuntu and archlinux only) (--notify on) (thanks to mattnick)
+3.2
+* A lot of changes in default setup(thanks to Riivo)
+* Add mpd widget (--mpd on)(thanks to Riivo)
+* Default font is now Liberations Sans instead of DejaVu Sans
+* Better calendar widget(thanks to Riivo)
+* Code Clean
+* Bugfix
+* Add weathercode option (ex: --weathercode bbxxccaa)
+* Add side option (--side (left || right))
+* Better Makefile
+3.1
+* Automatic detect mountpoint (default=/media) (thanks to meerkat)
+3.0
+* Now conky-colors is a script generator
+* Add noble color theme
+* update all scripts
+* Added a calendar script(thanks to Riivo)
+* Fix 3G connection(thanks to GoddamnDevil)
