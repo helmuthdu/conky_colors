@@ -1,2 +1,0 @@
-${color1}${font Liberation Sans:size=11:style=Bold}[imagename]${color2}${font Liberation Sans:size=8}([imageurl])
-${image [imagepath] -n -p 0,0 -s [imagewidth]x[imageheight]}

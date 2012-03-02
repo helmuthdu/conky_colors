@@ -15,15 +15,23 @@ function rgb_to_r_g_b(colour, alpha)
 end
 
 -------------------------------------------------------------------------------
+--                                                                 get_user_dir
+-- return user dir
+--
+function get_user_dir()
+	local f = assert(io.popen("conky-colors --localdir"))
+	local s = assert(f:read('*l'))
+	f:close()
+	return s
+end
+
+-------------------------------------------------------------------------------
 --                                                             get_weather_info
 -- return weather info
 --
-function get_weather_info(data, day, area_code)
-	local f = assert(io.popen("conky-colors --systemdir"))
+function get_weather_info(dataType, dataPeriod, dataFile)
+	local f = assert(io.popen("sed -n \'" .. dataType .. "\' " .. get_user_dir() .. "/Weather/" .. dataPeriod .. "/" .. dataFile ))
 	local s = assert(f:read('*l'))
-	f:close()
-	f = assert(io.popen("sh " .. s .. "/bin/conkyForecast --location=" .. area_code .. " --datatype=" .. data .. " --startday=" .. day)) -- runs command
-	s = assert(f:read('*l'))
 	f:close()
 	return s
 end
@@ -595,13 +603,13 @@ function conky_main(color, theme, drawbg, draw_weather, area_code)
 		bga = 0.4
 	else
 		bgc = 0x1e1c1a
-		bga = 0.7
+		bga = 0.8
 	end
 
 	local theme = ("0x" .. theme)
 	local w = conky_window.width
 	local h = conky_window.height
-	local hori_space = w*0.08
+	local hori_space = w*0.07
 	local vert_space = h*0.5
 	local xp = hori_space
 	local yp = vert_space
@@ -626,65 +634,55 @@ function conky_main(color, theme, drawbg, draw_weather, area_code)
 	if color == "white" then
 		bgc = 0x1e1c1a
 		fgc = 0x1e1c1a
-		bga = 0.4
+		bga = 0.15
 		fga = 0.8
 	else
 		bgc = 0xffffff
 		fgc = 0xffffff
-		bga = 0.2
+		bga = 0.05
 		fga = 0.8
 	end
 
 	if draw_weather == "on" then
 		settings = {--DAYS NAME
-			txt=get_day_name("+%A", "\"0 days\""),
-			x=w/2.1             , y=h/1.8          ,
-			txt_weight=1        , txt_size=w*0.025 ,
+			txt=conky_parse("${time %H:}"),
+			x=w/1.85             , y=h/1.2          ,
+			txt_weight=1        , txt_size=w*0.04 ,
 			txt_fg_colour=theme , txt_fg_alpha=fga ,
+			font = "Digital Readout Thick Upright"
 		};display_text(settings)
 		settings = {--DAYS NAME
-			txt=get_day_name("+%A", "\"1 days\""),
-			x=w/2.1-60          , y=h/1.8+20       ,
-			txt_weight=1        , txt_size=w*0.025 ,
-			txt_fg_colour=theme , txt_fg_alpha=0.3 ,
-		};display_text(settings)
-		settings = {--DAYS NAME
-			txt=get_day_name("+%A", "\"2 days\""),
-			x=w/2.1+60          , y=h/1.8-20       ,
-			txt_weight=1        , txt_size=w*0.025 ,
-			txt_fg_colour=theme , txt_fg_alpha=0.2 ,
-		};display_text(settings)
-		settings = {--DAYS INFO
-			txt="[" .. get_weather_info("CC", 1, area_code) .. "]",
-			x=w/1.9               , y=h/1.5             ,
-			txt_weight=1        , txt_size=w*0.025*.3 ,
-			txt_fg_colour=theme , txt_fg_alpha=fga    ,
-		};display_text(settings)
-		settings = {--DAYS INFO
-			txt="[" .. get_weather_info("CC", 2, area_code) .. "]",
-			x=w/1.9-60            , y=h/1.5+20          ,
-			txt_weight=1        , txt_size=w*0.025*.3 ,
-			txt_fg_colour=theme , txt_fg_alpha=0.3    ,
-		};display_text(settings)
-		settings = {--DAYS INFO
-			txt="[" .. get_weather_info("CC", 3, area_code) .. "]",
-			x=w/1.9+60            , y=h/1.5-20          ,
-			txt_weight=1        , txt_size=w*0.025*.3 ,
-			txt_fg_colour=theme , txt_fg_alpha=0.2    ,
+			txt=conky_parse("${time %M}"),
+			x=w/1.695             , y=h/1.2          ,
+			txt_weight=1        , txt_size=w*0.04 ,
+			txt_fg_colour=theme , txt_fg_alpha=fga ,
+			font = "Digital Readout Thick Upright"
 		};display_text(settings)
 		settings = {--DAYS TEMP
-			txt=get_weather_info("HT", 1, area_code),
-			x=w/1.9               , y=h/1.1             ,
-			txt_weight=1        , txt_size=w*0.025*.8 ,
-			txt_fg_colour=theme , txt_fg_alpha=0.6    ,
+			txt="Temp: " .. get_weather_info("1p", "RightNow", "temperatures_rn") .. "C°",
+			x=w/2.38               , y=h/2.6             ,
+			txt_weight=0        , txt_size=w*0.01 ,
+			txt_fg_colour=theme , txt_fg_alpha=fga    ,
+		};display_text(settings)
+		settings = {--DAYS TEMP
+			txt=conky_parse("${time %d}") .. " " .. conky_parse("${time %b}") .. " " .. conky_parse("${time %Y}"),
+			x=w/2.40               , y=h/1.6             ,
+			txt_weight=0        , txt_size=w*0.01 ,
+			txt_fg_colour=theme , txt_fg_alpha=fga    ,
+		};display_text(settings)
+		settings = {--DAYS TEMP
+			txt=conky_parse("${time %A}"),
+			x=w/2.235               , y=h/1.2             ,
+			txt_weight=0        , txt_size=w*0.01 ,
+			txt_fg_colour=theme , txt_fg_alpha=fga    ,
 		};display_text(settings)
 	end
 
 	settings = {--DAYS GRAPH
 		value=tonumber(conky_parse("${time %d}")),
 		value_max=31               ,
-		x=xp                       , y=yp                        ,
-		graph_radius=56            ,
+		x=w/2                     , y=yp                        ,
+		graph_radius=33            ,
 		graph_thickness=5          ,
 		graph_start_angle=215      ,
 		graph_unit_angle=3.6       , graph_unit_thickness=2.6    ,
@@ -697,7 +695,7 @@ function conky_main(color, theme, drawbg, draw_weather, area_code)
 		graduation_radius=28       ,
 		graduation_thickness=0     , graduation_mark_thickness=1 ,
 		graduation_unit_angle=27   ,
-		graduation_fg_colour=theme , graduation_fg_alpha=0.3     ,
+		graduation_fg_colour=theme , graduation_fg_alpha=0.4     ,
 		caption=''                 ,
 		caption_weight=1           , caption_size=10.0           ,
 		caption_fg_colour=fgc      , caption_fg_alpha=fga        ,
@@ -706,8 +704,8 @@ function conky_main(color, theme, drawbg, draw_weather, area_code)
 	settings = {--MONTHS GRAPH
 		value=tonumber(conky_parse("${time %m}")),
 		value_max=12               ,
-		x=xp                       , y=yp                        ,
-		graph_radius=56            ,
+		x=w/2                     , y=yp                        ,
+		graph_radius=33            ,
 		graph_thickness=5          ,
 		graph_start_angle=34       ,
 		graph_unit_angle=9.2       , graph_unit_thickness=8.2    ,
@@ -729,21 +727,21 @@ function conky_main(color, theme, drawbg, draw_weather, area_code)
 	settings = {--SECONDS
 		value=tonumber(conky_parse("${time %S}")),
 		value_max = 60    ,
-		x = xp            , y = yp          ,
+		x = w/2          , y = yp          ,
 		bg_colour = bgc   , bg_alpha = bga  ,
 		fg_colour = theme , fg_alpha = fga  ,
-		radius =45        , thickness = 10  ,
+		radius =25        , thickness = 10  ,
 		start_angle = 0   , end_angle = 360 ,
 		lr = 0            ,
 	};draw_ring(settings)
 
 	settings = {--CLOCK HANDS
-		xc = xp          ,
+		xc = w/2          ,
 		yc = yp          ,
 		colour = bgc     ,
 		alpha = 1        ,
 		show_secs = true ,
-		size = 90        ,
+		size = 40        ,
 	};clock_hands(settings)
 
 	xp = hori_space * 2 + hori_space / 2

@@ -181,19 +181,19 @@ void conkyrc_ring () {
 				fprintf(fp,"${goto 100}${font Ubuntu:style=Bold:size=8}${color2}${freq_g %d}${color} GHZ${font}\n", 0);
 			fprintf(fp,"${goto 100}CPU%d: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu%d}%%${color}${font}\n", 1, 1);
 			fprintf(fp,"${goto 100}CPU%d: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu%d}%%${color}${font}\n", 2, 2);
-			fprintf(fp,"${voffset 12}\n");
+			fprintf(fp,"${voffset 15}\n");
 			fprintf(fp,"${goto 100}${font Ubuntu:style=Bold:size=8}${color2}${freq_g %d}${color} GHZ${font}\n", 0);
 			fprintf(fp,"${goto 100}CPU%d: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu%d}%%${color}${font}\n", 1, 1);
 			fprintf(fp,"${goto 100}CPU%d: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu%d}%%${color}${font}\n", 2, 2);
 		}
 	fprintf(fp,"# |--MEM\n");
-	fprintf(fp,"${voffset 12}\n");
+	fprintf(fp,"${voffset 15}\n");
 	fprintf(fp,"${goto 100}RAM: ${font Ubuntu:style=Bold:size=8}${color1}$memperc%%${color}${font}\n");
 	fprintf(fp,"${goto 100}F: ${font Ubuntu:style=Bold:size=8}${color2}${memeasyfree}${color}${font}\n");
 	fprintf(fp,"${goto 100}U: ${font Ubuntu:style=Bold:size=8}${color2}${mem}${color}${font}\n");
 	//Swap
 	fprintf(fp,"# |--SWAP\n");
-	fprintf(fp,"${voffset 12}\n");
+	fprintf(fp,"${voffset 15}\n");
 	fprintf(fp,"${goto 100}SWAP: ${font Ubuntu:style=Bold:size=8}${color1}$swapperc%%${color}${font}\n");
 	fprintf(fp,"${goto 100}F: ${font Ubuntu:style=Bold:size=8}${color2}${swapmax}${color}${font}\n");
 	fprintf(fp,"${goto 100}U: ${font Ubuntu:style=Bold:size=8}${color2}${swap}${color}${font}\n");
@@ -201,19 +201,19 @@ void conkyrc_ring () {
 	fprintf(fp,"#############\n");
 	fprintf(fp,"# - CLOCK - #\n");
 	fprintf(fp,"#############\n");
-	fprintf(fp,"${voffset 44}\n");
+	fprintf(fp,"${voffset 48}\n");
 	fprintf(fp,"${alignr 40}${time %%d %%b %%Y}\n");
 	fprintf(fp,"${alignr 42}${voffset -2}${font Ubuntu:style=Bold:size=8}${color2}${time %%A}${color}${font}\n");
-	fprintf(fp,"${voffset 12}\n");
+	fprintf(fp,"${voffset 14}\n");
 	//HD
 	fprintf(fp,"##########\n");
 	fprintf(fp,"# - HD - #\n");
 	fprintf(fp,"##########\n");
-	fprintf(fp,"${voffset 12}\n");
+	fprintf(fp,"${voffset 15}\n");
 	fprintf(fp,"${goto 100}/\n");
 	fprintf(fp,"${goto 100}F: ${font Ubuntu:style=Bold:size=8}${color2}${fs_free /}${color}${font}\n");
 	fprintf(fp,"${goto 100}U: ${font Ubuntu:style=Bold:size=8}${color2}${fs_used /}${color}${font}\n");
-	fprintf(fp,"${voffset 12}\n");
+	fprintf(fp,"${voffset 15}\n");
 	fprintf(fp,"${goto 100}/home\n");
 	fprintf(fp,"${goto 100}F: ${font Ubuntu:style=Bold:size=8}${color2}${fs_free /home}${color}${font}\n");
 	fprintf(fp,"${goto 100}U: ${font Ubuntu:style=Bold:size=8}${color2}${fs_used /home}${color}${font}\n");
@@ -222,7 +222,7 @@ void conkyrc_ring () {
 		fprintf(fp,"####################\n");
 		fprintf(fp,"# - MEDIA PLAYER - #\n");
 		fprintf(fp,"####################\n");
-		fprintf(fp,"${voffset -6}\n");
+		fprintf(fp,"${voffset -4}\n");
 		if (cover > 9)
 			fprintf(fp,"${execi 6 %s/bin/conkyCover}", coverdir);
 		fprintf(fp,"${execpi 10 %s/bin/conky%s -t %s/templates/conkyPlayer.template}${voffset -10}\n", playerdir, player, playertemplatedir);
@@ -239,7 +239,7 @@ void conkyrc_ring () {
 		fprintf(fp,"${goto 100}Total: ${font Ubuntu:style=Bold:size=8}${color2}${totalup wlan%d}${color}${font}\n", wlan);
 		fprintf(fp,"${goto 100}Down: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed wlan%d}${color}${font}\n", wlan);
 		fprintf(fp,"${goto 100}Total: ${font Ubuntu:style=Bold:size=8}${color2}${totaldown wlan%d}${color}${font}\n", wlan);
-		fprintf(fp,"${goto 100}Signal: ${font Ubuntu:style=Bold:size=8}${color1}${wireless_link_qual_perc wlan%d}%%${color}${font}\n", wlan);
+		fprintf(fp,"${goto 100}Signal: ${font Ubuntu:style=Bold:size=8}${color1}${wireless_link_qual wlan%d}%%${color}${font}\n", wlan);
 		fprintf(fp,"# |--ETH%d\n", eth);
 		fprintf(fp,"${else}${if_up eth%d}\n", eth);
 		fprintf(fp,"${goto 100}Up: ${font Ubuntu:style=Bold:size=8}${color1}${upspeed eth%d}${color}${font}\n", eth);

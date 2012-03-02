@@ -64,11 +64,8 @@ void help() {
 	printf("\t\t--wlan=<number> - Change wireless device [Default=0]\n");
 	printf("\t\t--ppp=<number> - Change 3g modem device [Default=0]\n");
 	printf("\t--unit=<C|F>- Force output temperature either in Celius or Fahrenheit\n");
-	printf("\t--bbcweather=<AreaID> - Enable weather[Ex: --bbcweather=3849]\n");
-	printf("\t--yahooweather=<AreaID> - Enable weather[Ex: --weather=BRXX0043]\n");
 	printf("\t--weather=<AreaID> - Enable weather[Ex: --weather=BRXX0043]\n");
-	printf("\t--weatherplus - Enable weather+\n");
-	printf("\t--simpleweather=<AreaID> - Enable simple weather[Ex: --simpleweather=BRXX0043]\n");
+	printf("\t--bbcweather=<AreaID> - Enable weather[Ex: --bbcweather=3849]\n");
 	printf("\t--side=<left|right*> - Set the side of conky in your screem\n");
 	printf("\t-------------- CAIRO/RING MODE --------------\n");
 	printf("\t--cairo - Enable cairo-conky mode.\n");

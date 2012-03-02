@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-import sys
 import os
 import subprocess
 
@@ -36,7 +35,7 @@ if os.path.ismount("/home"):
 	else:
 		icon = str(dec)
 	# end calculation icon
-	print ("${voffset -12}${color0}${font Pie charts for maps:size=14}"+icon+"${font}${color}   ${voffset -5}Home: ${font Ubuntu:style=Bold:size=8}${color1}${fs_free_perc /home}%${color} ${alignr}${color2}${fs_free /home}${color}${font}\n")
+	print ("${voffset -6}${color0}${font Pie charts for maps:size=14}"+icon+"${font}${color}   ${voffset -5}Home: ${font Ubuntu:style=Bold:size=8}${color1}${fs_free_perc /home}%${color} ${alignr}${color2}${fs_free /home}${color}${font}\n")
 
 # folder in /media
 for device in os.listdir("/media/"):
@@ -56,5 +55,5 @@ for device in os.listdir("/media/"):
 		else:
 			icon = str(dec)
 		# end calculation dec
-		print ("${voffset -12}${color0}${font Pie charts for maps:size=14}"+icon+"${font}${color}   ${voffset -5}"+device.capitalize()+": ${font Ubuntu:style=Bold:size=8}${color1}${fs_free_perc /media/"+device+"}%${color} ${alignr}${color2}${fs_free /media/"+device+"}${color}${font}\n")
-print ("${voffset -12}")
+		print ("${voffset -6}${color0}${font Pie charts for maps:size=14}"+icon+"${font}${color}   ${voffset -5}"+device.capitalize()+": ${font Ubuntu:style=Bold:size=8}${color1}${fs_free_perc /media/"+device+"}%${color} ${alignr}${color2}${fs_free /media/"+device+"}${color}${font}\n")
+print ("${voffset -6}")

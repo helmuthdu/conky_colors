@@ -15,15 +15,23 @@ function rgb_to_r_g_b(colour, alpha)
 end
 
 -------------------------------------------------------------------------------
+--                                                                 get_user_dir
+-- return user dir
+--
+function get_user_dir()
+	local f = assert(io.popen("conky-colors --localdir"))
+	local s = assert(f:read('*l'))
+	f:close()
+	return s
+end
+
+-------------------------------------------------------------------------------
 --                                                             get_weather_info
 -- return weather info
 --
-function get_weather_info(data, day, area_code)
-	local f = assert(io.popen("conky-colors --systemdir"))
+function get_weather_info(dataType, dataPeriod, dataFile)
+	local f = assert(io.popen("sed -n \'" .. dataType .. "\' " .. get_user_dir() .. "/Weather/" .. dataPeriod .. "/" .. dataFile ))
 	local s = assert(f:read('*l'))
-	f:close()
-	f = assert(io.popen("sh " .. s .. "/bin/conkyForecast --location=" .. area_code .. " --datatype=" .. data .. " --startday=" .. day)) -- runs command
-	s = assert(f:read('*l'))
 	f:close()
 	return s
 end
@@ -644,7 +652,7 @@ function conky_main(color, theme, drawbg, weather_code)
 	cairo_surface_destroy (image);
 
 	-- WEATHER ICON
-	image = cairo_image_surface_create_from_png (get_weather_info ("WI", 0, weather_code))
+	image = cairo_image_surface_create_from_png (get_user_dir() .. "/Weather/r1.png")
 	cairo_set_source_surface (cr, image, 125, 85)
 	cairo_paint (cr);
 	cairo_surface_destroy (image);

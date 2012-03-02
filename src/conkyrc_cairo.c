@@ -227,19 +227,19 @@ void conkyrc_cairo () {
 				else
 					fprintf(fp,"${goto 100}Temp: ${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors | grep 'Core %d' | cut -c16-17}°C${color}${font}\n", i-1);
 				if ( i < cpu)
-					fprintf(fp,"${voffset 12}\n");
+					fprintf(fp,"${voffset 15}\n");
 			}
 		}
 	}
 	fprintf(fp,"# |--MEM\n");
-	fprintf(fp,"${voffset 12}\n");
+	fprintf(fp,"${voffset 15}\n");
 	fprintf(fp,"${goto 100}RAM: ${font Ubuntu:style=Bold:size=8}${color1}$memperc%%${color}${font}\n");
 	fprintf(fp,"${goto 100}F: ${font Ubuntu:style=Bold:size=8}${color2}${memeasyfree}${color}${font}\n");
 	fprintf(fp,"${goto 100}U: ${font Ubuntu:style=Bold:size=8}${color2}${mem}${color}${font}\n");
 	//Swap
 	if (swap == True) {
 		fprintf(fp,"# |--SWAP\n");
-		fprintf(fp,"${voffset 12}\n");
+		fprintf(fp,"${voffset 15}\n");
 		fprintf(fp,"${goto 100}SWAP: ${font Ubuntu:style=Bold:size=8}${color1}$swapperc%%${color}${font}\n");
 		fprintf(fp,"${goto 100}F: ${font Ubuntu:style=Bold:size=8}${color2}${swapmax}${color}${font}\n");
 		fprintf(fp,"${goto 100}U: ${font Ubuntu:style=Bold:size=8}${color2}${swap}${color}${font}\n");
@@ -249,7 +249,7 @@ void conkyrc_cairo () {
 		fprintf(fp,"#############\n");
 		fprintf(fp,"# - CLOCK - #\n");
 		fprintf(fp,"#############\n");
-		fprintf(fp,"${voffset 8}\n");
+		fprintf(fp,"${voffset 15}\n");
 		fprintf(fp,"${alignr 78}${font Ubuntu:style=Bold:size=11}${color2}${time %%H}${time :%%M}${time :%%S}${color}${font}\n");
 		fprintf(fp,"${alignr 66}${voffset -2}${font Ubuntu:style=Bold:size=8}${color2}${time %%A}${color}${font}\n");
 		fprintf(fp,"${alignr 64}${time %%d %%b %%Y}\n");
@@ -259,17 +259,17 @@ void conkyrc_cairo () {
 		fprintf(fp,"#############\n");
 		fprintf(fp,"# - CLOCK - #\n");
 		fprintf(fp,"#############\n");
-		fprintf(fp,"${voffset 92}\n");
+		fprintf(fp,"${voffset 94}\n");
 	}
 	//HD
 	fprintf(fp,"##########\n");
 	fprintf(fp,"# - HD - #\n");
 	fprintf(fp,"##########\n");
-	fprintf(fp,"${voffset 12}\n");
+	fprintf(fp,"${voffset 15}\n");
 	fprintf(fp,"${goto 100}Root: ${font Liberation Sans:style=Bold:size=8}${color1}${fs_free_perc /}%%${color}${font}\n");
 	fprintf(fp,"${goto 100}F: ${font Ubuntu:style=Bold:size=8}${color2}${fs_free /}${color}${font}\n");
 	fprintf(fp,"${goto 100}U: ${font Ubuntu:style=Bold:size=8}${color2}${fs_used /}${color}${font}\n");
-	fprintf(fp,"${voffset 12}\n");
+	fprintf(fp,"${voffset 15}\n");
 	fprintf(fp,"${goto 100}Home: ${font Liberation Sans:style=Bold:size=8}${color1}${fs_free_perc /home}%%${color}${font}\n");
 	fprintf(fp,"${goto 100}F: ${font Ubuntu:style=Bold:size=8}${color2}${fs_free /home}${color}${font}\n");
 	fprintf(fp,"${goto 100}U: ${font Ubuntu:style=Bold:size=8}${color2}${fs_used /home}${color}${font}\n");
@@ -278,7 +278,7 @@ void conkyrc_cairo () {
 		fprintf(fp,"####################\n");
 		fprintf(fp,"# - MEDIA PLAYER - #\n");
 		fprintf(fp,"####################\n");
-		fprintf(fp,"${voffset -4}\n");
+		fprintf(fp,"${voffset 0}\n");
 		if (cover > 9)
 			fprintf(fp,"${execi 6 %s/bin/conkyCover}", coverdir);
 		fprintf(fp,"${execpi 10 %s/bin/conky%s -t %s/templates/conkyPlayer.template}${voffset -10}\n", playerdir, player, playertemplatedir);
@@ -287,7 +287,7 @@ void conkyrc_cairo () {
 		fprintf(fp,"################\n");
 		fprintf(fp,"# - WIRELESS - #\n");
 		fprintf(fp,"################\n");
-		fprintf(fp,"${voffset 12}\n");
+		fprintf(fp,"${voffset 15}\n");
 		fprintf(fp,"${goto 100}%s: ${font Liberation Sans:style=Bold:size=8}${color1}${wireless_link_qual wlan%d}%%${color}${font}\n", sinal, wlan);
 		fprintf(fp,"${alignr 33}${color2}${wireless_essid wlan%d}${color}\n", wlan);
 		fprintf(fp,"${alignr 35}${font Ubuntu:style=Bold:size=8}${color2}${execi 10800 %s/bin/conkyIp}${color}${font}\n", conkyipdir);

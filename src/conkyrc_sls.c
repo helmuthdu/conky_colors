@@ -22,8 +22,7 @@ void conkyrc_sls () {
 		return;
 	}
 
-	const char *forecastdir=finddir("bin/conkyForecast");
-	const char *forecastconfdir=finddir(".conkyForecast.config");
+	const char *forecastdir=finddir("bin/accuweather");
 	const char *conkysls=finddir("scripts/conkySLS.lua");
 
 	//Global Setup
@@ -80,8 +79,8 @@ void conkyrc_sls () {
 	fprintf(fp,"alignment top_right\n");
 	fprintf(fp,"gap_x 5\n");
 	fprintf(fp,"gap_y 25\n");
-	fprintf(fp,"minimum_size 235 450\n");
-	fprintf(fp,"maximum_width 235 450\n");
+	fprintf(fp,"minimum_size 235 0\n");
+	fprintf(fp,"maximum_width 235\n");
 	fprintf(fp,"\n");
 	fprintf(fp,"#########################\n");
 	fprintf(fp,"# - Graphics settings - #\n");
@@ -162,16 +161,9 @@ void conkyrc_sls () {
 	fprintf(fp,"###############\n");
 	fprintf(fp,"# - WEATHER - #\n");
 	fprintf(fp,"###############\n");
-	fprintf(fp,"# For a working weather script you NEED to define, in a user specific config file, a partner id and registration code for the weather.com xoap service. For this purpose copy .conkyForecast.config in %s folder to your home and setup as required.\n", forecastconfdir);
-	fprintf(fp,"# http://www.weather.com/services/xmloap.html\n");
-	fprintf(fp,"${alignr 10}${voffset 4}${font Ubuntu:style=Bold:size=10}${color2}${execpi 12000 %s/bin/conkyForecast --datatype=HT --location=BRXX0043}${font}${color}\n", forecastdir);
-	char fixalign;
-	printf("(align-fix) ubuntu distro? [y][n]: ");
-	getchar(); scanf("%c",&fixalign);
-	if (fixalign == 'y')
-		fprintf(fp,"${voffset 50}\n");
-	else
-		fprintf(fp,"${voffset 62}\n");
+	fprintf(fp,"${execi 600 bash %s/bin/conkyWeather \"%s\"}\n", forecastdir,weather_code);
+	fprintf(fp,"${alignr 10}${voffset -8}${font Ubuntu:style=Bold:size=10}${color2}${execi 600 sed -n '1p' $HOME/.conkycolors/Weather/RightNow/temperatures_rn}${font}${color}\n");
+	fprintf(fp,"${voffset 60}\n");
 	fprintf(fp,"#################\n");
 	fprintf(fp,"# - PROCESSES - #\n");
 	fprintf(fp,"#################\n");
@@ -214,7 +206,7 @@ void conkyrc_sls () {
 	fprintf(fp,"${goto 65}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totaldown ppp0}${color}${font}\n", total);
 	fprintf(fp,"${goto 65}%s: ${color2}${addr eth0}${color}\n", localip);
 	fprintf(fp,"${else}${voffset 4}${color0}${font PizzaDude Bullets:size=12}4${font}${color}${goto 32}%s${voffset 14}${endif}${endif}${endif}\n", nonet);
-	fprintf(fp,"${voffset -35}\n");
+	fprintf(fp,"${voffset -40}\n");
 
 	fclose(fp);
 }

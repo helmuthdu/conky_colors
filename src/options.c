@@ -295,23 +295,11 @@ int options (int argc, char *argv[]) {
 			snprintf(weather_code, 31, "%s", value);
 			set_weather = 1;
 		}
-		else OPTION_WITH_VALUE("--simpleweather", key)
-		{
-			snprintf(weather_code, 31, "%s", value);
-			set_weather = 2;
-		}
 		else OPTION_WITH_VALUE("--bbcweather", key)
 		{
 			bbccode = atoi(value);
-			set_weather = 3;
+			set_weather = 2;
 		}
-		else OPTION_WITH_VALUE("--yahooweather", key)
-		{
-			snprintf(weather_code, 31, "%s", value);
-			set_weather = 4;
-		}
-		else OPTION("--weatherplus", key)
-			weatherplus = True;
 		else OPTION("--unit", key)
 		{
 			OPTION("F", value)

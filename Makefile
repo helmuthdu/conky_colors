@@ -17,7 +17,6 @@ install: conky-colors conkyrc
 	cp -v -r conkycolors $(DESTDIR)/usr/share
 	ln -fs $(DESTDIR)/usr/share/conkycolors/bin/conkyTask $(DESTDIR)/usr/bin/ct
 	cp -v fonts/conkycolors/*.ttf fonts/conkycolors/*.TTF $(DESTDIR)/usr/share/fonts/TTF/conky
-	cp -v fonts/conkycolors/*.otf $(DESTDIR)/usr/share/fonts/OTF/conky
 	chmod +x $(DESTDIR)/usr/share/conkycolors/scripts/*
 	chmod +x $(DESTDIR)/usr/share/conkycolors/bin/*
 	chmod -R 755 $(DESTDIR)/usr/share/conkycolors/
@@ -31,9 +30,6 @@ uninstall:
 	rm -rf $(DESTDIR)/usr/share/conkycolors
 	rm $(DESTDIR)/usr/bin/conky-colors
 	rm $(DESTDIR)/usr/bin/ct
-	for file in $$(find $(CWD)/fonts/conkycolors -iname *.otf -print0); do \
-		rm $(DESTDIR)/usr/share/fonts/OTF/conky/$$(basename $$file); \
-		done
 	for file in $$(find $(CWD)/fonts/conkycolors -iname *.ttf -print0); do \
 		rm $(DESTDIR)/usr/share/fonts/TTF/conky/$$(basename $$file); \
 		done

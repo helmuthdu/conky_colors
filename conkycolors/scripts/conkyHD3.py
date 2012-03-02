@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-import sys
 import os
 import subprocess
 
@@ -18,7 +17,7 @@ elif dec < 1:
 else:
 	icon = str(dec)
 print ("${voffset 3}${color0}${font Pie charts for maps:size=15}"+icon+"${font}${color}   ${voffset -9}Root: ${font Ubuntu:style=Bold:size=8}${color1}${fs_free_perc /}%${color}${font}\n")
-print ("${voffset -12}${offset 29}F: ${font Ubuntu:style=Bold:size=8}${color2}${fs_free /}${color}${font} U: ${font Ubuntu:style=Bold:size=8}${color2}${fs_used /}${color}${font}\n")
+print ("${voffset -10}${offset 29}F: ${font Ubuntu:style=Bold:size=8}${color2}${fs_free /}${color}${font} U: ${font Ubuntu:style=Bold:size=8}${color2}${fs_used /}${color}${font}\n")
 
 # /home folder (if its a separate mount point)
 if os.path.ismount("/home"):
@@ -37,8 +36,8 @@ if os.path.ismount("/home"):
 	else:
 		icon = str(dec)
 	# end calculation icon
-	print ("${voffset -12}${color0}${font Pie charts for maps:size=15}"+icon+"${font}${color}   ${voffset -9}Home: ${font Ubuntu:style=Bold:size=8}${color1}${fs_free_perc /home}%${color}${font}\n")
-	print ("${voffset -12}${offset 29}F: ${font Ubuntu:style=Bold:size=8}${color2}${fs_free /home}${color}${font} U: ${font Ubuntu:style=Bold:size=8}${color2}${fs_used /home}${color}${font}\n")
+	print ("${voffset -10}${color0}${font Pie charts for maps:size=15}"+icon+"${font}${color}   ${voffset -9}Home: ${font Ubuntu:style=Bold:size=8}${color1}${fs_free_perc /home}%${color}${font}\n")
+	print ("${voffset -10}${offset 29}F: ${font Ubuntu:style=Bold:size=8}${color2}${fs_free /home}${color}${font} U: ${font Ubuntu:style=Bold:size=8}${color2}${fs_used /home}${color}${font}\n")
 
 # folder in /media
 for device in os.listdir("/media/"):
@@ -58,6 +57,6 @@ for device in os.listdir("/media/"):
 		else:
 			icon = str(dec)
 		# end calculation dec
-		print ("${voffset -12}${color0}${font Pie charts for maps:size=15}"+icon+"${font}${color}   ${voffset -9}"+device.capitalize()+": ${font Ubuntu:style=Bold:size=8}${color1}${fs_free_perc /media/"+device+"}%${color}${font}\n")
-		print ("${voffset -12}${offset 29}F: ${font Ubuntu:style=Bold:size=8}${color2}${fs_free /media/"+device+"}${color}${font} U: ${font Ubuntu:style=Bold:size=8}${color2}${fs_used /media/"+device+"}${color}${font}\n")
-print ("${voffset -12}")
+		print ("${voffset -10}${color0}${font Pie charts for maps:size=15}"+icon+"${font}${color}   ${voffset -9}"+device.capitalize()+": ${font Ubuntu:style=Bold:size=8}${color1}${fs_free_perc /media/"+device+"}%${color}${font}\n")
+		print ("${voffset -10}${offset 29}F: ${font Ubuntu:style=Bold:size=8}${color2}${fs_free /media/"+device+"}${color}${font} U: ${font Ubuntu:style=Bold:size=8}${color2}${fs_used /media/"+device+"}${color}${font}\n")
+print ("${voffset -10}")

@@ -69,8 +69,8 @@ void conkyrc_slim () {
 	fprintf(fp,"alignment top_left\n");
 	fprintf(fp,"gap_x 0\n");
 	fprintf(fp,"gap_y %.0f\n", board_height/1.5);
-	fprintf(fp,"minimum_size %.0f %d\n", board_width, 90);
-	fprintf(fp,"maximum_width %.0f %d\n", board_width, 90);
+	fprintf(fp,"minimum_size %.0f %d\n", board_width, 50);
+	fprintf(fp,"maximum_width %.0f %d\n", board_width, 50);
 	fprintf(fp,"\n");
 	fprintf(fp,"default_bar_size 60 8\n");
 	fprintf(fp,"\n");

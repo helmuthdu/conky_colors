@@ -21,10 +21,7 @@ void conkyrc_default () {
 		return;
 	}
 
-	const char *forecastdir=finddir("bin/conkyForecast");
 	const char *clockdir=finddir("bin/conkyClock");
-	const char *forecastconfdir=finddir(".conkyForecast.config");
-	const char *templdir=finddir("templates/conkyForecast.template");
 	const char *playerdir=finddir("bin/conky%s", player);
 	const char *pltempldir=finddir("templates/conkyPlayer.template");
 	const char *coverdir=finddir("bin/conkyCover");
@@ -213,7 +210,7 @@ void conkyrc_default () {
 	//Battery
 	if (set_battery == True) {
 		fprintf(fp,"# |--BATTERY\n");
-		fprintf(fp,"${color0}${font Poky:size=13}E${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${battery_percent BAT%d}%%${color}${font} ${alignr}${color2}${battery_bar 8,60 BAT%d}${color}\n", go2, battery, battery_value, battery_value);
+		fprintf(fp,"${color0}${font Poky:size=13}E${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${battery_percent BAT%d}%%${color}${font} ${alignr}${color2}${battery_bar BAT%d 8,60}${color}\n", go2, battery, battery_value, battery_value);
 	}
 	//Processes
 	if (set_process == True) {
@@ -294,15 +291,15 @@ void conkyrc_default () {
 				fprintf(fp,"${voffset -2}${color0}${font Poky:size=16}D${font}${voffset -8}${font Ubuntu:style=Bold:size=7}${offset -17}${voffset 4}${time %%d}${font}${color}${voffset -1}${font Monospace:size=7}${execpi 300 DJS=`date +%%_d`; cal ");
 				if (calendarfix == 'y')
 					fprintf(fp,"-h");
-				fprintf(fp,"|sed \'2,7!d\'| sed \'/./!d\' | sed \'s/^/${goto 32} /\'| sed \'s/$/ /\' | sed \'s/^/ /\' | sed /\" $DJS \"/s/\" $DJS \"/\" \"\'${font Ubuntu:style=Bold:size=8}${voffset -1}${color1} \'\"$DJS\"\'${color}${font Monospace:size=7}\'\" \"/}${voffset -1}\n");
+				fprintf(fp,"|sed \'2,8!d\'| sed \'/./!d\' | sed \'s/^/${goto 42} /\'| sed \'s/$/ /\' | sed \'s/^/ /\' | sed /\" $DJS \"/s/\" $DJS \"/\" \"\'${font Arial:style=Bold:size=8}${voffset -2}${offset -2}${color1} \'\"$DJS\"\'${color}${font Monospace:size=7}\'\" \"/}${voffset -1}\n");
 			}
 			else if (set_calendar == 2)
 				fprintf(fp,"${voffset -2}${color0}${font Poky:size=16}D${font}${voffset -8}${font Ubuntu:style=Bold:size=7}${offset -17}${voffset 4}${time %%d}${font}${color}${font Monospace:size=7}${execpi 10800 %s/bin/conkyZimCalendar}${font}${voffset -14}\n", finddir("bin/conkyZimCalendar"));
 			else {
 				fprintf(fp,"${voffset -2}${color0}${font Poky:size=16}D${font}${voffset -8}${font Ubuntu:style=Bold:size=7}${offset -17}${voffset 4}${time %%d}${font}${color}${voffset -1}${font Monospace:size=7}${execpi 300 DJS=`date +%%_d`; cal ");
 				if (calendarfix == 'y')
-					fprintf(fp,"-h");
-				fprintf(fp," -m|sed \'2,7!d\'| sed \'/./!d\' | sed \'s/^/${goto 32} /\'| sed \'s/$/ /\' | sed \'s/^/ /\' | sed /\" $DJS \"/s/\" $DJS \"/\" \"\'${font Ubuntu:style=Bold:size=8}${voffset -1}${color1} \'\"$DJS\"\'${color}${font Monospace:size=7}\'\" \"/}${voffset -1}\n");
+					fprintf(fp,"-h ");
+				fprintf(fp," -m|sed \'2,8!d\'| sed \'/./!d\' | sed \'s/^/${goto 42} /\'| sed \'s/$/ /\' | sed \'s/^/ /\' | sed /\" $DJS \"/s/\" $DJS \"/\" \"\'${font Ubuntu:style=Bold:size=8}${voffset -2}${offset -2}${color1} \'\"$DJS\"\'${color}${font Monospace:size=7}\'\" \"/}${voffset -1}\n");
 			}
 		}
 	}
@@ -324,9 +321,9 @@ void conkyrc_default () {
 		fprintf(fp," folders\n");
 		fprintf(fp,"${voffset 4}${font Ubuntu:style=Bold:size=8}%s $stippled_hr${font}\n", photo);
 		if (set_photo == 1)
-			fprintf(fp,"${execi 10800 %s/bin/conkyPhoto}${image /tmp/conkyPhoto.png -s 175x120 -p 4,%d}${voffset 114}\n", finddir("bin/conkyPhoto"), yp);
+			fprintf(fp,"${execi 10800 %s/bin/conkyPhoto}${image /tmp/conkyPhoto.png -s 174x110 -p 4,%d}${voffset 104}\n", finddir("bin/conkyPhoto"), yp);
 		else
-			fprintf(fp,"${execi 60 %s/bin/conkyPhotoRandom}${image /tmp/conkyPhoto.png -s 175x120 -p 4,%d}${voffset 114}\n", finddir("bin/conkyPhotoRandom"), yp);
+			fprintf(fp,"${execi 60 %s/bin/conkyPhotoRandom}${image /tmp/conkyPhoto.png -s 174x110 -p 4,%d}${voffset 104}\n", finddir("bin/conkyPhotoRandom"), yp);
 	}
 
 	//Rhythmbox/Exaile/Banshee/Clementine Widget
@@ -480,47 +477,29 @@ void conkyrc_default () {
 	}
 
 	//Weather Widget
-	if (set_weather == True) {
-		fprintf(fp,"###############\n");
-		fprintf(fp,"# - WEATHER - #\n");
-		fprintf(fp,"###############\n");
-		fprintf(fp,"# For a working weather script you NEED to define, in a user specific config file, a partner id and registration code for the weather.com xoap service. For this purpose copy .conkyForecast.config in %s folder to your home and setup as required.\n", forecastconfdir);
-		fprintf(fp,"# http://www.weather.com/services/xmloap.html\n");
-		if (set_network == True)
-			fprintf(fp,"${voffset -8}${font Ubuntu:style=Bold:size=8}%s $stippled_hr${font}\n", Weather);
-		else
-			fprintf(fp,"${voffset 4}${font Ubuntu:style=Bold:size=8}%s $stippled_hr${font}\n", Weather);
-		fprintf(fp,"# |--WLAN%d\n", wlan);
-		fprintf(fp,"${if_up wlan%d}\n", wlan);
-		fprintf(fp,"${execpi 10800 %s/bin/conkyForecast --location=%s%s -t %s/templates/conkyForecast.template}\n", forecastdir, weather_code, imperial, templdir );
-		fprintf(fp,"# |--ETH%d\n", eth);
-		fprintf(fp,"${else}${if_up eth%d}\n", eth);
-		fprintf(fp,"${execpi 10800 %s/bin/conkyForecast --location=%s%s -t %s/templates/conkyForecast.template}\n", forecastdir, weather_code, imperial, templdir );
-		fprintf(fp,"# |--PPP%d\n", ppp);
-		fprintf(fp,"${else}${if_up ppp%d}\n", ppp);
-		fprintf(fp,"${execpi 10800 %s/bin/conkyForecast --location=%s%s -t %s/templates/conkyForecast.template}\n", forecastdir, weather_code, imperial, templdir);
-		fprintf(fp,"${else}");
-		fprintf(fp,"${voffset 4}${color0}${font PizzaDude Bullets:size=12}4${font}${color}${goto %d}%s${voffset 14}${endif}${endif}${endif}\n", go2,noweather);
-	}
-	else
-		if (set_weather == 2) {
-			fprintf(fp,"###############\n");
+	if (set_weather == 1) {
+			fprintf(fp,"####################\n");
 			fprintf(fp,"# - WEATHER - #\n");
-			fprintf(fp,"###############\n");
-			fprintf(fp,"# For a working weather script you NEED to define, in a user specific config file, a partner id and registration code for the weather.com xoap service. For this purpose copy .conkyForecast.config in %s folder to your home and setup as required.\n", forecastconfdir);
-			fprintf(fp,"# http://www.weather.com/services/xmloap.html\n");
+			fprintf(fp,"####################\n");
+			fprintf(fp,"# http://weather.yahoo.com/\n");
 			if (set_network == True)
 				fprintf(fp,"${voffset -8}${font Ubuntu:style=Bold:size=8}%s $stippled_hr${font}\n", Weather);
 			else
 				fprintf(fp,"${voffset 4}${font Ubuntu:style=Bold:size=8}%s $stippled_hr${font}\n", Weather);
-				fprintf(fp,"${goto 12}${voffset 4}${color0}${font Weather:size=24}y${font}${color}\n");
-				fprintf(fp,"${voffset -29}${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execpi 10800 %s/bin/conkyForecast --location=%s%s --datatype=HT}${color}${font}\n", go2, temperature, forecastdir, weather_code, imperial);
-				fprintf(fp,"${goto %d}${voffset -2}${color0}${font VariShapes Solid:size=8}q${font}${color}${font Ubuntu:style=Bold:size=8}${color2}${execpi 10800 %s/bin/conkyForecast --location=%s%s --datatype=HT --startday=1}${color}${font} ${voffset -2}${color0}${font VariShapes Solid:size=8}Q${font}${voffset -1}${color}${font Ubuntu:style=Bold:size=8}${color2}${execpi 10800 %s/bin/conkyForecast --location=%s%s --datatype=LT --startday=1}${color}${font}\n", go2, forecastdir, weather_code, imperial, forecastdir, weather_code, imperial);
-				fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execpi 10800 %s/bin/conkyForecast --datatype=HM}${color}${font}${alignr}${color2}${execbar %s/bin/conkyForecast --location=%s%s --datatype=HM}%%${color}${font}\n", go2, humidity, forecastdir, forecastdir, weather_code, imperial);
 
-		}
+			if (unit == True) {
+				fprintf(fp,"${goto 12}${voffset 4}${color0}${font Weather:size=24}y${font}${color}\n");
+				fprintf(fp,"${voffset -29}${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather cur %s f}°F${color}${font}\n", go2, temperature, yahooweatherdir, weather_code);
+				fprintf(fp,"${goto %d}${voffset -2}${color0}${font VariShapes Solid:size=8}q${font}${color}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather min %s c}°F${color}${font}  ${voffset -2}${color0}${font VariShapes Solid:size=8}Q${font}${color}${voffset -1}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather max %s c}°F${color}${font}\n", go2, yahooweatherdir, weather_code, yahooweatherdir, weather_code);
+			}
+			else {
+				fprintf(fp,"${goto 12}${voffset 4}${color0}${font Weather:size=24}y${font}${color}\n");
+				fprintf(fp,"${voffset -29}${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather cur %s c}°C${color}${font}\n", go2, temperature, yahooweatherdir, weather_code);
+				fprintf(fp,"${goto %d}${voffset -2}${color0}${font VariShapes Solid:size=8}q${font}${color}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather min %s c}°C${color}${font}  ${voffset -2}${color0}${font VariShapes Solid:size=8}Q${font}${color}${voffset -1}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather max %s c}°C${color}${font}\n", go2, yahooweatherdir, weather_code, yahooweatherdir, weather_code);
+			}
+	}
 	else
-		if (set_weather == 3) {
+		if (set_weather == 2) {
 			fprintf(fp,"##################\n");
 			fprintf(fp,"# - BBCWEATHER - #\n");
 			fprintf(fp,"##################\n");
@@ -542,29 +521,7 @@ void conkyrc_default () {
 				fprintf(fp,"${goto %d}${voffset -2}${color0}${font VariShapes Solid:size=8}q${font}${color}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather min %d c}°C${color}${font}  ${voffset -2}${color0}${font VariShapes Solid:size=8}Q${font}${color}${voffset -1}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather max %d c}°C${color}${font}\n", go2, bbcweatherdir, bbccode, bbcweatherdir, bbccode);
 				fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather hum %d c}%%${color}${font}${alignr}${color2}${execbar %s/bin/conkyBBCWeather hum %d c}%%${color}${font}\n", go2, humidity, bbcweatherdir, bbccode, bbcweatherdir, bbccode);
 			}
-		}
-	else
-		if (set_weather == 4) {
-			fprintf(fp,"####################\n");
-			fprintf(fp,"# - YAHOOWEATHER - #\n");
-			fprintf(fp,"####################\n");
-			fprintf(fp,"# http://weather.yahoo.com/\n");
-			if (set_network == True)
-				fprintf(fp,"${voffset -8}${font Ubuntu:style=Bold:size=8}%s $stippled_hr${font}\n", Weather);
-			else
-				fprintf(fp,"${voffset 4}${font Ubuntu:style=Bold:size=8}%s $stippled_hr${font}\n", Weather);
-
-			if (unit == True) {
-				fprintf(fp,"${goto 12}${voffset 4}${color0}${font Weather:size=24}y${font}${color}\n");
-				fprintf(fp,"${voffset -29}${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather cur %s f}°F${color}${font}\n", go2, temperature, yahooweatherdir, weather_code);
-				fprintf(fp,"${goto %d}${voffset -2}${color0}${font VariShapes Solid:size=8}q${font}${color}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather min %s c}°F${color}${font}  ${voffset -2}${color0}${font VariShapes Solid:size=8}Q${font}${color}${voffset -1}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather max %s c}°F${color}${font}\n", go2, yahooweatherdir, weather_code, yahooweatherdir, weather_code);
-			}
-			else {
-				fprintf(fp,"${goto 12}${voffset 4}${color0}${font Weather:size=24}y${font}${color}\n");
-				fprintf(fp,"${voffset -29}${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather cur %s c}°C${color}${font}\n", go2, temperature, yahooweatherdir, weather_code);
-				fprintf(fp,"${goto %d}${voffset -2}${color0}${font VariShapes Solid:size=8}q${font}${color}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather min %s c}°C${color}${font}  ${voffset -2}${color0}${font VariShapes Solid:size=8}Q${font}${color}${voffset -1}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather max %s c}°C${color}${font}\n", go2, yahooweatherdir, weather_code, yahooweatherdir, weather_code);
-			}
-		}
+	    }
 	fclose(fp);
 }
 
