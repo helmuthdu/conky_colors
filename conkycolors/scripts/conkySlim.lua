@@ -662,7 +662,7 @@ function conky_main(color, theme, drawbg, draw_weather, area_code)
 			txt="Temp: " .. get_weather_info("1p", "RightNow", "temperatures_rn") .. "C°",
 			x=w/2.38               , y=h/2.6             ,
 			txt_weight=0        , txt_size=w*0.01 ,
-			txt_fg_colour=theme , txt_fg_alpha=fga    ,
+			txt_fg_colour=fgc , txt_fg_alpha=fga    ,
 		};display_text(settings)
 		settings = {--DAYS TEMP
 			txt=conky_parse("${time %d}") .. " " .. conky_parse("${time %b}") .. " " .. conky_parse("${time %Y}"),
@@ -674,7 +674,7 @@ function conky_main(color, theme, drawbg, draw_weather, area_code)
 			txt=conky_parse("${time %A}"),
 			x=w/2.235               , y=h/1.2             ,
 			txt_weight=0        , txt_size=w*0.01 ,
-			txt_fg_colour=theme , txt_fg_alpha=fga    ,
+			txt_fg_colour=fgc , txt_fg_alpha=fga    ,
 		};display_text(settings)
 	end
 
@@ -744,7 +744,7 @@ function conky_main(color, theme, drawbg, draw_weather, area_code)
 		size = 40        ,
 	};clock_hands(settings)
 
-	xp = hori_space * 2 + hori_space / 2
+	xp = hori_space * 3
 	settings = {--CPU GRAPH CPU1
 		value=tonumber(conky_parse("${cpu cpu1}")),
 		value_max=100              ,
@@ -839,7 +839,7 @@ function conky_main(color, theme, drawbg, draw_weather, area_code)
 		caption_fg_colour=fgc      , caption_fg_alpha=fga        ,
 	};draw_gauge_ring(settings)
 
-	xp = hori_space + w*0.6
+	xp = hori_space + w*0.59
 	disks = {'/', '/home'}
 	disksLabel = {'ROOT', 'HOME'}
 	for i, partitions in ipairs(disks) do
