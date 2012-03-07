@@ -22,7 +22,7 @@ void conkyrc_sls () {
 		return;
 	}
 
-	const char *forecastdir=finddir("bin/accuweather");
+	const char *forecastdir=finddir("bin/conkyWeather");
 	const char *conkysls=finddir("scripts/conkySLS.lua");
 
 	//Global Setup
@@ -177,9 +177,9 @@ void conkyrc_sls () {
 	fprintf(fp,"#############\n");
 	fprintf(fp,"# - GMAIL - #\n");
 	fprintf(fp,"#############\n");
-	fprintf(fp,"${goto 46}${color0}${font Ubuntu:style=Bold:size=10}${execpi 1200 %s/bin/conkyEmail -m IMAP -s imap.googlemail.com -u %s -p %s --ssl}${color}${font}\n", finddir("bin/conkyEmail"), user, password);
+	fprintf(fp,"${goto 46}${color0}${font Ubuntu:style=Bold:size=10}${execpi 1200 %s/bin/conkyEmail -m IMAP -s imap.googlemail.com -e -u %s -p %s -i 10}${color}${font}\n", finddir("bin/conkyEmail"), user, password);
 	fprintf(fp,"${goto 65}${voffset -8}${color0}${font Ubuntu:style=Bold:size=8}GMAIL${color}${font}\n");
-	fprintf(fp,"${goto 65}${voffset -4}${font Ubuntu:size=6}YOU HAVE ${execpi 1200 %s/bin/conkyEmail -m IMAP -s imap.googlemail.com -u %s -p %s --ssl} NEW MAIL(S)${font}\n", finddir("bin/conkyEmail"), user, password);
+	fprintf(fp,"${goto 65}${voffset -4}${font Ubuntu:size=6}YOU HAVE ${execpi 1200 %s/bin/conkyEmail -m IMAP -s imap.googlemail.com -e -u %s -p %s -i 10} NEW MAIL(S)${font}\n", finddir("bin/conkyEmail"), user, password);
 	fprintf(fp,"###############\n");
 	fprintf(fp,"# - NETWORK - #\n");
 	fprintf(fp,"###############\n");

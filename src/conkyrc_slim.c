@@ -14,10 +14,7 @@ void conkyrc_slim () {
 
 	FILE *fp;
 
-/*	const char *playerdir=finddir("bin/conky%s", player);*/
-/*	const char *playertemplatedir=finddir("/templates/conkyPlayer.template");*/
-/*	const char *coverdir=finddir("bin/conkyCover");*/
-	/*const char *forecastconfdir=finddir(".conkyForecast.config");*/
+	const char *forecastdir=finddir("bin/conkyWeather");
 
 	if(board_width == 0 || board_height == 0)
 	{
@@ -149,6 +146,7 @@ void conkyrc_slim () {
 	fprintf(fp,"\n");
 	fprintf(fp,"\n");
 	fprintf(fp,"TEXT\n");
+	fprintf(fp,"${execi 600 bash %s/bin/conkyWeather \"%s\"}\n", forecastdir,weather_code);
 	fclose(fp);
 }
 
