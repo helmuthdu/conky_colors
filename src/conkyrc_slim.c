@@ -146,7 +146,7 @@ void conkyrc_slim () {
 	fprintf(fp,"\n");
 	fprintf(fp,"\n");
 	fprintf(fp,"TEXT\n");
-	fprintf(fp,"${execi 600 bash %s/bin/conkyWeather \"%s\"}\n", forecastdir,weather_code);
+	fprintf(fp,"${execi 1800 bash %s/bin/conkyWeather \"%s\"}\n", forecastdir,weather_code);
 	fclose(fp);
 }
 

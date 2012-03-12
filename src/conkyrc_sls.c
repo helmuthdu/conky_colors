@@ -161,8 +161,8 @@ void conkyrc_sls () {
 	fprintf(fp,"###############\n");
 	fprintf(fp,"# - WEATHER - #\n");
 	fprintf(fp,"###############\n");
-	fprintf(fp,"${execi 600 bash %s/bin/conkyWeather \"%s\"}\n", forecastdir,weather_code);
-	fprintf(fp,"${alignr 10}${voffset -8}${font Ubuntu:style=Bold:size=10}${color2}${execi 600 sed -n '1p' $HOME/.conkycolors/Weather/RightNow/temperatures_rn}${font}${color}\n");
+	fprintf(fp,"${execi 1800 bash %s/bin/conkyWeather \"%s\"}\n", forecastdir,weather_code);
+	fprintf(fp,"${alignr 10}${voffset -8}${font Ubuntu:style=Bold:size=10}${color2}${execi 1860 sed -n '1p' $HOME/.conkycolors/Weather/RightNow/temperatures_rn}${font}${color}\n");
 	fprintf(fp,"${voffset 60}\n");
 	fprintf(fp,"#################\n");
 	fprintf(fp,"# - PROCESSES - #\n");

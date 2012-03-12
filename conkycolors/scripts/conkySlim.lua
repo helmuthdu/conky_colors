@@ -644,36 +644,43 @@ function conky_main(color, theme, drawbg, draw_weather, area_code)
 	end
 
 	if draw_weather == "on" then
-		settings = {--DAYS NAME
+		settings = {--HOUR
+			txt="88:88",
+			x=(w/2)-140             , y=50          ,
+			txt_weight=1        , txt_size=50,
+			txt_fg_colour=fgc , txt_fg_alpha=bga ,
+			font = "Digital Readout Thick Upright"
+		};display_text(settings)
+		settings = {--HOUR
 			txt=conky_parse("${time %H:}"),
-			x=w/2.50             , y=h/1.2          ,
-			txt_weight=1        , txt_size=w*0.035,
+			x=(w/2)-140            , y=50          ,
+			txt_weight=1        , txt_size=50,
 			txt_fg_colour=theme , txt_fg_alpha=fga ,
 			font = "Digital Readout Thick Upright"
 		};display_text(settings)
-		settings = {--DAYS NAME
+		settings = {--MINUTES
 			txt=conky_parse("${time %M}"),
-			x=w/2.25             , y=h/1.2          ,
-			txt_weight=1        , txt_size=w*0.035 ,
+			x=(w/2)-78             , y=50          ,
+			txt_weight=1        , txt_size=50 ,
 			txt_fg_colour=theme , txt_fg_alpha=fga ,
 			font = "Digital Readout Thick Upright"
 		};display_text(settings)
-		settings = {--DAYS TEMP
+		settings = {--DAY TEMP
 			txt="Temp: " .. get_weather_info("1p", "RightNow", "temperatures_rn") .. "C°",
-			x=w/1.85               , y=h/2.6             ,
-			txt_weight=0        , txt_size=w*0.01 ,
+			x=(w/2)+60               , y=20            ,
+			txt_weight=0        , txt_size=12 ,
 			txt_fg_colour=fgc , txt_fg_alpha=fga    ,
 		};display_text(settings)
-		settings = {--DAYS TEMP
+		settings = {--DATA
 			txt=conky_parse("${time %d}") .. " " .. conky_parse("${time %b}") .. " " .. conky_parse("${time %Y}"),
-			x=w/1.85               , y=h/1.6             ,
-			txt_weight=0        , txt_size=w*0.01 ,
+			x=(w/2)+60               , y=35            ,
+			txt_weight=0        , txt_size=12 ,
 			txt_fg_colour=theme , txt_fg_alpha=fga    ,
 		};display_text(settings)
-		settings = {--DAYS TEMP
+		settings = {--NAME WEEK
 			txt=conky_parse("${time %A}"),
-			x=w/1.85               , y=h/1.2             ,
-			txt_weight=0        , txt_size=w*0.01 ,
+			x=(w/2)+60               , y=48           ,
+			txt_weight=0        , txt_size=12 ,
 			txt_fg_colour=fgc , txt_fg_alpha=fga    ,
 		};display_text(settings)
 	end
@@ -689,7 +696,7 @@ function conky_main(color, theme, drawbg, draw_weather, area_code)
 		graph_bg_colour=bgc        , graph_bg_alpha=bga          ,
 		graph_fg_colour=theme      , graph_fg_alpha=fga          ,
 		hand_fg_colour=theme       , hand_fg_alpha=0.0           ,
-		txt_radius=68              ,
+		txt_radius=42              ,
 		txt_weight=1               , txt_size=8.0                ,
 		txt_fg_colour=fgc          , txt_fg_alpha=fga            ,
 		graduation_radius=28       ,
@@ -712,7 +719,7 @@ function conky_main(color, theme, drawbg, draw_weather, area_code)
 		graph_bg_colour=bgc        , graph_bg_alpha=bga          ,
 		graph_fg_colour=theme      , graph_fg_alpha=fga          ,
 		hand_fg_colour=theme       , hand_fg_alpha=0.0           ,
-		txt_radius=68              ,
+		txt_radius=42              ,
 		txt_weight=1               , txt_size=8.0                ,
 		txt_fg_colour=fgc          , txt_fg_alpha=fga            ,
 		graduation_radius=28       ,
@@ -744,7 +751,7 @@ function conky_main(color, theme, drawbg, draw_weather, area_code)
 		size = 40        ,
 	};clock_hands(settings)
 
-	xp = hori_space * 2.94 
+	xp = ((w/2)/2.6)
 	settings = {--CPU GRAPH CPU1
 		value=tonumber(conky_parse("${cpu cpu1}")),
 		value_max=100              ,
@@ -839,7 +846,7 @@ function conky_main(color, theme, drawbg, draw_weather, area_code)
 		caption_fg_colour=fgc      , caption_fg_alpha=fga        ,
 	};draw_gauge_ring(settings)
 
-	xp = hori_space + w*0.57
+	xp = w/2 + 170
 	disks = {'/', '/home'}
 	disksLabel = {'ROOT', 'HOME'}
 	for i, partitions in ipairs(disks) do
