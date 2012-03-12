@@ -15,15 +15,23 @@ function rgb_to_r_g_b(colour, alpha)
 end
 
 -------------------------------------------------------------------------------
+--                                                                 get_user_dir
+-- return user dir
+--
+function get_user_dir()
+	local f = assert(io.popen("conky-colors --localdir"))
+	local s = assert(f:read('*l'))
+	f:close()
+	return s
+end
+
+-------------------------------------------------------------------------------
 --                                                             get_weather_info
 -- return weather info
 --
-function get_weather_info(data, day, area_code)
-	local f = assert(io.popen("conky-colors --systemdir"))
+function get_weather_info(dataType, dataPeriod, dataFile)
+	local f = assert(io.popen("sed -n \'" .. dataType .. "\' " .. get_user_dir() .. "/Weather/" .. dataPeriod .. "/" .. dataFile ))
 	local s = assert(f:read('*l'))
-	f:close()
-	f = assert(io.popen("sh " .. s .. "/bin/conkyForecast --location=" .. area_code .. " --datatype=" .. data .. " --startday=" .. day)) -- runs command
-	s = assert(f:read('*l'))
 	f:close()
 	return s
 end
@@ -391,6 +399,77 @@ end--function bars
 --
 function draw_box(data)
 
+--[[BOX WIDGET v1.1 by Wlourf 27/01/2011
+This widget can drawn some boxes, even circles in your conky window
+http://u-scripts.blogspot.com/2011/01/box-widget.html)
+
+Inspired by Background by londonali1010 (2009), thanks ;-) 
+
+The parameters (all optionals) are :
+x           - x coordinate of top-left corner of the box, default = 0 = (top-left corner of conky window)
+y           - y coordinate of top-left corner of the box, default = 0 = (top-left corner of conky window)
+w           - width of the box, default = width of the conky window
+h           - height of the box, default = height of the conky window
+corners     - corners is a table for the four corners in this order : top-left, top-right,bottom-right, bottom-left
+              each corner is defined in a table with a shape and a radius, available shapes are : "curve","circle","line"
+              example for the same shapes for all corners:
+              { {"circle",10} }
+              example for first corner different from the three others
+              { {"circle",10}, {"circle",5}  }              
+              example for top corners differents from bottom corners
+              { {"circle",10}, {"circle",10}, {"line",0}  }   
+              default = { {"line",0} } i.e=no corner
+operator    - set the compositing operator (needs in the conkyrc : own_window_argb_visual yes)                          
+              see http://cairographics.org/operators/
+              available operators are :
+              "clear","source","over","in","out","atop","dest","dest_over","dest_in","dest_out","dest_atop","xor","add","saturate"
+              default = "over"
+border      - if border>0, the script draws only the border, like a frame, default=0
+dash        - if border>0 and dash>0, the border is draw with dashes, default=0
+skew_x      - skew box around x axis, default = 0
+skew_y      - skew box around y axis, default = 0
+scale_x     - rescale the x axis, default=1, useful for drawing elipses ...
+scale_y     - rescale the x axis, default=1
+angle	    - angle of rotation of the box in degrees, default = 0
+              i.e. a horizontal graph
+rot_x       - x point of rotation's axis, default = 0,
+              relative to top-left corner of the box, (not the conky window)
+rot_y       - y point of rotation's axis, default = 0              
+              relative to top-left corner of the box, (not the conky window)
+draw_me     - if set to false, box is not drawn (default = true or 1)
+              it can be used with a conky string, if the string returns 1, the box is drawn :
+              example : "${if_empty ${wireless_essid wlan0}}${else}1$endif",              
+              
+linear_gradient - table with the coordinates of two points to define a linear gradient,
+                  points are relative to top-left corner of the box, (not the conky window)
+                  {x1,y1,x2,y2}
+radial_gradient - table with the coordinates of two circle to define a radial gradient,
+                  points are relative to top-left corner of the box, (not the conky window)
+                  {x1,y1,r1,x2,y2,r2} (r=radius)
+colour      - table of colours, default = plain white {{1,0xFFFFFF,0.5}}
+              this table contains one or more tables with format {P,C,A}
+              P=position of gradient (0 = start of the gradient, 1= end of the gradient)
+              C=hexadecimal colour 
+              A=alpha (opacity) of color (0=invisible,1=opacity 100%)
+              Examples :
+              for a plain color {{1,0x00FF00,0.5}}
+              for a gradient with two colours {{0,0x00FF00,0.5},{1,0x000033,1}}        {x=80,y=150,w=20,h=20,
+        radial_gradient={20,20,0,20,20,20},
+        colour={{0.5,0xFFFFFF,1},{1,0x000000,0}},
+              or {{0.5,0x00FF00,1},{1,0x000033,1}} -with this one, gradient will start in the middle
+              for a gradient with three colours {{0,0x00FF00,0.5},{0.5,0x000033,1},{1,0x440033,1}}
+              and so on ...
+
+
+
+To call this script in Conky, use (assuming you have saved this script to ~/scripts/):
+    lua_load ~/scripts/box.lua
+    lua_draw_hook_pre main_box
+    
+And leave one line blank or not after TEXT
+]]
+
+
 	if data.draw_me == true then data.draw_me = nil end
 	if data.draw_me ~= nil and conky_parse(tostring(data.draw_me)) ~= "1" then return end
 
@@ -590,11 +669,11 @@ function conky_main(color, theme, drawbg, draw_weather, area_code)
 	if updates>5 then
 
 	-- BACKGROUND COLOR
-	if color == "white" then
+	if color == "black" then
 		bgc = 0xffffff
 		fgc = 0xffffff
-		bga = 0.4
-		fga = 0.8
+		bga = 1
+		fga = 1
 	else
 		bgc = 0x1e1c1a
 		fgc = 0x1e1c1a
@@ -602,10 +681,10 @@ function conky_main(color, theme, drawbg, draw_weather, area_code)
 		fga = 0.8
 	end
 
-	local theme = ("0x" .. theme)
+	local theme = ("0x" .. "37BDC0")
 	local w = conky_window.width
 	local h = conky_window.height
-	local hori_space = w*0.07
+	local hori_space = 200
 	local vert_space = h*0.5
 	local xp = hori_space
 	local yp = vert_space
@@ -616,61 +695,110 @@ function conky_main(color, theme, drawbg, draw_weather, area_code)
 		x=0-1    , y=0 ,
 		w=w+1    , h=h ,
 		border=1 ,
-		colour={{0,bgc,0.2},},
+		colour={{0,bgc,1},},
 	};draw_box(settings)
-	settings={
+		settings={
 		x=0-1 , y=0 ,
 		w=w+1 , h=h ,
-		colour={{0.5,bgc,bga},{1,bgc,bga-0.1},},
-		linear_gradient={0,0,w/2,h/2},
+		colour={{1,0x0E97B9,1}, {0,0x37BDC0,1}},
+		radial_gradient={(w/2.5),h/2,100, w/3,h/2,h},
 	};draw_box(settings)
 	end
+	
+	xp = ((w/2)/1.5)
+    settings = {--CPU GRAPH CPU1
+		value=tonumber(conky_parse("${cpu cpu1}")),
+		value_max=100              ,
+		x=xp                       , y=yp                        ,
+		graph_radius=70            ,
+		graph_thickness=15          ,
+		graph_start_angle=180      ,
+		graph_unit_angle=3       , graph_unit_thickness=4    ,
+		graph_bg_colour=bgc        , graph_bg_alpha=bga          ,
+		graph_fg_colour=theme      , graph_fg_alpha=fga          ,
+		hand_fg_colour=theme       , hand_fg_alpha=0.0           ,
+		txt_radius=35              ,
+		txt_weight=1               , txt_size=8.0                ,
+		txt_fg_colour=fgc          , txt_fg_alpha=fga            ,
+		graduation_radius=28       ,
+		graduation_thickness=0     , graduation_mark_thickness=1 ,
+		graduation_unit_angle=27   ,
+		graduation_fg_colour=theme , graduation_fg_alpha=0.3     ,
+		caption='CPU'              ,
+		caption_weight=1           , caption_size=20.0           ,
+		caption_fg_colour=fgc      , caption_fg_alpha=fga        ,
+	};draw_gauge_ring(settings)
 
-	-- DATE AND WEATHER INFO
-	if draw_weather == "on" then
-	settings = {--DAYS NAME
-		txt=get_day_name("+%A" , "\"0 days\"")    ,
-		x=w/2.2                , y=h/1.9          ,
-		txt_weight=1           , txt_size=w*0.025 ,
-		txt_fg_colour=theme    , txt_fg_alpha=fga ,
-	};display_text(settings)
-	settings = {--DAYS NAME
-		txt=get_day_name("+%A" , "\"1 days\"")    ,
-		x=w/2.2-60             , y=h/1.9+20       ,
-		txt_weight=1           , txt_size=w*0.025 ,
-		txt_fg_colour=theme    , txt_fg_alpha=0.3 ,
-	};display_text(settings)
-	settings = {--DAYS NAME
-		txt=get_day_name("+%A" , "\"2 days\"")    ,
-		x=w/2.2+60             , y=h/1.9-20       ,
-		txt_weight=1           , txt_size=w*0.025 ,
-		txt_fg_colour=theme    , txt_fg_alpha=0.2 ,
-	};display_text(settings)
-	settings = {--DAYS INFO
-		txt="[" .. get_weather_info("CC", 1, area_code) .. "]" ,
-		x=w/2                        , y=h/1.82            ,
-		txt_weight=1                 , txt_size=w*0.025*.3 ,
-		txt_fg_colour=theme          , txt_fg_alpha=fga    ,
-	};display_text(settings)
-	settings = {--DAYS INFO
-		txt="[" .. get_weather_info("CC", 2, area_code) .. "]" ,
-		x=w/2-60                     , y=h/1.82+20         ,
-		txt_weight=1                 , txt_size=w*0.025*.3 ,
-		txt_fg_colour=theme          , txt_fg_alpha=0.3    ,
-	};display_text(settings)
-	settings = {--DAYS INFO
-		txt="[" .. get_weather_info("CC", 3, area_code) .. "]" ,
-		x=w/2+60                     , y=h/1.82-20         ,
-		txt_weight=1                 , txt_size=w*0.025*.3 ,
-		txt_fg_colour=theme          , txt_fg_alpha=0.2    ,
-	};display_text(settings)
-	settings = {--DAYS TEMP
-		txt=get_weather_info("HT", 1, area_code) ,
-		x=w/1.85              , y=h/1.75            ,
-		txt_weight=1          , txt_size=w*0.025*.8 ,
-		txt_fg_colour=theme   , txt_fg_alpha=0.6    ,
-	};display_text(settings)
-	end
+	settings = {--CPU GRAPH CPU2
+		value=tonumber(conky_parse("${cpu cpu2}")) ,
+		value_max=100              ,
+		x=xp                       , y=yp                        ,
+		graph_radius=60            ,
+		graph_thickness=10          ,
+		graph_start_angle=180      ,
+		graph_unit_angle=3       , graph_unit_thickness=1    ,
+		graph_bg_colour=bgc        , graph_bg_alpha=bga          ,
+		graph_fg_colour=theme      , graph_fg_alpha=fga          ,
+		hand_fg_colour=theme       , hand_fg_alpha=0.0           ,
+		txt_radius=0               ,
+		txt_weight=1               , txt_size=8.0                ,
+		txt_fg_colour=fgc          , txt_fg_alpha=fga            ,
+		graduation_radius=28       ,
+		graduation_thickness=0     , graduation_mark_thickness=1 ,
+		graduation_unit_angle=27   ,
+		graduation_fg_colour=theme , graduation_fg_alpha=0.3     ,
+		caption=''                 ,
+		caption_weight=1           , caption_size=20.0           ,
+		caption_fg_colour=fgc      , caption_fg_alpha=fga        ,
+	};draw_gauge_ring(settings)
+
+	xp = xp + hori_space
+	settings = {--MEMPERC GRAPH
+		value=tonumber(conky_parse("${memperc}")),
+		value_max=100              ,
+		x=xp                       , y=yp                        ,
+		graph_radius=70            ,
+		graph_thickness=15          ,
+		graph_start_angle=180      ,
+		graph_unit_angle=3       , graph_unit_thickness=1    ,
+		graph_bg_colour=bgc        , graph_bg_alpha=bga          ,
+		graph_fg_colour=theme      , graph_fg_alpha=fga          ,
+		hand_fg_colour=theme       , hand_fg_alpha=0.0           ,
+		txt_radius=0               ,
+		txt_weight=1               , txt_size=8.0                ,
+		txt_fg_colour=fgc          , txt_fg_alpha=fga            ,
+		graduation_radius=22       ,
+		graduation_thickness=4     , graduation_mark_thickness=2 ,
+		graduation_unit_angle=27   ,
+		graduation_fg_colour=theme , graduation_fg_alpha=0.5     ,
+		caption='MEM'              ,
+		caption_weight=1           , caption_size=20.0           ,
+		caption_fg_colour=fgc      , caption_fg_alpha=fga        ,
+	};draw_gauge_ring(settings)
+
+    xp = xp + hori_space
+	settings = {--SWAP FILESYSTEM USED GRAPH
+		value=tonumber(conky_parse("${swapperc}")),
+		value_max=100              ,
+		x=xp                       , y=yp                        ,
+		graph_radius=70            ,
+		graph_thickness=15          ,
+		graph_start_angle=180      ,
+		graph_unit_angle=3       , graph_unit_thickness=1    ,
+		graph_bg_colour=bgc        , graph_bg_alpha=bga          ,
+		graph_fg_colour=theme      , graph_fg_alpha=fga          ,
+		hand_fg_colour=theme       , hand_fg_alpha=0.0           ,
+		txt_radius=0               ,
+		txt_weight=1               , txt_size=8.0                ,
+		txt_fg_colour=fgc          , txt_fg_alpha=fga            ,
+		graduation_radius=22       ,
+		graduation_thickness=4     , graduation_mark_thickness=2 ,
+		graduation_unit_angle=27   ,
+		graduation_fg_colour=theme , graduation_fg_alpha=0.5     ,
+		caption='SWAP'             ,
+		caption_weight=1           , caption_size=30.0           ,
+		caption_fg_colour=fgc      , caption_fg_alpha=fga        ,
+	};draw_gauge_ring(settings)
 
 	end-- if updates>5
 	cairo_destroy(cr)

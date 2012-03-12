@@ -5,11 +5,11 @@
 
 source="/usr/share/backgrounds"
 photo="/tmp/conkyPhoto.png"
-template="/usr/share/conkycolors/icons"
+template="/usr/share/conkycolors/icons/ConkyPhoto"
 filename=`find $source -type f | shuf -n1`
 
 #choose your theme: 1,2 or 3
-theme=1
+theme=3
 
 dim="medium"
 # Manage dimension flag
@@ -44,20 +44,6 @@ elif [ $theme = "2" ]; then
 		-background  none -flatten \
 	$photo
 elif [ $theme = "3" ]; then
-# Theme 3
-	convert "$photo" \
-		-bordercolor snow -border 4.5\
-		-bordercolor gray55 -border 1 \
-		-bordercolor none  -background  none \
-		\( -clone 0 -rotate `convert null: -format '%[fx:rand()*30-15]' info:` \) \
-		\( -clone 0 -rotate `convert null: -format '%[fx:rand()*30-15]' info:` \) \
-		\( -clone 0 -rotate `convert null: -format '%[fx:rand()*30-15]' info:` \) \
-		-delete 0 -border $geometry -gravity center \
-		-crop $geometry_crop+0+0 +repage -flatten -trim +repage \
-		-background black \( +clone -shadow 40x2+1+1 \) +swap \
-		-background none  -flatten \
-	"$photo"
-elif [ $theme = "4" ]; then
 # Theme 4
     convert $template/photobg_bg_$dim.png $photo -geometry +11+11 -composite $photo
     convert $photo $template/photobg_shadow_$dim.png -composite $photo

@@ -48,6 +48,17 @@ function get_day_name(format, day)
 end
 
 -------------------------------------------------------------------------------
+--                                                                 get_day_name
+-- return day name
+--
+function get_day_name(format, day)
+	local f = assert(io.popen("date " .. format .. " --date=" .. day)) -- runs command
+	local s = assert(f:read('*l'))
+	f:close()
+	return s
+end
+
+-------------------------------------------------------------------------------
 --                                                            get_music_percent
 -- return music percent
 --

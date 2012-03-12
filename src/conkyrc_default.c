@@ -291,7 +291,7 @@ void conkyrc_default () {
 				fprintf(fp,"${voffset -2}${color0}${font Poky:size=16}D${font}${voffset -8}${font Ubuntu:style=Bold:size=7}${offset -17}${voffset 4}${time %%d}${font}${color}${voffset -1}${font Monospace:size=7}${execpi 300 DJS=`date +%%_d`; cal ");
 				if (calendarfix == 'y')
 					fprintf(fp,"-h");
-				fprintf(fp,"|sed \'2,8!d\'| sed \'/./!d\' | sed \'s/^/${goto 42} /\'| sed \'s/$/ /\' | sed \'s/^/ /\' | sed /\" $DJS \"/s/\" $DJS \"/\" \"\'${font Arial:style=Bold:size=8}${voffset -2}${offset -2}${color1} \'\"$DJS\"\'${color}${font Monospace:size=7}\'\" \"/}${voffset -1}\n");
+				fprintf(fp,"|sed \'2,8!d\'| sed \'/./!d\' | sed \'s/^/${goto 42} /\'| sed \'s/$/ /\' | sed \'s/^/ /\' | sed /\" $DJS \"/s/\" $DJS \"/\" \"\'${font Arial:style=Bold:size=8}${voffset -2}${offset -4}${color1} \'\"$DJS\"\'${color}${font Monospace:size=7}\'\" \"/}${voffset -1}\n");
 			}
 			else if (set_calendar == 2)
 				fprintf(fp,"${voffset -2}${color0}${font Poky:size=16}D${font}${voffset -8}${font Ubuntu:style=Bold:size=7}${offset -17}${voffset 4}${time %%d}${font}${color}${font Monospace:size=7}${execpi 10800 %s/bin/conkyZimCalendar}${font}${voffset -14}\n", finddir("bin/conkyZimCalendar"));
@@ -299,7 +299,7 @@ void conkyrc_default () {
 				fprintf(fp,"${voffset -2}${color0}${font Poky:size=16}D${font}${voffset -8}${font Ubuntu:style=Bold:size=7}${offset -17}${voffset 4}${time %%d}${font}${color}${voffset -1}${font Monospace:size=7}${execpi 300 DJS=`date +%%_d`; cal ");
 				if (calendarfix == 'y')
 					fprintf(fp,"-h ");
-				fprintf(fp," -m|sed \'2,8!d\'| sed \'/./!d\' | sed \'s/^/${goto 42} /\'| sed \'s/$/ /\' | sed \'s/^/ /\' | sed /\" $DJS \"/s/\" $DJS \"/\" \"\'${font Ubuntu:style=Bold:size=8}${voffset -2}${offset -2}${color1} \'\"$DJS\"\'${color}${font Monospace:size=7}\'\" \"/}${voffset -1}\n");
+				fprintf(fp," -m|sed \'2,8!d\'| sed \'/./!d\' | sed \'s/^/${goto 42} /\'| sed \'s/$/ /\' | sed \'s/^/ /\' | sed /\" $DJS \"/s/\" $DJS \"/\" \"\'${font Ubuntu:style=Bold:size=8}${voffset -2}${offset -4}${color1} \'\"$DJS\"\'${color}${font Monospace:size=7}\'\" \"/}${voffset -1}\n");
 			}
 		}
 	}
@@ -436,7 +436,7 @@ void conkyrc_default () {
 		fprintf(fp,"###############\n");
 		fprintf(fp,"# - NETWORK - #\n");
 		fprintf(fp,"###############\n");
-		fprintf(fp,"${voffset 4}${font Ubuntu:style=Bold:size=8}%s $stippled_hr${font}\n", network);
+		fprintf(fp,"${voffset -4}${font Ubuntu:style=Bold:size=8}%s $stippled_hr${font}\n", network);
 		fprintf(fp,"# |--WLAN%d\n", wlan);
 		fprintf(fp,"${if_up wlan%d}\n", wlan);
 		fprintf(fp,"${voffset -13}${color0}${font VariShapes Solid:size=14}q${font}${color}${goto %d}${voffset -6}%s: ${font Ubuntu:style=Bold:size=8}${color1}${upspeed wlan%d}${color}${font} ${alignr}${color2}${upspeedgraph wlan%d 8,60 %s}${color}\n", go2, up, wlan, wlan, color3);
@@ -485,7 +485,7 @@ void conkyrc_default () {
 			if (set_network == True)
 				fprintf(fp,"${voffset -8}${font Ubuntu:style=Bold:size=8}%s $stippled_hr${font}\n", Weather);
 			else
-				fprintf(fp,"${voffset 4}${font Ubuntu:style=Bold:size=8}%s $stippled_hr${font}\n", Weather);
+				fprintf(fp,"${voffset -4}${font Ubuntu:style=Bold:size=8}%s $stippled_hr${font}\n", Weather);
 
 			if (unit == True) {
 				fprintf(fp,"${goto 12}${voffset 4}${color0}${font Weather:size=24}y${font}${color}\n");
@@ -507,7 +507,7 @@ void conkyrc_default () {
 			if (set_network == True)
 				fprintf(fp,"${voffset -8}${font Ubuntu:style=Bold:size=8}%s $stippled_hr${font}\n", Weather);
 			else
-				fprintf(fp,"${voffset 4}${font Ubuntu:style=Bold:size=8}%s $stippled_hr${font}\n", Weather);
+				fprintf(fp,"${voffset -4}${font Ubuntu:style=Bold:size=8}%s $stippled_hr${font}\n", Weather);
 
 			if (unit == True) {
 				fprintf(fp,"${goto 12}${voffset 4}${color0}${font Weather:size=24}y${font}${color}\n");
