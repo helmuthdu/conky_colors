@@ -27,11 +27,14 @@ end
 
 -------------------------------------------------------------------------------
 --                                                             get_weather_info
--- return weather info
+-- return yahoo weather info
 --
-function get_weather_info(dataType, dataPeriod, dataFile)
-	local f = assert(io.popen("sed -n \'" .. dataType .. "\' " .. get_user_dir() .. "/Weather/" .. dataPeriod .. "/" .. dataFile ))
+function get_yahoo_weather_info(dataType, dataLocation, dataUnit)
+	local f = assert(io.popen("conky-colors --systemdir"))
 	local s = assert(f:read('*l'))
+	f:close()
+	f = assert(io.popen("sh " .. s .. "/bin/conkyYahooWeather " .. dataType .. " " .. dataLocation .. " " .. dataUnit)) -- runs command
+	s = assert(f:read('*l'))
 	f:close()
 	return s
 end
@@ -397,7 +400,6 @@ end--function bars
 --                                                                     draw_box
 -- display background
 --
-function draw_box(data)
 
 --[[BOX WIDGET v1.1 by Wlourf 27/01/2011
 This widget can drawn some boxes, even circles in your conky window
@@ -469,6 +471,7 @@ To call this script in Conky, use (assuming you have saved this script to ~/scri
 And leave one line blank or not after TEXT
 ]]
 
+function draw_box(data)
 
 	if data.draw_me == true then data.draw_me = nil end
 	if data.draw_me ~= nil and conky_parse(tostring(data.draw_me)) ~= "1" then return end

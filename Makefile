@@ -3,7 +3,7 @@ CFLAGS=-Wall -std=c99
 CWD:=$(shell pwd)
 
 all: conky-colors
-conky-colors: conky-colors.c conkycover.c conkyforecast.c conkyplayer.c \
+conky-colors: conky-colors.c conkycover.c conkyplayer.c \
 	conkyrc_cairo.c conkyrc_ring.c conkyrc_board.c conkyrc_default.c conkyrc_slim.c conkyrc_sls.c \
 	coverposition.c finddir.c help.c options.c photoposition.c themes.c translations.c variables.c \
 	confinstall.c utils.c initialize.c

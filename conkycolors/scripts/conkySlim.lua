@@ -27,11 +27,14 @@ end
 
 -------------------------------------------------------------------------------
 --                                                             get_weather_info
--- return weather info
+-- return yahoo weather info
 --
-function get_weather_info(dataType, dataPeriod, dataFile)
-	local f = assert(io.popen("sed -n \'" .. dataType .. "\' " .. get_user_dir() .. "/Weather/" .. dataPeriod .. "/" .. dataFile ))
+function get_yahoo_weather_info(dataType, dataLocation, dataUnit)
+	local f = assert(io.popen("conky-colors --systemdir"))
 	local s = assert(f:read('*l'))
+	f:close()
+	f = assert(io.popen("sh " .. s .. "/bin/conkyYahooWeather " .. dataType .. " " .. dataLocation .. " " .. dataUnit)) -- runs command
+	s = assert(f:read('*l'))
 	f:close()
 	return s
 end
@@ -397,6 +400,77 @@ end--function bars
 --                                                                     draw_box
 -- display background
 --
+
+--[[BOX WIDGET v1.1 by Wlourf 27/01/2011
+This widget can drawn some boxes, even circles in your conky window
+http://u-scripts.blogspot.com/2011/01/box-widget.html)
+
+Inspired by Background by londonali1010 (2009), thanks ;-)
+
+The parameters (all optionals) are :
+x           - x coordinate of top-left corner of the box, default = 0 = (top-left corner of conky window)
+y           - y coordinate of top-left corner of the box, default = 0 = (top-left corner of conky window)
+w           - width of the box, default = width of the conky window
+h           - height of the box, default = height of the conky window
+corners     - corners is a table for the four corners in this order : top-left, top-right,bottom-right, bottom-left
+              each corner is defined in a table with a shape and a radius, available shapes are : "curve","circle","line"
+              example for the same shapes for all corners:
+              { {"circle",10} }
+              example for first corner different from the three others
+              { {"circle",10}, {"circle",5}  }
+              example for top corners differents from bottom corners
+              { {"circle",10}, {"circle",10}, {"line",0}  }
+              default = { {"line",0} } i.e=no corner
+operator    - set the compositing operator (needs in the conkyrc : own_window_argb_visual yes)
+              see http://cairographics.org/operators/
+              available operators are :
+              "clear","source","over","in","out","atop","dest","dest_over","dest_in","dest_out","dest_atop","xor","add","saturate"
+              default = "over"
+border      - if border>0, the script draws only the border, like a frame, default=0
+dash        - if border>0 and dash>0, the border is draw with dashes, default=0
+skew_x      - skew box around x axis, default = 0
+skew_y      - skew box around y axis, default = 0
+scale_x     - rescale the x axis, default=1, useful for drawing elipses ...
+scale_y     - rescale the x axis, default=1
+angle	    - angle of rotation of the box in degrees, default = 0
+              i.e. a horizontal graph
+rot_x       - x point of rotation's axis, default = 0,
+              relative to top-left corner of the box, (not the conky window)
+rot_y       - y point of rotation's axis, default = 0
+              relative to top-left corner of the box, (not the conky window)
+draw_me     - if set to false, box is not drawn (default = true or 1)
+              it can be used with a conky string, if the string returns 1, the box is drawn :
+              example : "${if_empty ${wireless_essid wlan0}}${else}1$endif",
+
+linear_gradient - table with the coordinates of two points to define a linear gradient,
+                  points are relative to top-left corner of the box, (not the conky window)
+                  {x1,y1,x2,y2}
+radial_gradient - table with the coordinates of two circle to define a radial gradient,
+                  points are relative to top-left corner of the box, (not the conky window)
+                  {x1,y1,r1,x2,y2,r2} (r=radius)
+colour      - table of colours, default = plain white {{1,0xFFFFFF,0.5}}
+              this table contains one or more tables with format {P,C,A}
+              P=position of gradient (0 = start of the gradient, 1= end of the gradient)
+              C=hexadecimal colour
+              A=alpha (opacity) of color (0=invisible,1=opacity 100%)
+              Examples :
+              for a plain color {{1,0x00FF00,0.5}}
+              for a gradient with two colours {{0,0x00FF00,0.5},{1,0x000033,1}}        {x=80,y=150,w=20,h=20,
+        radial_gradient={20,20,0,20,20,20},
+        colour={{0.5,0xFFFFFF,1},{1,0x000000,0}},
+              or {{0.5,0x00FF00,1},{1,0x000033,1}} -with this one, gradient will start in the middle
+              for a gradient with three colours {{0,0x00FF00,0.5},{0.5,0x000033,1},{1,0x440033,1}}
+              and so on ...
+
+
+
+To call this script in Conky, use (assuming you have saved this script to ~/scripts/):
+    lua_load ~/scripts/box.lua
+    lua_draw_hook_pre main_box
+
+And leave one line blank or not after TEXT
+]]
+
 function draw_box(data)
 
 	if data.draw_me == true then data.draw_me = nil end
@@ -586,7 +660,7 @@ end
 
 -------------------------------------------------------------------------------
 --                                                                         MAIN
-function conky_main(color, theme, drawbg, draw_weather, area_code)
+function conky_main(color, theme, drawbg, unit, area_code, posfix)
 
 	if conky_window == nil then return end
 
@@ -639,51 +713,56 @@ function conky_main(color, theme, drawbg, draw_weather, area_code)
 	else
 		bgc = 0xffffff
 		fgc = 0xffffff
-		bga = 0.05
+		bga = 0.1
 		fga = 0.8
 	end
 
-	if draw_weather == "on" then
-		settings = {--HOUR
-			txt="88:88",
-			x=(w/2)-140             , y=50          ,
-			txt_weight=1        , txt_size=50,
-			txt_fg_colour=fgc , txt_fg_alpha=bga ,
-			font = "Digital Readout Thick Upright"
-		};display_text(settings)
-		settings = {--HOUR
-			txt=conky_parse("${time %H:}"),
-			x=(w/2)-140            , y=50          ,
-			txt_weight=1        , txt_size=50,
-			txt_fg_colour=theme , txt_fg_alpha=fga ,
-			font = "Digital Readout Thick Upright"
-		};display_text(settings)
-		settings = {--MINUTES
-			txt=conky_parse("${time %M}"),
-			x=(w/2)-78             , y=50          ,
-			txt_weight=1        , txt_size=50 ,
-			txt_fg_colour=theme , txt_fg_alpha=fga ,
-			font = "Digital Readout Thick Upright"
-		};display_text(settings)
-		settings = {--DAY TEMP
-			txt="Temp: " .. get_weather_info("1p", "RightNow", "temperatures_rn") .. "C°",
-			x=(w/2)+60               , y=20            ,
-			txt_weight=0        , txt_size=12 ,
-			txt_fg_colour=fgc , txt_fg_alpha=fga    ,
-		};display_text(settings)
-		settings = {--DATA
-			txt=conky_parse("${time %d}") .. " " .. conky_parse("${time %b}") .. " " .. conky_parse("${time %Y}"),
-			x=(w/2)+60               , y=35            ,
-			txt_weight=0        , txt_size=12 ,
-			txt_fg_colour=theme , txt_fg_alpha=fga    ,
-		};display_text(settings)
-		settings = {--NAME WEEK
-			txt=conky_parse("${time %A}"),
-			x=(w/2)+60               , y=48           ,
-			txt_weight=0        , txt_size=12 ,
-			txt_fg_colour=fgc , txt_fg_alpha=fga    ,
-		};display_text(settings)
-	end
+    settings = {--HOUR
+        txt="88:88",
+        x=(w/2)-140             , y=50          ,
+        txt_weight=1        , txt_size=50,
+        txt_fg_colour=fgc , txt_fg_alpha=bga ,
+        font = "Digital Readout Thick Upright"
+    };display_text(settings)
+    settings = {--HOUR
+        txt=conky_parse("${time %H:}"),
+        x=(w/2)-140            , y=50          ,
+        txt_weight=1        , txt_size=50,
+        txt_fg_colour=theme , txt_fg_alpha=fga ,
+        font = "Digital Readout Thick Upright"
+    };display_text(settings)
+    settings = {--MINUTES
+        txt=conky_parse("${time %M}"),
+        x=(w/2)-78             , y=50          ,
+        txt_weight=1        , txt_size=50 ,
+        txt_fg_colour=theme , txt_fg_alpha=fga ,
+        font = "Digital Readout Thick Upright"
+    };display_text(settings)
+
+    if unit =='f' then
+        unitChar = 'F°'
+    else
+        unitChar = 'C°'
+    end
+
+    settings = {--DAY TEMP
+        txt="Temp: " .. get_yahoo_weather_info("cur", area_code, unit) .. unitChar,
+        x=(w/2)+60               , y=20            ,
+        txt_weight=0        , txt_size=12 ,
+        txt_fg_colour=fgc , txt_fg_alpha=fga    ,
+    };display_text(settings)
+    settings = {--DATA
+        txt=conky_parse("${time %d}") .. " " .. conky_parse("${time %b}") .. " " .. conky_parse("${time %Y}"),
+        x=(w/2)+60               , y=35            ,
+        txt_weight=0        , txt_size=12 ,
+        txt_fg_colour=theme , txt_fg_alpha=fga    ,
+    };display_text(settings)
+    settings = {--NAME WEEK
+        txt=conky_parse("${time %A}"),
+        x=(w/2)+60               , y=48           ,
+        txt_weight=0        , txt_size=12 ,
+        txt_fg_colour=fgc , txt_fg_alpha=fga    ,
+    };display_text(settings)
 
 	settings = {--DAYS GRAPH
 		value=tonumber(conky_parse("${time %d}")),
@@ -751,7 +830,7 @@ function conky_main(color, theme, drawbg, draw_weather, area_code)
 		size = 40        ,
 	};clock_hands(settings)
 
-	xp = ((w/2)/2.6)
+	xp = ((w/2)/2.6) - posfix
 	settings = {--CPU GRAPH CPU1
 		value=tonumber(conky_parse("${cpu cpu1}")),
 		value_max=100              ,

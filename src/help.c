@@ -15,7 +15,7 @@ void help() {
 	printf("\t--theme=<theme> - Set default theme color\n");
 	printf("\tThemes: brave|carbonite|dust|human*|noble|tribute|wine|wise|\n");
 	printf("\t        ambiance|radiance|elementary|\n");
-	printf("\t        cyan|blue|orange|red|green|purple|black|grey|white|\n");
+	printf("\t        cyan|blue|orange|red|green|purple|black|white|\n");
 	printf("\t        custom\n");
 	printf("\tWork only with --theme=custom\n");
 	printf("\t\t--default-color=<value>\n");
@@ -89,7 +89,7 @@ void help() {
 	printf("\t--w=<width> - Set your screen width\n");
 	printf("\t--h=<height> - Set your screen height\n");
 	printf("\t--nobg - remove the background\n");
-	printf("\t--cpu=<number> - Set number of cpu cores [max=4]\n");
+	printf("\t--poxfix=<number> - fix ring position\n");
 	printf("\t--weather=<AreaID> - Enable weather[Ex: --weather=BRXX0043]\n");
 	printf("\t--unit=<C|F>- Force output temperature either in Celius or Fahrenheit\n");
 	printf("\t-------------- SLS MODE --------------\n");

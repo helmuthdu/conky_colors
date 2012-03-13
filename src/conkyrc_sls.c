@@ -23,6 +23,7 @@ void conkyrc_sls () {
 	}
 
 	const char *forecastdir=finddir("bin/conkyWeather");
+	const char *yahooweatherdir=finddir("bin/conkyYahooWeather");
 	const char *conkysls=finddir("scripts/conkySLS.lua");
 
 	//Global Setup
@@ -162,7 +163,12 @@ void conkyrc_sls () {
 	fprintf(fp,"# - WEATHER - #\n");
 	fprintf(fp,"###############\n");
 	fprintf(fp,"${execi 1800 bash %s/bin/conkyWeather \"%s\"}\n", forecastdir,weather_code);
-	fprintf(fp,"${alignr 10}${voffset -8}${font Ubuntu:style=Bold:size=10}${color2}${execi 1860 sed -n '1p' $HOME/.conkycolors/Weather/RightNow/temperatures_rn}${font}${color}\n");
+    if (unit == True) {
+        fprintf(fp,"${alignr 10}${voffset -8}${font Ubuntu:style=Bold:size=10}${color2}${font}${execi 600 %s/bin/conkyYahooWeather cur %s f}°F${color}\n", yahooweatherdir, weather_code);
+    }
+    else {
+        fprintf(fp,"${alignr 10}${voffset -8}${font Ubuntu:style=Bold:size=10}${color2}${font}${execi 600 %s/bin/conkyYahooWeather cur %s c}°C${color}\n", yahooweatherdir, weather_code);
+    }
 	fprintf(fp,"${voffset 60}\n");
 	fprintf(fp,"#################\n");
 	fprintf(fp,"# - PROCESSES - #\n");

@@ -19,7 +19,6 @@
 #include "translations.h"
 #include "options.h"
 #include "conkycover.h"
-#include "conkyforecast.h"
 #include "conkyplayer.h"
 #include "coverposition.h"
 #include "photoposition.h"
@@ -75,8 +74,6 @@ void create_conkyrc () {
 		photoposition();
 		if (cover > 2)
 			conkycover();
-		if (set_weather > 0)
-			conkyforecast();
 		conkyplayer();
 		conkyrc_default();
 	}

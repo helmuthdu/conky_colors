@@ -119,6 +119,8 @@ int options (int argc, char *argv[]) {
 			board_width = atoi(value);
 		else OPTION("--h", key)
 			board_height = atoi(value);
+		else OPTION("--posfix", key)
+			posfix = atoi(value);
 		else OPTION_WITH_VALUE("--side", key)
 			snprintf(side, 31, "%s", value);
 		else OPTION_WITH_VALUE("--cpu", key)

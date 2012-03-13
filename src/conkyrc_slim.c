@@ -14,8 +14,6 @@ void conkyrc_slim () {
 
 	FILE *fp;
 
-	const char *forecastdir=finddir("bin/conkyWeather");
-
 	if(board_width == 0 || board_height == 0)
 	{
 		printf("You have to set the width AND height of your screen (ex: 1280x800): --w=1280 --h=800\n");
@@ -138,15 +136,17 @@ void conkyrc_slim () {
 	else
 		fprintf(fp,"on ");
 
-	if (set_weather == 1)
-		fprintf(fp,"on %s", weather_code);
+	if (unit == 1)
+		fprintf(fp,"f ");
 	else
-		fprintf(fp,"off %s", weather_code);
+		fprintf(fp,"c ");
+
+    fprintf(fp,"%s ", weather_code);
+    fprintf(fp,"%d", posfix);
 
 	fprintf(fp,"\n");
 	fprintf(fp,"\n");
 	fprintf(fp,"TEXT\n");
-	fprintf(fp,"${execi 1800 bash %s/bin/conkyWeather \"%s\"}\n", forecastdir,weather_code);
 	fclose(fp);
 }
 
