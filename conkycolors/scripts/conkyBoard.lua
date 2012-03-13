@@ -672,7 +672,7 @@ function conky_main(color, theme, drawbg, draw_weather, area_code)
 	if color == "black" then
 		bgc = 0xffffff
 		fgc = 0xffffff
-		bga = 1
+		bga = 0.4
 		fga = 1
 	else
 		bgc = 0x1e1c1a
@@ -700,105 +700,146 @@ function conky_main(color, theme, drawbg, draw_weather, area_code)
 		settings={
 		x=0-1 , y=0 ,
 		w=w+1 , h=h ,
-		colour={{1,0x0E97B9,1}, {0,0x37BDC0,1}},
+		colour={{1,0x0e97b9,1}, {0,0x30b6bf,1}},
 		radial_gradient={(w/2.5),h/2,100, w/3,h/2,h},
 	};draw_box(settings)
 	end
 	
-	xp = ((w/2)/1.5)
-    settings = {--CPU GRAPH CPU1
-		value=tonumber(conky_parse("${cpu cpu1}")),
-		value_max=100              ,
-		x=xp                       , y=yp                        ,
-		graph_radius=70            ,
-		graph_thickness=15          ,
-		graph_start_angle=180      ,
-		graph_unit_angle=3       , graph_unit_thickness=4    ,
-		graph_bg_colour=bgc        , graph_bg_alpha=bga          ,
-		graph_fg_colour=theme      , graph_fg_alpha=fga          ,
-		hand_fg_colour=theme       , hand_fg_alpha=0.0           ,
-		txt_radius=35              ,
-		txt_weight=1               , txt_size=8.0                ,
-		txt_fg_colour=fgc          , txt_fg_alpha=fga            ,
-		graduation_radius=28       ,
-		graduation_thickness=0     , graduation_mark_thickness=1 ,
-		graduation_unit_angle=27   ,
-		graduation_fg_colour=theme , graduation_fg_alpha=0.3     ,
-		caption='CPU'              ,
-		caption_weight=1           , caption_size=20.0           ,
-		caption_fg_colour=fgc      , caption_fg_alpha=fga        ,
-	};draw_gauge_ring(settings)
+	xp = ((w/2)/1.75)
 
-	settings = {--CPU GRAPH CPU2
-		value=tonumber(conky_parse("${cpu cpu2}")) ,
-		value_max=100              ,
-		x=xp                       , y=yp                        ,
-		graph_radius=60            ,
-		graph_thickness=10          ,
-		graph_start_angle=180      ,
-		graph_unit_angle=3       , graph_unit_thickness=1    ,
-		graph_bg_colour=bgc        , graph_bg_alpha=bga          ,
-		graph_fg_colour=theme      , graph_fg_alpha=fga          ,
-		hand_fg_colour=theme       , hand_fg_alpha=0.0           ,
-		txt_radius=0               ,
-		txt_weight=1               , txt_size=8.0                ,
-		txt_fg_colour=fgc          , txt_fg_alpha=fga            ,
-		graduation_radius=28       ,
-		graduation_thickness=0     , graduation_mark_thickness=1 ,
-		graduation_unit_angle=27   ,
-		graduation_fg_colour=theme , graduation_fg_alpha=0.3     ,
-		caption=''                 ,
-		caption_weight=1           , caption_size=20.0           ,
-		caption_fg_colour=fgc      , caption_fg_alpha=fga        ,
-	};draw_gauge_ring(settings)
+    settings = {--CPU GRAPH
+        value=0,
+        value_max = 100   ,
+        x = xp          , y = yp          ,
+        bg_colour = bgc  , bg_alpha = bga  ,
+        fg_colour = fgc  , fg_alpha = fga  ,
+        radius = 60      , thickness = 12   ,
+        start_angle = 180 , end_angle = 540 ,
+        lr = 0           ,
+    };draw_ring(settings)
+    settings = {--CPU GRAPH
+        value=tonumber(conky_parse("${cpu cpu1}")),
+        value_max = 100   ,
+        x = xp          , y = yp          ,
+        bg_colour = bgc  , bg_alpha = 0  ,
+        fg_colour = fgc  , fg_alpha = fga  ,
+        radius = 60      , thickness = 6   ,
+        start_angle = 180 , end_angle = 540 ,
+        lr = 0           ,
+    };draw_ring(settings)
+    settings = {--CPU GRAPH
+        value=tonumber(conky_parse("${cpu cpu2}")),
+        value_max = 100   ,
+        x = xp          , y = yp          ,
+        bg_colour = bgc  , bg_alpha = bga  ,
+        fg_colour = fgc  , fg_alpha = fga  ,
+        radius = 50      , thickness = 4   ,
+        start_angle = 180 , end_angle = 540 ,
+        lr = 0           ,
+    };draw_ring(settings)
 
-	xp = xp + hori_space
-	settings = {--MEMPERC GRAPH
-		value=tonumber(conky_parse("${memperc}")),
-		value_max=100              ,
-		x=xp                       , y=yp                        ,
-		graph_radius=70            ,
-		graph_thickness=15          ,
-		graph_start_angle=180      ,
-		graph_unit_angle=3       , graph_unit_thickness=1    ,
-		graph_bg_colour=bgc        , graph_bg_alpha=bga          ,
-		graph_fg_colour=theme      , graph_fg_alpha=fga          ,
-		hand_fg_colour=theme       , hand_fg_alpha=0.0           ,
-		txt_radius=0               ,
-		txt_weight=1               , txt_size=8.0                ,
-		txt_fg_colour=fgc          , txt_fg_alpha=fga            ,
-		graduation_radius=22       ,
-		graduation_thickness=4     , graduation_mark_thickness=2 ,
-		graduation_unit_angle=27   ,
-		graduation_fg_colour=theme , graduation_fg_alpha=0.5     ,
-		caption='MEM'              ,
-		caption_weight=1           , caption_size=20.0           ,
-		caption_fg_colour=fgc      , caption_fg_alpha=fga        ,
-	};draw_gauge_ring(settings)
+		settings = {--NAME WEEK
+			txt='cpu',
+			x=xp-12               , y=yp*1.3           ,
+			txt_weight=0        , txt_size=30 ,
+			txt_fg_colour=fgc , txt_fg_alpha=fga    ,
+		};display_text(settings)
+
 
     xp = xp + hori_space
-	settings = {--SWAP FILESYSTEM USED GRAPH
-		value=tonumber(conky_parse("${swapperc}")),
-		value_max=100              ,
-		x=xp                       , y=yp                        ,
-		graph_radius=70            ,
-		graph_thickness=15          ,
-		graph_start_angle=180      ,
-		graph_unit_angle=3       , graph_unit_thickness=1    ,
-		graph_bg_colour=bgc        , graph_bg_alpha=bga          ,
-		graph_fg_colour=theme      , graph_fg_alpha=fga          ,
-		hand_fg_colour=theme       , hand_fg_alpha=0.0           ,
-		txt_radius=0               ,
-		txt_weight=1               , txt_size=8.0                ,
-		txt_fg_colour=fgc          , txt_fg_alpha=fga            ,
-		graduation_radius=22       ,
-		graduation_thickness=4     , graduation_mark_thickness=2 ,
-		graduation_unit_angle=27   ,
-		graduation_fg_colour=theme , graduation_fg_alpha=0.5     ,
-		caption='SWAP'             ,
-		caption_weight=1           , caption_size=30.0           ,
-		caption_fg_colour=fgc      , caption_fg_alpha=fga        ,
-	};draw_gauge_ring(settings)
+    settings = {--MEMPERC GRAPH
+        value=0,
+        value_max = 100   ,
+        x = xp          , y = yp          ,
+        bg_colour = bgc  , bg_alpha = bga  ,
+        fg_colour = fgc  , fg_alpha = fga  ,
+        radius = 60      , thickness = 12   ,
+        start_angle = 180 , end_angle = 540 ,
+        lr = 0           ,
+    };draw_ring(settings)
+    settings = {--MEMPERC GRAPH
+        value=tonumber(conky_parse("${memperc}")),
+        value_max = 100   ,
+        x = xp          , y = yp          ,
+        bg_colour = bgc  , bg_alpha = 0  ,
+        fg_colour = fgc  , fg_alpha = fga  ,
+        radius = 60      , thickness = 6   ,
+        start_angle = 180 , end_angle = 540 ,
+        lr = 0           ,
+    };draw_ring(settings)
+    		settings = {--NAME WEEK
+			txt='mem',
+			x=xp-16               , y=yp*1.3           ,
+			txt_weight=0        , txt_size=30 ,
+			txt_fg_colour=fgc , txt_fg_alpha=fga    ,
+		};display_text(settings)
+        xp = xp + hori_space
+    settings = {--MEMPERC GRAPH
+        value=0,
+        value_max = 100   ,
+        x = xp          , y = yp          ,
+        bg_colour = bgc  , bg_alpha = bga  ,
+        fg_colour = fgc  , fg_alpha = fga  ,
+        radius = 60      , thickness = 12   ,
+        start_angle = 180 , end_angle = 540 ,
+        lr = 0           ,
+    };draw_ring(settings)
+    settings = {--DISKS GRAPH
+        value=tonumber(conky_parse("${fs_used_perc /}")),
+        value_max = 100   ,
+        x = xp          , y = yp          ,
+        bg_colour = bgc  , bg_alpha = 0  ,
+        fg_colour = fgc  , fg_alpha = fga  ,
+        radius = 60      , thickness = 6   ,
+        start_angle = 180 , end_angle = 540 ,
+        lr = 0           ,
+    };draw_ring(settings)
+    		settings = {--NAME WEEK
+			txt='root',
+			x=xp-12               , y=yp*1.3           ,
+			txt_weight=0        , txt_size=30 ,
+			txt_fg_colour=fgc , txt_fg_alpha=fga    ,
+		};display_text(settings)
+    
+        xp = xp + hori_space
+    settings = {--CPU GRAPH
+        value=0,
+        value_max = 100   ,
+        x = xp          , y = yp          ,
+        bg_colour = bgc  , bg_alpha = bga  ,
+        fg_colour = fgc  , fg_alpha = fga  ,
+        radius = 60      , thickness = 12   ,
+        start_angle = 180 , end_angle = 540 ,
+        lr = 0           ,
+    };draw_ring(settings)
+    settings = {--MEMPERC GRAPH
+        value=tonumber(conky_parse("${time %H}")),
+        value_max = 24   ,
+        x = xp          , y = yp          ,
+        bg_colour = bgc  , bg_alpha = 0  ,
+        fg_colour = fgc  , fg_alpha = fga  ,
+        radius = 60      , thickness = 6   ,
+        start_angle = 0 , end_angle = 360 ,
+        lr = 0           ,
+    };draw_ring(settings)
+    
+			settings = {
+				value=tonumber(conky_parse("${time %M}")),
+				value_max = 60  ,
+				x = xp           , y = yp          ,
+				bg_colour = bgc   , bg_alpha = bga  ,
+				fg_colour = fgc , fg_alpha = fga  ,
+				radius =50        , thickness = 4  ,
+				start_angle = 0   , end_angle = 360 ,
+				lr = 0            ,
+			};draw_ring(settings)
+    		settings = {--NAME WEEK
+			txt='hour',
+			x=xp-16               , y=yp*1.3           ,
+			txt_weight=0        , txt_size=30 ,
+			txt_fg_colour=fgc , txt_fg_alpha=fga    ,
+		};display_text(settings)
+
 
 	end-- if updates>5
 	cairo_destroy(cr)
