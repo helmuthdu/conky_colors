@@ -403,7 +403,7 @@ function draw_box(data)
 This widget can drawn some boxes, even circles in your conky window
 http://u-scripts.blogspot.com/2011/01/box-widget.html)
 
-Inspired by Background by londonali1010 (2009), thanks ;-) 
+Inspired by Background by londonali1010 (2009), thanks ;-)
 
 The parameters (all optionals) are :
 x           - x coordinate of top-left corner of the box, default = 0 = (top-left corner of conky window)
@@ -415,11 +415,11 @@ corners     - corners is a table for the four corners in this order : top-left, 
               example for the same shapes for all corners:
               { {"circle",10} }
               example for first corner different from the three others
-              { {"circle",10}, {"circle",5}  }              
+              { {"circle",10}, {"circle",5}  }
               example for top corners differents from bottom corners
-              { {"circle",10}, {"circle",10}, {"line",0}  }   
+              { {"circle",10}, {"circle",10}, {"line",0}  }
               default = { {"line",0} } i.e=no corner
-operator    - set the compositing operator (needs in the conkyrc : own_window_argb_visual yes)                          
+operator    - set the compositing operator (needs in the conkyrc : own_window_argb_visual yes)
               see http://cairographics.org/operators/
               available operators are :
               "clear","source","over","in","out","atop","dest","dest_over","dest_in","dest_out","dest_atop","xor","add","saturate"
@@ -434,12 +434,12 @@ angle	    - angle of rotation of the box in degrees, default = 0
               i.e. a horizontal graph
 rot_x       - x point of rotation's axis, default = 0,
               relative to top-left corner of the box, (not the conky window)
-rot_y       - y point of rotation's axis, default = 0              
+rot_y       - y point of rotation's axis, default = 0
               relative to top-left corner of the box, (not the conky window)
 draw_me     - if set to false, box is not drawn (default = true or 1)
               it can be used with a conky string, if the string returns 1, the box is drawn :
-              example : "${if_empty ${wireless_essid wlan0}}${else}1$endif",              
-              
+              example : "${if_empty ${wireless_essid wlan0}}${else}1$endif",
+
 linear_gradient - table with the coordinates of two points to define a linear gradient,
                   points are relative to top-left corner of the box, (not the conky window)
                   {x1,y1,x2,y2}
@@ -449,7 +449,7 @@ radial_gradient - table with the coordinates of two circle to define a radial gr
 colour      - table of colours, default = plain white {{1,0xFFFFFF,0.5}}
               this table contains one or more tables with format {P,C,A}
               P=position of gradient (0 = start of the gradient, 1= end of the gradient)
-              C=hexadecimal colour 
+              C=hexadecimal colour
               A=alpha (opacity) of color (0=invisible,1=opacity 100%)
               Examples :
               for a plain color {{1,0x00FF00,0.5}}
@@ -465,7 +465,7 @@ colour      - table of colours, default = plain white {{1,0xFFFFFF,0.5}}
 To call this script in Conky, use (assuming you have saved this script to ~/scripts/):
     lua_load ~/scripts/box.lua
     lua_draw_hook_pre main_box
-    
+
 And leave one line blank or not after TEXT
 ]]
 
@@ -657,7 +657,7 @@ end
 
 -------------------------------------------------------------------------------
 --                                                                         MAIN
-function conky_main(color, theme, drawbg, draw_weather, area_code)
+function conky_main(color, theme1, theme2, drawbg, draw_weather, area_code)
 
 	if conky_window == nil then return end
 
@@ -681,13 +681,15 @@ function conky_main(color, theme, drawbg, draw_weather, area_code)
 		fga = 0.8
 	end
 
-	local theme = ("0x" .. "37BDC0")
+	local theme1 = ("0x" .. theme1)
+	local theme2 = ("0x" .. theme2)
 	local w = conky_window.width
 	local h = conky_window.height
 	local hori_space = 200
 	local vert_space = h*0.5
 	local xp = hori_space
 	local yp = vert_space
+
 
 	-- BACKGROUND
 	if drawbg == "on" then
@@ -700,145 +702,151 @@ function conky_main(color, theme, drawbg, draw_weather, area_code)
 		settings={
 		x=0-1 , y=0 ,
 		w=w+1 , h=h ,
-		colour={{1,0x0e97b9,1}, {0,0x30b6bf,1}},
+		--colour={{1,0x0e97b9,1}, {0,0x30b6bf,1}},
+		colour={{1,theme1,1}, {0,theme2,1}},
 		radial_gradient={(w/2.5),h/2,100, w/3,h/2,h},
 	};draw_box(settings)
 	end
-	
+
 	xp = ((w/2)/1.75)
 
-    settings = {--CPU GRAPH
-        value=0,
+    settings = {--CPU BACKGROUND
+        value=0           ,
         value_max = 100   ,
-        x = xp          , y = yp          ,
-        bg_colour = bgc  , bg_alpha = bga  ,
-        fg_colour = fgc  , fg_alpha = fga  ,
-        radius = 60      , thickness = 12   ,
+        x = xp            , y = yp          ,
+        bg_colour = bgc   , bg_alpha = bga  ,
+        fg_colour = fgc   , fg_alpha = fga  ,
+        radius = 60       , thickness = 12  ,
         start_angle = 180 , end_angle = 540 ,
-        lr = 0           ,
+        lr = 0            ,
     };draw_ring(settings)
-    settings = {--CPU GRAPH
+    settings = {--CPU1 GRAPH
         value=tonumber(conky_parse("${cpu cpu1}")),
         value_max = 100   ,
-        x = xp          , y = yp          ,
-        bg_colour = bgc  , bg_alpha = 0  ,
-        fg_colour = fgc  , fg_alpha = fga  ,
-        radius = 60      , thickness = 6   ,
+        x = xp            , y = yp          ,
+        bg_colour = bgc   , bg_alpha = 0    ,
+        fg_colour = fgc   , fg_alpha = fga  ,
+        radius = 60       , thickness = 6   ,
         start_angle = 180 , end_angle = 540 ,
-        lr = 0           ,
+        lr = 0            ,
     };draw_ring(settings)
-    settings = {--CPU GRAPH
+    settings = {--CPU2 GRAPH
         value=tonumber(conky_parse("${cpu cpu2}")),
         value_max = 100   ,
-        x = xp          , y = yp          ,
-        bg_colour = bgc  , bg_alpha = bga  ,
-        fg_colour = fgc  , fg_alpha = fga  ,
-        radius = 50      , thickness = 4   ,
+        x = xp            , y = yp          ,
+        bg_colour = bgc   , bg_alpha = bga  ,
+        fg_colour = fgc   , fg_alpha = fga  ,
+        radius = 50       , thickness = 4   ,
         start_angle = 180 , end_angle = 540 ,
-        lr = 0           ,
+        lr = 0            ,
     };draw_ring(settings)
-
-		settings = {--NAME WEEK
-			txt='cpu',
-			x=xp-12               , y=yp*1.3           ,
-			txt_weight=0        , txt_size=30 ,
-			txt_fg_colour=fgc , txt_fg_alpha=fga    ,
-		};display_text(settings)
-
+    settings = {--CPU NAME
+        txt='cpu'         ,
+        x=xp-12           , y=yp*1.3         ,
+        txt_weight=0      , txt_size=30      ,
+        txt_fg_colour=fgc , txt_fg_alpha=fga ,
+    };display_text(settings)
 
     xp = xp + hori_space
-    settings = {--MEMPERC GRAPH
-        value=0,
+    settings = {--MEMPERC BACKGROUND
+        value=0           ,
         value_max = 100   ,
-        x = xp          , y = yp          ,
-        bg_colour = bgc  , bg_alpha = bga  ,
-        fg_colour = fgc  , fg_alpha = fga  ,
-        radius = 60      , thickness = 12   ,
+        x = xp            , y = yp          ,
+        bg_colour = bgc   , bg_alpha = bga  ,
+        fg_colour = fgc   , fg_alpha = fga  ,
+        radius = 60       , thickness = 12  ,
         start_angle = 180 , end_angle = 540 ,
-        lr = 0           ,
+        lr = 0            ,
     };draw_ring(settings)
     settings = {--MEMPERC GRAPH
         value=tonumber(conky_parse("${memperc}")),
         value_max = 100   ,
-        x = xp          , y = yp          ,
-        bg_colour = bgc  , bg_alpha = 0  ,
-        fg_colour = fgc  , fg_alpha = fga  ,
-        radius = 60      , thickness = 6   ,
+        x = xp            , y = yp          ,
+        bg_colour = bgc   , bg_alpha = 0    ,
+        fg_colour = fgc   , fg_alpha = fga  ,
+        radius = 60       , thickness = 6   ,
         start_angle = 180 , end_angle = 540 ,
-        lr = 0           ,
+        lr = 0            ,
     };draw_ring(settings)
-    		settings = {--NAME WEEK
-			txt='mem',
-			x=xp-16               , y=yp*1.3           ,
-			txt_weight=0        , txt_size=30 ,
-			txt_fg_colour=fgc , txt_fg_alpha=fga    ,
-		};display_text(settings)
-        xp = xp + hori_space
+    settings = {--MEM NAME
+        txt='mem'         ,
+        x=xp-16           , y=yp*1.3         ,
+        txt_weight=0      , txt_size=30      ,
+        txt_fg_colour=fgc , txt_fg_alpha=fga ,
+    };display_text(settings)
+
+    xp = xp + hori_space
     settings = {--MEMPERC GRAPH
-        value=0,
+        value=0           ,
         value_max = 100   ,
-        x = xp          , y = yp          ,
-        bg_colour = bgc  , bg_alpha = bga  ,
-        fg_colour = fgc  , fg_alpha = fga  ,
-        radius = 60      , thickness = 12   ,
+        x = xp            , y = yp          ,
+        bg_colour = bgc   , bg_alpha = bga  ,
+        fg_colour = fgc   , fg_alpha = fga  ,
+        radius = 60       , thickness = 12  ,
         start_angle = 180 , end_angle = 540 ,
-        lr = 0           ,
+        lr = 0            ,
     };draw_ring(settings)
     settings = {--DISKS GRAPH
         value=tonumber(conky_parse("${fs_used_perc /}")),
         value_max = 100   ,
-        x = xp          , y = yp          ,
-        bg_colour = bgc  , bg_alpha = 0  ,
-        fg_colour = fgc  , fg_alpha = fga  ,
-        radius = 60      , thickness = 6   ,
+        x = xp            , y = yp          ,
+        bg_colour = bgc   , bg_alpha = 0    ,
+        fg_colour = fgc   , fg_alpha = fga  ,
+        radius = 60       , thickness = 6   ,
         start_angle = 180 , end_angle = 540 ,
-        lr = 0           ,
+        lr = 0            ,
     };draw_ring(settings)
-    		settings = {--NAME WEEK
-			txt='root',
-			x=xp-12               , y=yp*1.3           ,
-			txt_weight=0        , txt_size=30 ,
-			txt_fg_colour=fgc , txt_fg_alpha=fga    ,
-		};display_text(settings)
-    
-        xp = xp + hori_space
-    settings = {--CPU GRAPH
-        value=0,
+    settings = {--ROOT NAME
+        txt='root'        ,
+        x=xp-12           , y=yp*1.3         ,
+        txt_weight=0      , txt_size=30      ,
+        txt_fg_colour=fgc , txt_fg_alpha=fga ,
+    };display_text(settings)
+
+    xp = xp + hori_space
+    settings = {--CLOCK BACKGROUND
+        value=0           ,
         value_max = 100   ,
-        x = xp          , y = yp          ,
-        bg_colour = bgc  , bg_alpha = bga  ,
-        fg_colour = fgc  , fg_alpha = fga  ,
-        radius = 60      , thickness = 12   ,
+        x = xp            , y = yp          ,
+        bg_colour = bgc   , bg_alpha = bga  ,
+        fg_colour = fgc   , fg_alpha = fga  ,
+        radius = 60       , thickness = 12  ,
         start_angle = 180 , end_angle = 540 ,
-        lr = 0           ,
+        lr = 0            ,
     };draw_ring(settings)
-    settings = {--MEMPERC GRAPH
-        value=tonumber(conky_parse("${time %H}")),
-        value_max = 24   ,
+	settings = {--CLOCK HOURS
+		value=tonumber(conky_parse("${time %H}")),
+		value_max=12             ,
+		x=xp                     , y=yp                        ,
+		graph_radius=60          ,
+		graph_thickness=6        ,
+		graph_unit_angle=30      , graph_unit_thickness=30     ,
+		graph_bg_colour=bgc      , graph_bg_alpha=0            ,
+		graph_fg_colour=fgc      , graph_fg_alpha=fga          ,
+		txt_radius=60            ,
+		txt_weight=1             , txt_size=8.0                ,
+		txt_fg_colour=fgc        , txt_fg_alpha=0              ,
+		graduation_radius=60     ,
+		graduation_thickness=0   , graduation_mark_thickness=2 ,
+		graduation_unit_angle=30 ,
+		graduation_fg_colour=fgc , graduation_fg_alpha=0.3     ,
+	};draw_clock_ring(settings)
+    settings = {--CLOCK MINUTES
+        value=tonumber(conky_parse("${time %M}")),
+        value_max = 60  ,
         x = xp          , y = yp          ,
-        bg_colour = bgc  , bg_alpha = 0  ,
-        fg_colour = fgc  , fg_alpha = fga  ,
-        radius = 60      , thickness = 6   ,
+        bg_colour = bgc , bg_alpha = bga  ,
+        fg_colour = fgc , fg_alpha = fga  ,
+        radius =50      , thickness = 4   ,
         start_angle = 0 , end_angle = 360 ,
-        lr = 0           ,
+        lr = 0          ,
     };draw_ring(settings)
-    
-			settings = {
-				value=tonumber(conky_parse("${time %M}")),
-				value_max = 60  ,
-				x = xp           , y = yp          ,
-				bg_colour = bgc   , bg_alpha = bga  ,
-				fg_colour = fgc , fg_alpha = fga  ,
-				radius =50        , thickness = 4  ,
-				start_angle = 0   , end_angle = 360 ,
-				lr = 0            ,
-			};draw_ring(settings)
-    		settings = {--NAME WEEK
-			txt='hour',
-			x=xp-16               , y=yp*1.3           ,
-			txt_weight=0        , txt_size=30 ,
-			txt_fg_colour=fgc , txt_fg_alpha=fga    ,
-		};display_text(settings)
+    settings = {--CLOCK NAME
+        txt='clock'       ,
+        x=xp-20           , y=yp*1.3         ,
+        txt_weight=0      , txt_size=30      ,
+        txt_fg_colour=fgc , txt_fg_alpha=fga ,
+    };display_text(settings)
 
 
 	end-- if updates>5

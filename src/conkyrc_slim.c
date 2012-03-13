@@ -87,13 +87,13 @@ void conkyrc_slim () {
 		if(radiance == True)
 			fprintf(fp,"\ndefault_color 3C3B37\n");
 	else
-		if(dark == True || alldark == True)
+		if(dark == True || black == True)
 			fprintf(fp,"\ndefault_color 212526\n");
 	else
 		fprintf(fp,"\ndefault_color cccccc\n");
 	fprintf(fp,"\n");
 	//COLOR0
-	if (dark == True || alldark == True)
+	if (dark == True || black == True)
 			fprintf(fp,"color0 1E1C1A\n");
 	else
 		if (custom == True || radiance == True || ambiance == True || elementary == True)
@@ -104,10 +104,10 @@ void conkyrc_slim () {
 	if (custom == True || radiance == True || ambiance == True || elementary == True)
 		fprintf(fp,"color1 %s\n", color1);
 	else
-		if (alldark == True)
+		if (black == True)
 			fprintf(fp,"color1 1E1C1A\n");
 	else
-		if (alllight == True)
+		if (white == True)
 			fprintf(fp,"color1 white\n");
 	else
 		fprintf(fp,"color1 %s\n", color1);
@@ -115,7 +115,7 @@ void conkyrc_slim () {
 	if (custom == True || radiance == True || ambiance == True || (elementary == True && dark != True))
 		fprintf(fp,"color2 %s\n", color2);
 	else
-		if (dark == True || alldark == True)
+		if (dark == True || black == True)
 			fprintf(fp,"color2 1E1C1A\n");
 	else
 		fprintf(fp,"color2 white\n");
@@ -126,7 +126,7 @@ void conkyrc_slim () {
 	if (elementary == True || ambiance == True)
 			fprintf(fp,"black ");
 	else
-		if (dark == True || alldark == True || radiance == True)
+		if (dark == True || black == True || radiance == True)
 			fprintf(fp,"white ");
 	else
 			fprintf(fp,"black ");

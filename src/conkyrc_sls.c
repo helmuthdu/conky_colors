@@ -98,13 +98,13 @@ void conkyrc_sls () {
 		if(radiance == True)
 			fprintf(fp,"\ndefault_color 3C3B37\n");
 	else
-		if(dark == True || alldark == True)
+		if(dark == True || black == True)
 			fprintf(fp,"\ndefault_color 212526\n");
 	else
 		fprintf(fp,"\ndefault_color cccccc\n");
 	fprintf(fp,"\n");
 	//COLOR0
-	if (dark == True || alldark == True)
+	if (dark == True || black == True)
 			fprintf(fp,"color0 1E1C1A\n");
 	else
 		if (custom == True || radiance == True || ambiance == True || elementary == True)
@@ -115,10 +115,10 @@ void conkyrc_sls () {
 	if (custom == True || radiance == True || ambiance == True || elementary == True)
 		fprintf(fp,"color1 %s\n", color1);
 	else
-		if (alldark == True)
+		if (black == True)
 			fprintf(fp,"color1 1E1C1A\n");
 	else
-		if (alllight == True)
+		if (white == True)
 			fprintf(fp,"color1 white\n");
 	else
 		fprintf(fp,"color1 %s\n", color1);
@@ -126,7 +126,7 @@ void conkyrc_sls () {
 	if (custom == True || radiance == True || ambiance == True || (elementary == True && dark != True))
 		fprintf(fp,"color2 %s\n", color2);
 	else
-		if (dark == True || alldark == True)
+		if (dark == True || black == True)
 			fprintf(fp,"color2 1E1C1A\n");
 	else
 		fprintf(fp,"color2 white\n");
@@ -134,12 +134,12 @@ void conkyrc_sls () {
 	fprintf(fp,"\nlua_load %s/scripts/conkySLS.lua\n", conkysls);
 	fprintf(fp,"lua_draw_hook_pre conky_main ");
 	//DEFAULT COLOR
-	if (dark == True || alldark == True || radiance == True)
+	if (dark == True || black == True || radiance == True)
 			fprintf(fp,"black ");
 	else
 			fprintf(fp,"white ");
 	//THEME
-	fprintf(fp,"%s ", color1);
+	fprintf(fp,"%s ", color3);
 	//DRAW_BACKGROUND
 	if (nobg != True)
 		fprintf(fp,"on ");

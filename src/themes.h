@@ -3,14 +3,15 @@
 
 
 extern int 	radiance, ambiance, elementary, custom,
-		dark, alldark, alllight;
+		    dark, black, white;
 
 extern char 	theme[31],
 		defaultcolor[31],
 		color0[31],
 		color1[31],
 		color2[31],
-		color3[31];
+		color3[31],
+		color4[31];
 
 void themes();
 

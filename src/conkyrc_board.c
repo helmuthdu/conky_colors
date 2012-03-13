@@ -14,12 +14,9 @@ void conkyrc_board () {
 
 	FILE *fp;
 
-	float value_temp1, value_temp2, value_temp3;
-
 /*	const char *playerdir=finddir("bin/conky%s", player);*/
 /*	const char *playertemplatedir=finddir("/templates/conkyPlayer.template");*/
 /*	const char *coverdir=finddir("bin/conkyCover");*/
-	const char *forecastconfdir=finddir(".conkyForecast.config");
 
 	if(board_width == 0 || board_height == 0)
 	{
@@ -71,8 +68,8 @@ void conkyrc_board () {
 	fprintf(fp,"alignment top_left\n");
 	fprintf(fp,"gap_x 0\n");
 	fprintf(fp,"gap_y %.0f\n", board_height/4);
-	fprintf(fp,"minimum_size %.0f %.0f\n", board_width, board_height/2);
-	fprintf(fp,"maximum_width %.0f %.0f\n", board_width, board_height/2);
+	fprintf(fp,"minimum_size %.0f %.0f\n", board_width, board_height);
+	fprintf(fp,"maximum_width %.0f %.0f\n", board_width, board_height);
 	fprintf(fp,"\n");
 	fprintf(fp,"default_bar_size 60 8\n");
 	fprintf(fp,"\n");
@@ -92,13 +89,13 @@ void conkyrc_board () {
 		if(radiance == True)
 			fprintf(fp,"\ndefault_color 3C3B37\n");
 	else
-		if(dark == True || alldark == True)
+		if(dark == True || black == True)
 			fprintf(fp,"\ndefault_color 212526\n");
 	else
 		fprintf(fp,"\ndefault_color cccccc\n");
 	fprintf(fp,"\n");
 	//COLOR0
-	if (dark == True || alldark == True)
+	if (dark == True || black == True)
 			fprintf(fp,"color0 1E1C1A\n");
 	else
 		if (custom == True || radiance == True || ambiance == True || elementary == True)
@@ -109,10 +106,10 @@ void conkyrc_board () {
 	if (custom == True || radiance == True || ambiance == True || elementary == True)
 		fprintf(fp,"color1 %s\n", color1);
 	else
-		if (alldark == True)
+		if (black == True)
 			fprintf(fp,"color1 1E1C1A\n");
 	else
-		if (alllight == True)
+		if (white == True)
 			fprintf(fp,"color1 white\n");
 	else
 		fprintf(fp,"color1 %s\n", color1);
@@ -120,10 +117,21 @@ void conkyrc_board () {
 	if (custom == True || radiance == True || ambiance == True || (elementary == True && dark != True))
 		fprintf(fp,"color2 %s\n", color2);
 	else
-		if (dark == True || alldark == True)
+		if (dark == True || black == True)
 			fprintf(fp,"color2 1E1C1A\n");
 	else
 		fprintf(fp,"color2 white\n");
+	//COLOR3
+	if (custom == True || radiance == True || ambiance == True || (elementary == True && dark != True))
+		fprintf(fp,"color3 %s\n", color3);
+	else
+		if (dark == True || black == True)
+			fprintf(fp,"color2 1E1C1A\n");
+	else
+		if (white == True)
+			fprintf(fp,"color1 white\n");
+	else
+		fprintf(fp,"color3 %s\n", color3);
 	// LUA SCRIPTS
 	fprintf(fp,"\nlua_load %s/scripts/conkyBoard.lua\n", finddir("scripts/conkyBoard.lua") );
 	fprintf(fp,"lua_draw_hook_pre main ");
@@ -131,11 +139,12 @@ void conkyrc_board () {
 	if (elementary == True || ambiance == True)
 			fprintf(fp,"black ");
 	else
-		if (dark == True || alldark == True || radiance == True)
+		if (dark == True || black == True || radiance == True)
 			fprintf(fp,"white ");
 	else
 			fprintf(fp,"black ");
 
+	fprintf(fp,"%s ", color3);
 	fprintf(fp,"%s ", color1);
 
 	if ( nobg == True )
@@ -151,150 +160,7 @@ void conkyrc_board () {
 	fprintf(fp,"\n");
 	fprintf(fp,"\n");
 	fprintf(fp,"TEXT\n");
-	//Clock
-	fprintf(fp,"${voffset 40}\n");
-	fprintf(fp,"#############\n");
-	fprintf(fp,"# - CLOCK - #\n");
-	fprintf(fp,"#############\n");
-	if (clocktype == 0)
-	{
-		fprintf(fp,"${goto %.0f}${voffset -%.0f}${font Arial Black:size=%.0f}${color2}${time %%H}${color}${font}${voffset -%.0f}${font Ubuntu:style=Bold:size=%.0f}${color2}${time :%%M}${time :%%S}${color}${font}\n", board_width/3, board_width*0.035, board_width*0.083, board_width*0.0764, board_width*0.0208);
-		fprintf(fp,"${goto %.0f}${voffset -2}${font Ubuntu:style=Bold:size=%.0f}${color1}${time %%B}${color}${font}\n", board_width*0.483, board_width*0.0208);
-		fprintf(fp,"${goto %.0f}${font Ubuntu:style=Bold:size=%.0f}${time %%d %%a %%Y}\n", board_width*0.483, board_width*0.0208);
-	}
-	fprintf(fp,"##############\n");
-	fprintf(fp,"# - SYSTEM - #\n");
-	fprintf(fp,"##############\n");
 
-	value_temp1 = board_width/3 + 30;
-	value_temp2 = board_width/3;
-	value_temp3 = board_width/3;
-
-	if ( set_weather == True )
-		fprintf(fp,"${voffset %.0f}\n", board_width*0.029);
-	else
-		fprintf(fp,"${voffset %.0f}\n", board_width*0.026);
-
-	fprintf(fp,"# |--CPU\n");
-	if (cpu == 1) {
-			fprintf(fp,"${goto %.0f}${color0}${font Poky:size=24}P${font}${offset -27}${voffset 9}${cpubar cpu1 4,22}${color}${voffset -40}\n", value_temp2);
-			fprintf(fp,"${goto %.0f}${font Ubuntu:style=Bold:size=8}${color2}${freq_g}${color} GHZ${font}\n",value_temp1);
-			fprintf(fp,"${goto %.0f}CPU1: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu1}%%${color}${font}\n",value_temp1);
-			if (unit == True)
-				fprintf(fp,"${goto %.0f}Tmp: ${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors -f | grep 'Core 0' | cut -c15-17}°F${color}${font}\n",value_temp1);
-			else
-				fprintf(fp,"${goto %.0f}Temp: ${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors | grep 'Core 0' | cut -c16-17}°C${color}${font}\n",value_temp1);
-			fprintf(fp,"${voffset 60}\n");
-	}
-
-	// More then 1 cpu
-	else {
-		for (i = 1; i <= cpu; i++) {
-			fprintf(fp,"${goto %.0f}${color0}${font Poky:size=24}P${font}${offset -27}${voffset 9}${cpubar cpu%d 4,22}${color}${voffset -40}\n",value_temp2, i);
-			fprintf(fp,"${goto %.0f}${font Ubuntu:style=Bold:size=8}${color2}${freq_g %d}${color} GHZ${font}\n",value_temp1, i);
-			fprintf(fp,"${goto %.0f}CPU%d: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu%d}%%${color}${font}\n",value_temp1, i, i);
-			if (unit == True)
-				fprintf(fp,"${goto %.0f}Tmp: ${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors -f | grep 'Core 0' | cut -c15-17}°F${color}${font}\n",value_temp1);
-			else
-				fprintf(fp,"${goto %.0f}Temp: ${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors | grep 'Core 0' | cut -c16-17}°C${color}${font}\n",value_temp1);
-
-			if ( i == 2 && cpu > 2 )
-			{
-				value_temp1 += value_temp3/5;
-				value_temp2 += value_temp3/5;
-				fprintf(fp,"${voffset -157}\n");
-			}
-			if ( i < cpu)
-				fprintf(fp,"${voffset 12}\n");
-		}
-	}
-
-	if ( cpu > 2 ) {
-		value_temp1 += value_temp3/5;
-		value_temp2 += value_temp3/5;
-	}
-	else {
-		value_temp1 += value_temp3/4;
-		value_temp2 += value_temp3/4;
-	}
-	//Mem
-	fprintf(fp,"# |--MEM\n");
-	fprintf(fp,"${voffset -127}\n");
-	fprintf(fp,"${goto %.0f}${color0}${font Poky:size=20}M${font}${offset -25}${voffset 9}${membar 4,22}${color}${voffset -40}\n",value_temp2);
-	fprintf(fp,"${goto %.0f}RAM: ${font Ubuntu:style=Bold:size=8}${color1}$memperc%%${color}${font}\n",value_temp1);
-	fprintf(fp,"${goto %.0f}F: ${font Ubuntu:style=Bold:size=8}${color2}${memeasyfree}${color}${font}\n",value_temp1);
-	fprintf(fp,"${goto %.0f}U: ${font Ubuntu:style=Bold:size=8}${color2}${mem}${color}${font}\n",value_temp1);
-	//Swap
-	fprintf(fp,"# |--SWAP\n");
-	fprintf(fp,"${voffset 20}\n");
-	fprintf(fp,"${goto %.0f}${color0}${font Poky:size=18}s${font}${offset -24}${voffset 9}${swapbar 4,22}${color}${voffset -40}\n",value_temp2);
-	fprintf(fp,"${goto %.0f}SWAP: ${font Ubuntu:style=Bold:size=8}${color1}$swapperc%%${color}${font}\n",value_temp1);
-	fprintf(fp,"${goto %.0f}F: ${font Ubuntu:style=Bold:size=8}${color2}${swapmax}${color}${font}\n",value_temp1);
-	fprintf(fp,"${goto %.0f}U: ${font Ubuntu:style=Bold:size=8}${color2}${swap}${color}${font}\n",value_temp1);
-
-	if ( cpu > 2 ) {
-		value_temp1 += value_temp3/5;
-		value_temp2 += value_temp3/5;
-	}
-	else {
-		value_temp1 += value_temp3/4;
-		value_temp2 += value_temp3/4;
-	}
-	//HD
-	fprintf(fp,"##########\n");
-	fprintf(fp,"# - HD - #\n");
-	fprintf(fp,"##########\n");
-	fprintf(fp,"${voffset -125}\n");
-	fprintf(fp,"${goto %.0f}${color0}${font Poky:size=20}y${font}${offset -26}${voffset 9}${fs_bar 4,22 /}${color}${voffset -40}\n",value_temp2);
-	fprintf(fp,"${goto %.0f}Root: ${font Liberation Sans:style=Bold:size=8}${color1}${fs_free_perc /}%%${color}${font}\n",value_temp1);
-	fprintf(fp,"${goto %.0f}F: ${font Ubuntu:style=Bold:size=8}${color2}${fs_free /}${color}${font}\n",value_temp1);
-	fprintf(fp,"${goto %.0f}U: ${font Ubuntu:style=Bold:size=8}${color2}${fs_used /}${color}${font}\n",value_temp1);
-	fprintf(fp,"${voffset 16}\n");
-	fprintf(fp,"${goto %.0f}${color0}${font Poky:size=20}y${font}${offset -26}${voffset 9}${fs_bar 4,22 /home}${color}${voffset -40}\n",value_temp2);
-	fprintf(fp,"${goto %.0f}Home: ${font Liberation Sans:style=Bold:size=8}${color1}${fs_free_perc /home}%%${color}${font}\n",value_temp1);
-	fprintf(fp,"${goto %.0f}F: ${font Ubuntu:style=Bold:size=8}${color2}${fs_free /home}${color}${font}\n",value_temp1);
-	fprintf(fp,"${goto %.0f}U: ${font Ubuntu:style=Bold:size=8}${color2}${fs_used /home}${color}${font}\n",value_temp1);
-
-	if ( cpu > 2 ) {
-		value_temp1 += value_temp3/5;
-		value_temp2 += value_temp3/5;
-	}
-	else {
-		value_temp1 += value_temp3/4;
-		value_temp2 += value_temp3/4;
-	}
-	//Network Widget
-	fprintf(fp,"###############\n");
-	fprintf(fp,"# - NETWORK - #\n");
-	fprintf(fp,"###############\n");
-	fprintf(fp,"${voffset -120}\n");
-	fprintf(fp,"${goto %.0f}${color0}${font Poky:size=18}w${font}${voffset -46}\n",value_temp2);
-	fprintf(fp,"# |--WLAN%d\n", wlan);
-	fprintf(fp,"${if_up wlan%d}\n", wlan);
-	fprintf(fp,"${goto %.0f}Up: ${font Ubuntu:style=Bold:size=8}${color1}${upspeed wlan%d}${color}${font}\n",value_temp1, wlan);
-	fprintf(fp,"${goto %.0f}Total: ${font Ubuntu:style=Bold:size=8}${color2}${totalup wlan%d}${color}${font}\n",value_temp1, wlan);
-	fprintf(fp,"${goto %.0f}Down: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed wlan%d}${color}${font}\n",value_temp1, wlan);
-	fprintf(fp,"${goto %.0f}Total: ${font Ubuntu:style=Bold:size=8}${color2}${totaldown wlan%d}${color}${font}\n",value_temp1, wlan);
-	fprintf(fp,"${goto %.0f}Signal: ${font Ubuntu:style=Bold:size=8}${color1}${wireless_link_qual_perc wlan%d}%%${color}${font}\n",value_temp1, wlan);
-	fprintf(fp,"# |--eth%d\n", eth);
-	fprintf(fp,"${else}${if_up eth%d}\n", eth);
-	fprintf(fp,"${goto %.0f}Up: ${font Ubuntu:style=Bold:size=8}${color1}${upspeed eth%d}${color}${font}\n",value_temp1, eth);
-	fprintf(fp,"${goto %.0f}Total: ${font Ubuntu:style=Bold:size=8}${color2}${totalup eth%d}${color}${font}\n",value_temp1, eth);
-	fprintf(fp,"${goto %.0f}Down: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed eth%d}${color}${font}\n",value_temp1, eth);
-	fprintf(fp,"${goto %.0f}Total: ${font Ubuntu:style=Bold:size=8}${color2}${totaldown eth%d}${color}${font}\n",value_temp1, eth);
-	fprintf(fp,"# |--ppp%d\n", ppp);
-	fprintf(fp,"${else}${if_up ppp%d}\n", ppp);
-	fprintf(fp,"${goto %.0f}Up: ${font Ubuntu:style=Bold:size=8}${color1}${upspeed ppp%d}${color}${font}\n",value_temp1, ppp);
-	fprintf(fp,"${goto %.0f}Total: ${font Ubuntu:style=Bold:size=8}${color2}${totalup ppp%d}${color}${font}\n",value_temp1, ppp);
-	fprintf(fp,"${goto %.0f}Down: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed ppp%d}${color}${font}\n",value_temp1, ppp);
-	fprintf(fp,"${goto %.0f}Total: ${font Ubuntu:style=Bold:size=8}${color2}${totaldown ppp%d}${color}${font}\n",value_temp1, ppp);
-	fprintf(fp,"${endif}${endif}${endif}\n");
-	fprintf(fp,"###############\n");
-	fprintf(fp,"# - WEATHER - #\n");
-	fprintf(fp,"###############\n");
-	fprintf(fp,"# For a working weather script you NEED to define, in a user specific config file, a partner id and registration code for the weather.com xoap service. For this purpose copy .conkyForecast.config in %s folder to your home and setup as required.\n", forecastconfdir);
-	fprintf(fp,"# http://www.weather.com/services/xmloap.html\n");
-	fprintf(fp,"${voffset -%.0f}\n",board_height/4);
 	fclose(fp);
 }
 

@@ -39,9 +39,19 @@ int options (int argc, char *argv[]) {
 			OR_OPTION("human", value) OR_OPTION("illustrious", value) OR_OPTION("noble", value)
 			OR_OPTION("tribute", value) OR_OPTION("wine", value) OR_OPTION("wise", value)
 			OR_OPTION("blue", value) OR_OPTION("orange", value) OR_OPTION("red", value)
-			OR_OPTION("green", value) OR_OPTION("grey", value) OR_OPTION_END("purple", value)
+			OR_OPTION("green", value) OR_OPTION("cyan", value) OR_OPTION_END("purple", value)
 			{
 				snprintf(theme, 31, "%s", value);
+			}
+			else OPTION("black", value)
+			{
+				snprintf(theme, 31, "%s", value);
+				black = True;
+			}
+			else OPTION("white", value)
+			{
+				snprintf(theme, 31, "%s", value);
+				white = True;
 			}
 			else OPTION("radiance", value)
 			{
@@ -66,8 +76,6 @@ int options (int argc, char *argv[]) {
 				return OPTIONS_ERROR;
 			}
 		}
-		else OPTION("--battery-value", key)
-			battery_value = atoi(value);
 		else OPTION_WITH_VALUE("--default-color", key)
 			snprintf(defaultcolor, 31, "%s", value);
 		else OPTION_WITH_VALUE("--color0", key)
@@ -76,12 +84,10 @@ int options (int argc, char *argv[]) {
 			snprintf(color1, 31, "%s", value);
 		else OPTION_WITH_VALUE("--color2", key)
 			snprintf(color2, 31, "%s", value);
+		else OPTION_WITH_VALUE("--color3", key)
+			snprintf(color3, 31, "%s", value);
 		else OPTION("--dark", key)
 			dark = True;
-		else OPTION("--alldark", key)
-			alldark = True;
-		else OPTION("--alllight", key)
-			alllight = True;
 		else OPTION("--lang", key)
 		{
 			OR_OPTION_START("portuguese", value) OR_OPTION("pt", value) OR_OPTION("english", value) OR_OPTION("en", value)
@@ -176,6 +182,8 @@ int options (int argc, char *argv[]) {
 			todo = True;
 		else OPTION("--battery", key)
 			set_battery = True;
+		else OPTION("--battery-value", key)
+			battery_value = atoi(value);
 		else OPTION("--hd", key)
 		{
 			OPTION("default", value)

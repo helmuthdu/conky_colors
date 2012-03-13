@@ -15,15 +15,15 @@ void help() {
 	printf("\t--theme=<theme> - Set default theme color\n");
 	printf("\tThemes: brave|carbonite|dust|human*|noble|tribute|wine|wise|\n");
 	printf("\t        ambiance|radiance|elementary|\n");
-	printf("\t        blue|orange|red|green|purple|grey|custom\n");
+	printf("\t        cyan|blue|orange|red|green|purple|black|grey|white|\n");
+	printf("\t        custom\n");
 	printf("\tWork only with --theme=custom\n");
 	printf("\t\t--default-color=<value>\n");
 	printf("\t\t--color0=<value>\n");
 	printf("\t\t--color1=<value>\n");
 	printf("\t\t--color2=<value>\n");
+	printf("\t\t--color3=<value>\n");
 	printf("\t--dark - Set Dark Brightness\n");
-	printf("\t--alldark - Set Dark Brightness for all\n");
-	printf("\t--alllight - Set light Brightness for all\n");
 	printf("\t-------------- DEFAULT MODE --------------\n");
 	printf("\t--<logo> - Replace computer icon for distro Logo\n");
 	printf("\tLogos: ubuntu|fedora|opensuse|debian|arch|gentoo|pardus|xfce|gnome\n");
