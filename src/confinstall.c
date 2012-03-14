@@ -22,9 +22,6 @@ int confinstall()
 		COPY("mv %s/conkyCover %s/bin/conkyCover; chmod +x %s/bin/conkyCover", tempdir(), datadir, datadir);
 	COPY("mv %s/conkyPlayer.template %s/templates/conkyPlayer.template", tempdir(), datadir);
 
-	if (set_weather > 0)
-		COPY("mv %s/conkyForecast.template %s/templates/", tempdir(), datadir);
-
 	if(set_photo == 1)
 	{
 		COPY("cp -i %s/bin/conkyPhoto %s/bin/conkyPhoto; chmod +x %s/bin/conkyPhoto", systemdir(), datadir, datadir);
@@ -34,7 +31,7 @@ int confinstall()
 		COPY("cp -i %s/bin/conkyPhotoRandom %s/bin/conkyPhotoRandom; chmod +x %s/bin/conkyPhotoRandom", systemdir(), datadir, datadir);
 	}
 
-	// finish	
+	// finish
 	systemf("mv %s/conkyrc %s", tempdir(), localdir());
 	printf("Your conkyrc was copied to %s\n", localdir());
 	printf("Generated configuration files are copied to %s\n", datadir);
