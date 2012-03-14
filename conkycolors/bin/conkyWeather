@@ -11,16 +11,15 @@ metrification=0
 #and weather.com says that the sun rises at 4:00, make the variable equal to -1
 sun_moon_correction=5
 
-kill -STOP $(pidof conky)
-killall wget
-
 addr_now=$(echo $address|sed 's/5-day/today/')
+
 DIRECTORY="$HOME/.conkycolors/Weather"
 
 if [ ! -d "$DIRECTORY" ]; then
     mkdir -p $DIRECTORY/RightNow/
     mkdir -p $DIRECTORY/5days/
 fi
+
 wget -O $DIRECTORY/RightNow/raw_rn $addr_now
 
 wget -O $DIRECTORY/5days/raw $address
@@ -385,5 +384,3 @@ if (( metrification==1 )); then
 	fi
 
 fi
-
-kill -CONT $(pidof conky)
