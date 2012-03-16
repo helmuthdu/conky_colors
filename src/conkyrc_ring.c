@@ -91,8 +91,8 @@ void conkyrc_ring () {
 	if(elementary == True && dark == True)
 		fprintf(fp,"\ndefault_color 2B2B2B\n");
 	else
-		if(elementary == True)
-			fprintf(fp,"\ndefault_color D6D6D6\n");
+		if(dark == True || black == True)
+			fprintf(fp,"\ndefault_color 212526\n");
 	else
 		if(ambiance == True)
 			fprintf(fp,"\ndefault_color E2DACB\n");
@@ -100,38 +100,32 @@ void conkyrc_ring () {
 		if(radiance == True)
 			fprintf(fp,"\ndefault_color 3C3B37\n");
 	else
-		if(dark == True || black == True)
-			fprintf(fp,"\ndefault_color 212526\n");
+		if(elementary == True)
+			fprintf(fp,"\ndefault_color D6D6D6\n");
 	else
 		fprintf(fp,"\ndefault_color cccccc\n");
 	fprintf(fp,"\n");
 	//COLOR0
-	if (dark == True || black == True)
-			fprintf(fp,"color0 1E1C1A\n");
-	else
-		if (custom == True || radiance == True || ambiance == True || elementary == True)
-			fprintf(fp,"color0 %s\n", color0);
-	else
-		fprintf(fp,"color0 white\n");
+    if (dark == True || black == True)
+        fprintf(fp,"color0 1E1C1A\n");
+    else
+        if (custom == True || radiance == True || ambiance == True || elementary == True)
+            fprintf(fp,"color0 %s\n", color0);
+    else
+        fprintf(fp,"color0 white\n");
 	//COLOR1
-	if (custom == True || radiance == True || ambiance == True || elementary == True)
-		fprintf(fp,"color1 %s\n", color1);
-	else
-		if (black == True)
-			fprintf(fp,"color1 1E1C1A\n");
-	else
-		if (white == True)
-			fprintf(fp,"color1 white\n");
-	else
-		fprintf(fp,"color1 %s\n", color1);
+    fprintf(fp,"color1 %s\n", color1);
 	//COLOR2
-	if (custom == True || radiance == True || ambiance == True || (elementary == True && dark != True))
-		fprintf(fp,"color2 %s\n", color2);
+    if (dark == True || black == True)
+        fprintf(fp,"color2 1E1C1A\n");
 	else
-		if (dark == True || black == True)
-			fprintf(fp,"color2 1E1C1A\n");
+        if (custom == True || radiance == True || ambiance == True || (elementary == True && dark != True))
+            fprintf(fp,"color2 %s\n", color2);
 	else
 		fprintf(fp,"color2 white\n");
+	//COLOR3
+    fprintf(fp,"color3 %s\n", color3);
+	fprintf(fp,"\n");
 	//LUA SCRIPTS
 	fprintf(fp,"\nlua_load %s/scripts/conkyRing.lua\n", finddir("scripts/conkyRing.lua") );
 	fprintf(fp,"lua_draw_hook_post main ");
