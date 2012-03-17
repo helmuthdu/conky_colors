@@ -132,13 +132,10 @@ void conkyrc_cairo () {
 	fprintf(fp,"\nlua_load %s/scripts/conkyCairo.lua\n", conkycairo);
 	fprintf(fp,"lua_draw_hook_post conky_main ");
 
-	if (elementary == True || ambiance == True)
-			fprintf(fp,"white ");
-	else
-		if (dark == True || black == True || radiance == True)
-			fprintf(fp,"black ");
-	else
-			fprintf(fp,"white ");
+    if (dark == True || black == True)
+        fprintf(fp,"black ");
+    else
+        fprintf(fp,"white ");
 
 	if (dark == True || black == True)
 		fprintf(fp,"000000 ");

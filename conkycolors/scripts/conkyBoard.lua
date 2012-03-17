@@ -689,7 +689,7 @@ function conky_main(color, theme1, theme2, drawbg, draw_weather, area_code)
 	local w = conky_window.width
 	local h = conky_window.height
 	local hori_space = 200
-	local vert_space = h*0.5
+	local vert_space = h*0.485
 	local xp = hori_space
 	local yp = vert_space
 
@@ -711,7 +711,7 @@ function conky_main(color, theme1, theme2, drawbg, draw_weather, area_code)
 	};draw_box(settings)
 	end
 
-	xp = ((w/2)/1.75)
+	xp = ((w/2)-300)
 
     settings = {--CPU BACKGROUND
         value=0           ,

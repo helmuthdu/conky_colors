@@ -119,13 +119,10 @@ void conkyrc_board () {
 	fprintf(fp,"\nlua_load %s/scripts/conkyBoard.lua\n", finddir("scripts/conkyBoard.lua") );
 	fprintf(fp,"lua_draw_hook_pre main ");
 
-	if (elementary == True || ambiance == True)
-			fprintf(fp,"black ");
-	else
-		if (dark == True || black == True || radiance == True)
-			fprintf(fp,"white ");
-	else
-			fprintf(fp,"black ");
+    if (dark == True || white == True || radiance == True)
+        fprintf(fp,"white ");
+    else
+        fprintf(fp,"black ");
 
 	fprintf(fp,"%s ", color3);
 	fprintf(fp,"%s ", color1);

@@ -130,13 +130,10 @@ void conkyrc_ring () {
 	fprintf(fp,"\nlua_load %s/scripts/conkyRing.lua\n", finddir("scripts/conkyRing.lua") );
 	fprintf(fp,"lua_draw_hook_post main ");
 
-	if (elementary == True || ambiance == True)
-			fprintf(fp,"white ");
+    if (dark == True || black == True)
+        fprintf(fp,"black ");
 	else
-		if (dark == True || black == True || radiance == True)
-			fprintf(fp,"black ");
-	else
-			fprintf(fp,"white ");
+        fprintf(fp,"white ");
 
 	if (dark == True || black == True)
 		fprintf(fp,"000000 ");

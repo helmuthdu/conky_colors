@@ -115,19 +115,18 @@ void themes () {
 	else
 		if(strcmp("radiance",theme) == 0) {
 			snprintf(color0, 31, "292927");
-			snprintf(color1, 31, "F8995B");
+			snprintf(color1, 31, "CCCCCC");
 			snprintf(color2, 31, "292927");
-    		snprintf(color3, 31, "DD4814");
-			snprintf(color4, 31, "F8995B DD4814");
-
+    		snprintf(color3, 31, "AEA79F");
+			snprintf(color4, 31, "CCCCCC AEA79F");
 		}
 	else
 		if(strcmp("ambiance",theme) == 0) {
 			snprintf(color0, 31, "F0EBE2");
 			snprintf(color1, 31, "77216F");
 			snprintf(color2, 31, "E6E6E6");
-			snprintf(color3, 31, "5E2750");
-			snprintf(color4, 31, "77216F 5E2750");
+			snprintf(color3, 31, "2C001E");
+			snprintf(color4, 31, "77216F 2C001E");
 		}
 	else
 		if(strcmp("elementary",theme) == 0) {
