@@ -173,9 +173,9 @@ void conkyrc_default () {
 		fprintf(fp,"${offset 2}${color0}${font Poky:size=16}P${color}${font}${voffset -4}");
 		if (cputemp == True) {
 			if (unit == True)
-				fprintf(fp,"${goto %d}CPU: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu1}%%${font} ${alignr}${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors -f | grep 'Core 0' | cut -c15-17}°F${color}${font}  ${color2}${cpugraph cpu1 8,50 %s}${color}\n", go2, color4);
+				fprintf(fp,"${goto %d}CPU: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu1}%%${font} ${alignr}${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors -f | grep 'Core 0' | awk '{print $3}' | sed 's/+//' | sed 's/.0//g'}${color}${font}  ${color2}${cpugraph cpu1 8,50 %s}${color}\n", go2, color4);
 			else
-				fprintf(fp,"${goto %d}CPU: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu1}%%${font} ${alignr}${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors | grep 'Core 0' | cut -c16-17}°C${color}${font}  ${color2}${cpugraph cpu1 8,50 %s}${color}\n", go2, color4);
+				fprintf(fp,"${goto %d}CPU: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu1}%%${font} ${alignr}${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors | grep 'Core 0' | awk '{print $3}' | sed 's/+//' | sed 's/.0//g'}${color}${font}  ${color2}${cpugraph cpu1 8,50 %s}${color}\n", go2, color4);
 		}
 		else
 			fprintf(fp,"${goto %d}CPU: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu1}%%${color}${font} ${alignr}${color2}${cpugraph cpu1 8,60 %s}${color}\n", go2, color4);
@@ -185,9 +185,9 @@ void conkyrc_default () {
 		for (i = 1; i <= cpu; i++) {
 			if (cputemp == True) {
 				if (unit == True)
-					fprintf(fp,"${goto %d}CPU%d: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu%d}%%${font} ${alignr}${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors -f | grep 'Core %d' | cut -c14-16}°F${color}${font}  ${color2}${cpugraph cpu%d 8,50 %s}${color}\n", go2, i, i, i-1, i, color4);
+					fprintf(fp,"${goto %d}CPU%d: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu%d}%%${font} ${alignr}${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors -f | grep 'Core %d' | awk '{print $3}' | sed 's/+//' | sed 's/.0//g'}${color}${font}  ${color2}${cpugraph cpu%d 8,50 %s}${color}\n", go2, i, i, i-1, i, color4);
 				else
-					fprintf(fp,"${goto %d}CPU%d: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu%d}%%${font} ${alignr}${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors | grep 'Core %d' | cut -c15-16}°C${color}${font}  ${color2}${cpugraph cpu%d 8,50 %s}${color}\n", go2, i, i, i-1, i, color4);
+					fprintf(fp,"${goto %d}CPU%d: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu%d}%%${font} ${alignr}${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors | grep 'Core %d' | awk '{print $3}' | sed 's/+//' | sed 's/.0//g'}${color}${font}  ${color2}${cpugraph cpu%d 8,50 %s}${color}\n", go2, i, i, i-1, i, color4);
 			}
 			else
 				fprintf(fp,"${goto %d}CPU%d: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu%d}%%${color}${font} ${alignr}${color2}${cpugraph cpu%d 8,60 %s}${color}\n", go2, i, i, i, color4);
@@ -206,7 +206,7 @@ void conkyrc_default () {
 	//Battery
 	if (set_battery == True) {
 		fprintf(fp,"# |--BATTERY\n");
-		fprintf(fp,"${color0}${font Poky:size=13}E${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${battery_percent BAT%d}%%${color}${font} ${alignr}${color2}${battery_bar BAT%d 8,60}${color}\n", go2, battery, battery_value, battery_value);
+		fprintf(fp,"${if_existing /sys/class/power_supply/BAT%d}${color0}${font Poky:size=13}E${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${battery_percent BAT%d}%%${color}${font} ${alignr}${color2}${battery_bar BAT%d 8,60}${color}${else}${color0}${font Poky:size=13}E${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}unknown status${color}${font}${endif}\n", battery_value, go2, battery, battery_value, battery_value, go2, battery);
 	}
 	//Processes
 	if (set_process == True) {
