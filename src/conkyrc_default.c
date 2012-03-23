@@ -206,7 +206,7 @@ void conkyrc_default () {
 	//Battery
 	if (set_battery == True) {
 		fprintf(fp,"# |--BATTERY\n");
-		fprintf(fp,"${if_existing /sys/class/power_supply/BAT%d}${color0}${font Poky:size=13}E${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${battery_percent BAT%d}%%${color}${font} ${alignr}${color2}${battery_bar BAT%d 8,60}${color}${else}${color0}${font Poky:size=13}E${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}unknown status${color}${font}${endif}\n", battery_value, go2, battery, battery_value, battery_value, go2, battery);
+		fprintf(fp,"${if_existing /sys/class/power_supply/BAT%d}${color0}${font Poky:size=13}E${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${battery_percent BAT%d}%%${color}${font} ${alignr}${color2}${battery_bar BAT%d 8,60}${color}${else}${color0}${font Poky:size=13}E${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color2}unknown status${color}${font}${endif}\n", battery_value, go2, battery, battery_value, battery_value, go2, battery);
 	}
 	//Processes
 	if (set_process == True) {

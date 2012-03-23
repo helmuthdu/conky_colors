@@ -142,7 +142,8 @@ void themes () {
 	else {
 		snprintf(color1, 31, "CE5C00 ");
 		snprintf(color3, 31, "E07A1F");
-		snprintf(color3, 31, "E07A1F CE5C00");
+		snprintf(color3, 31, "CE5C00");
+		snprintf(color4, 31, "E07A1F CE5C00");
 	}
 }
 
