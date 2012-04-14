@@ -37,7 +37,8 @@ char 	sys[31],
 		song[31],
 		tempo[31],
 		nopidgin[31],
-		norhythmbox[31];
+		norhythmbox[31],
+		unknownstatus[31];
 
 char 	language[31];
 
@@ -78,11 +79,12 @@ void translation () {
 		snprintf(tempo, 31, "Tempo");
 		snprintf(nopidgin, 31, "Pidgin não está rodando");
 		snprintf(norhythmbox, 31, "Rhythmbox não está rodando");
+		snprintf(unknownstatus, 31, "Status desconhecido");
 	}
 	else OR_OPTION_START("it",language) OR_OPTION_END("italian",language) {
 		snprintf(sys, 31, "SISTEMA");
 		snprintf(battery, 31, "Batteria");
-		snprintf(uptime, 31, "uptime");
+		snprintf(uptime, 31, "Uptime");
 		snprintf(processes, 31, "Processi");
 		snprintf(packages, 31, "Pacchetti");
 		snprintf(date, 31, "DATA");
@@ -114,6 +116,7 @@ void translation () {
 		snprintf(tempo, 31, "Tempo");
 		snprintf(nopidgin, 31, "Pidgin non è in esecuzione");
 		snprintf(norhythmbox, 31, "Rhythmbox non è in esecuzione");
+		snprintf(unknownstatus, 31, "Stato sconosciuto");
 	}
 	else OR_OPTION_START("es", language) OR_OPTION_END("spanish", language) {
 		snprintf(sys, 31, "SISTEMA");
@@ -150,11 +153,12 @@ void translation () {
 		snprintf(tempo, 31, "Tiempo");
 		snprintf(nopidgin, 31, "Pidgin no esta corriendo");
 		snprintf(norhythmbox, 31, "Rhythmbox no esta corriendo");
+		snprintf(unknownstatus, 31, "Estado desconocido");
 	}
 	else OR_OPTION_START("de", language) OR_OPTION_END("deutsch", language) {
 		snprintf(sys, 31, "SYSTEM");
 		snprintf(battery, 31, "Batterie");
-		snprintf(uptime, 31, "uptime");
+		snprintf(uptime, 31, "Uptime");
 		snprintf(processes, 31, "Prozesse");
 		snprintf(packages, 31, "Pakete");
 		snprintf(date, 31, "DATUM");
@@ -186,6 +190,7 @@ void translation () {
 		snprintf(tempo, 31, "Zeit");
 		snprintf(nopidgin, 31, "Pidgin nicht läuft");
 		snprintf(norhythmbox, 31, "Rhythmbox nicht läuft");
+		snprintf(unknownstatus, 31, "Unbekannter Status");
 	}
 	else OR_OPTION_START("pl", language) OR_OPTION_END("polish", language) {
 		snprintf(sys, 31, "SYSTEM");
@@ -222,6 +227,7 @@ void translation () {
 		snprintf(tempo, 31, "Pozycja");
 		snprintf(nopidgin, 31, "Pidgin nie działa");
 		snprintf(norhythmbox, 31, "Rhythmbox nie działa");
+		snprintf(unknownstatus, 31, "Stan nieznany");
 	}
 	else OR_OPTION_START("et", language) OR_OPTION_END("estonian", language) {
 		snprintf(sys, 31, "SÜSTEEM");
@@ -258,6 +264,7 @@ void translation () {
 		snprintf(tempo, 31, "Aeg");
 		snprintf(nopidgin, 31, "Pidgin ei tööta");
 		snprintf(norhythmbox, 31, "Rhythmbox ei tööta");
+		snprintf(unknownstatus, 31, "Unknown Status");
 	}
 	else OR_OPTION_START("ru", language) OR_OPTION_END("russian", language) {
 		snprintf(sys, 31, "СИСТЕМА");
@@ -294,6 +301,7 @@ void translation () {
 		snprintf(tempo, 31, "Время");
 		snprintf(nopidgin, 31, "Pidgin не запущен");
 		snprintf(norhythmbox, 31, "Rhythmbox не запущен");
+		snprintf(unknownstatus, 31, "Unknown Status");
 	}
 	else OR_OPTION_START("bg", language) OR_OPTION_END("bulgarian", language) {
 		snprintf(sys, 31, "СИСТЕМА");
@@ -330,6 +338,7 @@ void translation () {
 		snprintf(tempo, 31, "Време");
 		snprintf(nopidgin, 31, "Pidgin не е стартиран");
 		snprintf(norhythmbox, 31, "Rhythmbox не е стартиран");
+		snprintf(unknownstatus, 31, "Unknown Status");
 	}
 	else OR_OPTION_START("uk",language) OR_OPTION_END("ukrainian",language) {
 		snprintf(sys, 31, "СИСТЕМА");
@@ -366,11 +375,12 @@ void translation () {
 		snprintf(tempo, 31, "Час");
 		snprintf(nopidgin, 31, "Pidgin не запущений");
 		snprintf(norhythmbox, 31, "Rhythmbox не запущений");
+		snprintf(unknownstatus, 31, "Невідомий стан");
 	}
 	else OR_OPTION_START("fr", language) OR_OPTION_END("french", language) {
 		snprintf(sys, 31, "SYSTÈME");
 		snprintf(battery, 31, "Batterie");
-		snprintf(uptime, 31, "uptime");
+		snprintf(uptime, 31, "Uptime");
 		snprintf(processes, 31, "Processus");
 		snprintf(packages, 31, "Paquets");
 		snprintf(date, 31, "DATE");
@@ -402,11 +412,12 @@ void translation () {
 		snprintf(tempo, 31, "Temps");
 		snprintf(nopidgin, 31, "Pidgin non démarré");	
 		snprintf(norhythmbox, 31, "Rhythmbox non démarré");
+		snprintf(unknownstatus, 31, "État inconnu");
 	}
 	else {
 		snprintf(sys, 31, "SYSTEM");
 		snprintf(battery, 31, "Battery");
-		snprintf(uptime, 31, "uptime");
+		snprintf(uptime, 31, "Uptime");
 		snprintf(processes, 31, "Processes");
 		snprintf(packages, 31, "Packages");
 		snprintf(date, 31, "DATE");
@@ -438,5 +449,6 @@ void translation () {
 		snprintf(tempo, 31, "Time");
 		snprintf(nopidgin, 31, "Pidgin not running");
 		snprintf(norhythmbox, 31, "Rhythmbox not running");
+		snprintf(unknownstatus, 31, "Unknown Status");
 	}
 }
