@@ -37,7 +37,7 @@ char 	sys[31],
 		song[31],
 		tempo[31],
 		nopidgin[31],
-		norhythmbox[31];
+		norhythmbox[31],
 		unknownstatus[31];
 
 char 	language[31];
