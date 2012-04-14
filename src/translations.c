@@ -82,7 +82,7 @@ void translation () {
 	else OR_OPTION_START("it",language) OR_OPTION_END("italian",language) {
 		snprintf(sys, 31, "SISTEMA");
 		snprintf(battery, 31, "Batteria");
-		snprintf(uptime, 31, "uptime");
+		snprintf(uptime, 31, "Uptime");
 		snprintf(processes, 31, "Processi");
 		snprintf(packages, 31, "Pacchetti");
 		snprintf(date, 31, "DATA");
@@ -154,7 +154,7 @@ void translation () {
 	else OR_OPTION_START("de", language) OR_OPTION_END("deutsch", language) {
 		snprintf(sys, 31, "SYSTEM");
 		snprintf(battery, 31, "Batterie");
-		snprintf(uptime, 31, "uptime");
+		snprintf(uptime, 31, "Uptime");
 		snprintf(processes, 31, "Prozesse");
 		snprintf(packages, 31, "Pakete");
 		snprintf(date, 31, "DATUM");
@@ -370,7 +370,7 @@ void translation () {
 	else OR_OPTION_START("fr", language) OR_OPTION_END("french", language) {
 		snprintf(sys, 31, "SYSTÈME");
 		snprintf(battery, 31, "Batterie");
-		snprintf(uptime, 31, "uptime");
+		snprintf(uptime, 31, "Uptime");
 		snprintf(processes, 31, "Processus");
 		snprintf(packages, 31, "Paquets");
 		snprintf(date, 31, "DATE");
@@ -406,7 +406,7 @@ void translation () {
 	else {
 		snprintf(sys, 31, "SYSTEM");
 		snprintf(battery, 31, "Battery");
-		snprintf(uptime, 31, "uptime");
+		snprintf(uptime, 31, "Uptime");
 		snprintf(processes, 31, "Processes");
 		snprintf(packages, 31, "Packages");
 		snprintf(date, 31, "DATE");
