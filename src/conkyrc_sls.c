@@ -190,7 +190,7 @@ void conkyrc_sls () {
 	fprintf(fp,"${goto 65}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totalup wlan0}${color}${font}\n", total);
 	fprintf(fp,"${goto 65}%s: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed wlan0}${color}${font}\n", down);
 	fprintf(fp,"${goto 65}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totaldown wlan0}${color}${font}\n", total);
-	fprintf(fp,"${goto 65}%s: ${color2}${addr eth0}${color}\n", localip);
+	fprintf(fp,"${goto 65}%s: ${color2}${addr wlan0}${color}\n", localip);
 	fprintf(fp,"# |--ETH0\n");
 	fprintf(fp,"${else}${if_up eth0}\n");
 	fprintf(fp,"${goto 65}%s: ${font Ubuntu:style=Bold:size=8}${color1}${upspeed eth0}${color}${font}\n", up);
@@ -204,7 +204,7 @@ void conkyrc_sls () {
 	fprintf(fp,"${goto 65}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totalup ppp0}${color}${font}\n", total);
 	fprintf(fp,"${goto 65}%s: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed ppp0}${color}${font}\n", down);
 	fprintf(fp,"${goto 65}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totaldown ppp0}${color}${font}\n", total);
-	fprintf(fp,"${goto 65}%s: ${color2}${addr eth0}${color}\n", localip);
+	fprintf(fp,"${goto 65}%s: ${color2}${addr ppp0}${color}\n", localip);
 	fprintf(fp,"${else}${voffset 4}${color0}${font PizzaDude Bullets:size=12}4${font}${color}${goto 32}%s${voffset 14}${endif}${endif}${endif}\n", nonet);
 	fprintf(fp,"${voffset -40}\n");
 
