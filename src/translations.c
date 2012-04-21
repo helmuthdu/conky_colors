@@ -36,7 +36,7 @@ char 	sys[31],
 		status[31],
 		song[31],
 		tempo[31],
-		//nopidgin[31],
+		nopidgin[31],
 		//norhythmbox[31],
 		unknownstatus[31];
 
@@ -77,7 +77,7 @@ void translation () {
 		snprintf(status, 31, "Status");
 		snprintf(song, 31, "Música");
 		snprintf(tempo, 31, "Tempo");
-		//snprintf(nopidgin, 31, "Pidgin não está rodando");
+		snprintf(nopidgin, 31, "Pidgin não está rodando");
 		//snprintf(norhythmbox, 31, "Rhythmbox não está rodando");
 		snprintf(unknownstatus, 31, "Status desconhecido");
 	}
@@ -114,7 +114,7 @@ void translation () {
 		snprintf(status, 31, "Status");
 		snprintf(song, 31, "Canzone");
 		snprintf(tempo, 31, "Tempo");
-		//snprintf(nopidgin, 31, "Pidgin non è in esecuzione");
+		snprintf(nopidgin, 31, "Pidgin non è in esecuzione");
 		//snprintf(norhythmbox, 31, "Rhythmbox non è in esecuzione");
 		snprintf(unknownstatus, 31, "Stato sconosciuto");
 	}
@@ -151,7 +151,7 @@ void translation () {
 		snprintf(status, 31, "Situación");
 		snprintf(song, 31, "Canción");
 		snprintf(tempo, 31, "Tiempo");
-		//snprintf(nopidgin, 31, "Pidgin no esta corriendo");
+		snprintf(nopidgin, 31, "Pidgin no esta corriendo");
 		//snprintf(norhythmbox, 31, "Rhythmbox no esta corriendo");
 		snprintf(unknownstatus, 31, "Estado desconocido");
 	}
@@ -188,7 +188,7 @@ void translation () {
 		snprintf(status, 31, "Status");
 		snprintf(song, 31, "Gesang");
 		snprintf(tempo, 31, "Zeit");
-		//snprintf(nopidgin, 31, "Pidgin nicht läuft");
+		snprintf(nopidgin, 31, "Pidgin nicht läuft");
 		//snprintf(norhythmbox, 31, "Rhythmbox nicht läuft");
 		snprintf(unknownstatus, 31, "Unbekannter Status");
 	}
@@ -225,7 +225,7 @@ void translation () {
 		snprintf(status, 31, "Stan");
 		snprintf(song, 31, "Utwór");
 		snprintf(tempo, 31, "Pozycja");
-		//snprintf(nopidgin, 31, "Pidgin nie działa");
+		snprintf(nopidgin, 31, "Pidgin nie działa");
 		//snprintf(norhythmbox, 31, "Rhythmbox nie działa");
 		snprintf(unknownstatus, 31, "Stan nieznany");
 	}
@@ -262,7 +262,7 @@ void translation () {
 		snprintf(status, 31, "Staatus");
 		snprintf(song, 31, "Laul");
 		snprintf(tempo, 31, "Aeg");
-		//snprintf(nopidgin, 31, "Pidgin ei tööta");
+		snprintf(nopidgin, 31, "Pidgin ei tööta");
 		//snprintf(norhythmbox, 31, "Rhythmbox ei tööta");
 		snprintf(unknownstatus, 31, "Unknown Status");
 	}
@@ -299,7 +299,7 @@ void translation () {
 		snprintf(status, 31, "Статус");
 		snprintf(song, 31, "Композиция");
 		snprintf(tempo, 31, "Время");
-		//snprintf(nopidgin, 31, "Pidgin не запущен");
+		snprintf(nopidgin, 31, "Pidgin не запущен");
 		//snprintf(norhythmbox, 31, "Rhythmbox не запущен");
 		snprintf(unknownstatus, 31, "Unknown Status");
 	}
@@ -336,7 +336,7 @@ void translation () {
 		snprintf(status, 31, "Статус");
 		snprintf(song, 31, "Песен");
 		snprintf(tempo, 31, "Време");
-		//snprintf(nopidgin, 31, "Pidgin не е стартиран");
+		snprintf(nopidgin, 31, "Pidgin не е стартиран");
 		//snprintf(norhythmbox, 31, "Rhythmbox не е стартиран");
 		snprintf(unknownstatus, 31, "Unknown Status");
 	}
@@ -373,7 +373,7 @@ void translation () {
 		snprintf(status, 31, "Статус");
 		snprintf(song, 31, "Композиція");
 		snprintf(tempo, 31, "Час");
-		//snprintf(nopidgin, 31, "Pidgin не запущений");
+		snprintf(nopidgin, 31, "Pidgin не запущений");
 		//snprintf(norhythmbox, 31, "Rhythmbox не запущений");
 		snprintf(unknownstatus, 31, "Невідомий стан");
 	}
@@ -410,7 +410,7 @@ void translation () {
 		snprintf(status, 31, "Status");
 		snprintf(song, 31, "Morceau");
 		snprintf(tempo, 31, "Temps");
-		//snprintf(nopidgin, 31, "Pidgin non démarré");	
+		snprintf(nopidgin, 31, "Pidgin non démarré");	
 		//snprintf(norhythmbox, 31, "Rhythmbox non démarré");
 		snprintf(unknownstatus, 31, "État inconnu");
 	}
@@ -447,7 +447,7 @@ void translation () {
 		snprintf(status, 31, "Status");
 		snprintf(song, 31, "Song");
 		snprintf(tempo, 31, "Time");
-		//snprintf(nopidgin, 31, "Pidgin not running");
+		snprintf(nopidgin, 31, "Pidgin not running");
 		//snprintf(norhythmbox, 31, "Rhythmbox not running");
 		snprintf(unknownstatus, 31, "Unknown Status");
 	}
