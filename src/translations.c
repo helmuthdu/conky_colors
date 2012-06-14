@@ -24,7 +24,7 @@ char 	sys[31],
 		publicip[31],
 		nonet[31],
 		Weather[31],
-		//noweather[31],
+		noweather[31],
 		//station[31],
 		//rain[31],
 		humidity[31],
@@ -67,7 +67,7 @@ void translation () {
 		snprintf(publicip, 31, "Ip externo");
 		snprintf(nonet, 31, "Rede indisponível");
 		snprintf(Weather, 31, "TEMPO");
-		//snprintf(noweather, 31, "Tempo indisponível");
+		snprintf(noweather, 31, "Tempo indisponível");
 		//snprintf(station, 31, "Estação");
 		//snprintf(rain, 31, "Chuva");
 		snprintf(humidity, 31, "Umidade");
@@ -104,7 +104,7 @@ void translation () {
 		snprintf(publicip, 31, "Ip Pubblico");
 		snprintf(nonet, 31, "Rete Non Disponibile");
 		snprintf(Weather, 31, "METEO");
-		//snprintf(noweather, 31, "Meteo Non Disponibile");
+		snprintf(noweather, 31, "Meteo Non Disponibile");
 		//snprintf(station, 31, "Stazione");
 		//snprintf(rain, 31, "Pioggia");
 		snprintf(humidity, 31, "Umidità");
@@ -141,7 +141,7 @@ void translation () {
 		snprintf(publicip, 31, "Ip Pública");
 		snprintf(nonet, 31, "Red no disponible");
 		snprintf(Weather, 31, "CLIMA");
-		//snprintf(noweather, 31, "Clima no disponible");
+		snprintf(noweather, 31, "Clima no disponible");
 		//snprintf(station, 31, "Estación");
 		//snprintf(rain, 31, "Lluvia");
 		snprintf(humidity, 31, "Humedad");
@@ -178,7 +178,7 @@ void translation () {
 		snprintf(publicip, 31, "Öffentliche IP");
 		snprintf(nonet, 31, "Netzwerk nicht verfügbar");
 		snprintf(Weather, 31, "WETTER");
-		//snprintf(noweather, 31, "Wetter nicht verfügbar");
+		snprintf(noweather, 31, "Wetter nicht verfügbar");
 		//snprintf(station, 31, "Station");
 		//snprintf(rain, 31, "Regen");
 		snprintf(humidity, 31, "Feuchte");
@@ -215,7 +215,7 @@ void translation () {
 		snprintf(publicip, 31, "Publiczne IP");
 		snprintf(nonet, 31, "Sieć Niedostępna");
 		snprintf(Weather, 31, "POGODA");
-		//snprintf(noweather, 31, "Pogoda niedostępna");
+		snprintf(noweather, 31, "Pogoda niedostępna");
 		//snprintf(station, 31, "Dworzec");
 		//snprintf(rain, 31, "Deszcz");
 		snprintf(humidity, 31, "Wilgotność");
@@ -252,7 +252,7 @@ void translation () {
 		snprintf(publicip, 31, "Avalik IP");
 		snprintf(nonet, 31, "Võrk pole saadaval");
 		snprintf(Weather, 31, "ILM");
-		//snprintf(noweather, 31, "Ilm pole saadaval");
+		snprintf(noweather, 31, "Ilm pole saadaval");
 		//snprintf(station, 31, "Jaam");
 		//snprintf(rain, 31, "Vihm");
 		snprintf(humidity, 31, "Niiskus");
@@ -289,7 +289,7 @@ void translation () {
 		snprintf(publicip, 31, "Внешний IP");
 		snprintf(nonet, 31, "Сеть недоступна");
 		snprintf(Weather, 31, "ПОГОДА");
-		//snprintf(noweather, 31, "Информация о погоде недоступна");
+		snprintf(noweather, 31, "Информация о погоде недоступна");
 		//snprintf(station, 31, "Станция");
 		//snprintf(rain, 31, "Дождь");
 		snprintf(humidity, 31, "Влажность");
@@ -326,7 +326,7 @@ void translation () {
 		snprintf(publicip, 31, "Външен IP");
 		snprintf(nonet, 31, "Мрежата е недостъпна");
 		snprintf(Weather, 31, "ВРЕМЕТО");
-		//snprintf(noweather, 31, "Няма информация за времето");
+		snprintf(noweather, 31, "Няма информация за времето");
 		//snprintf(station, 31, "станция");
 		//snprintf(rain, 31, "дъжд");
 		snprintf(humidity, 31, "влажност");
@@ -363,7 +363,7 @@ void translation () {
 		snprintf(publicip, 31, "Зовнішній IP");
 		snprintf(nonet, 31, "Мережа недоступна");
 		snprintf(Weather, 31, "ПОГОДА");
-		//snprintf(noweather, 31, "Інформация про погоду недоступна");
+		snprintf(noweather, 31, "Інформация про погоду недоступна");
 		//snprintf(station, 31, "Станція");
 		//snprintf(rain, 31, "Дощ");
 		snprintf(humidity, 31, "Вологість");
@@ -400,7 +400,7 @@ void translation () {
 		snprintf(publicip, 31, "IP publique");
 		snprintf(nonet, 31, "Réseau indisponible");
 		snprintf(Weather, 31, "MÉTÉO");
-		//snprintf(noweather, 31, "Météo indisponible");
+		snprintf(noweather, 31, "Météo indisponible");
 		//snprintf(station, 31, "Station");
 		//snprintf(rain, 31, "Pluie");
 		snprintf(humidity, 31, "Humidité");
@@ -437,7 +437,7 @@ void translation () {
 		snprintf(publicip, 31, "Public IP");
 		snprintf(nonet, 31, "Network Unavailable");
 		snprintf(Weather, 31, "WEATHER");
-		//snprintf(noweather, 31, "Weather Unavailable");
+		snprintf(noweather, 31, "Weather Unavailable");
 		//snprintf(station, 31, "Station");
 		//snprintf(rain, 31, "Rain");
 		snprintf(humidity, 31, "Humidity");

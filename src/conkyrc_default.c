@@ -487,14 +487,16 @@ void conkyrc_default () {
 				fprintf(fp,"${voffset -4}${font Ubuntu:style=Bold:size=8}%s $stippled_hr${font}\n", Weather);
 
 			if (unit == True) {
-				fprintf(fp,"${goto 12}${voffset 4}${color0}${font Weather:size=24}y${font}${color}\n");
+				fprintf(fp,"${if_gw}${goto 12}${voffset 4}${color0}${font Weather:size=24}y${font}${color}\n");
 				fprintf(fp,"${voffset -29}${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather cur %s f}°F${color}${font}\n", go2, temperature, yahooweatherdir, weather_code);
 				fprintf(fp,"${goto %d}${voffset -2}${color0}${font VariShapes Solid:size=8}Q${font}${color}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather min %s c}°F${color}${font}  ${voffset -2}${color0}${font VariShapes Solid:size=8}q${font}${color}${voffset -1}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather max %s c}°F${color}${font}\n", go2, yahooweatherdir, weather_code, yahooweatherdir, weather_code);
+				fprintf(fp, "${else}${voffset 4}${color0}${font PizzaDude Bullets:size=12}4${font}${color}${goto 32}%s${voffset 14}${endif}\n", noweather);
 			}
 			else {
-				fprintf(fp,"${goto 12}${voffset 4}${color0}${font Weather:size=24}y${font}${color}\n");
+				fprintf(fp,"${if_gw}${goto 12}${voffset 4}${color0}${font Weather:size=24}y${font}${color}\n");
 				fprintf(fp,"${voffset -29}${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather cur %s c}°C${color}${font}\n", go2, temperature, yahooweatherdir, weather_code);
 				fprintf(fp,"${goto %d}${voffset -2}${color0}${font VariShapes Solid:size=8}Q${font}${color}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather min %s c}°C${color}${font}  ${voffset -2}${color0}${font VariShapes Solid:size=8}q${font}${color}${voffset -1}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather max %s c}°C${color}${font}\n", go2, yahooweatherdir, weather_code, yahooweatherdir, weather_code);
+				fprintf(fp, "${else}${voffset 4}${color0}${font PizzaDude Bullets:size=12}4${font}${color}${goto 32}%s${voffset 14}${endif}\n", noweather);
 			}
 	}
 	else
@@ -509,16 +511,18 @@ void conkyrc_default () {
 				fprintf(fp,"${voffset -4}${font Ubuntu:style=Bold:size=8}%s $stippled_hr${font}\n", Weather);
 
 			if (unit == True) {
-				fprintf(fp,"${goto 12}${voffset 4}${color0}${font Weather:size=24}y${font}${color}\n");
+				fprintf(fp,"${if_gw}${goto 12}${voffset 4}${color0}${font Weather:size=24}y${font}${color}\n");
 				fprintf(fp,"${voffset -29}${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather cur %d f}°F${color}${font}\n", go2, temperature, bbcweatherdir, bbccode);
 				fprintf(fp,"${goto %d}${voffset -2}${color0}${font VariShapes Solid:size=8}Q${font}${color}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather min %d f}°F${color}${font}  ${voffset -2}${color0}${font VariShapes Solid:size=8}q${font}${color}${voffset -1}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather max %d f}°F${color}${font}\n", go2, bbcweatherdir, bbccode, bbcweatherdir, bbccode);
 				fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather hum %d f}%%${color}${font}${alignr}${color2}${execbar %s/bin/conkyBBCWeather hum %d f}%%${color}${font}\n", go2, humidity, bbcweatherdir, bbccode, bbcweatherdir, bbccode);
+				fprintf(fp, "${else}${voffset 4}${color0}${font PizzaDude Bullets:size=12}4${font}${color}${goto 32}%s${voffset 14}${endif}\n", noweather);
 			}
 			else {
-				fprintf(fp,"${goto 12}${voffset 4}${color0}${font Weather:size=24}y${font}${color}\n");
+				fprintf(fp,"${if_gw}${goto 12}${voffset 4}${color0}${font Weather:size=24}y${font}${color}\n");
 				fprintf(fp,"${voffset -29}${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather cur %d c}°C${color}${font}\n", go2, temperature, bbcweatherdir, bbccode);
 				fprintf(fp,"${goto %d}${voffset -2}${color0}${font VariShapes Solid:size=8}Q${font}${color}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather min %d c}°C${color}${font}  ${voffset -2}${color0}${font VariShapes Solid:size=8}q${font}${color}${voffset -1}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather max %d c}°C${color}${font}\n", go2, bbcweatherdir, bbccode, bbcweatherdir, bbccode);
 				fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather hum %d c}%%${color}${font}${alignr}${color2}${execbar %s/bin/conkyBBCWeather hum %d c}%%${color}${font}\n", go2, humidity, bbcweatherdir, bbccode, bbcweatherdir, bbccode);
+				fprintf(fp, "${else}${voffset 4}${color0}${font PizzaDude Bullets:size=12}4${font}${color}${goto 32}%s${voffset 14}${endif}\n", noweather);
 			}
 	    }
 	fclose(fp);
