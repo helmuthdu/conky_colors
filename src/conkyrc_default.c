@@ -22,7 +22,7 @@ void conkyrc_default () {
 	}
 
     char ubuntufix;
-    printf("Ubuntu/Debian distro? [y][n]: ");
+    printf("Ubuntu/Debian distro? [y/N]: ");
     scanf("%c",&ubuntufix);
 
 	const char *clockdir=finddir("bin/conkyClock");

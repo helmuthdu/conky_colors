@@ -10,13 +10,12 @@ conky-colors: conky-colors.c conkycover.c conkyplayer.c \
 
 install: conky-colors conkyrc
 	mkdir -p $(DESTDIR)/usr/share
-	mkdir -p $(DESTDIR)/usr/share/fonts/TTF/conky
-	mkdir -p $(DESTDIR)/usr/share/fonts/OTF/conky
 	mkdir -p $(DESTDIR)/usr/bin
 	cp -v conky-colors $(DESTDIR)/usr/bin
 	cp -v -r conkycolors $(DESTDIR)/usr/share
+	cp -v -r fonts $(DESTDIR)/usr/share/conkycolors
 	ln -fs $(DESTDIR)/usr/share/conkycolors/bin/conkyTask $(DESTDIR)/usr/bin/ct
-	cp -v fonts/conkycolors/*.ttf fonts/conkycolors/*.TTF $(DESTDIR)/usr/share/fonts/TTF/conky
+	ln -fs $(DESTDIR)/usr/share/conkycolors/fonts/conkycolors $(DESTDIR)/usr/share/fonts
 	chmod +x $(DESTDIR)/usr/share/conkycolors/scripts/*
 	chmod +x $(DESTDIR)/usr/share/conkycolors/bin/*
 	chmod -R 755 $(DESTDIR)/usr/share/conkycolors/
@@ -28,11 +27,9 @@ clean:
 
 uninstall:
 	rm -rf $(DESTDIR)/usr/share/conkycolors
+	rm $(DESTDIR)/usr/share/fonts/conkycolors
 	rm $(DESTDIR)/usr/bin/conky-colors
 	rm $(DESTDIR)/usr/bin/ct
-	for file in $$(find $(CWD)/fonts/conkycolors -iname *.ttf -print0); do \
-		rm $(DESTDIR)/usr/share/fonts/TTF/conky/$$(basename $$file); \
-		done
 
 .PHONY: all clean install uninstall
 
