@@ -62,25 +62,13 @@ void conkyrc_default () {
 	fprintf(fp,"own_window_class Conky\n");
 	fprintf(fp,"own_window yes\n");
 	//CHECK GNOME VERSION
-	char gnome_version='u';
-	printf("[u]nity or [g]nome-shell: ");
-	scanf("%c",&gnome_version);
-	if (gnome_version == 'u')
-		if (set_photo == 1 || set_photo == 2 || cover > 2)
-			fprintf(fp,"own_window_type override\n");
-		else {
-			fprintf(fp,"own_window_type normal\n");
-			fprintf(fp, "own_window_argb_visual yes\n");
-			fprintf(fp, "own_window_argb_value %d\n", argb_value);
-		}
-	else
-		if (set_photo == 1 || set_photo == 2 || cover > 2)
-			fprintf(fp,"own_window_type desktop\n");
-		else {
-			fprintf(fp,"own_window_type normal\n");
-			fprintf(fp, "own_window_argb_visual yes\n");
-			fprintf(fp, "own_window_argb_value %d\n", argb_value);
-		}
+	if (set_photo == 1 || set_photo == 2 || cover > 2)
+		fprintf(fp,"own_window_type override\n");
+	else {
+		fprintf(fp,"own_window_type normal\n");
+		fprintf(fp, "own_window_argb_visual yes\n");
+		fprintf(fp, "own_window_argb_value %d\n", argb_value);
+	}
 	fprintf(fp,"own_window_transparent yes\n");
 	fprintf(fp,"own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager\n");
 	fprintf(fp,"\n");
