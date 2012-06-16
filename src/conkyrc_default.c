@@ -22,7 +22,7 @@ void conkyrc_default () {
 	}
 
     char ubuntufix;
-    printf("Ubuntu/Debian distro? [y][n]: ");
+    printf("Ubuntu/Debian distro? [y/N]: ");
     scanf("%c",&ubuntufix);
 
 	const char *clockdir=finddir("bin/conkyClock");
@@ -61,26 +61,13 @@ void conkyrc_default () {
 	fprintf(fp,"#############################\n");
 	fprintf(fp,"own_window_class Conky\n");
 	fprintf(fp,"own_window yes\n");
-	//CHECK GNOME VERSION
-	char gnome_version='u';
-	printf("[u]nity or [g]nome-shell: ");
-	scanf("%c",&gnome_version);
-	if (gnome_version == 'u')
-		if (set_photo == 1 || set_photo == 2 || cover > 2)
-			fprintf(fp,"own_window_type override\n");
-		else {
-			fprintf(fp,"own_window_type normal\n");
-			fprintf(fp, "own_window_argb_visual yes\n");
-			fprintf(fp, "own_window_argb_value %d\n", argb_value);
-		}
-	else
-		if (set_photo == 1 || set_photo == 2 || cover > 2)
-			fprintf(fp,"own_window_type desktop\n");
-		else {
-			fprintf(fp,"own_window_type normal\n");
-			fprintf(fp, "own_window_argb_visual yes\n");
-			fprintf(fp, "own_window_argb_value %d\n", argb_value);
-		}
+	if (set_photo == 1 || set_photo == 2 || cover > 2)
+		fprintf(fp,"own_window_type override\n");
+	else {
+		fprintf(fp,"own_window_type normal\n");
+		fprintf(fp, "own_window_argb_visual yes\n");
+		fprintf(fp, "own_window_argb_value %d\n", argb_value);
+	}
 	fprintf(fp,"own_window_transparent yes\n");
 	fprintf(fp,"own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager\n");
 	fprintf(fp,"\n");
@@ -260,6 +247,7 @@ void conkyrc_default () {
 		//Clock off
 		else
 			if (clocktype == 6);
+		//Clock Default Theme
 		else
 			fprintf(fp,"${voffset -10}${alignc 46}${color2}${font Arial Black:size=30}${time %%H:%%M}${font}${color}\n");
 		if (clocktype != 3 && clocktype != 4 && clocktype != 5) {
@@ -414,16 +402,20 @@ void conkyrc_default () {
 			else
 				fprintf(fp,"${goto %d}/dev/%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 120 hddtemp /dev/%s -n --unit=C}°C${color}${font}\n", go2, dev4, dev4);
 		}
+		//Default Theme
 		if (hdtype == 1)
-			fprintf(fp,"${execpi 30 %s/bin/conkyHD1}\n", finddir("bin/conkyHD1") ); //Default Theme
+			fprintf(fp,"${execpi 30 %s/bin/conkyHD1}\n", finddir("bin/conkyHD1") );
 		else
+    	//Meerkat Theme
 			if (hdtype == 2)
-				fprintf(fp,"${execpi 30 %s/bin/conkyHD2}\n", finddir("bin/conkyHD2") ); //Meerkat Theme
+				fprintf(fp,"${execpi 30 %s/bin/conkyHD2}\n", finddir("bin/conkyHD2") );
 			else
+    	//Mix Theme
 				if (hdtype == 3)
-					fprintf(fp,"${execpi 30 %s/bin/conkyHD3}\n", finddir("bin/conkyHD3") ); //Mix Theme
+					fprintf(fp,"${execpi 30 %s/bin/conkyHD3}\n", finddir("bin/conkyHD3") );
 			else
-				fprintf(fp,"${execpi 30 %s/bin/conkyHD4}\n", finddir("bin/conkyHD4") ); //Simple Theme
+        //Simple Theme 
+				fprintf(fp,"${execpi 30 %s/bin/conkyHD4}\n", finddir("bin/conkyHD4") );
 	}
 
 	//Network Widget
