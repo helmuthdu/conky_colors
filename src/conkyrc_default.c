@@ -41,6 +41,7 @@ void conkyrc_default () {
 	fprintf(fp,"total_run_times 0\n");
 	fprintf(fp,"net_avg_samples 1\n");
 	fprintf(fp,"cpu_avg_samples 1\n");
+	fprintf(fp,"if_up_strictness link\n");
 	fprintf(fp,"\n");
 	fprintf(fp,"imlib_cache_size 0\n");
 	fprintf(fp,"double_buffer yes\n");
