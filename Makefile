@@ -13,7 +13,7 @@ install: conky-colors conkyrc
 	mkdir -p $(DESTDIR)/usr/bin
 	cp -v conky-colors $(DESTDIR)/usr/bin
 	cp -v -r conkycolors $(DESTDIR)/usr/share
-	cp -v -r fonts $(DESTDIR)/usr/share/fonts
+	cp -v -r fonts/conkycolors $(DESTDIR)/usr/share/fonts
 	ln -fs $(DESTDIR)/usr/share/conkycolors/bin/conkyTask $(DESTDIR)/usr/bin/ct
 	chmod +x $(DESTDIR)/usr/share/conkycolors/scripts/*
 	chmod +x $(DESTDIR)/usr/share/conkycolors/bin/*
