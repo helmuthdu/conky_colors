@@ -1,386 +1,117 @@
 #!/bin/bash
 
-#put your 5 day weather.com address here
-address="http://www.weather.com/weather/5-day/$1"
+#put your 10 day weather.com address here
+address10="http://www.weather.com/weather/tenday/$1"
+#address10="http://www.weather.com/weather/tenday/Ojmjakon+RSXX0138:1:RS"
+#address10="http://www.weather.com/weather/tenday/Kastoria+GRXX0292:1:GR"
 
-#Change this variable to any other value than 1 if you don't want metric output
-metrification=0
+addr_now=$(echo $address10|sed 's/tenday/right-now/')
+addr_today=$(echo $address10|sed 's/tenday/today/')
 
-#Sun/Moon Rise/Set correction: set this variable to the difference of the value provided by weather.com
-#and the value the script(wget) gives you. For example, if your conky says that the sun rises at 5:00
-#and weather.com says that the sun rises at 4:00, make the variable equal to -1
-sun_moon_correction=5
-
-addr_now=$(echo $address|sed 's/5-day/today/')
-
-DIRECTORY="$HOME/.conkycolors/Weather"
-
-if [ ! -d "$DIRECTORY" ]; then
-    mkdir -p $DIRECTORY/RightNow/
-    mkdir -p $DIRECTORY/5days/
+[[ ! -d $HOME/.conkycolors/weather/RightNow/ ]] && mkdir -p $HOME/.conkycolors/weather/RightNow;
+[[ ! -d $HOME/.conkycolors/weather/Today/ ]] && mkdir -p $HOME/.conkycolors/weather/Today;
+[[ ! -d $HOME/.conkycolors/weather/10days/ ]] && mkdir -p $HOME/.conkycolors/weather/10days;
+if [[ ! -d $HOME/.conkycolors/weather/images/ ]]; then 
+    mkdir -p $HOME/.conkycolors/weather/images
+    cp /usr/share/conkycolors/icons/Weather/* $HOME/.conkycolors/weather/images/
 fi
 
-wget -O $DIRECTORY/RightNow/raw_rn $addr_now
+wget --user-agent="Firefox" -O $HOME/.conkycolors/weather/RightNow/raw_rn $addr_now
+wget --user-agent="Firefox" -O $HOME/.conkycolors/weather/Today/raw_td $addr_today
+wget --user-agent="Firefox" -O $HOME/.conkycolors/weather/10days/raw_10 $address10
 
-wget -O $DIRECTORY/5days/raw $address
+rm $HOME/.conkycolors/weather/10days/10days_OK
 
-if [[ -s $DIRECTORY/RightNow/raw_rn ]]; then
-
+if [[ -s $HOME/.conkycolors/weather/RightNow/raw_rn ]]; then
 	#############
 	# Right now #
 	#############
-	sed -i '/twc-col-1 twc-animated-icon/,/twc-forecast-table twc-forecast-links-table/!d' $DIRECTORY/RightNow/raw_rn
-	
-	#file: days_rn
-	sed '/twc-forecast-when/!d' $DIRECTORY/RightNow/raw_rn > $DIRECTORY/RightNow/days_rn
-	sed -i -e 's/^.*">//g' -e 's/<.*$//g' $DIRECTORY/RightNow/days_rn
-	
-	#file: images_rn
-	sed '/.png/!d' $DIRECTORY/RightNow/raw_rn > $DIRECTORY/RightNow/images_rn
-	sed -i -e 's/^.*src="//g' -e 's/".*$//g' -e 's/^.*\///g' $DIRECTORY/RightNow/images_rn
-	for (( i=1; i<=4; i++))
-	    do
-	        image=$(sed -n ${i}p $DIRECTORY/RightNow/images_rn)
-	        cp /usr/share/conkycolors/icons/Weather/$image $DIRECTORY/r${i}.png
-	    done
-	
-	#file: messages_rn
-	sed '/.png/!d' $DIRECTORY/RightNow/raw_rn > $DIRECTORY/RightNow/messages_rn
-	sed -i -e 's/^.*alt="//g' -e 's/".*$//g' $DIRECTORY/RightNow/messages_rn
-	
-	#file: temperatures_rn
-	sed '/"twc-col-1 twc-forecast-temperature"/,/"merch-link"/!d' $DIRECTORY/RightNow/raw_rn > $DIRECTORY/RightNow/temperatures_rn
-	sed -i -e '/&deg;/!d' -e 's/^.*<strong>//g' -e 's/&deg;.*$//g' $DIRECTORY/RightNow/temperatures_rn
-	
-	#file: precipitation_rn
-	sed '/twc-col-1 twc-line-precip/,/"twc-col-1 twc-line-wind"/!d' $DIRECTORY/RightNow/raw_rn > $DIRECTORY/RightNow/precipitation_rn
-	sed -i -e '/^[ \t]*$/d' -e 's/^.*">//g' -e 's/<strong>//g' -e 's/<\/strong>.*$//g' $DIRECTORY/RightNow/precipitation_rn
-	sed -i -e 's/<br>/ /g' -e 's/<\/span>//g' -e '/<\|Wind/d' -e '/^[ \t]*$/d' -e 's/^[ \t]*//g' -e '/&nbsp/d' $DIRECTORY/RightNow/precipitation_rn
-	
-	#file: wind_rn
-	sed '/"twc-col-1 twc-line-wind"/,/twc-col-1 twc-line-nar/!d' $DIRECTORY/RightNow/raw_rn > $DIRECTORY/RightNow/wind_rn
-	sed -i -e '/^[ \t]*$/d' -e '/</d' -e 's/^[ \t]*//g' -e 's/From //g' -e 's/ .*$//g' -e 's/mph\|km//g' $DIRECTORY/RightNow/wind_rn
-	
-	#file: messages_long_rn
-	sed '/"twc-col-1 twc-line-nar"/,/twc-forecast-table twc-last/!d' $DIRECTORY/RightNow/raw_rn > $DIRECTORY/RightNow/messages_long_rn
-	sed -i -e 's/^.*twc-line-nar ">//g' -e 's/<\/td>.*$//g' -e '/<t\|<\/t/d' -e '/^[ \t]*$/d' -e 's/^[ \t]*//g' -e '/</d' $DIRECTORY/RightNow/messages_long_rn
-	
-	#file: humidity_rn
-	sed '/>Humidity:</,/>Dew Point:</!d' $DIRECTORY/RightNow/raw_rn > $DIRECTORY/RightNow/humidity_rn
-	sed -i -e '/%/!d' -e 's/^.*first">//g' -e 's/^.*<\/span> //g' -e 's/<.*$//g' $DIRECTORY/RightNow/humidity_rn
-	
-	#file: dew_point_rn
-	sed '/>Dew Point:</,/>Pressure:</!d' $DIRECTORY/RightNow/raw_rn > $DIRECTORY/RightNow/dew_point_rn
-	sed -i -e '/&deg;/!d' -e 's/^.*<\/span>//g' -e 's/&deg;.*$//g' $DIRECTORY/RightNow/dew_point_rn
-	
-	#file: pressure_rn
-	sed '/>Pressure:</,/>Visibility:</!d' $DIRECTORY/RightNow/raw_rn > $DIRECTORY/RightNow/pressure_rn
-	sed -i -e '/</d' -e '/^[ \t]*$/d' -e '/in\|mb/d' -e 's/^[ \t]*//g' -e 's/[ \t].*$//g' $DIRECTORY/RightNow/pressure_rn
-	
-	#file: visibility_rn
-	sed '/>Visibility:</,/>UV Index:</!d' $DIRECTORY/RightNow/raw_rn > $DIRECTORY/RightNow/visibility_rn
-	sed -i -e '/</d' -e '/^[ \t]*$/d' -e '/mi\|km/d' -e 's/^[ \t]*//g' -e 's/[ \t].*$//g' $DIRECTORY/RightNow/visibility_rn
-	
-	#file: uv_rn
-	sed '/>UV Index:</,/twc-col-1 twc-line-daylight/!d' $DIRECTORY/RightNow/raw_rn > $DIRECTORY/RightNow/uv_rn
-	sed -i -e '/</d' -e '/^[ \t]*$/d' -e 's/^[ \t]*//g' $DIRECTORY/RightNow/uv_rn
-	
-	#file: sunr_suns_rn
-	sed '/twc-col-1 twc-line-daylight/,/<\/table>/!d' $DIRECTORY/RightNow/raw_rn > $DIRECTORY/RightNow/sunr_suns_rn
-	sed -i -e '/^[ \t]*$/d' -e 's/<strong>/\n/g' -e 's/^.*daylight">//g' -e '/^[ \t]*$/d' $DIRECTORY/RightNow/sunr_suns_rn
-	sed -i -e 's/<\/strong>.*$//g' -e '/</d' -e '/^[ \t]*$/d' -e 's/^[ \t]*//g' $DIRECTORY/RightNow/sunr_suns_rn
-	sed -i -e 's/^.*[a-z][a-z][a-z] [a-z][a-z][a-z] [0-9][0-9] //g' -e 's/:[0-9][0-9] .*$//g' $DIRECTORY/RightNow/sunr_suns_rn 
-	for (( i=4; i<=8; i+=2 ))
-    do
-        whole_time=$(sed -n ${i}p $DIRECTORY/RightNow/sunr_suns_rn)
-        time=$(echo $whole_time|sed 's/:.*$//g')
-        time=$((10#$time))
-        minutes=$(echo $whole_time|sed 's/^.*:/:/g')
-        corrected_time=$(( $time+$sun_moon_correction ))
-        if (( corrected_time >= 24 )); then
-            ((corrected_time-=24))
-        fi
-        sed -i $i"s/.*/$corrected_time/" $DIRECTORY/RightNow/sunr_suns_rn 
-        sed -i $i"s/$/$minutes/" $DIRECTORY/RightNow/sunr_suns_rn
-    done
-
-fi
-
-
-if [[ -s $DIRECTORY/5days/raw ]]; then
-
-	##################
-	# 5 day forecast #
-	##################
-	sed -i '/twc-forecast-table twc-first/,/twc-forecast-table twc-forecast-links-table/!d' $DIRECTORY/5days/raw
-	
-	#file: days
-	egrep -i 'Mon |Tue |Wed |Thu |Fri |Sat |Sun ' $DIRECTORY/5days/raw > $DIRECTORY/5days/days
-	sed -i -e '/</d' -e 's/^[ \t]*//g' -e 's/ .*$//g' $DIRECTORY/5days/days
-	sed -i -e 's/mon/MON/g' -e 's/tue/TUE/g' -e 's/wed/WED/g' -e 's/thu/THU/g' -e 's/fri/FRI/g' -e 's/sat/SAT/g' -e 's/sun/SUN/g' $DIRECTORY/5days/days
-	
-	#file: images
-	egrep -i '.png' $DIRECTORY/5days/raw > $DIRECTORY/5days/images
-	sed -i -e 's/^.*src="//g' -e 's/".*$//g' $DIRECTORY/5days/images
-	sed -i -e 's/^.*\///g' $DIRECTORY/5days/images
-	
-	#file: messages
-	sed '/twc-wx-phrase1/,/twc-forecast-temperature-high/!d' $DIRECTORY/5days/raw > $DIRECTORY/5days/messages
-	sed -i -e '/<t/d' -e '/<\/t/d' -e '/^\t*$/d' -e 's/^\t*//g' $DIRECTORY/5days/messages
-	
-	#file: temperatures
-	sed '/twc-forecast-temperature-high/,/twc-col-1 twc-line-precip/!d' $DIRECTORY/5days/raw > $DIRECTORY/5days/temperatures
-	sed -i -e '/wx-hi\|wx-low/!d' -e 's/^.*<strong>//g' -e 's/^.*low[0-9]">//g' $DIRECTORY/5days/temperatures
-	sed -i -e 's/&deg;.*$//g' -e 's/<\/strong>.*$//g' $DIRECTORY/5days/temperatures
-	for (( i=1; i<=5; i++ ))
-		do
-			temp=$(sed -n $((i+5))p $DIRECTORY/5days/temperatures)
-			sed -i $i"s/$/ \/ $temp/" $DIRECTORY/5days/temperatures
-		done
-	
-	#file: precipitation
-	sed '/twc-col-1 twc-line-precip/,/twc-col-1 twc-line-wind/!d' $DIRECTORY/5days/raw > $DIRECTORY/5days/precipitation
-	sed -i -e '/Chance /!d' -e 's/^.*">//g' -e 's/<\/strong.*$//g' -e 's/<br><strong>/ /g' $DIRECTORY/5days/precipitation
-	
-	#file: wind
-	sed '/twc-col-1 twc-line-wind/,/twc-col-1 twc-line-humidity/!d' $DIRECTORY/5days/raw > $DIRECTORY/5days/wind
-	sed -i -e '/^$/d' -e '/^\t*$/d' -e '/^ *$/d' -e 's/^ *\|^\t*//g' $DIRECTORY/5days/wind
-	sed -i -e '/</d' -e 's/^ *//g' -e 's/ .*$//g' $DIRECTORY/5days/wind
-	
-	#file: humidity
-	sed '/twc-col-1 twc-line-humidity/,/UV Index/!d' $DIRECTORY/5days/raw > $DIRECTORY/5days/humidity
-	sed -i -e '/humidity/!d' -e 's/^.*<strong>//g' -e 's/<\/strong>.*$//g' $DIRECTORY/5days/humidity
-	
-	#file: uv
-	sed '/UV Index/,/twc-line-sunrise/!d' $DIRECTORY/5days/raw > $DIRECTORY/5days/uv
-	sed -i -e '/^$/d' -e '/^\t*$/d' -e '/^ *$/d' -e 's/^ *\|^\t*//g' $DIRECTORY/5days/uv
-	sed -i -e '/</d' $DIRECTORY/5days/uv
-	
-	#file: sunrise
-	sed '/twc-line-sunrise/,/twc-line-sunset/!d' $DIRECTORY/5days/raw > $DIRECTORY/5days/sunrise
-	sed -i -e '/^$/d' -e '/^\t*$/d' -e '/^ *$/d' -e 's/^ *\|^\t*//g' $DIRECTORY/5days/sunrise
-	sed -i -e '/</d' -e 's/^.*[a-z][a-z][a-z] [a-z][a-z][a-z] [0-9][0-9] //g' -e 's/ .*$//g' -e 's/:[0-9][0-9]$//g' $DIRECTORY/5days/sunrise
-	for (( i=1; i<=5; i++ ))
-    do
-        whole_time=$(sed -n ${i}p $DIRECTORY/5days/sunrise)
-        time=$(echo $whole_time|sed 's/:.*$//g')
-        time=$((10#$time))
-        minutes=$(echo $whole_time|sed 's/^.*:/:/g')
-        corrected_time=$(( $time+$sun_moon_correction ))
-        if (( corrected_time >= 24 )); then
-            ((corrected_time-=24))
-        fi
-        sed -i $i"s/.*/$corrected_time/" $DIRECTORY/5days/sunrise 
-        sed -i $i"s/$/$minutes/" $DIRECTORY/5days/sunrise
-    done
-	
-	#file: sunset
-	sed '/twc-line-sunset/,/twc-line-moonrise/!d' $DIRECTORY/5days/raw > $DIRECTORY/5days/sunset
-	sed -i -e '/^$/d' -e '/^\t*$/d' -e '/^ *$/d' -e 's/^ *\|^\t*//g' $DIRECTORY/5days/sunset
-	sed -i -e '/</d' -e 's/^.*[a-z][a-z][a-z] [a-z][a-z][a-z] [0-9][0-9] //g' -e 's/ .*$//g' -e 's/:[0-9][0-9]$//g' $DIRECTORY/5days/sunset
-	for (( i=1; i<=5; i++ ))
-    do
-        whole_time=$(sed -n ${i}p $DIRECTORY/5days/sunset)
-        time=$(echo $whole_time|sed 's/:.*$//g')
-        time=$((10#$time))
-        minutes=$(echo $whole_time|sed 's/^.*:/:/g')
-        corrected_time=$(( $time+$sun_moon_correction ))
-        if (( corrected_time >= 24 )); then
-            ((corrected_time-=24))
-        fi
-        sed -i $i"s/.*/$corrected_time/" $DIRECTORY/5days/sunset 
-        sed -i $i"s/$/$minutes/" $DIRECTORY/5days/sunset
-    done
-	
-	#file: moonrise
-	sed '/twc-line-moonrise/,/twc-line-moonset/!d' $DIRECTORY/5days/raw > $DIRECTORY/5days/moonrise
-	sed -i -e '/^$/d' -e '/^\t*$/d' -e '/^ *$/d' -e 's/^ *\|^\t*//g' $DIRECTORY/5days/moonrise
-	sed -i -e '/</d' -e 's/^.*[a-z][a-z][a-z] [a-z][a-z][a-z] [0-9][0-9] //g' -e 's/ .*$//g' -e 's/:[0-9][0-9]$//g' $DIRECTORY/5days/moonrise
-	for (( i=1; i<=5; i++ ))
-    do
-        whole_time=$(sed -n ${i}p $DIRECTORY/5days/moonrise)
-        time=$(echo $whole_time|sed 's/:.*$//g')
-        time=$((10#$time))
-        minutes=$(echo $whole_time|sed 's/^.*:/:/g')
-        corrected_time=$(( $time+$sun_moon_correction ))
-        if (( corrected_time >= 24 )); then
-            ((corrected_time-=24))
-        fi
-        sed -i $i"s/.*/$corrected_time/" $DIRECTORY/5days/moonrise 
-        sed -i $i"s/$/$minutes/" $DIRECTORY/5days/moonrise
-    done
-	
-	#file: moonset
-	sed '/twc-line-moonset/,/twc-col-1 twc-line-daylight twc-moonphase-icon/!d' $DIRECTORY/5days/raw > $DIRECTORY/5days/moonset
-	sed -i -e '/^$/d' -e '/^\t*$/d' -e '/^ *$/d' -e 's/^ *\|^\t*//g' $DIRECTORY/5days/moonset
-	sed -i -e '/</d' -e 's/^.*[a-z][a-z][a-z] [a-z][a-z][a-z] [0-9][0-9] //g' -e 's/ .*$//g' -e 's/:[0-9][0-9]$//g' $DIRECTORY/5days/moonset
-	for (( i=1; i<=5; i++ ))
-    do
-        whole_time=$(sed -n ${i}p $DIRECTORY/5days/moonset)
-        time=$(echo $whole_time|sed 's/:.*$//g')
-        time=$((10#$time))
-        minutes=$(echo $whole_time|sed 's/^.*:/:/g')
-        corrected_time=$(( $time+$sun_moon_correction ))
-        if (( corrected_time >= 24 )); then
-            ((corrected_time-=24))
-        fi
-        sed -i $i"s/.*/$corrected_time/" $DIRECTORY/5days/moonset 
-        sed -i $i"s/$/$minutes/" $DIRECTORY/5days/moonset
-    done
-
-	
-	#file: moonphase
-	sed '/twc-col-1 twc-line-daylight twc-moonphase-icon/,/<\/table>/!d' $DIRECTORY/5days/raw > $DIRECTORY/5days/moonphase
-	sed -i -e '/.gif/!d' -e 's/^.*src="//g' -e 's/" alt="/\n/g' -e 's/".*$//g' -e 's/^.*\///g' $DIRECTORY/5days/moonphase
-	for (( i=1; i<=9; i+=2))
-	    do
-	        image=$(sed -n ${i}p $DIRECTORY/5days/moonphase)
-	        cp /usr/share/conkycolors/icons/Weather_Moonphases/$image $DIRECTORY/m$i.gif
-	    done
-
-fi
-
-
-###################################################
-# metrification of the output files - requires bc #
-###################################################
-
-if (( metrification==1 )); then
-
-	if [[ -s $DIRECTORY/RightNow/raw_rn && -s $DIRECTORY/5days/raw ]]; then
-
-	#TEMPERATURES: temperatures_rn, temperatures, temperatures10 files
-	    
-	    for (( i=1; i<=5; i++))
-	        do
-	            ftemp=$(sed -n ${i}p $DIRECTORY/RightNow/temperatures_rn)
-	            if [ $ftemp -eq $ftemp 2>/dev/null ]; then
-	                nom=$(echo "5*($ftemp-32)"|bc)
-	                ctemp=$(echo "$nom/9"|bc)
-	                rem=$(echo "scale=1;10*($nom%9)"|bc|sed 's/\..*$//')
-	                if (( rem<0 )); then
-	                    ((rem*=-1))
-	                fi
-	                if (( rem>=5 && ctemp>0 )); then
-	                    ((ctemp++))
-	                elif (( rem>=5 && ctemp<0 )); then
-	                    ((ctemp--))
-	                fi
-	                sed -i $i"s/$ftemp/$ctemp/" $DIRECTORY/RightNow/temperatures_rn
-	            fi
-	            ftemp=$(sed -n ${i}p $DIRECTORY/5days/temperatures|sed 's/ \/ .*$//')
-	            if [ $ftemp -eq $ftemp 2>/dev/null ]; then
-	                nom=$(echo "5*($ftemp-32)"|bc)
-	                ctemp=$(echo "$nom/9"|bc)
-	                rem=$(echo "scale=1;10*($nom%9)"|bc|sed 's/\..*$//')
-	                if (( rem<0)); then
-	                    ((rem*=-1))
-	                fi
-	                if (( rem>=5 && ctemp>0 )); then
-	                    ((ctemp++))
-	                elif (( rem>=5 && ctemp<0 )); then
-	                    ((ctemp--))
-	                fi
-	                sed -i $i"s/^.* \//$ctemp \//" $DIRECTORY/5days/temperatures
-	            fi
-	            ftemp=$(sed -n ${i}p $DIRECTORY/5days/temperatures|sed 's/^.* \/ //')
-	            if [ $ftemp -eq $ftemp 2>/dev/null ]; then
-	                nom=$(echo "5*($ftemp-32)"|bc)
-	                ctemp=$(echo "$nom/9"|bc)
-	                rem=$(echo "scale=1;10*($nom%9)"|bc|sed 's/\..*$//')
-	                if (( rem<0)); then
-	                    ((rem*=-1))
-	                fi
-	                if (( rem>=5 && ctemp>0 )); then
-	                    ((ctemp++))
-	                elif (( rem>=5 && ctemp<0 )); then
-	                    ((ctemp--))
-	                fi
-	                sed -i $i"s/\/ .*$/\/ $ctemp/" $DIRECTORY/5days/temperatures
-	            fi
-	    done
-	    
-	
-	#WIND SPEED: wind_rn, wind, wind10 files
-	    
-	    for (( i=2; i<=8; i+=2 ))
-	        do
-	            mi=$(sed -n ${i}p $DIRECTORY/RightNow/wind_rn)
-	            if [ $mi -eq $mi 2>/dev/null ]; then
-	                km=$(echo "($mi*1.609344)/1"|bc)
-	                rem=$(echo "10*($(echo "($mi*1.609344)"|bc)-$km)/1"|bc)
-	                if (( $rem>5 )); then
-	                    ((km++))
-	                fi
-	                sed -i $i"s/^.*$/$km/" $DIRECTORY/RightNow/wind_rn
-	            fi
-	        done
-	    for (( i=2; i<=10; i+=2 ))
-	        do
-	            mi=$(sed -n ${i}p $DIRECTORY/5days/wind)
-	            if [ $mi -eq $mi 2>/dev/null ]; then
-	                km=$(echo "($mi*1.609344)/1"|bc)
-	                rem=$(echo "10*($(echo "($mi*1.609344)"|bc)-$km)/1"|bc)
-	                if (( $rem>5 )); then
-	                    ((km++))
-	                fi
-	                sed -i $i"s/^.*$/$km/" $DIRECTORY/5days/wind
-	            fi
-	        done
-	 
-	
-	#VISIBILITY: visibility_rn file
-	
-	        mi=$(sed -n 1p $DIRECTORY/RightNow/visibility_rn)
-	        km=$(echo "scale=2;($mi*1.609344)/1"|bc)
-	        sed -i "1s/^.*$/$km/" $DIRECTORY/RightNow/visibility_rn
-	
-	#DEW POINT: dew_point_rn file
-	
-	        ftemp=$(sed -n 1p $DIRECTORY/RightNow/dew_point_rn)
-	        if [ $ftemp -eq $ftemp 2>/dev/null ]; then
-	            nom=$(echo "5*($ftemp-32)"|bc)
-	            ctemp=$(echo "$nom/9"|bc)
-	            rem=$(echo "scale=1;10*($nom%9)"|bc|sed 's/\..*$//')
-	            if (( rem<0)); then
-	                ((rem*=-1))
-	            fi
-	            if (( rem>=5 && ctemp>0 )); then
-	                ((ctemp++))
-	            elif (( rem>=5 && ctemp<0 )); then
-	                ((ctemp--))
-	            fi
-	            sed -i "1s/^.*$/$ctemp/" $DIRECTORY/RightNow/dew_point_rn
-	        fi
-	
-	#PRESSURE: pressure_rn file
-	
-	        in=$(sed -n 1p $DIRECTORY/RightNow/pressure_rn)
-	        mb=$(echo "scale=2;($in*33.864)/1"|bc)
-	        sed -i "1s/^.*$/$mb/" $DIRECTORY/RightNow/pressure_rn
-	
-	#PRECIPITATION: precipitation_rn file
-	
-	        for (( i=1; i<=10; i++))
-	            do
-	                pr=$(sed -n ${i}p $DIRECTORY/RightNow/precipitation_rn|sed '/[0-9]*.[0-9]* in/!d')
-	                if [[ $pr != "" ]]; then
-	                    pr_in=$(echo $pr|sed 's/ .*$//')
-	                    pr_cm=$(echo "scale=2;($pr_in*2.54)/1"|bc)
-	                    temp=$(echo "10*$pr_cm/1"|bc)
-	                    if (( $temp < 10 && $temp > 0 )); then
-	                        sed -i -e ${i}"s/$pr_in/0$pr_cm/" -e ${i}'s/ in / cm /' $DIRECTORY/RightNow/precipitation_rn
-	                    else 
-	                        sed -i -e ${i}"s/$pr_in/$pr_cm/" -e ${i}'s/ in / cm /' $DIRECTORY/RightNow/precipitation_rn
-	                    fi
-	                fi
-	            done
-	
-	#LONG MESSAGES: messages_long_rn file
-	
-			cp $DIRECTORY/RightNow/messages_long_rn $DIRECTORY/RightNow/messages_long_rn_metric
-			sed -i 's/\..*$/\./g' $DIRECTORY/RightNow/messages_long_rn_metric
-
+	sed -i '/wx-weather-icon wx-hide/,/<div class="wx-next6hr-details ">/!d' $HOME/.conkycolors/weather/RightNow/raw_rn
+	sed -i -e '/^[ \t]*$/d' -e 's/\r//g' $HOME/.conkycolors/weather/RightNow/raw_rn
+	sed -i '/\.png\|&deg;\|weather-phrase\|feels-like\|"wx-temp"\|"wx-value"\|arrow wind-dir-/!d' $HOME/.conkycolors/weather/RightNow/raw_rn
+	sed -i -e 's/^.*wxicon\/120\///g' -e s'/png.*$/png/g' -e 's/^.*"wx-temp">//g' $HOME/.conkycolors/weather/RightNow/raw_rn
+	sed -i -e 's/^.*wx-dir-arrow wind-dir-//g' -e 's/"><\/div>.*$//g' -e 's/<\/span>.*$//g' -e 's/^.*">//g' -e 's/&deg;//g' $HOME/.conkycolors/weather/RightNow/raw_rn
+	image=$(sed -n 1p $HOME/.conkycolors/weather/RightNow/raw_rn)
+	if [[ $(sed -n 6p $HOME/.conkycolors/weather/RightNow/raw_rn) == "Calm" ]]; then
+		sed -i '6s/$/\n/' $HOME/.conkycolors/weather/RightNow/raw_rn
 	fi
+    cp $HOME/.conkycolors/weather/images/$image $HOME/.conkycolors/weather/now.png
+fi
 
+if [[ -s $HOME/.conkycolors/weather/Today/raw_td ]]; then
+	#############
+	#   Today   #   
+	#############
+    sed -i '/<div class="wx-daypart/,/<div class="wx-tempgraph wx-module wx-grid3of6/!d' $HOME/.conkycolors/weather/Today/raw_td
+    sed -i -e '/^[ \t]*$/d' -e 's/^[ \t]*//g' -e 's/\r//g' $HOME/.conkycolors/weather/Today/raw_td
+    sed -i -e 's/^.*wx-observed">//g' -e 's/&deg;.*$//g' $HOME/.conkycolors/weather/Today/raw_td
+    sed -i -e 's/^.*wxicon\/120\///g' -e 's/\.png.*$/\.png/g' -e 's/^.*"wx-temp"> //g' $HOME/.conkycolors/weather/Today/raw_td
+    sed -i -e 's/^.*<h3>//g' -e 's/^.*"wx-phrase ">//g' -e 's/^.*<dt>//g' -e 's/^.*<dd>//g' $HOME/.conkycolors/weather/Today/raw_td
+    sed -i -e 's/^.*snowfall-value">//g' -e "s/<span class='wx-firstletter'>//g" -e 's/^.*<strong>//g' $HOME/.conkycolors/weather/Today/raw_td
+    sed -i -e 's/^.*<p class="wx-narrative">//g' -e 's/<sup>//g' -e 's/<\/sup>//g' -e 's/<span class=.*<\/span>//g' $HOME/.conkycolors/weather/Today/raw_td
+    sed -i -e 's/<.*$//g' -e '/^[ \t]*$/d' -e 's/Chance of rain/Chance of rain:/g' $HOME/.conkycolors/weather/Today/raw_td
+    sed -i -e :a -e '/:$/N; s/:\n/: /; ta' $HOME/.conkycolors/weather/Today/raw_td
+    sed -n '1,/Night/p' $HOME/.conkycolors/weather/Today/raw_td > $HOME/.conkycolors/weather/Today/day
+    sed -n '/Night/,$p' $HOME/.conkycolors/weather/Today/raw_td > $HOME/.conkycolors/weather/Today/night
+    sed -i '/Day\|Night/d' $HOME/.conkycolors/weather/Today/{day,night}
+
+    if (( $(cat $HOME/.conkycolors/weather/Today/day|wc -l)==3 )); then
+        line2=$(sed -n 2p $HOME/.conkycolors/weather/Today/day)
+        sed -i '2d' $HOME/.conkycolors/weather/Today/day
+        sed -i 1i$line2 $HOME/.conkycolors/weather/Today/day
+    fi
+
+	day=$(sed -n 1p $HOME/.conkycolors/weather/Today/day)
+    cp $HOME/.conkycolors/weather/images/$day $HOME/.conkycolors/weather/TD.png
+    night=$(sed -n 1p $HOME/.conkycolors/weather/Today/night)
+    cp $HOME/.conkycolors/weather/images/$night $HOME/.conkycolors/weather/TN.png
+
+    fold -s30 $HOME/.conkycolors/weather/Today/day > $HOME/.conkycolors/weather/Today/day1
+    sed -i 's/\(^.*: \)\(.*$\)/\$\{color ffe595\}\1\$\{color\}\2/g' $HOME/.conkycolors/weather/Today/day1
+    fold -s30 $HOME/.conkycolors/weather/Today/night > $HOME/.conkycolors/weather/Today/night1 
+    sed -i 's/\(^.*: \)\(.*$\)/\$\{color ffe595\}\1\$\{color\}\2/g' $HOME/.conkycolors/weather/Today/night1
+
+    for (( i=1; i<=$(cat $HOME/.conkycolors/weather/Today/night1|wc -l); i++ ))
+        do
+             sed -i "${i}s/^/\$\{goto 195\}/" $HOME/.conkycolors/weather/Today/night1
+        done
+    paste -d'*' $HOME/.conkycolors/weather/Today/{day1,night1} > $HOME/.conkycolors/weather/Today/final_today
+    sed -i 's/\*//g' $HOME/.conkycolors/weather/Today/final_today
+    
+    j=$(cat $HOME/.conkycolors/weather/Today/final_today|wc -l)
+    if (( $j<16 )); then
+		for (( i=1; i<=$(( 16-$j )); i++ ))
+			do
+				echo '' >> $HOME/.conkycolors/weather/Today/final_today
+			done
+	fi
+fi
+
+if [[ -s $HOME/.conkycolors/weather/10days/raw_10 ]]; then
+	#############
+	#  10 days  #
+	#############
+	observed_high=$(grep "Observed High" $HOME/.conkycolors/weather/10days/raw_10|wc -l)
+	sed -i '/"wx-daypart"/,/wx-planmyday10 wx-plan-day/!d' $HOME/.conkycolors/weather/10days/raw_10
+	sed -i -e '/^[ \t]*$/d' -e 's/\r//g' -e '/^$/d' -e 's/^[ \t]*//g' $HOME/.conkycolors/weather/10days/raw_10
+	sed -i -e 's/^.*wxicon\/70\///g' -e 's/\.png.*$/\.png/g' $HOME/.conkycolors/weather/10days/raw_10
+	sed -i -e 's/^.*"wx-temp"> \|"wx-temp-alt"> \|"wx-phrase">\|<dt>\|<dd>\|<h3>\|<p class=//g' $HOME/.conkycolors/weather/10days/raw_10
+	sed -i -e 's/<sup>&deg;.*$//g' -e 's/<\/p>\|<\/dd>.*$//g' -e '/<\|>\|^$/d' -e 's/ at / /g' $HOME/.conkycolors/weather/10days/raw_10
+	sed -i 's/ mph/mph/g' $HOME/.conkycolors/weather/10days/raw_10
+	
+	line1=$(sed -n 1p $HOME/.conkycolors/weather/10days/raw_10|sed 's/ *$//')
+	if [[ $line1 == Tonight && $observed_high == 0 ]]; then
+		sed -i '3s/$/\n-/' $HOME/.conkycolors/weather/10days/raw_10
+	fi
+	
+	for (( i=2; i<=65; i+=7 ))
+	    do
+	        image=$(sed -n ${i}p $HOME/.conkycolors/weather/10days/raw_10)
+	        cp $HOME/.conkycolors/weather/images/$image $HOME/.conkycolors/weather/10_${i}.png
+	    done
+fi
+
+line_count=$(cat $HOME/.conkycolors/weather/10days/raw_10|wc -l)
+if [[ $line_count == 70 ]]; then
+	touch $HOME/.conkycolors/weather/10days/10days_OK
 fi

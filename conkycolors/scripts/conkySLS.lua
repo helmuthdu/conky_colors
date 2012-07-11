@@ -737,7 +737,7 @@ function conky_main(color, theme, drawbg, weather_code)
 	cairo_surface_destroy (image);
 
 	-- WEATHER ICON
-	image = cairo_image_surface_create_from_png (get_user_dir() .. "/Weather/r1.png")
+	image = cairo_image_surface_create_from_png (get_user_dir() .. "/weather/now.png")
 	cairo_set_source_surface (cr, image, 125, 85)
 	cairo_paint (cr);
 	cairo_surface_destroy (image);
