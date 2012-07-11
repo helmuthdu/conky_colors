@@ -864,7 +864,7 @@ function conky_main(color, theme, n_cpu, swap, clock_theme, player, player_theme
 	end
 
 	-- PLAYERS
-	if player == "Banshee" or player == "Clementine" or player == "Exaile" or player == "Rhythmbox" then
+	if player == "Banshee" or player == "Clementine" or player == "Rhythmbox" then
 		if player_theme == "cairo" then
 			settings = {
 				value=get_music_percent(player) ,

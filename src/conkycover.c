@@ -41,13 +41,9 @@ void conkycover ()
 		fprintf(fp,"#player=\"`%s/bin/conkyRhythmbox -d CA | sed -e 's/\\%%20/\\\\ /g'`\"\n", finddir("bin/conkyRhythmbox"));
 		fprintf(fp,"icon=%s/icons/Players/rhythmbox.png\n", finddir("icons/Players/rhythmbox.png") );
 	}
-	else if (clementine == True){
+	else {
 		fprintf(fp,"player=\"`%s/bin/conkyClementine --datatype=CA | sed -e 's/\\\\\\//g'`\"\n", finddir("bin/conkyClementine") );
 		fprintf(fp,"icon=%s/icons/Players/rhythmbox.png\n", finddir("icons/Players/rhythmbox.png") );
-	}
-	else {
-		fprintf(fp,"player=\"`%s/bin/conkyExaile --datatype=CA | sed -e 's/\\\\\\//g'`\"\n", finddir("bin/conkyExaile") );
-		fprintf(fp,"icon=%s/icons/Players/exaile.png\n", finddir("icons/Players/exaile.png") );
 	}
 	fprintf(fp,"cover=%s/conkyCover.png\n", tempdir() );
 	fprintf(fp,"\n");

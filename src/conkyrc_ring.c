@@ -209,7 +209,7 @@ void conkyrc_ring () {
 	fprintf(fp,"${goto 100}F: ${font Ubuntu:style=Bold:size=8}${color2}${fs_free /home}${color}${font}\n");
 	fprintf(fp,"${goto 100}U: ${font Ubuntu:style=Bold:size=8}${color2}${fs_used /home}${color}${font}\n");
 	//Media Player Widget
-	if (rhythmbox == True || banshee == True || exaile == True || clementine == True) {
+	if (rhythmbox == True || banshee == True || clementine == True) {
 		fprintf(fp,"####################\n");
 		fprintf(fp,"# - MEDIA PLAYER - #\n");
 		fprintf(fp,"####################\n");

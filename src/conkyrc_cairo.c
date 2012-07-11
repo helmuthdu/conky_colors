@@ -162,7 +162,7 @@ void conkyrc_cairo () {
 		fprintf(fp,"off ");
 
 	//Media Widget
-	if (rhythmbox == True || banshee == True || exaile == True || clementine == True)
+	if (rhythmbox == True || banshee == True || clementine == True)
 		fprintf(fp,"%s ", player);
 	else
 		fprintf(fp,"off ");
@@ -257,15 +257,15 @@ void conkyrc_cairo () {
 	fprintf(fp,"# - HD - #\n");
 	fprintf(fp,"##########\n");
 	fprintf(fp,"${voffset 15}\n");
-	fprintf(fp,"${goto 100}Root: ${font Liberation Sans:style=Bold:size=8}${color1}${fs_free_perc /}%%${color}${font}\n");
+	fprintf(fp,"${goto 100}Root: ${font Ubuntu:style=Bold:size=8}${color1}${fs_free_perc /}%%${color}${font}\n");
 	fprintf(fp,"${goto 100}F: ${font Ubuntu:style=Bold:size=8}${color2}${fs_free /}${color}${font}\n");
 	fprintf(fp,"${goto 100}U: ${font Ubuntu:style=Bold:size=8}${color2}${fs_used /}${color}${font}\n");
 	fprintf(fp,"${voffset 15}\n");
-	fprintf(fp,"${goto 100}Home: ${font Liberation Sans:style=Bold:size=8}${color1}${fs_free_perc /home}%%${color}${font}\n");
+	fprintf(fp,"${goto 100}Home: ${font Ubuntu:style=Bold:size=8}${color1}${fs_free_perc /home}%%${color}${font}\n");
 	fprintf(fp,"${goto 100}F: ${font Ubuntu:style=Bold:size=8}${color2}${fs_free /home}${color}${font}\n");
 	fprintf(fp,"${goto 100}U: ${font Ubuntu:style=Bold:size=8}${color2}${fs_used /home}${color}${font}\n");
 	//Media Player Widget
-	if (rhythmbox == True || banshee == True || exaile == True || clementine == True) {
+	if (rhythmbox == True || banshee == True || clementine == True) {
 		fprintf(fp,"####################\n");
 		fprintf(fp,"# - MEDIA PLAYER - #\n");
 		fprintf(fp,"####################\n");
@@ -279,7 +279,7 @@ void conkyrc_cairo () {
 		fprintf(fp,"# - WIRELESS - #\n");
 		fprintf(fp,"################\n");
 		fprintf(fp,"${voffset 15}\n");
-		fprintf(fp,"${goto 100}%s: ${font Liberation Sans:style=Bold:size=8}${color1}${wireless_link_qual wlan%d}%%${color}${font}\n", sinal, wlan);
+		fprintf(fp,"${goto 100}%s: ${font Ubuntu:style=Bold:size=8}${color1}${wireless_link_qual wlan%d}%%${color}${font}\n", sinal, wlan);
 		fprintf(fp,"${alignr 33}${color2}${wireless_essid wlan%d}${color}\n", wlan);
 		fprintf(fp,"${alignr 35}${font Ubuntu:style=Bold:size=8}${color2}${execi 10800 %s/bin/conkyIp}${color}${font}\n", conkyipdir);
 	}

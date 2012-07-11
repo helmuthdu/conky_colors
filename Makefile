@@ -26,7 +26,7 @@ clean:
 
 uninstall:
 	rm -rf $(DESTDIR)/usr/share/conkycolors
-	rm $(DESTDIR)/usr/share/fonts/conkycolors
+	rm -fr $(DESTDIR)/usr/share/fonts/conkycolors
 	rm $(DESTDIR)/usr/bin/conky-colors
 	rm $(DESTDIR)/usr/bin/ct
 

@@ -5,29 +5,29 @@
 
 photo="/tmp/conkyPhoto.png"
 template="/usr/share/conkycolors/icons"
-filename="/usr/share/backgrounds/Ropey_Photo_by_Bob_Farrell.jpg"
+filename="/usr/share/backgrounds/159.jpg"
 
 #choose your theme: 1,2 or 3
 theme=1
 
 dim="medium"
 # Manage dimension flag
-if [ $dim == "small" ]; then
+if [[ $dim == "small" ]]; then
   geometry="158x100"
   geometry_crop="236x212"
-elif [ $dim == "medium" ]; then
+elif [[ $dim == "medium" ]]; then
   geometry="238x148"
   geometry_crop="316x260"
-elif [ $dim == "big" ]; then
+elif [[ $dim == "big" ]]; then
   geometry="318x200"
   geometry_crop="396x312"
 fi
 
 cp "$filename" "$photo"
 
-convert $filename -resize $geometry\> -size $geometry xc:black +swap -gravity center -composite $photo
+convert "$filename" -resize $geometry\> -size $geometry xc:black +swap -gravity center -composite "$photo"
 
-if [ $theme = "1" ]; then
+if [[ $theme -eq 1 ]]; then
 # Theme 1
 	convert -page +2+2 "$photo"\
 		-bordercolor snow -border 4.5\
@@ -35,30 +35,15 @@ if [ $theme = "1" ]; then
 		-background  black  \( +clone -shadow 40x2+1+1 \) +swap \
 		-background  none -flatten \
 	"$photo"
-elif [ $theme = "2" ]; then
+elif [[ $theme -eq 2 ]]; then
 # Theme 2
 	convert -page +4+4 "$photo"\
 		-bordercolor gray10 -border 1\
 		-background  black  \( +clone -shadow 40x4+2+2 \) +swap \
 		-background  none -flatten \
-	$photo
-elif [ $theme = "3" ]; then
-# Theme 3
-	convert "$photo" \
-		-bordercolor snow -border 4.5\
-		-bordercolor gray55 -border 1 \
-		-bordercolor none  -background  none \
-		\( -clone 0 -rotate `convert null: -format '%[fx:rand()*30-15]' info:` \) \
-		\( -clone 0 -rotate `convert null: -format '%[fx:rand()*30-15]' info:` \) \
-		\( -clone 0 -rotate `convert null: -format '%[fx:rand()*30-15]' info:` \) \
-		-delete 0 -border $geometry -gravity center \
-		-crop $geometry_crop+0+0 +repage -flatten -trim +repage \
-		-background black \( +clone -shadow 40x2+1+1 \) +swap \
-		-background none  -flatten \
 	"$photo"
-elif [ $theme = "4" ]; then
-# Theme 4
-    convert $template/photobg_bg_$dim.png $photo -geometry +11+11 -composite $photo
-    convert $photo $template/photobg_shadow_$dim.png -composite $photo
+elif [[ $theme -eq 3 ]]; then
+# Theme 3
+    convert "$template"/photobg_bg_$dim.png "$photo" -geometry +11+11 -composite "$photo"
+    convert "$photo" "$template"/photobg_shadow_$dim.png -composite "$photo"
 fi
-exit

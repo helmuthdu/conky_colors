@@ -228,7 +228,7 @@ int options (int argc, char *argv[]) {
 			mpd = True;
 		else OPTION("--covergloobus", key)
 			covergloobus = True;
-		else OR_OPTION_START("--rhythmbox", key) OR_OPTION("--exaile", key)  OR_OPTION("--clementine", key) OR_OPTION_END("--banshee", key)
+		else OR_OPTION_START("--rhythmbox", key) OR_OPTION("--clementine", key) OR_OPTION_END("--banshee", key)
 		{
 			// Copy key to player without "--".
 			snprintf(player, 31, key+2);
@@ -237,8 +237,6 @@ int options (int argc, char *argv[]) {
 
 			OPTION("--rhythmbox", key)
 				rhythmbox = True;
-			else OPTION("--exaile", key)
-				exaile = True;
 			else OPTION("--banshee", key)
 				banshee = True;
 			else OPTION("--clementine", key)
@@ -280,10 +278,6 @@ int options (int argc, char *argv[]) {
 				return OPTIONS_ERROR;
 			}
 		}
-		else OPTION("--pidgin", key)
-			pidgin = True;
-		else OPTION_WITH_VALUE("--limit", key)
-			limit = atoi(value);
 		else OPTION("--gmail", key)
 			gmail = True;
 		else OPTION_WITH_VALUE("--user", key)

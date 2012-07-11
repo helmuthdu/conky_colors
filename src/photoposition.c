@@ -12,7 +12,7 @@ void photoposition () {
 	}
 	if (aptget == True)
 		yp += 13;
-	if (gmail == True && pidgin == False)
+	if (gmail == True)
 		yp += 13;
 	if (set_battery == True)
 		yp += 14;

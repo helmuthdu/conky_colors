@@ -51,11 +51,8 @@ void help() {
 	printf("\t--mpd - Enable MPD\n");
 	printf("\t--banshee=<default|cd|case|glassy|vinyl|oldvinyl|simple>\n");
 	printf("\t--clementine=<default|cd|case|glassy|vinyl|oldvinyl|simple>\n");
-	printf("\t--exaile=<default|cd|case|glassy|vinyl|oldvinyl|simple>\n");
 	printf("\t--rhythmbox=<default|cd|case|glassy|vinyl|oldvinyl|simple>\n");
 	printf("\t--covergloobus - Enable CoverGloobus\n");
-	printf("\t--pidgin - Enable Pidgin\n");
-	printf("\t\t--limit=<number> - [default: 5] Limit to the number of buddies displayed\n");
 	printf("\t--gmail - Enable gmail notify\n");
 	printf("\t\t--user=<username> - Type your username\n");
 	printf("\t\t--passwd=<password> - Type your password\n");
@@ -75,11 +72,9 @@ void help() {
 	printf("\t--clock=<cairo|bigcairo> - Enable/disable clock [cairo-mode only]\n");
 	printf("\t--banshee=<cairo|cairo-case|cairo-cd|cairo-glassy|lua> [cairo-mode only]\n");
 	printf("\t--clementine=<cairo|cairo-case|cairo-cd|cairo-glassy|lua> [cairo-mode only]\n");
-	printf("\t--exaile=<cairo|cairo-case|cairo-cd|cairo-glassy|lua> [cairo-mode only]\n");
 	printf("\t--rhythmbox=<cairo|cairo-case|cairo-cd|cairo-glassy|lua> [cairo-mode only]\n");
 	printf("\t--banshee=<ring|ring-case|ring-cd|ring-glassy> [ring-mode only]\n");
 	printf("\t--clementine=<ring|ring-case|ring-cd|ring-glassy> [ring-mode only]\n");
-	printf("\t--exaile=<ring|ring-case|ring-cd|ring-glassy> [ring-mode only]\n");
 	printf("\t--rhythmbox=<ring|ring-case|ring-cd|ring-glassy> [ring-mode only]\n");
 	printf("\t--network - Enable network\n");
 	printf("\t--unit=<C|F>- Force output temperature either in Celius or Fahrenheit\n");

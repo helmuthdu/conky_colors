@@ -141,7 +141,7 @@ void conkyrc_default () {
 		fprintf(fp,"${goto %d}${voffset -14}Kernel:  ${alignr}${color2}${kernel}${color}\n", go2);
 	}
 	else {
-		fprintf(fp,"${color0}${font Poky:size=15}S${font}${color}");
+		fprintf(fp,"${color0}${font Poky:size=14}S${font}${color}");
 		fprintf(fp,"${goto %d}${voffset -8}Kernel:  ${alignr}${color2}${kernel}${color}\n", go2);
 	}
 	fprintf(fp,"${goto %d}%s: ${alignr}${color2}${uptime}${color}\n", go2, uptime);
@@ -150,15 +150,15 @@ void conkyrc_default () {
 		fprintf(fp,"# |--UPDATES\n");
 		fprintf(fp,"${goto %d}%s: ${alignr}${font Ubuntu:style=Bold:size=8}${color1}${execi 360 aptitude search \"~U\" | wc -l | tail}${color}${font} ${color2}%s${color}\n", go2, updates, packages);
 	}
-	//Gmail without pidgin widget
-	if (gmail == True && pidgin == False) {
+	//Gmail widget
+	if (gmail == True) {
 		fprintf(fp,"# |--GMAIL\n");
 		fprintf(fp,"${goto %d}Gmail: ${alignr}${font Ubuntu:style=Bold:size=8}${color0}${execpi 3600 %s/bin/conkyEmail -m IMAP -s imap.googlemail.com -u %s -p %s --ssl}${color}${font} %s email(s)\n", go2, finddir("bin/conkyEmail"), user, password, nouve);
 	}
 	//CPU
 	fprintf(fp,"# |--CPU\n");
 	if (cpu == 1) {
-		fprintf(fp,"${offset 2}${color0}${font Poky:size=16}P${color}${font}${voffset -4}");
+		fprintf(fp,"${voffset 2}${offset 2}${color0}${font Poky:size=14}P${color}${font}${voffset -4}");
 		if (cputemp == True) {
 			if (unit == True)
 				fprintf(fp,"${goto %d}CPU: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu1}%%${font} ${alignr}${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors -f | grep 'Core 0' | awk '{print $3}' | sed 's/+//' | sed 's/\\.0//g'}${color}${font}  ${color2}${cpugraph cpu1 8,50 %s}${color}\n", go2, color4);
@@ -169,7 +169,7 @@ void conkyrc_default () {
 			fprintf(fp,"${goto %d}CPU: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu1}%%${color}${font} ${alignr}${color2}${cpugraph cpu1 8,60 %s}${color}\n", go2, color4);
 	}
 	else {
-		fprintf(fp,"${offset 1}${color0}${font Poky:size=16}P${font}${offset -19}${voffset 9}${cpubar cpu0 4,18}${color}${voffset -16}");
+		fprintf(fp,"${voffset 2}${offset 2}${color0}${font Poky:size=14}P${font}${offset -19}${voffset 9}${offset 1}${cpubar cpu0 4,18}${color}${voffset -16}");
 		for (i = 1; i <= cpu; i++) {
 			if (cputemp == True) {
 				if (unit == True)
@@ -183,13 +183,13 @@ void conkyrc_default () {
 	}
 	//Memory
 	fprintf(fp,"# |--MEM\n");
-	fprintf(fp,"${color0}${font Poky:size=16}M${font}${color}${goto %d}${voffset -7}RAM: ${font Ubuntu:style=Bold:size=8}${color1}$memperc%%${color}${font}\n", go2);
-	fprintf(fp,"${offset 1}${voffset 2}${color0}${membar 4,18}${color}${goto %d}${voffset -2}F: ${font Ubuntu:style=Bold:size=8}${color2}${memeasyfree}${color}${font} U: ${font Ubuntu:style=Bold:size=8}${color2}${mem}${color}${font}\n", go2);
+	fprintf(fp,"${voffset 2}${offset 1}${color0}${font Poky:size=14}M${font}${color}${goto %d}${voffset -7}RAM: ${font Ubuntu:style=Bold:size=8}${color1}$memperc%%${color}${font}\n", go2);
+	fprintf(fp,"${voffset 1}${offset 1}${voffset 2}${color0}${membar 4,18}${color}${goto %d}${voffset -2}F: ${font Ubuntu:style=Bold:size=8}${color2}${memeasyfree}${color}${font} U: ${font Ubuntu:style=Bold:size=8}${color2}${mem}${color}${font}\n", go2);
 	//Swap
 	if (swap == True) {
 		fprintf(fp,"# |--SWAP\n");
-		fprintf(fp,"${voffset 2}${color0}${font Poky:size=14}s${font}${color}${voffset -8}${goto %d}SWAP: ${font Ubuntu:style=Bold:size=8}${color1}${swapperc}%%${color}${font}\n", go2);
-		fprintf(fp,"${voffset 4}${offset 1}${color0}${swapbar 4,18}${color}${voffset -4}${goto %d}F: ${font Ubuntu:style=Bold:size=8}${color2}$swapmax${color}${font} U: ${font Ubuntu:style=Bold:size=8}${color2}$swap${color}${font}\n", go2);
+		fprintf(fp,"${voffset 4}${offset 1}${color0}${font Poky:size=12}s${font}${color}${voffset -4}${goto %d}SWAP: ${font Ubuntu:style=Bold:size=8}${color1}${swapperc}%%${color}${font}\n", go2);
+		fprintf(fp,"${voffset 2}${offset 1}${color0}${swapbar 4,18}${color}${voffset -2}${goto %d}F: ${font Ubuntu:style=Bold:size=8}${color2}$swapmax${color}${font} U: ${font Ubuntu:style=Bold:size=8}${color2}$swap${color}${font}\n", go2);
 	}
 	//Battery
 	if (set_battery == True) {
@@ -199,7 +199,7 @@ void conkyrc_default () {
 	//Processes
 	if (set_process == True) {
 		fprintf(fp,"# |--PROC\n");
-		fprintf(fp,"${voffset 2}${color0}${font Poky:size=15}a${font}${color}${goto %d}${voffset -10}%s: ${color2}${alignr 13}CPU${alignr}RAM${color}\n", go2, processes);
+		fprintf(fp,"${voffset 2}${voffset 1}${color0}${font Poky:size=14}a${font}${color}${goto %d}${voffset -10}%s: ${color2}${alignr 13}CPU${alignr}RAM${color}\n", go2, processes);
 		for (i = True; i <= proc; i++)
 			fprintf(fp,"${voffset -1}${goto 42}${color2}${top name %d}${color}${font Ubuntu:style=Bold:size=8}${color1} ${goto 126}${top cpu %d}${alignr }${top mem %d}${color}${font}\n", i, i, i);
 	}
@@ -268,7 +268,7 @@ void conkyrc_default () {
 			fprintf(fp,"################\n");
 			fprintf(fp,"# - CALENDAR - #\n");
 			fprintf(fp,"################\n");
-			if (set_calendar == True) {
+			if (set_calendar == 1) {
 				fprintf(fp,"${voffset -2}${color0}${font Poky:size=16}D${font}${voffset -8}${font Ubuntu:style=Bold:size=7}${offset -17}${voffset 4}${time %%d}${font}${color}${voffset -1}${font Monospace:size=7}${execpi 300 DJS=`date +%%_d`; cal ");
 				if (ubuntufix == 'y')
 					fprintf(fp,"-h ");
@@ -311,8 +311,8 @@ void conkyrc_default () {
 			fprintf(fp,"${execi 60 %s/bin/conkyPhotoRandom}${image /tmp/conkyPhoto.png -s 174x110 -p 4,%d}${voffset 104}\n", finddir("bin/conkyPhotoRandom"), yp);
 	}
 
-	//Rhythmbox/Exaile/Banshee/Clementine Widget
-	if (rhythmbox == True || exaile == True || banshee == True || clementine == True) {
+	//Rhythmbox/Banshee/Clementine Widget
+	if (rhythmbox == True || banshee == True || clementine == True) {
 		fprintf(fp,"####################\n");
 		fprintf(fp,"# - MEDIA PLAYER - #\n");
 		fprintf(fp,"####################\n");
@@ -415,7 +415,7 @@ void conkyrc_default () {
 				if (hdtype == 3)
 					fprintf(fp,"${execpi 30 %s/bin/conkyHD3}\n", finddir("bin/conkyHD3") );
 			else
-        //Simple Theme 
+        //Simple Theme
 				fprintf(fp,"${execpi 30 %s/bin/conkyHD4}\n", finddir("bin/conkyHD4") );
 	}
 
@@ -431,41 +431,29 @@ void conkyrc_default () {
             fprintf(fp,"${voffset -4}${font Ubuntu:style=Bold:size=8}%s $stippled_hr${font}\n", network);
 		fprintf(fp,"# |--WLAN%d\n", wlan);
 		fprintf(fp,"${if_up wlan%d}\n", wlan);
-		fprintf(fp,"${voffset -13}${color0}${font VariShapes Solid:size=14}q${font}${color}${goto %d}${voffset -6}%s: ${font Ubuntu:style=Bold:size=8}${color1}${upspeed wlan%d}${color}${font} ${alignr}${color2}${upspeedgraph wlan%d 8,60 %s}${color}\n", go2, up, wlan, wlan, color4);
+		fprintf(fp,"${voffset -5}${color0}${font Webdings:size=17}”${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${upspeed wlan%d}${color}${font} ${alignr}${color2}${upspeedgraph wlan%d 8,60 %s}${color}\n", go2, up, wlan, wlan, color4);
 		fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totalup wlan%d}${color}${font}\n", go2, total, wlan);
-		fprintf(fp,"${voffset -2}${color0}${font VariShapes Solid:size=14}Q${font}${color}${goto %d}${voffset -6}%s: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed wlan%d}${color}${font} ${alignr}${color2}${downspeedgraph wlan%d 8,60 %s}${color}\n", go2, down, wlan, wlan, color4);
+		fprintf(fp,"${voffset 5}${color0}${font Webdings:size=17}“${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed wlan%d}${color}${font} ${alignr}${color2}${downspeedgraph wlan%d 8,60 %s}${color}\n", go2, down, wlan, wlan, color4);
 		fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totaldown wlan%d}${color}${font}\n", go2, total, wlan);
-		fprintf(fp,"${voffset -2}${color0}${font Poky:size=14}Y${font}${color}${goto %d}${voffset -2}%s: ${font Ubuntu:style=Bold:size=8}${color1}${wireless_link_qual_perc wlan%d}%%${color}${font} ${alignr}${color2}${wireless_link_bar 8,60 wlan%d}${color}\n", go2, sinal, wlan, wlan);
-		fprintf(fp,"${voffset 4}${color0}${font Poky:size=13}w${font}${color}${goto %d}${voffset -8}%s: ${alignr}${color2}${addr wlan%d}${color}\n", go2, localip, wlan);
+		fprintf(fp,"${voffset 5}${color0}${font Poky:size=14}Y${font}${color}${goto %d}${voffset -2}%s: ${font Ubuntu:style=Bold:size=8}${color1}${wireless_link_qual_perc wlan%d}%%${color}${font} ${alignr}${color2}${wireless_link_bar 8,60 wlan%d}${color}\n", go2, sinal, wlan, wlan);
+		fprintf(fp,"${voffset 4}${color0}${font Webdings:size=16}¬${font}${color}${goto %d}${voffset -8}%s: ${alignr}${color2}${addr wlan%d}${color}\n", go2, localip, wlan);
 		fprintf(fp,"${goto %d}%s: ${alignr}${color2}${execi 10800 %s/bin/conkyIp}${color}\n", go2, publicip, conkyipdir );
 		fprintf(fp,"# |--ETH%d\n", eth);
 		fprintf(fp,"${else}${if_up eth%d}\n", eth);
-		fprintf(fp,"${voffset -13}${color0}${font VariShapes Solid:size=14}q${font}${color}${goto %d}${voffset -6}%s: ${font Ubuntu:style=Bold:size=8}${color1}${upspeed eth%d}${color}${font} ${alignr}${color2}${upspeedgraph eth%d 8,60 %s}${color}\n", go2, up, eth, eth, color4);
+		fprintf(fp,"${voffset -5}${color0}${font Webdings:size=17}”${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${upspeed eth%d}${color}${font} ${alignr}${color2}${upspeedgraph eth%d 8,60 %s}${color}\n", go2, up, eth, eth, color4);
 		fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totalup eth%d}${color}${font}\n", go2, total, eth);
-		fprintf(fp,"${voffset -2}${color0}${font VariShapes Solid:size=14}Q${font}${color}${goto %d}${voffset -6}%s: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed eth%d}${color}${font} ${alignr}${color2}${downspeedgraph eth%d 8,60 %s}${color}\n", go2, down, eth, eth, color4);
+		fprintf(fp,"${voffset 5}${color0}${font Webdings:size=17}“${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed eth%d}${color}${font} ${alignr}${color2}${downspeedgraph eth%d 8,60 %s}${color}\n", go2, down, eth, eth, color4);
 		fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totaldown eth%d}${color}${font}\n", go2, total, eth);
-		fprintf(fp,"${voffset -2}${color0}${font Poky:size=13}w${font}${color}${goto %d}${voffset -4}%s: ${alignr}${color2}${addr eth%d}${color}\n", go2, localip, eth);
+		fprintf(fp,"${voffset 5}${color0}${font Webdings:size=16}¬${font}${color}${goto %d}${voffset -4}%s: ${alignr}${color2}${addr eth%d}${color}\n", go2, localip, eth);
 		fprintf(fp,"${goto %d}%s: ${alignr}${color2}${execi 10800 %s/bin/conkyIp}${color}\n", go2, publicip, conkyipdir);
 		fprintf(fp,"# |--PPP%d\n", ppp);
 		fprintf(fp,"${else}${if_up ppp%d}\n", ppp);
-		fprintf(fp,"${voffset -13}${color0}${font VariShapes Solid:size=14}q${font}${color}${goto %d}${voffset -6}%s: ${font Ubuntu:style=Bold:size=8}${color1}${upspeed ppp%d}${color}${font} ${alignr}${color2}${upspeedgraph ppp%d 8,60 %s}${color}\n", go2, up, ppp, ppp, color4);
+		fprintf(fp,"${voffset -5}${color0}${font Webdings:size=17}”${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${upspeed ppp%d}${color}${font} ${alignr}${color2}${upspeedgraph ppp%d 8,60 %s}${color}\n", go2, up, ppp, ppp, color4);
 		fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totalup ppp%d}${color}${font}\n", go2, total, ppp);
-		fprintf(fp,"${voffset -2}${color0}${font VariShapes Solid:size=14}Q${font}${color}${goto %d}${voffset -6}%s: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed ppp%d}${color}${font} ${alignr}${color2}${downspeedgraph ppp%d 8,60 %s}${color}\n", go2, down, ppp, ppp, color4);
+		fprintf(fp,"${voffset 5}${color0}${font Webdings:size=17}“${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed ppp%d}${color}${font} ${alignr}${color2}${downspeedgraph ppp%d 8,60 %s}${color}\n", go2, down, ppp, ppp, color4);
 		fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totaldown ppp%d}${color}${font}\n", go2, total, ppp);
-		fprintf(fp,"${voffset -2}${color0}${font Poky:size=13}w${font}${color}${goto %d}${voffset -4}%s: ${alignr}${color2}${addr ppp%d}${color}\n", go2, localip, ppp);
-		fprintf(fp,"${else}${voffset 4}${color0}${font PizzaDude Bullets:size=12}4${font}${color}${goto %d}%s${voffset 14}${endif}${endif}${endif}\n", go2, nonet);
-	}
-
-	//Pidgin Widget
-	if (pidgin == True) {
-		fprintf(fp,"##############\n");
-		fprintf(fp,"# - PIDGIN - #\n");
-		fprintf(fp,"##############\n");
-		fprintf(fp,"${voffset 4}${font Ubuntu:style=Bold:size=8}PIDGIN $stippled_hr${font}${if_running pidgin}\n");
-		if (gmail == True)
-			fprintf(fp,"${voffset -8}${color0}${font Martin Vogel's Symbols:size=19}B${font}${color}${goto %d}Gmail: ${alignr}${font Ubuntu:style=Bold:size=8}${color0}${execpi 3600 %s/bin/conkyEmail -m IMAP -s imap.googlemail.com -u %s -p %s --ssl}${color}${font} %s email(s)\n", go2, finddir("bin/conkyEmail"), user, password, nouve);
-		fprintf(fp,"${voffset 4}${execpi 10 %s/bin/conkyPidgin -o -s -l %d}${else}\n", finddir("bin/conkyPidgin"), limit);
-		fprintf(fp,"${voffset 4}${color0}${font PizzaDude Bullets:size=12}4${font}${color}${goto %d}%s${endif}\n\n", go2,nopidgin);
+		fprintf(fp,"${voffset 5}${color0}${font Webdings:size=16}¬${font}${color}${goto %d}${voffset -4}%s: ${alignr}${color2}${addr ppp%d}${color}\n", go2, localip, ppp);
+		fprintf(fp,"${else}${voffset 4}${offset 4}${color0}${font Wingdings:size=20}N${font}${color}${voffset -6}${goto %d}%s${voffset 14}${endif}${endif}${endif}\n", go2, nonet);
 	}
 
 	//Weather Widget
@@ -480,16 +468,16 @@ void conkyrc_default () {
 				fprintf(fp,"${voffset -4}${font Ubuntu:style=Bold:size=8}%s $stippled_hr${font}\n", Weather);
 
 			if (unit == True) {
-				fprintf(fp,"${if_gw}${goto 12}${voffset 4}${color0}${font Weather:size=24}y${font}${color}\n");
-				fprintf(fp,"${voffset -29}${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather cur %s f}°F${color}${font}\n", go2, temperature, yahooweatherdir, weather_code);
-				fprintf(fp,"${goto %d}${voffset -2}${color0}${font VariShapes Solid:size=8}Q${font}${color}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather min %s c}°F${color}${font}  ${voffset -2}${color0}${font VariShapes Solid:size=8}q${font}${color}${voffset -1}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather max %s c}°F${color}${font}\n", go2, yahooweatherdir, weather_code, yahooweatherdir, weather_code);
-				fprintf(fp, "${else}${voffset 4}${color0}${font PizzaDude Bullets:size=12}4${font}${color}${goto 32}%s${voffset 14}${endif}\n", noweather);
+				fprintf(fp,"${if_gw}${voffset 4}${offset -4}${color0}${font Webdings:size=24}·${font}${color}\n");
+				fprintf(fp,"${voffset -24}${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather cur %s f}°F${color}${font}\n", go2, temperature, yahooweatherdir, weather_code);
+				fprintf(fp,"${goto %d}${voffset -2}${color0}${font Webdings}6${font}${color}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather min %s c}°F${color}${font}  ${voffset -2}${color0}${font Webdings}5${font}${color}${voffset -1}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather max %s c}°F${color}${font}\n", go2, yahooweatherdir, weather_code, yahooweatherdir, weather_code);
+				fprintf(fp,"${else}${voffset 4}${offset 4}${color0}${font Wingdings:size=20}N${font}${color}${voffset -6}${goto %d}%s${voffset 14}${endif}\n", go2, noweather);
 			}
 			else {
-				fprintf(fp,"${if_gw}${goto 12}${voffset 4}${color0}${font Weather:size=24}y${font}${color}\n");
-				fprintf(fp,"${voffset -29}${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather cur %s c}°C${color}${font}\n", go2, temperature, yahooweatherdir, weather_code);
-				fprintf(fp,"${goto %d}${voffset -2}${color0}${font VariShapes Solid:size=8}Q${font}${color}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather min %s c}°C${color}${font}  ${voffset -2}${color0}${font VariShapes Solid:size=8}q${font}${color}${voffset -1}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather max %s c}°C${color}${font}\n", go2, yahooweatherdir, weather_code, yahooweatherdir, weather_code);
-				fprintf(fp, "${else}${voffset 4}${color0}${font PizzaDude Bullets:size=12}4${font}${color}${goto 32}%s${voffset 14}${endif}\n", noweather);
+				fprintf(fp,"${if_gw}${voffset 4}${offset -4}${color0}${font Webdings:size=24}·${font}${color}\n");
+				fprintf(fp,"${voffset -24}${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather cur %s c}°C${color}${font}\n", go2, temperature, yahooweatherdir, weather_code);
+				fprintf(fp,"${goto %d}${voffset -2}${color0}${font Webdings}6${font}${color}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather min %s c}°C${color}${font}  ${voffset -2}${color0}${font Webdings}5${font}${color}${voffset -1}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather max %s c}°C${color}${font}\n", go2, yahooweatherdir, weather_code, yahooweatherdir, weather_code);
+				fprintf(fp,"${else}${voffset 4}${offset 4}${color0}${font Wingdings:size=20}N${font}${color}${voffset -6}${goto %d}%s${voffset 14}${endif}\n", go2, noweather);
 			}
 	}
 	else
@@ -504,18 +492,18 @@ void conkyrc_default () {
 				fprintf(fp,"${voffset -4}${font Ubuntu:style=Bold:size=8}%s $stippled_hr${font}\n", Weather);
 
 			if (unit == True) {
-				fprintf(fp,"${if_gw}${goto 12}${voffset 4}${color0}${font Weather:size=24}y${font}${color}\n");
-				fprintf(fp,"${voffset -29}${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather cur %d f}°F${color}${font}\n", go2, temperature, bbcweatherdir, bbccode);
-				fprintf(fp,"${goto %d}${voffset -2}${color0}${font VariShapes Solid:size=8}Q${font}${color}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather min %d f}°F${color}${font}  ${voffset -2}${color0}${font VariShapes Solid:size=8}q${font}${color}${voffset -1}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather max %d f}°F${color}${font}\n", go2, bbcweatherdir, bbccode, bbcweatherdir, bbccode);
+				fprintf(fp,"${if_gw}${voffset 4}${offset -4}${color0}${font Webdings:size=24}·${font}${color}\n");
+				fprintf(fp,"${voffset -24}${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather cur %d f}°F${color}${font}\n", go2, temperature, bbcweatherdir, bbccode);
+				fprintf(fp,"${goto %d}${voffset -2}${color0}${font Webdings}6${font}${color}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather min %d f}°F${color}${font}  ${voffset -2}${color0}${font Webdings}5${font}${color}${voffset -1}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather max %d f}°F${color}${font}\n", go2, bbcweatherdir, bbccode, bbcweatherdir, bbccode);
 				fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather hum %d f}%%${color}${font}${alignr}${color2}${execbar %s/bin/conkyBBCWeather hum %d f}%%${color}${font}\n", go2, humidity, bbcweatherdir, bbccode, bbcweatherdir, bbccode);
-				fprintf(fp, "${else}${voffset 4}${color0}${font PizzaDude Bullets:size=12}4${font}${color}${goto 32}%s${voffset 14}${endif}\n", noweather);
+				fprintf(fp,"${else}${voffset 4}${offset 4}${color0}${font Wingdings:size=20}N${font}${color}${voffset -6}${goto %d}%s${voffset 14}${endif}\n", go2, noweather);
 			}
 			else {
-				fprintf(fp,"${if_gw}${goto 12}${voffset 4}${color0}${font Weather:size=24}y${font}${color}\n");
-				fprintf(fp,"${voffset -29}${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather cur %d c}°C${color}${font}\n", go2, temperature, bbcweatherdir, bbccode);
-				fprintf(fp,"${goto %d}${voffset -2}${color0}${font VariShapes Solid:size=8}Q${font}${color}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather min %d c}°C${color}${font}  ${voffset -2}${color0}${font VariShapes Solid:size=8}q${font}${color}${voffset -1}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather max %d c}°C${color}${font}\n", go2, bbcweatherdir, bbccode, bbcweatherdir, bbccode);
+				fprintf(fp,"${if_gw}${voffset 4}${offset -4}${color0}${font Webdings:size=24}·${font}${color}\n");
+				fprintf(fp,"${voffset -24}${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather cur %d c}°C${color}${font}\n", go2, temperature, bbcweatherdir, bbccode);
+				fprintf(fp,"${goto %d}${voffset -2}${color0}${font Webdings}6${font}${color}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather min %d c}°C${color}${font}  ${voffset -2}${color0}${font Webdings}5${font}${color}${voffset -1}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather max %d c}°C${color}${font}\n", go2, bbcweatherdir, bbccode, bbcweatherdir, bbccode);
 				fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather hum %d c}%%${color}${font}${alignr}${color2}${execbar %s/bin/conkyBBCWeather hum %d c}%%${color}${font}\n", go2, humidity, bbcweatherdir, bbccode, bbcweatherdir, bbccode);
-				fprintf(fp, "${else}${voffset 4}${color0}${font PizzaDude Bullets:size=12}4${font}${color}${goto 32}%s${voffset 14}${endif}\n", noweather);
+				fprintf(fp,"${else}${voffset 4}${offset 4}${color0}${font Wingdings:size=20}N${font}${color}${voffset -6}${goto %d}%s${voffset 14}${endif}\n", go2, noweather);
 			}
 	    }
 	fclose(fp);

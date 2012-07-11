@@ -3,7 +3,7 @@
 # Photo in conky
 # by helmuthdu, paulvictor and Alessandro Roncone
 
-source="/usr/share/backgrounds"
+source="/usr/share/backgrounds/"
 photo="/tmp/conkyPhoto.png"
 template="/usr/share/conkycolors/icons/ConkyPhoto"
 filename=`find $source -type f | shuf -n1`
@@ -13,22 +13,22 @@ theme=3
 
 dim="medium"
 # Manage dimension flag
-if [ $dim == "small" ]; then
+if [[ $dim == "small" ]]; then
   geometry="158x100"
   geometry_crop="236x212"
-elif [ $dim == "medium" ]; then
+elif [[ $dim == "medium" ]]; then
   geometry="238x148"
   geometry_crop="316x260"
-elif [ $dim == "big" ]; then
+elif [[ $dim == "big" ]]; then
   geometry="318x200"
   geometry_crop="396x312"
 fi
 
 cp "$filename" "$photo"
 
-convert $filename -resize $geometry\> -size $geometry xc:black +swap -gravity center -composite $photo
+convert "$filename" -resize $geometry\> -size $geometry xc:black +swap -gravity center -composite "$photo"
 
-if [ $theme = "1" ]; then
+if [[ $theme -eq 1 ]]; then
 # Theme 1
 	convert -page +2+2 "$photo"\
 		-bordercolor snow -border 4.5\
@@ -36,16 +36,16 @@ if [ $theme = "1" ]; then
 		-background  black  \( +clone -shadow 40x2+1+1 \) +swap \
 		-background  none -flatten \
 	"$photo"
-elif [ $theme = "2" ]; then
+elif [[ $theme -eq 2 ]]; then
 # Theme 2
 	convert -page +4+4 "$photo"\
 		-bordercolor gray10 -border 1\
 		-background  black  \( +clone -shadow 40x4+2+2 \) +swap \
 		-background  none -flatten \
-	$photo
-elif [ $theme = "3" ]; then
-# Theme 4
-    convert $template/photobg_bg_$dim.png $photo -geometry +11+11 -composite $photo
-    convert $photo $template/photobg_shadow_$dim.png -composite $photo
+	"$photo"
+elif [[ $theme -eq 3 ]]; then
+# Theme 3
+    convert "$template"/photobg_bg_$dim.png "$photo" -geometry +11+11 -composite "$photo"
+    convert "$photo" "$template"/photobg_shadow_$dim.png -composite "$photo"
 fi
 exit

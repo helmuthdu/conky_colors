@@ -12,7 +12,7 @@ void coverposition () {
 	}
 	if (aptget == True)
 		yc += 13;
-	if (gmail == True && pidgin == False)
+	if (gmail == True)
 		yc += 13;
 	if (set_battery == True)
 		yc += 14;

@@ -29,9 +29,6 @@ void conkyplayer () {
 				if (rhythmbox == True)
 				fprintf(fp,"${if_running rhythmbox}\n");
 			else
-				if (exaile == True)
-				fprintf(fp,"${if_running exaile}\n");
-			else
 				fprintf(fp,"${if_running clementine}\n");
 			fprintf(fp,"${voffset -22}${color0}${font Musicelements:size=18}z${font}${color}${voffset -8}${goto %d}%s:${alignr}${color2}[--datatype=ST]${color}\n", go2, status);
 			fprintf(fp,"${goto 100}${voffset 4}${color2}[--datatype=AR]${color}\n");
@@ -51,9 +48,6 @@ void conkyplayer () {
 			else
 				if (rhythmbox == True)
 				fprintf(fp,"${if_running rhythmbox}\n");
-			else
-				if (exaile == True)
-				fprintf(fp,"${if_running exaile}\n");
 			else
 				fprintf(fp,"${if_running clementine}\n");
 			fprintf(fp,"${voffset -1}\n");
@@ -147,9 +141,6 @@ void conkyplayer () {
 				if (rhythmbox == True)
 				fprintf(fp,"${if_running rhythmbox}\n");
 			else
-				if (exaile == True)
-				fprintf(fp,"${if_running exaile}\n");
-			else
 				fprintf(fp,"${if_running clementine}\n");
 			fprintf(fp,"${voffset -12}${color0}${font Musicelements:size=18}z${font}${color}${voffset -8}${goto %d}%s:${alignr}${color2}[--datatype=ST]${color}\n", go2, status);
 			fprintf(fp,"${voffset 4}${goto %d}${color2}[--datatype=AR]${color}\n", go2);
@@ -169,9 +160,6 @@ void conkyplayer () {
 			else
 				if (rhythmbox == True)
 				fprintf(fp,"${if_running rhythmbox}\n");
-			else
-				if (exaile == True)
-				fprintf(fp,"${if_running exaile}\n");
 			else
 				fprintf(fp,"${if_running clementine}\n");
 			fprintf(fp,"${voffset -12}${color0}${font Webdings:size=16}U${font}${color}${voffset -2}${goto %d}%s:${alignr}${color2}[--datatype=ST]${color}\n", go2, status);
