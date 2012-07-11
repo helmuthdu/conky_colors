@@ -433,26 +433,26 @@ void conkyrc_default () {
 		fprintf(fp,"${if_up wlan%d}\n", wlan);
 		fprintf(fp,"${voffset -5}${color0}${font Webdings:size=17}”${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${upspeed wlan%d}${color}${font} ${alignr}${color2}${upspeedgraph wlan%d 8,60 %s}${color}\n", go2, up, wlan, wlan, color4);
 		fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totalup wlan%d}${color}${font}\n", go2, total, wlan);
-		fprintf(fp,"${voffset 5}${color0}${font Webdings:size=17}“${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed wlan%d}${color}${font} ${alignr}${color2}${downspeedgraph wlan%d 8,60 %s}${color}\n", go2, down, wlan, wlan, color4);
+		fprintf(fp,"${voffset 2}${color0}${font Webdings:size=17}“${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed wlan%d}${color}${font} ${alignr}${color2}${downspeedgraph wlan%d 8,60 %s}${color}\n", go2, down, wlan, wlan, color4);
 		fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totaldown wlan%d}${color}${font}\n", go2, total, wlan);
-		fprintf(fp,"${voffset 5}${color0}${font Poky:size=14}Y${font}${color}${goto %d}${voffset -2}%s: ${font Ubuntu:style=Bold:size=8}${color1}${wireless_link_qual_perc wlan%d}%%${color}${font} ${alignr}${color2}${wireless_link_bar 8,60 wlan%d}${color}\n", go2, sinal, wlan, wlan);
-		fprintf(fp,"${voffset 4}${color0}${font Webdings:size=16}¬${font}${color}${goto %d}${voffset -8}%s: ${alignr}${color2}${addr wlan%d}${color}\n", go2, localip, wlan);
+		fprintf(fp,"${voffset 2}${color0}${font Poky:size=14}Y${font}${color}${goto %d}${voffset -2}%s: ${font Ubuntu:style=Bold:size=8}${color1}${wireless_link_qual_perc wlan%d}%%${color}${font} ${alignr}${color2}${wireless_link_bar 8,60 wlan%d}${color}\n", go2, sinal, wlan, wlan);
+		fprintf(fp,"${voffset 2}${color0}${font Webdings:size=16}¬${font}${color}${goto %d}${voffset -8}%s: ${alignr}${color2}${addr wlan%d}${color}\n", go2, localip, wlan);
 		fprintf(fp,"${goto %d}%s: ${alignr}${color2}${execi 10800 %s/bin/conkyIp}${color}\n", go2, publicip, conkyipdir );
 		fprintf(fp,"# |--ETH%d\n", eth);
 		fprintf(fp,"${else}${if_up eth%d}\n", eth);
 		fprintf(fp,"${voffset -5}${color0}${font Webdings:size=17}”${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${upspeed eth%d}${color}${font} ${alignr}${color2}${upspeedgraph eth%d 8,60 %s}${color}\n", go2, up, eth, eth, color4);
 		fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totalup eth%d}${color}${font}\n", go2, total, eth);
-		fprintf(fp,"${voffset 5}${color0}${font Webdings:size=17}“${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed eth%d}${color}${font} ${alignr}${color2}${downspeedgraph eth%d 8,60 %s}${color}\n", go2, down, eth, eth, color4);
+		fprintf(fp,"${voffset 2}${color0}${font Webdings:size=17}“${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed eth%d}${color}${font} ${alignr}${color2}${downspeedgraph eth%d 8,60 %s}${color}\n", go2, down, eth, eth, color4);
 		fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totaldown eth%d}${color}${font}\n", go2, total, eth);
-		fprintf(fp,"${voffset 5}${color0}${font Webdings:size=16}¬${font}${color}${goto %d}${voffset -4}%s: ${alignr}${color2}${addr eth%d}${color}\n", go2, localip, eth);
+		fprintf(fp,"${voffset 2}${color0}${font Webdings:size=16}¬${font}${color}${goto %d}${voffset -4}%s: ${alignr}${color2}${addr eth%d}${color}\n", go2, localip, eth);
 		fprintf(fp,"${goto %d}%s: ${alignr}${color2}${execi 10800 %s/bin/conkyIp}${color}\n", go2, publicip, conkyipdir);
 		fprintf(fp,"# |--PPP%d\n", ppp);
 		fprintf(fp,"${else}${if_up ppp%d}\n", ppp);
 		fprintf(fp,"${voffset -5}${color0}${font Webdings:size=17}”${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${upspeed ppp%d}${color}${font} ${alignr}${color2}${upspeedgraph ppp%d 8,60 %s}${color}\n", go2, up, ppp, ppp, color4);
 		fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totalup ppp%d}${color}${font}\n", go2, total, ppp);
-		fprintf(fp,"${voffset 5}${color0}${font Webdings:size=17}“${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed ppp%d}${color}${font} ${alignr}${color2}${downspeedgraph ppp%d 8,60 %s}${color}\n", go2, down, ppp, ppp, color4);
+		fprintf(fp,"${voffset 2}${color0}${font Webdings:size=17}“${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed ppp%d}${color}${font} ${alignr}${color2}${downspeedgraph ppp%d 8,60 %s}${color}\n", go2, down, ppp, ppp, color4);
 		fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totaldown ppp%d}${color}${font}\n", go2, total, ppp);
-		fprintf(fp,"${voffset 5}${color0}${font Webdings:size=16}¬${font}${color}${goto %d}${voffset -4}%s: ${alignr}${color2}${addr ppp%d}${color}\n", go2, localip, ppp);
+		fprintf(fp,"${voffset 2}${color0}${font Webdings:size=16}¬${font}${color}${goto %d}${voffset -4}%s: ${alignr}${color2}${addr ppp%d}${color}\n", go2, localip, ppp);
 		fprintf(fp,"${else}${voffset 4}${offset 4}${color0}${font Wingdings:size=20}N${font}${color}${voffset -6}${goto %d}%s${voffset 14}${endif}${endif}${endif}\n", go2, nonet);
 	}
 
