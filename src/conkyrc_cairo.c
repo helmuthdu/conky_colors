@@ -55,7 +55,7 @@ void conkyrc_cairo () {
 	fprintf(fp,"#############################\n");
 	fprintf(fp,"own_window_class Conky\n");
 	fprintf(fp,"own_window yes\n");
-    fprintf(fp,"own_window_type desktop\n");
+    fprintf(fp,"own_window_type normal\n");
     if (cover < 2) {
         fprintf(fp, "own_window_argb_visual yes\n");
         fprintf(fp, "own_window_argb_value %d\n", argb_value);
