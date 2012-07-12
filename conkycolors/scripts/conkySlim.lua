@@ -733,7 +733,7 @@ function conky_main(color, theme, drawbg, unit, area_code, posfix)
     };display_text(settings)
     settings = {--MINUTES
         txt=conky_parse("${time %M}"),
-        x=(w/2)-78             , y=50          ,
+        x=(w/2)-85             , y=50          ,
         txt_weight=1        , txt_size=50 ,
         txt_fg_colour=theme , txt_fg_alpha=fga ,
         font = "Digital Readout Thick Upright"
