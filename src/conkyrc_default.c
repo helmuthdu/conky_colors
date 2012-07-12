@@ -62,7 +62,7 @@ void conkyrc_default () {
 	fprintf(fp,"#############################\n");
 	fprintf(fp,"own_window_class Conky\n");
 	fprintf(fp,"own_window yes\n");
-    fprintf(fp,"own_window_type dekstop\n");
+    fprintf(fp,"own_window_type desktop\n");
 	if (set_photo == 0 && cover < 2) {
 		fprintf(fp, "own_window_argb_visual yes\n");
 		fprintf(fp, "own_window_argb_value %d\n", argb_value);
