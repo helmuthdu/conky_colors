@@ -63,9 +63,9 @@ void conkyrc_default () {
 	fprintf(fp,"own_window_class Conky\n");
 	fprintf(fp,"own_window yes\n");
 	if (set_photo == 1 || set_photo == 2 || cover > 2)
-		fprintf(fp,"own_window_type override\n");
+		fprintf(fp,"own_window_type dekstop\n");
 	else {
-		fprintf(fp,"own_window_type normal\n");
+		fprintf(fp,"own_window_type desktop\n");
 		fprintf(fp, "own_window_argb_visual yes\n");
 		fprintf(fp, "own_window_argb_value %d\n", argb_value);
 	}
@@ -425,7 +425,7 @@ void conkyrc_default () {
 		fprintf(fp,"###############\n");
 		fprintf(fp,"# - NETWORK - #\n");
 		fprintf(fp,"###############\n");
-        if (ubuntufix == 'y')
+        if (ubuntufix == 'y'|| ( rhythmbox == True || banshee == True || clementine == True ) && set_hd == 0)
             fprintf(fp,"${voffset 4}${font Ubuntu:style=Bold:size=8}%s $stippled_hr${font}\n", network);
         else
             fprintf(fp,"${voffset -4}${font Ubuntu:style=Bold:size=8}%s $stippled_hr${font}\n", network);
