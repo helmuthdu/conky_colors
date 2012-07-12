@@ -54,13 +54,7 @@ void conkyrc_sls () {
 	fprintf(fp,"#############################\n");
 	fprintf(fp,"own_window_class Conky\n");
 	fprintf(fp,"own_window yes\n");
-    if (set_photo == 1 || set_photo == 2 || cover > 2)
-        fprintf(fp,"own_window_type override\n");
-    else {
-        fprintf(fp,"own_window_type normal\n");
-        fprintf(fp, "own_window_argb_visual yes\n");
-        fprintf(fp, "own_window_argb_value %d\n", argb_value);
-    }
+    fprintf(fp,"own_window_type desktop\n");
 	fprintf(fp,"own_window_transparent yes\n");
 	fprintf(fp,"own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager\n");
 	fprintf(fp,"\n");
