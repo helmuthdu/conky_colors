@@ -364,6 +364,11 @@ int options (int argc, char *argv[]) {
 			sprintf(logo_letter, "T");
 			logo = True;
 		}
+		else OPTION("--kde", key)
+		{
+			sprintf(logo_letter, "Y");
+			logo = True;
+		}
 		else OR_OPTION_START("-h", key) OR_OPTION_END("--help", key)
 		{
 			help();
