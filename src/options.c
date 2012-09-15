@@ -326,47 +326,47 @@ int options (int argc, char *argv[]) {
 		}
 		else OPTION("--fedora", key)
 		{
-			sprintf(logo_letter, "N");
+			sprintf(logo_letter, "f");
 			logo = True;
 		}
 		else OPTION("--arch", key)
 		{
-			sprintf(logo_letter, "A");
+			sprintf(logo_letter, "a");
 			logo = True;
 		}
 		else OPTION("--opensuse", key)
 		{
-			sprintf(logo_letter, "h");
+			sprintf(logo_letter, "o");
 			logo = True;
 		}
 		else OPTION("--pardus", key)
 		{
-			sprintf(logo_letter, "i");
+			sprintf(logo_letter, "p");
 			logo = True;
 		}
 		else OPTION("--debian", key)
 		{
-			sprintf(logo_letter, "J");
+			sprintf(logo_letter, "d");
 			logo = True;
 		}
 		else OPTION("--gentoo", key)
 		{
-			sprintf(logo_letter, "Q");
+			sprintf(logo_letter, "g");
 			logo = True;
 		}
 		else OPTION("--xfce", key)
 		{
-			sprintf(logo_letter, "y");
+			sprintf(logo_letter, "x");
 			logo = True;
 		}
 		else OPTION("--gnome", key)
 		{
-			sprintf(logo_letter, "T");
+			sprintf(logo_letter, "e");
 			logo = True;
 		}
 		else OPTION("--kde", key)
 		{
-			sprintf(logo_letter, "Y");
+			sprintf(logo_letter, "k");
 			logo = True;
 		}
 		else OR_OPTION_START("-h", key) OR_OPTION_END("--help", key)
