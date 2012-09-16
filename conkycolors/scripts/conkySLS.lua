@@ -189,7 +189,7 @@ function draw_clock_ring(data)
 		local i = 1
 		while i <= nb_graduation do
 			cairo_set_line_width(cr, graduation_thickness)
-			cairo_arc(cr, x, y, graduation_radius, (((graduation_unit_angle * i)-(graduation_mark_thickness/2))*(2*math.pi/360))-(math.pi/2),(((graduation_unit_angle * i)+(graduation_mark_thickness/2))*(about:home2*math.pi/360))-(math.pi/2))
+			cairo_arc(cr, x, y, graduation_radius, (((graduation_unit_angle * i)-(graduation_mark_thickness/2))*(2*math.pi/360))-(math.pi/2),(((graduation_unit_angle * i)+(graduation_mark_thickness/2))*(2*math.pi/360))-(math.pi/2))
 			cairo_set_source_rgba(cr,rgb_to_r_g_b(graduation_fg_colour,graduation_fg_alpha))
 			cairo_stroke(cr)
 			cairo_set_line_width(cr, graph_thickness)
