@@ -124,6 +124,9 @@ void conkyrc_sls () {
 	//WEATHER
 	fprintf(fp,"%s ", weather_code );
 
+	//BATTERY
+	fprintf(fp,"%s " battery_value );
+
 	fprintf(fp,"\n");
 	fprintf(fp,"\n");
 	fprintf(fp,"TEXT\n\n");
