@@ -671,7 +671,7 @@ end
 
 -------------------------------------------------------------------------------
 --                                                                         MAIN
-function conky_main(color, theme, drawbg, weather_code)
+function conky_main(color, theme, drawbg, weather_code, battery_value)
 
 	if conky_window == nil then return end
 
@@ -888,7 +888,7 @@ function conky_main(color, theme, drawbg, weather_code)
 	-- BATTERY
 	for i=1,2 do
 		settings={
-			value=tonumber(conky_parse("${battery_percent BAT0}")),
+			value=tonumber(conky_parse("${battery_percent " .. battery_value .. "}")),
 			value_max=100            ,
 			x=xp                     , y=yp           ,
 			divisions=29             ,
@@ -905,7 +905,7 @@ function conky_main(color, theme, drawbg, weather_code)
 	end
 	for i=1,4 do
 		settings={
-			value=tonumber(conky_parse("${battery_percent BAT0}")),
+			value=tonumber(conky_parse("${battery_percent " .. battery_value .. "}")),
 			value_max=100            ,
 			x=xp                     , y=yp           ,
 			divisions=30             ,
@@ -922,7 +922,7 @@ function conky_main(color, theme, drawbg, weather_code)
 	end
 	for i=1,2 do
 		settings={
-			value=tonumber(conky_parse("${battery_percent BAT0}")),
+			value=tonumber(conky_parse("${battery_percent " .. battery_value .. "}")),
 			value_max=100            ,
 			x=xp                     , y=yp           ,
 			divisions=29             ,
@@ -938,7 +938,7 @@ function conky_main(color, theme, drawbg, weather_code)
 		yp = yp + 5
 	end
 	settings = {
-		txt=conky_parse("${battery_percent BAT0}") .. '%',
+		txt=conky_parse("${battery_percent " .. battery_value .. "}") .. '%',
 		x=200             , y=235          ,
 		txt_weight=1      , txt_size=14    ,
 		txt_fg_colour=bgc , txt_fg_alpha=1 ,
