@@ -180,18 +180,18 @@ void conkyrc_cairo () {
 		fprintf(fp,"${goto 100}${font Ubuntu:style=Bold:size=8}${color2}${freq_g}${color} GHZ${font}\n");
 		fprintf(fp,"${goto 100}CPU: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu0}%%${color}${font}\n");
 		if (unit == True)
-			fprintf(fp,"${goto 100}Tmp: ${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors -f | grep 'Core 0' | awk '{print $3}' | sed 's/+//' | sed 's/\\.0//g'}${color}${font}\n");
+			fprintf(fp,"${goto 100}Tmp: ${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors -f | grep 'Core 0' | awk '{print $3}' | sed 's/+//' | sed 's/.0.*//'}${color}${font}\n");
 		else
-			fprintf(fp,"${goto 100}Temp: ${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors | grep 'Core 0' | awk '{print $3}' | sed 's/+//' | sed 's/\\.0//g'}${color}${font}\n");
+			fprintf(fp,"${goto 100}Temp: ${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors | grep 'Core 0' | awk '{print $3}' | sed 's/+//' | sed 's/.0.*//'}${color}${font}\n");
 	}
 	else {
 		if (cpu == 1) {
 				fprintf(fp,"${goto 100}${font Ubuntu:style=Bold:size=8}${color2}${freq_g}${color} GHZ${font}\n");
 				fprintf(fp,"${goto 100}CPU1: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu1}%%${color}${font}\n");
 				if (unit == True)
-					fprintf(fp,"${goto 100}Tmp: ${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors -f | grep 'Core 0' | awk '{print $3}' | sed 's/+//' | sed 's/\\.0//g'}${color}${font}\n");
+					fprintf(fp,"${goto 100}Tmp: ${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors -f | grep 'Core 0' | awk '{print $3}' | sed 's/+//' | sed 's/.0.*//'}${color}${font}\n");
 				else
-					fprintf(fp,"${goto 100}Temp: ${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors | grep 'Core 0' | awk '{print $3}' | sed 's/+//' | sed 's/\\.0//g'}${color}${font}\n");
+					fprintf(fp,"${goto 100}Temp: ${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors | grep 'Core 0' | awk '{print $3}' | sed 's/+//' | sed 's/.0.*//'}${color}${font}\n");
 		}
 		// More then 1 cpu
 		else {
@@ -199,9 +199,9 @@ void conkyrc_cairo () {
 				fprintf(fp,"${goto 100}${font Ubuntu:style=Bold:size=8}${color2}${freq_g %d}${color} GHZ${font}\n", i);
 				fprintf(fp,"${goto 100}CPU%d: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu%d}%%${color}${font}\n", i, i);
 				if (unit == True)
-					fprintf(fp,"${goto 100}Tmp: ${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors -f | grep 'Core %d' | awk '{print $3}' | sed 's/+//' | sed 's/\\.0//g'}${color}${font}\n", i-1);
+					fprintf(fp,"${goto 100}Tmp: ${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors -f | grep 'Core %d' | awk '{print $3}' | sed 's/+//' | sed 's/.0.*//'}${color}${font}\n", i-1);
 				else
-					fprintf(fp,"${goto 100}Temp: ${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors | grep 'Core %d' | awk '{print $3}' | sed 's/+//' | sed 's/\\.0//g'}${color}${font}\n", i-1);
+					fprintf(fp,"${goto 100}Temp: ${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors | grep 'Core %d' | awk '{print $3}' | sed 's/+//' | sed 's/.0.*//'}${color}${font}\n", i-1);
 				if ( i < cpu)
 					fprintf(fp,"${voffset 15}\n");
 			}

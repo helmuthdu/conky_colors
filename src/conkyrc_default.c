@@ -162,9 +162,9 @@ void conkyrc_default () {
 		fprintf(fp,"${voffset 2}${offset 2}${color0}${font Poky:size=14}P${color}${font}${voffset -4}");
 		if (cputemp == True) {
 			if (unit == True)
-				fprintf(fp,"${goto %d}CPU: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu1}%%${font} ${alignr}${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors -f | grep 'Core 0' | awk '{print $3}' | sed 's/+//' | sed 's/\\.0//g'}${color}${font}  ${color2}${cpugraph cpu1 8,50 %s}${color}\n", go2, color4);
+				fprintf(fp,"${goto %d}CPU: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu1}%%${font} ${alignr}${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors -f | grep 'Core 0' | awk '{print $3}' | sed 's/+//' | sed 's/.0.*//'}${color}${font}  ${color2}${cpugraph cpu1 8,50 %s}${color}\n", go2, color4);
 			else
-				fprintf(fp,"${goto %d}CPU: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu1}%%${font} ${alignr}${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors | grep 'Core 0' | awk '{print $3}' | sed 's/+//' | sed 's/\\.0//g'}${color}${font}  ${color2}${cpugraph cpu1 8,50 %s}${color}\n", go2, color4);
+				fprintf(fp,"${goto %d}CPU: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu1}%%${font} ${alignr}${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors | grep 'Core 0' | awk '{print $3}' | sed 's/+//' | sed 's/.0.*//'}${color}${font}  ${color2}${cpugraph cpu1 8,50 %s}${color}\n", go2, color4);
 		}
 		else
 			fprintf(fp,"${goto %d}CPU: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu1}%%${color}${font} ${alignr}${color2}${cpugraph cpu1 8,60 %s}${color}\n", go2, color4);
@@ -174,9 +174,9 @@ void conkyrc_default () {
 		for (i = 1; i <= cpu; i++) {
 			if (cputemp == True) {
 				if (unit == True)
-					fprintf(fp,"${goto %d}CPU%d: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu%d}%%${font} ${alignr}${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors -f | grep 'Core %d' | awk '{print $3}' | sed 's/+//' | sed 's/\\.0//g'}${color}${font}  ${color2}${cpugraph cpu%d 8,50 %s}${color}\n", go2, i, i, i-1, i, color4);
+					fprintf(fp,"${goto %d}CPU%d: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu%d}%%${font} ${alignr}${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors -f | grep 'Core %d' | awk '{print $3}' | sed 's/+//' | sed 's/.0.*//'}${color}${font}  ${color2}${cpugraph cpu%d 8,50 %s}${color}\n", go2, i, i, i-1, i, color4);
 				else
-					fprintf(fp,"${goto %d}CPU%d: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu%d}%%${font} ${alignr}${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors | grep 'Core %d' | awk '{print $3}' | sed 's/+//' | sed 's/\\.0//g'}${color}${font}  ${color2}${cpugraph cpu%d 8,50 %s}${color}\n", go2, i, i, i-1, i, color4);
+					fprintf(fp,"${goto %d}CPU%d: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu%d}%%${font} ${alignr}${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors | grep 'Core %d' | awk '{print $3}' | sed 's/+//' | sed 's/.0.*//'}${color}${font}  ${color2}${cpugraph cpu%d 8,50 %s}${color}\n", go2, i, i, i-1, i, color4);
 			}
 			else
 				fprintf(fp,"${goto %d}CPU%d: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu%d}%%${color}${font} ${alignr}${color2}${cpugraph cpu%d 8,60 %s}${color}\n", go2, i, i, i, color4);

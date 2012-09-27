@@ -76,7 +76,7 @@ function get_music_percent (player)
 end
 
 -------------------------------------------------------------------------------
---                                                                      weather
+--                                                                  dispay text
 -- dispay text
 --
 function display_text(data)
@@ -854,7 +854,7 @@ function conky_main(color, theme, drawbg, weather_code, battery_value)
 	-- CPU TEMP
 	for i=1,10 do
 		settings={
-			value=tonumber(conky_parse("${execi 30 sensors | grep 'Core 0' | cut -c16-17}")),
+			value=tonumber(conky_parse("${execi 30 sensors | grep 'Core 0' | awk '{print $3}'| sed 's/.0.*//' | sed 's/+//'}")),
 			value_max=100          ,
 			x=xp                   , y=yp           ,
 			divisions=10           ,
@@ -870,7 +870,7 @@ function conky_main(color, theme, drawbg, weather_code, battery_value)
 		xp = xp + 5
 	end
 	settings = {
-		txt=conky_parse("${execi 30 sensors | grep 'Core 1' | cut -c16-17}") .. '°C',
+		txt=conky_parse("${execi 30 sensors | grep 'Core 1' | awk '{print $3}'| sed 's/.0.*//' | sed 's/+//'}") .. '°C',
 		x=xp-45           , y=yp+15        ,
 		txt_weight=1      , txt_size=14    ,
 		txt_fg_colour=bgc , txt_fg_alpha=1 ,
