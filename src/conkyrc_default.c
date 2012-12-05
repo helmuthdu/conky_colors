@@ -469,7 +469,7 @@ void conkyrc_default () {
 				fprintf(fp,"${voffset -4}${font Ubuntu:style=Bold:size=8}%s $stippled_hr${font}\n", Weather);
 
 			if (unit == True) {
-				fprintf(fp,"${if_gw}${voffset 4}${offset -4}${color0}${font Webdings:size=24}·${font}${color}\n");
+				fprintf(fp,"${if_gw}${voffset 4}${offset -4}${color0}${font ConkyWeather:size=21}${execi 600 /usr/share/conkycolors/bin/conkyYahooWeather code UKXX1609 c}${font}${color}\n");
 				fprintf(fp,"${voffset -24}${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather cur %s f}°F${color}${font}\n", go2, temperature, yahooweatherdir, weather_code);
 				fprintf(fp,"${goto %d}${voffset -2}${color0}${font Webdings}6${font}${color}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather min %s f}°F${color}${font}  ${voffset -2}${color0}${font Webdings}5${font}${color}${voffset -1}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather max %s f}°F${color}${font}\n", go2, yahooweatherdir, weather_code, yahooweatherdir, weather_code);
 				fprintf(fp,"${else}${voffset 4}${offset 4}${color0}${font Wingdings:size=20}N${font}${color}${voffset -6}${goto %d}%s${voffset 14}${endif}\n", go2, noweather);
