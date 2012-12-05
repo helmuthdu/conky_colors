@@ -17,7 +17,6 @@ void conkyrc_cairo () {
 	const char *playerdir=finddir("bin/conky%s", player);
 	const char *playertemplatedir=finddir("/templates/conkyPlayer.template");
 	const char *coverdir=finddir("bin/conkyCover");
-	const char *conkyipdir=finddir("bin/conkyIp");
 	const char *conkycairo=finddir("scripts/conkyCairo.lua");
 
 	fp = fopenf("%s/conkyrc", "w", tempdir());
@@ -266,7 +265,7 @@ void conkyrc_cairo () {
 		fprintf(fp,"${voffset 15}\n");
 		fprintf(fp,"${goto 100}%s: ${font Ubuntu:style=Bold:size=8}${color1}${wireless_link_qual wlan%d}%%${color}${font}\n", sinal, wlan);
 		fprintf(fp,"${alignr 33}${color2}${wireless_essid wlan%d}${color}\n", wlan);
-		fprintf(fp,"${alignr 35}${font Ubuntu:style=Bold:size=8}${color2}${execi 10800 %s/bin/conkyIp}${color}${font}\n", conkyipdir);
+		fprintf(fp,"${alignr 35}${font Ubuntu:style=Bold:size=8}${color2}${execi 10800 curl ifconfig.me}${color}${font}\n");
 	}
 	//Network Widget
 	if (set_network == True) {
