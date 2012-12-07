@@ -937,7 +937,7 @@ function conky_main(color, theme, n_cpu)
 
 --------------------------------------------------------------------------------
 --                                                                         clock
-	yp = yp + 64 + 7
+	yp = yp + 64 + 25
 	settings = {-- HOURS
 		value=tonumber(conky_parse("${time %H}")),
 		value_max=12             ,
@@ -995,7 +995,7 @@ function conky_main(color, theme, n_cpu)
 --------------------------------------------------------------------------------
 --                                                                continue rings
 
-	yp = yp + 64 + 44
+	yp = yp + 64 + 19
 	disks = {'/', '/home'}
 	disksLabel = {'ROOT', 'HOME'}
 	for i, partitions in ipairs(disks) do
