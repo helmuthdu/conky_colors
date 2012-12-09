@@ -271,8 +271,10 @@ void conkyrc_default () {
 			if (set_calendar == 1) {
 				fprintf(fp,"${voffset -2}${color0}${font Poky:size=16}D${font}${voffset -8}${font Ubuntu:style=Bold:size=7}${offset -17}${voffset 4}${time %%d}${font}${color}${voffset -1}${font Monospace:size=7}${execpi 300 DJS=`date +%%_d`; cal ");
 				if (ubuntufix == 'y')
-					fprintf(fp,"-h ");
-				fprintf(fp," -s|sed \'2,8!d\'| sed \'/./!d\' | sed \'s/^/${goto 42} /\'| sed \'s/$/ /\' | sed \'s/^/ /\' | sed /\" $DJS \"/s/\" $DJS \"/\" \"\'${font Arial:style=Bold:size=8}${voffset -2}${offset -4}${color1} \'\"$DJS\"\'${color}${font Monospace:size=7}\'\" \"/}${voffset -1}\n");
+					fprintf(fp,"-h -S");
+                                else
+                                        fprintf(fp,"-s");
+				fprintf(fp,"|sed \'2,8!d\'| sed \'/./!d\' | sed \'s/^/${goto 42} /\'| sed \'s/$/ /\' | sed \'s/^/ /\' | sed /\" $DJS \"/s/\" $DJS \"/\" \"\'${font Arial:style=Bold:size=8}${voffset -2}${offset -4}${color1} \'\"$DJS\"\'${color}${font Monospace:size=7}\'\" \"/}${voffset -1}\n");
 				if (ubuntufix == 'y')
 					fprintf(fp,"${voffset -22}\n");
 			}
@@ -280,9 +282,11 @@ void conkyrc_default () {
 				fprintf(fp,"${voffset -2}${color0}${font Poky:size=16}D${font}${voffset -8}${font Ubuntu:style=Bold:size=7}${offset -17}${voffset 4}${time %%d}${font}${color}${font Monospace:size=7}${execpi 10800 %s/bin/conkyZimCalendar}${font}${voffset -14}\n", finddir("bin/conkyZimCalendar"));
 			else {
 				fprintf(fp,"${voffset -2}${color0}${font Poky:size=16}D${font}${voffset -8}${font Ubuntu:style=Bold:size=7}${offset -17}${voffset 4}${time %%d}${font}${color}${voffset -1}${font Monospace:size=7}${execpi 300 DJS=`date +%%_d`; cal ");
-				if (ubuntufix == 'y')
-					fprintf(fp,"-h ");
-				fprintf(fp," -m|sed \'2,8!d\'| sed \'/./!d\' | sed \'s/^/${goto 42} /\'| sed \'s/$/ /\' | sed \'s/^/ /\' | sed /\" $DJS \"/s/\" $DJS \"/\" \"\'${font Ubuntu:style=Bold:size=8}${voffset -2}${offset -4}${color1} \'\"$DJS\"\'${color}${font Monospace:size=7}\'\" \"/}${voffset -1}\n");
+        			if (ubuntufix == 'y')
+					fprintf(fp,"-h -M");
+                                else
+                                        fprintf(fp,"-m");
+				fprintf(fp,"|sed \'2,8!d\'| sed \'/./!d\' | sed \'s/^/${goto 42} /\'| sed \'s/$/ /\' | sed \'s/^/ /\' | sed /\" $DJS \"/s/\" $DJS \"/\" \"\'${font Ubuntu:style=Bold:size=8}${voffset -2}${offset -4}${color1} \'\"$DJS\"\'${color}${font Monospace:size=7}\'\" \"/}${voffset -1}\n");
 				if (ubuntufix == 'y')
 					fprintf(fp,"${voffset -22}\n");
 			}
