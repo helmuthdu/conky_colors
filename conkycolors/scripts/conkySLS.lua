@@ -838,7 +838,7 @@ function conky_main(color, theme, drawbg, weather_code, battery_value)
 		xp = xp + 5
 	end
 
-	swapperc = tonumber(conky_parse("${swapperc}"))
+	local swapperc = tonumber(conky_parse("${swapperc}"))
 	if swapperc then
 		swapperc = swapperc .. '%'		
 	else
