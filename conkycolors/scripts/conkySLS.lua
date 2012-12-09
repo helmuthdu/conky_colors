@@ -837,8 +837,15 @@ function conky_main(color, theme, drawbg, weather_code, battery_value)
 		};draw_gauge_bars(settings)
 		xp = xp + 5
 	end
+
+	swapperc = tonumber(conky_parse("${swapperc}"))
+	if swapperc then
+		swapperc = swapperc .. '%'		
+	else
+		swapperc = "N/A"
+	end
 	settings = {
-		txt=tonumber(conky_parse("${swapperc}")) .. '%',
+		txt=swapperc      ,
 		x=xp-45           , y=yp+15        ,
 		txt_weight=1      , txt_size=14    ,
 		txt_fg_colour=bgc , txt_fg_alpha=1 ,
