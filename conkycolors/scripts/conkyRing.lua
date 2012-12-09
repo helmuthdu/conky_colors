@@ -692,62 +692,6 @@ function conky_main(color, theme, n_cpu)
 	local yp = vert_space
 
 --------------------------------------------------------------------------------
---                                                                         clock
-	settings = {-- HOURS
-		value=tonumber(conky_parse("${time %H}")),
-		value_max=12             ,
-		x=118                    , y=263                       ,
-		graph_radius=48          ,
-		graph_thickness=3        ,
-		graph_unit_angle=30      , graph_unit_thickness=30     ,
-		graph_bg_colour=bgc      , graph_bg_alpha=0.0          ,
-		graph_fg_colour=fgc      , graph_fg_alpha=0.4          ,
-		txt_radius=29            ,
-		txt_weight=1             , txt_size=8.0                ,
-		txt_fg_colour=fgc        , txt_fg_alpha=fga            ,
-		graduation_radius=48     ,
-		graduation_thickness=6   , graduation_mark_thickness=2 ,
-		graduation_unit_angle=30 ,
-		graduation_fg_colour=fgc , graduation_fg_alpha=0.3     ,
-	};draw_clock_ring(settings)
-
-	settings = {-- MINUTES
-		value=tonumber(conky_parse("${time %M}")),
-		value_max=60             ,
-		x=118                    , y=263                       ,
-		graph_radius=52          ,
-		graph_thickness=2        ,
-		graph_unit_angle=6       , graph_unit_thickness=6      ,
-		graph_bg_colour=bgc      , graph_bg_alpha=0.2          ,
-		graph_fg_colour=fgc      , graph_fg_alpha=fga          ,
-		txt_radius=63            ,
-		txt_weight=1             , txt_size=8.0                ,
-		txt_fg_colour=fgc        , txt_fg_alpha=fga            ,
-		graduation_radius=52     ,
-		graduation_thickness=0   , graduation_mark_thickness=2 ,
-		graduation_unit_angle=30 ,
-		graduation_fg_colour=fgc , graduation_fg_alpha=0.3     ,
-	};draw_clock_ring(settings)
-
-	settings = {-- SECONDS
-		value=tonumber(conky_parse("${time %S}")),
-		value_max=60               ,
-		x=118                      , y=263                       ,
-		graph_radius=45            ,
-		graph_thickness=2          ,
-		graph_unit_angle=6         , graph_unit_thickness=2      ,
-		graph_bg_colour=bgc        , graph_bg_alpha=0.0          ,
-		graph_fg_colour=fgc        , graph_fg_alpha=0.6          ,
-		txt_radius=35              ,
-		txt_weight=1               , txt_size=8.0                ,
-		txt_fg_colour=fgc          , txt_fg_alpha=fga            ,
-		graduation_radius=0        ,
-		graduation_thickness=0     , graduation_mark_thickness=0 ,
-		graduation_unit_angle=0    ,
-		graduation_fg_colour=theme , graduation_fg_alpha=0.0     ,
-	};draw_clock_ring(settings)
-
---------------------------------------------------------------------------------
 --                                                                         rings
 	settings = {--CPU GRAPH CPU1
 		value=tonumber(conky_parse("${cpu cpu1}")),
@@ -795,7 +739,7 @@ function conky_main(color, theme, n_cpu)
 		caption_fg_colour=fgc      , caption_fg_alpha=fga        ,
 	};draw_gauge_ring(settings)
 
-	if n_cpu == "4" then
+	if tonumber(n_cpu) > 3 then
 	yp = yp + 64
 	settings = {--CPU GRAPH CPU3
 			value=tonumber(conky_parse("${cpu cpu3}")),
@@ -822,6 +766,104 @@ function conky_main(color, theme, n_cpu)
 
 	settings = {--CPU GRAPH CPU4
 			value=tonumber(conky_parse("${cpu cpu4}")),
+			value_max=100              ,
+			x=xp                       , y=yp                        ,
+			graph_radius=17            ,
+			graph_thickness=5          ,
+			graph_start_angle=180      ,
+			graph_unit_angle=1.85      , graph_unit_thickness=2.7    ,
+			graph_bg_colour=bgc        , graph_bg_alpha=bga          ,
+			graph_fg_colour=theme      , graph_fg_alpha=fga          ,
+			hand_fg_colour=theme       , hand_fg_alpha=0.0           ,
+			txt_radius=35              ,
+			txt_weight=1               , txt_size=8.0                ,
+			txt_fg_colour=theme        , txt_fg_alpha=fga            ,
+			graduation_radius=28       ,
+			graduation_thickness=0     , graduation_mark_thickness=1 ,
+			graduation_unit_angle=27   ,
+			graduation_fg_colour=theme , graduation_fg_alpha=0.3     ,
+			caption=''                 ,
+			caption_weight=1           , caption_size=10.0           ,
+			caption_fg_colour=fgc      , caption_fg_alpha=fga        ,
+		};draw_gauge_ring(settings)
+	end
+
+	if tonumber(n_cpu) > 5 then
+	yp = yp + 64
+	settings = {--CPU GRAPH CPU5
+			value=tonumber(conky_parse("${cpu cpu5}")),
+			value_max=100              ,
+			x=xp                       , y=yp                        ,
+			graph_radius=22            ,
+			graph_thickness=5          ,
+			graph_start_angle=180      ,
+			graph_unit_angle=1.85      , graph_unit_thickness=2.7    ,
+			graph_bg_colour=bgc        , graph_bg_alpha=bga          ,
+			graph_fg_colour=fgc        , graph_fg_alpha=fga          ,
+			hand_fg_colour=fgc         , hand_fg_alpha=0.0           ,
+			txt_radius=35              ,
+			txt_weight=1               , txt_size=8.0                ,
+			txt_fg_colour=fgc          , txt_fg_alpha=fga            ,
+			graduation_radius=28       ,
+			graduation_thickness=0     , graduation_mark_thickness=1 ,
+			graduation_unit_angle=27   ,
+			graduation_fg_colour=theme , graduation_fg_alpha=0.3     ,
+			caption='CPU'              ,
+			caption_weight=1           , caption_size=10.0           ,
+			caption_fg_colour=fgc      , caption_fg_alpha=fga        ,
+		};draw_gauge_ring(settings)
+
+	settings = {--CPU GRAPH CPU6
+			value=tonumber(conky_parse("${cpu cpu6}")),
+			value_max=100              ,
+			x=xp                       , y=yp                        ,
+			graph_radius=17            ,
+			graph_thickness=5          ,
+			graph_start_angle=180      ,
+			graph_unit_angle=1.85      , graph_unit_thickness=2.7    ,
+			graph_bg_colour=bgc        , graph_bg_alpha=bga          ,
+			graph_fg_colour=theme      , graph_fg_alpha=fga          ,
+			hand_fg_colour=theme       , hand_fg_alpha=0.0           ,
+			txt_radius=35              ,
+			txt_weight=1               , txt_size=8.0                ,
+			txt_fg_colour=theme        , txt_fg_alpha=fga            ,
+			graduation_radius=28       ,
+			graduation_thickness=0     , graduation_mark_thickness=1 ,
+			graduation_unit_angle=27   ,
+			graduation_fg_colour=theme , graduation_fg_alpha=0.3     ,
+			caption=''                 ,
+			caption_weight=1           , caption_size=10.0           ,
+			caption_fg_colour=fgc      , caption_fg_alpha=fga        ,
+		};draw_gauge_ring(settings)
+	end
+
+	if tonumber(n_cpu) > 7 then
+	yp = yp + 64
+	settings = {--CPU GRAPH CPU7
+			value=tonumber(conky_parse("${cpu cpu7}")),
+			value_max=100              ,
+			x=xp                       , y=yp                        ,
+			graph_radius=22            ,
+			graph_thickness=5          ,
+			graph_start_angle=180      ,
+			graph_unit_angle=1.85      , graph_unit_thickness=2.7    ,
+			graph_bg_colour=bgc        , graph_bg_alpha=bga          ,
+			graph_fg_colour=fgc        , graph_fg_alpha=fga          ,
+			hand_fg_colour=fgc         , hand_fg_alpha=0.0           ,
+			txt_radius=35              ,
+			txt_weight=1               , txt_size=8.0                ,
+			txt_fg_colour=fgc          , txt_fg_alpha=fga            ,
+			graduation_radius=28       ,
+			graduation_thickness=0     , graduation_mark_thickness=1 ,
+			graduation_unit_angle=27   ,
+			graduation_fg_colour=theme , graduation_fg_alpha=0.3     ,
+			caption='CPU'              ,
+			caption_weight=1           , caption_size=10.0           ,
+			caption_fg_colour=fgc      , caption_fg_alpha=fga        ,
+		};draw_gauge_ring(settings)
+
+	settings = {--CPU GRAPH CPU8
+			value=tonumber(conky_parse("${cpu cpu8}")),
 			value_max=100              ,
 			x=xp                       , y=yp                        ,
 			graph_radius=17            ,
@@ -892,7 +934,68 @@ function conky_main(color, theme, n_cpu)
 		caption_fg_colour=fgc    , caption_fg_alpha=fga        ,
 	};draw_gauge_ring(settings)
 
-	yp = yp + 172
+
+--------------------------------------------------------------------------------
+--                                                                         clock
+	yp = yp + 64 + 25
+	settings = {-- HOURS
+		value=tonumber(conky_parse("${time %H}")),
+		value_max=12             ,
+		x=118                    , y=yp                        ,
+		graph_radius=48          ,
+		graph_thickness=3        ,
+		graph_unit_angle=30      , graph_unit_thickness=30     ,
+		graph_bg_colour=bgc      , graph_bg_alpha=0.0          ,
+		graph_fg_colour=fgc      , graph_fg_alpha=0.4          ,
+		txt_radius=29            ,
+		txt_weight=1             , txt_size=8.0                ,
+		txt_fg_colour=fgc        , txt_fg_alpha=fga            ,
+		graduation_radius=48     ,
+		graduation_thickness=6   , graduation_mark_thickness=2 ,
+		graduation_unit_angle=30 ,
+		graduation_fg_colour=fgc , graduation_fg_alpha=0.3     ,
+	};draw_clock_ring(settings)
+
+	settings = {-- MINUTES
+		value=tonumber(conky_parse("${time %M}")),
+		value_max=60             ,
+		x=118                    , y=yp                        ,
+		graph_radius=52          ,
+		graph_thickness=2        ,
+		graph_unit_angle=6       , graph_unit_thickness=6      ,
+		graph_bg_colour=bgc      , graph_bg_alpha=0.2          ,
+		graph_fg_colour=fgc      , graph_fg_alpha=fga          ,
+		txt_radius=63            ,
+		txt_weight=1             , txt_size=8.0                ,
+		txt_fg_colour=fgc        , txt_fg_alpha=fga            ,
+		graduation_radius=52     ,
+		graduation_thickness=0   , graduation_mark_thickness=2 ,
+		graduation_unit_angle=30 ,
+		graduation_fg_colour=fgc , graduation_fg_alpha=0.3     ,
+	};draw_clock_ring(settings)
+
+	settings = {-- SECONDS
+		value=tonumber(conky_parse("${time %S}")),
+		value_max=60               ,
+		x=118                      , y=yp                        ,
+		graph_radius=45            ,
+		graph_thickness=2          ,
+		graph_unit_angle=6         , graph_unit_thickness=2      ,
+		graph_bg_colour=bgc        , graph_bg_alpha=0.0          ,
+		graph_fg_colour=fgc        , graph_fg_alpha=0.6          ,
+		txt_radius=35              ,
+		txt_weight=1               , txt_size=8.0                ,
+		txt_fg_colour=fgc          , txt_fg_alpha=fga            ,
+		graduation_radius=0        ,
+		graduation_thickness=0     , graduation_mark_thickness=0 ,
+		graduation_unit_angle=0    ,
+		graduation_fg_colour=theme , graduation_fg_alpha=0.0     ,
+	};draw_clock_ring(settings)
+
+--------------------------------------------------------------------------------
+--                                                                continue rings
+
+	yp = yp + 64 + 19
 	disks = {'/', '/home'}
 	disksLabel = {'ROOT', 'HOME'}
 	for i, partitions in ipairs(disks) do
