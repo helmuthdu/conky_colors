@@ -269,11 +269,11 @@ void conkyrc_default () {
 			fprintf(fp,"# - CALENDAR - #\n");
 			fprintf(fp,"################\n");
 			if (set_calendar == 1) {
-				fprintf(fp,"${voffset -2}${color0}${font Poky:size=16}D${font}${voffset -8}${font Ubuntu:style=Bold:size=7}${offset -17}${voffset 4}${time %%d}${font}${color}${voffset -1}${font Monospace:size=7}${execpi 300 DJS=`date +%%_d`; cal ");
+				fprintf(fp,"${voffset -2}${color0}${font Poky:size=16}D${font}${voffset -8}${font Ubuntu:style=Bold:size=7}${offset -17}${voffset 4}${time %%d}${font}${color}${voffset -1}${font Monospace:size=7}${execpi 300 DJS=`date +%%_d`; ");
 				if (ubuntufix == 'y')
-					fprintf(fp,"-h -S");
+					fprintf(fp,"ncal -h -S -b");
                                 else
-                                        fprintf(fp,"-s");
+                                        fprintf(fp,"cal -s");
 				fprintf(fp,"|sed \'2,8!d\'| sed \'/./!d\' | sed \'s/^/${goto 42} /\'| sed \'s/$/ /\' | sed \'s/^/ /\' | sed /\" $DJS \"/s/\" $DJS \"/\" \"\'${font Arial:style=Bold:size=8}${voffset -2}${offset -4}${color1} \'\"$DJS\"\'${color}${font Monospace:size=7}\'\" \"/}${voffset -1}\n");
 				if (ubuntufix == 'y')
 					fprintf(fp,"${voffset -22}\n");
@@ -281,11 +281,11 @@ void conkyrc_default () {
 			else if (set_calendar == 2)
 				fprintf(fp,"${voffset -2}${color0}${font Poky:size=16}D${font}${voffset -8}${font Ubuntu:style=Bold:size=7}${offset -17}${voffset 4}${time %%d}${font}${color}${font Monospace:size=7}${execpi 10800 %s/bin/conkyZimCalendar}${font}${voffset -14}\n", finddir("bin/conkyZimCalendar"));
 			else {
-				fprintf(fp,"${voffset -2}${color0}${font Poky:size=16}D${font}${voffset -8}${font Ubuntu:style=Bold:size=7}${offset -17}${voffset 4}${time %%d}${font}${color}${voffset -1}${font Monospace:size=7}${execpi 300 DJS=`date +%%_d`; cal ");
+				fprintf(fp,"${voffset -2}${color0}${font Poky:size=16}D${font}${voffset -8}${font Ubuntu:style=Bold:size=7}${offset -17}${voffset 4}${time %%d}${font}${color}${voffset -1}${font Monospace:size=7}${execpi 300 DJS=`date +%%_d`; ");
         			if (ubuntufix == 'y')
-					fprintf(fp,"-h -M");
+					fprintf(fp,"ncal -h -M -b");
                                 else
-                                        fprintf(fp,"-m");
+                                        fprintf(fp,"cal -m");
 				fprintf(fp,"|sed \'2,8!d\'| sed \'/./!d\' | sed \'s/^/${goto 42} /\'| sed \'s/$/ /\' | sed \'s/^/ /\' | sed /\" $DJS \"/s/\" $DJS \"/\" \"\'${font Ubuntu:style=Bold:size=8}${voffset -2}${offset -4}${color1} \'\"$DJS\"\'${color}${font Monospace:size=7}\'\" \"/}${voffset -1}\n");
 				if (ubuntufix == 'y')
 					fprintf(fp,"${voffset -22}\n");
