@@ -136,14 +136,9 @@ void conkyrc_default () {
 	fprintf(fp,"# - SYSTEM - #\n");
 	fprintf(fp,"##############\n");
 	//Logo
-	if (logo == True) {
-		fprintf(fp,"${color0}${voffset 6}${font OpenLogos:size=19}%s${font}${color}", logo_letter);
-		fprintf(fp,"${goto %d}${voffset -14}Kernel:  ${alignr}${color2}${kernel}${color}\n", go2);
-	}
-	else {
-		fprintf(fp,"${color0}${font Poky:size=14}S${font}${color}");
-		fprintf(fp,"${goto %d}${voffset -8}Kernel:  ${alignr}${color2}${kernel}${color}\n", go2);
-	}
+  fprintf(fp,"${color0}${voffset 8}${offset 4}${font ConkyColorsLogos:size=8}%s${font}${color}${voffset -16}\n", logo_letter);
+  fprintf(fp,"${color0}${font ConkyColors:size=15}b${font}${color}");
+  fprintf(fp,"${goto %d}${voffset -8}Kernel:  ${alignr}${color2}${kernel}${color}\n", go2);
 	fprintf(fp,"${goto %d}%s: ${alignr}${color2}${uptime}${color}\n", go2, uptime);
 	//Updates
 	if (aptget == True) {
@@ -158,7 +153,7 @@ void conkyrc_default () {
 	//CPU
 	fprintf(fp,"# |--CPU\n");
 	if (cpu == 1) {
-		fprintf(fp,"${voffset 2}${offset 2}${color0}${font Poky:size=14}P${color}${font}${voffset -4}");
+		fprintf(fp,"${voffset 2}${offset 1}${color0}${font ConkyColors:size=15}c${color}${font}${voffset -4}");
 		if (cputemp == True) {
 			if (unit == True)
 				fprintf(fp,"${goto %d}CPU: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu1}%%${font} ${alignr}${font Ubuntu:style=Bold:size=8}${color1}${execi 30 sensors -f | grep 'Core 0' | awk '{print $3}' | sed 's/+//' | sed 's/.0.*//'}${color}${font}  ${color2}${cpugraph cpu1 8,50 %s}${color}\n", go2, color4);
@@ -169,7 +164,7 @@ void conkyrc_default () {
 			fprintf(fp,"${goto %d}CPU: ${font Ubuntu:style=Bold:size=8}${color1}${cpu cpu1}%%${color}${font} ${alignr}${color2}${cpugraph cpu1 8,60 %s}${color}\n", go2, color4);
 	}
 	else {
-		fprintf(fp,"${voffset 2}${offset 2}${color0}${font Poky:size=14}P${font}${offset -19}${voffset 9}${offset 1}${cpubar cpu0 4,18}${color}${voffset -16}");
+		fprintf(fp,"${voffset 2}${offset 1}${color0}${font ConkyColors:size=15}c${font}${offset -20}${voffset 6}${cpubar cpu0 4,17}${color}${voffset -16}");
 		for (i = 1; i <= cpu; i++) {
 			if (cputemp == True) {
 				if (unit == True)
@@ -183,23 +178,23 @@ void conkyrc_default () {
 	}
 	//Memory
 	fprintf(fp,"# |--MEM\n");
-	fprintf(fp,"${voffset 2}${offset 1}${color0}${font Poky:size=14}M${font}${color}${goto %d}${voffset -7}RAM: ${font Ubuntu:style=Bold:size=8}${color1}$memperc%%${color}${font}\n", go2);
-	fprintf(fp,"${voffset 1}${offset 1}${voffset 2}${color0}${membar 4,18}${color}${goto %d}${voffset -2}F: ${font Ubuntu:style=Bold:size=8}${color2}${memeasyfree}${color}${font} U: ${font Ubuntu:style=Bold:size=8}${color2}${mem}${color}${font}\n", go2);
+	fprintf(fp,"${voffset 2}${color0}${font ConkyColors:size=15}g${font}${color}${goto %d}${voffset -7}RAM: ${font Ubuntu:style=Bold:size=8}${color1}$memperc%%${color}${font}\n", go2);
+	fprintf(fp,"${offset 1}${color0}${membar 4,17}${color}${goto %d}${voffset -2}F: ${font Ubuntu:style=Bold:size=8}${color2}${memeasyfree}${color}${font} U: ${font Ubuntu:style=Bold:size=8}${color2}${mem}${color}${font}\n", go2);
 	//Swap
 	if (swap == True) {
 		fprintf(fp,"# |--SWAP\n");
-		fprintf(fp,"${voffset 4}${offset 1}${color0}${font Poky:size=12}s${font}${color}${voffset -4}${goto %d}SWAP: ${font Ubuntu:style=Bold:size=8}${color1}${swapperc}%%${color}${font}\n", go2);
-		fprintf(fp,"${voffset 2}${offset 1}${color0}${swapbar 4,18}${color}${voffset -2}${goto %d}F: ${font Ubuntu:style=Bold:size=8}${color2}$swapmax${color}${font} U: ${font Ubuntu:style=Bold:size=8}${color2}$swap${color}${font}\n", go2);
+		fprintf(fp,"${voffset 4}${color0}${font ConkyColors:size=15}y${font}${color}${voffset -6}${goto %d}SWAP: ${font Ubuntu:style=Bold:size=8}${color1}${swapperc}%%${color}${font}\n", go2);
+		fprintf(fp,"${offset 1}${color0}${swapbar 4,17}${color}${voffset -2}${goto %d}F: ${font Ubuntu:style=Bold:size=8}${color2}$swapmax${color}${font} U: ${font Ubuntu:style=Bold:size=8}${color2}$swap${color}${font}\n", go2);
 	}
 	//Battery
 	if (set_battery == True) {
 		fprintf(fp,"# |--BATTERY\n");
-		fprintf(fp,"${if_existing /sys/class/power_supply/BAT%d}${color0}${font Poky:size=13}E${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${battery_percent BAT%d}%%${color}${font} ${alignr}${color2}${battery_bar BAT%d 8,60}${color}${else}${color0}${font Poky:size=13}E${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color2}%s${color}${font}${endif}\n", battery_value, go2, battery, battery_value, battery_value, go2, battery, unknownstatus);
+		fprintf(fp,"${if_existing /sys/class/power_supply/BAT%d}${color0}${font ConkyColors:size=15}6${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${battery_percent BAT%d}%%${color}${font} ${alignr}${color2}${battery_bar BAT%d 8,60}${color}${else}${color0}${font ConkyColors:size=15}6${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color2}%s${color}${font}${endif}\n", battery_value, go2, battery, battery_value, battery_value, go2, battery, unknownstatus);
 	}
 	//Processes
 	if (set_process == True) {
 		fprintf(fp,"# |--PROC\n");
-		fprintf(fp,"${voffset 2}${voffset 1}${color0}${font Poky:size=14}a${font}${color}${goto %d}${voffset -10}%s: ${color2}${alignr 13}CPU${alignr}RAM${color}\n", go2, processes);
+		fprintf(fp,"${voffset 2}${color0}${font ConkyColors:size=15}z${font}${color}${goto %d}${voffset -10}%s: ${color2}${alignr 13}CPU${alignr}RAM${color}\n", go2, processes);
 		for (i = True; i <= proc; i++)
 			fprintf(fp,"${voffset -1}${goto 42}${color2}${top name %d}${color}${font Ubuntu:style=Bold:size=8}${color1} ${goto 126}${top cpu %d}${alignr }${top mem %d}${color}${font}\n", i, i, i);
 	}
@@ -269,7 +264,7 @@ void conkyrc_default () {
 			fprintf(fp,"# - CALENDAR - #\n");
 			fprintf(fp,"################\n");
 			if (set_calendar == 1) {
-				fprintf(fp,"${voffset -2}${color0}${font Poky:size=16}D${font}${voffset -8}${font Ubuntu:style=Bold:size=7}${offset -17}${voffset 4}${time %%d}${font}${color}${voffset -1}${font Monospace:size=7}${execpi 300 DJS=`date +%%_d`; ");
+				fprintf(fp,"${voffset -2}${color0}${font ConkyColors:size=15}n${font}${voffset -8}${offset 1}${font Ubuntu:style=Bold:size=7}${offset -17}${voffset 4}${time %%d}${font}${color}${voffset -1}${font Monospace:size=7}${execpi 300 DJS=`date +%%_d`; ");
 				if (ubuntufix == 'y')
 					fprintf(fp,"ncal -h -S -b");
                                 else
@@ -277,9 +272,9 @@ void conkyrc_default () {
 				fprintf(fp,"|sed \'2,8!d\'| sed \'/./!d\' | sed \'s/^/${goto 42} /\'| sed \'s/$/ /\' | sed \'s/^/ /\' | sed /\" $DJS \"/s/\" $DJS \"/\" \"\'${font Arial:style=Bold:size=8}${voffset -2}${offset -4}${color1} \'\"$DJS\"\'${color}${font Monospace:size=7}\'\" \"/}${voffset -1}\n");
 			}
 			else if (set_calendar == 2)
-				fprintf(fp,"${voffset -2}${color0}${font Poky:size=16}D${font}${voffset -8}${font Ubuntu:style=Bold:size=7}${offset -17}${voffset 4}${time %%d}${font}${color}${font Monospace:size=7}${execpi 10800 %s/bin/conkyZimCalendar}${font}${voffset -14}\n", finddir("bin/conkyZimCalendar"));
+				fprintf(fp,"${voffset -2}${color0}${font ConkyColors:size=15}D${font}${voffset -8}${font Ubuntu:style=Bold:size=7}${offset -17}${voffset 4}${time %%d}${font}${color}${font Monospace:size=7}${execpi 10800 %s/bin/conkyZimCalendar}${font}${voffset -14}\n", finddir("bin/conkyZimCalendar"));
 			else {
-				fprintf(fp,"${voffset -2}${color0}${font Poky:size=16}D${font}${voffset -8}${font Ubuntu:style=Bold:size=7}${offset -17}${voffset 4}${time %%d}${font}${color}${voffset -1}${font Monospace:size=7}${execpi 300 DJS=`date +%%_d`; ");
+				fprintf(fp,"${voffset -2}${color0}${font ConkyColors:size=15}D${font}${voffset -8}${font Ubuntu:style=Bold:size=7}${offset -17}${voffset 4}${time %%d}${font}${color}${voffset -1}${font Monospace:size=7}${execpi 300 DJS=`date +%%_d`; ");
         			if (ubuntufix == 'y')
 					fprintf(fp,"ncal -h -M -b");
                                 else
@@ -347,7 +342,7 @@ void conkyrc_default () {
 		fprintf(fp,"############\n");
 		fprintf(fp,"# type \"ct help\" in terminal for info\n");
 		fprintf(fp,"${voffset 4}${font Ubuntu:style=Bold:size=8}TASK $stippled_hr${font}\n");
-		fprintf(fp,"${voffset 4}${execpi 5 cat ~/.conkycolors/tasks | fold -w 38 | sed 's/\\[ \\]/\\[     \\]/' | sed 's/\\[X\\]/\\[ X \\]/' | sed 's/\\] /\\] ${color2}/' | sed 's/$/${color}/' | sed 's/ X /${color0}${font Poky:size=7}A${font}${color}${voffset -1}/'}\n");
+		fprintf(fp,"${voffset 4}${execpi 5 cat ~/.conkycolors/tasks | fold -w 38 | sed 's/\\[ \\]/\\[     \\]/' | sed 's/\\[X\\]/\\[ X \\]/' | sed 's/\\] /\\] ${color2}/' | sed 's/$/${color}/' | sed 's/ X /${color0}${font ConkyColors:size=11}p${font}${color}${voffset -5}/'}\n");
 	}
 
 	//NVIDIA Widget
@@ -431,29 +426,29 @@ void conkyrc_default () {
             fprintf(fp,"${voffset -4}${font Ubuntu:style=Bold:size=8}%s $stippled_hr${font}\n", network);
 		fprintf(fp,"# |--WLAN%d\n", wlan);
 		fprintf(fp,"${if_up wlan%d}\n", wlan);
-		fprintf(fp,"${voffset -5}${color0}${font Webdings:size=17}”${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${upspeed wlan%d}${color}${font} ${alignr}${color2}${upspeedgraph wlan%d 8,60 %s}${color}\n", go2, up, wlan, wlan, color4);
+		fprintf(fp,"${voffset -5}${color0}${font ConkyColors:size=15}s${font}${color}${goto %d}${voffset -12}%s: ${font Ubuntu:style=Bold:size=8}${color1}${upspeed wlan%d}${color}${font} ${alignr}${color2}${upspeedgraph wlan%d 8,60 %s}${color}\n", go2, up, wlan, wlan, color4);
 		fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totalup wlan%d}${color}${font}\n", go2, total, wlan);
-		fprintf(fp,"${voffset 2}${color0}${font Webdings:size=17}“${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed wlan%d}${color}${font} ${alignr}${color2}${downspeedgraph wlan%d 8,60 %s}${color}\n", go2, down, wlan, wlan, color4);
+		fprintf(fp,"${voffset 2}${color0}${font ConkyColors:size=15}t${font}${color}${goto %d}${voffset -12}%s: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed wlan%d}${color}${font} ${alignr}${color2}${downspeedgraph wlan%d 8,60 %s}${color}\n", go2, down, wlan, wlan, color4);
 		fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totaldown wlan%d}${color}${font}\n", go2, total, wlan);
-		fprintf(fp,"${voffset 2}${color0}${font Poky:size=14}Y${font}${color}${goto %d}${voffset -2}%s: ${font Ubuntu:style=Bold:size=8}${color1}${wireless_link_qual_perc wlan%d}%%${color}${font} ${alignr}${color2}${wireless_link_bar 8,60 wlan%d}${color}\n", go2, sinal, wlan, wlan);
+		fprintf(fp,"${voffset 2}${color0}${font ConkyColors:size=15}j${font}${color}${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${wireless_link_qual_perc wlan%d}%%${color}${font} ${alignr}${color2}${wireless_link_bar 8,60 wlan%d}${color}\n", go2, sinal, wlan, wlan);
 		fprintf(fp,"${voffset 2}${color0}${font Webdings:size=16}¬${font}${color}${goto %d}${voffset -8}%s: ${alignr}${color2}${addr wlan%d}${color}\n", go2, localip, wlan);
 		fprintf(fp,"${goto %d}%s: ${alignr}${color2}${execi 10800 curl ifconfig.me}${color}\n", go2, publicip);
 		fprintf(fp,"# |--ETH%d\n", eth);
 		fprintf(fp,"${else}${if_up eth%d}\n", eth);
-		fprintf(fp,"${voffset -5}${color0}${font Webdings:size=17}”${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${upspeed eth%d}${color}${font} ${alignr}${color2}${upspeedgraph eth%d 8,60 %s}${color}\n", go2, up, eth, eth, color4);
+		fprintf(fp,"${voffset -5}${color0}${font ConkyColors:size=15}s${font}${color}${goto %d}${voffset -12}%s: ${font Ubuntu:style=Bold:size=8}${color1}${upspeed eth%d}${color}${font} ${alignr}${color2}${upspeedgraph eth%d 8,60 %s}${color}\n", go2, up, eth, eth, color4);
 		fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totalup eth%d}${color}${font}\n", go2, total, eth);
-		fprintf(fp,"${voffset 2}${color0}${font Webdings:size=17}“${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed eth%d}${color}${font} ${alignr}${color2}${downspeedgraph eth%d 8,60 %s}${color}\n", go2, down, eth, eth, color4);
+		fprintf(fp,"${voffset 2}${color0}${font ConkyColors:size=15}t${font}${color}${goto %d}${voffset -12}%s: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed eth%d}${color}${font} ${alignr}${color2}${downspeedgraph eth%d 8,60 %s}${color}\n", go2, down, eth, eth, color4);
 		fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totaldown eth%d}${color}${font}\n", go2, total, eth);
 		fprintf(fp,"${voffset 2}${color0}${font Webdings:size=16}¬${font}${color}${goto %d}${voffset -4}%s: ${alignr}${color2}${addr eth%d}${color}\n", go2, localip, eth);
 		fprintf(fp,"${goto %d}%s: ${alignr}${color2}${execi 10800 curl ifconfig.me}${color}\n", go2, publicip);
 		fprintf(fp,"# |--PPP%d\n", ppp);
 		fprintf(fp,"${else}${if_up ppp%d}\n", ppp);
-		fprintf(fp,"${voffset -5}${color0}${font Webdings:size=17}”${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${upspeed ppp%d}${color}${font} ${alignr}${color2}${upspeedgraph ppp%d 8,60 %s}${color}\n", go2, up, ppp, ppp, color4);
+		fprintf(fp,"${voffset -5}${color0}${font ConkyColors:size=15}s${font}${color}${goto %d}${voffset -12}%s: ${font Ubuntu:style=Bold:size=8}${color1}${upspeed ppp%d}${color}${font} ${alignr}${color2}${upspeedgraph ppp%d 8,60 %s}${color}\n", go2, up, ppp, ppp, color4);
 		fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totalup ppp%d}${color}${font}\n", go2, total, ppp);
-		fprintf(fp,"${voffset 2}${color0}${font Webdings:size=17}“${font}${color}${goto %d}${voffset -5}%s: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed ppp%d}${color}${font} ${alignr}${color2}${downspeedgraph ppp%d 8,60 %s}${color}\n", go2, down, ppp, ppp, color4);
+		fprintf(fp,"${voffset 2}${color0}${font ConkyColors:size=15}t${font}${color}${goto %d}${voffset -12}%s: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed ppp%d}${color}${font} ${alignr}${color2}${downspeedgraph ppp%d 8,60 %s}${color}\n", go2, down, ppp, ppp, color4);
 		fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totaldown ppp%d}${color}${font}\n", go2, total, ppp);
 		fprintf(fp,"${voffset 2}${color0}${font Webdings:size=16}¬${font}${color}${goto %d}${voffset -4}%s: ${alignr}${color2}${addr ppp%d}${color}\n", go2, localip, ppp);
-		fprintf(fp,"${else}${voffset 4}${offset 4}${color0}${font Wingdings:size=20}N${font}${color}${voffset -6}${goto %d}%s${voffset 14}${endif}${endif}${endif}\n", go2, nonet);
+		fprintf(fp,"${else}${voffset 4}${offset 1}${color0}${font Wingdings:size=20}N${font}${color}${voffset -6}${goto %d}%s${voffset 14}${endif}${endif}${endif}\n", go2, nonet);
 	}
 
 	//Weather Widget

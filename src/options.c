@@ -443,6 +443,7 @@ int set_default_values()
 	strcpy(user,"<user>");
 	strcpy(password,"<password>");
 	strcpy(weather_code,"BRXX0043");
+	strcpy(logo_letter,"L");
 
 	strcpy(defaultcolor, "212526");
 	strcpy(color0, "E6E6E6");
