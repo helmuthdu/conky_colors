@@ -30,13 +30,13 @@ void conkyplayer () {
 				fprintf(fp,"${if_running rhythmbox}\n");
 			else
 				fprintf(fp,"${if_running clementine}\n");
-			fprintf(fp,"${voffset -22}${offset -2}${color0}${font Webdings:size=20}Ø${font}${color}${voffset -8}${goto %d}%s:${alignr}${color2}[--datatype=ST]${color}\n", go2, status);
+			fprintf(fp,"${voffset -18}${color0}${font ConkyColors:size=15}G${font}${color}${voffset -8}${goto %d}%s:${alignr}${color2}[--datatype=ST]${color}\n", go2, status);
 			fprintf(fp,"${goto 100}${voffset 4}${color2}[--datatype=AR]${color}\n");
 			fprintf(fp,"${goto 100}${color2}[--datatype=AL]${color}\n");
 			fprintf(fp,"${goto 100}${color2}[--datatype=TI]${color}\n");
 			fprintf(fp,"${goto 100}${color2}[--datatype=PT]/[--datatype=LE]${color}${voffset -8}\n");
 			fprintf(fp,"$else\n");
-			fprintf(fp,"${voffset -22}${offset -2}${color0}${font Webdings:size=20}Ø${font}${color}${voffset -8}${goto 32}Status:${alignr}${color2}off${color}\n");
+			fprintf(fp,"${voffset -18}${color0}${font ConkyColors:size=15}G${font}${color}${voffset -8}${goto 32}Status:${alignr}${color2}off${color}\n");
 			fprintf(fp,"${goto 105}${voffset 24}${execi 10 %s/bin/conkyCover}${font Droid Sans:style=Bold:size=8}${color2}%s${color}${font}${voffset 8}\n", finddir("bin/conkyCover"), player);
 			fprintf(fp,"$endif");
 	}
@@ -142,14 +142,14 @@ void conkyplayer () {
 				fprintf(fp,"${if_running rhythmbox}\n");
 			else
 				fprintf(fp,"${if_running clementine}\n");
-			fprintf(fp,"${voffset -12}${color0}${font Musicelements:size=18}z${font}${color}${voffset -8}${goto %d}%s:${alignr}${color2}[--datatype=ST]${color}\n", go2, status);
+			fprintf(fp,"${voffset -6}${color0}${font ConkyColors:size=15}G${font}${color}${voffset -8}${goto %d}%s:${alignr}${color2}[--datatype=ST]${color}\n", go2, status);
 			fprintf(fp,"${voffset 4}${goto %d}${color2}[--datatype=AR]${color}\n", go2);
 			fprintf(fp,"${color2}${goto %d}[--datatype=AL]${color}\n", go2);
 			fprintf(fp,"${color2}${goto %d}[--datatype=TI]${color}\n", go2);
 			fprintf(fp,"${voffset 4}${goto %d}${color2}[--datatype=PT]/[--datatype=LE]${color}", go2);
 			fprintf(fp,"${alignr}${color2}${execbar %s/bin/conky%s --datatype=PP}${color}", playerdir, player);
 			fprintf(fp,"$else\n");
-			fprintf(fp,"${voffset -12}${color0}${font Webdings:size=16}U${font}${color}${voffset -2}${goto 32}Status:${alignr}${color2}off${color}\n");
+			fprintf(fp,"${voffset -6}${color0}${font ConkyColors:size=15}G${font}${color}${voffset -2}${goto 32}Status:${alignr}${color2}off${color}\n");
 			fprintf(fp,"${voffset 12}$alignc${font Droid Sans:style=Bold:size=8}${color2}%s${color}${font}${voffset -10}\n", player);
 			fprintf(fp,"$endif");
 		}
@@ -162,13 +162,13 @@ void conkyplayer () {
 				fprintf(fp,"${if_running rhythmbox}\n");
 			else
 				fprintf(fp,"${if_running clementine}\n");
-			fprintf(fp,"${voffset -12}${color0}${font Webdings:size=16}U${font}${color}${voffset -2}${goto %d}%s:${alignr}${color2}[--datatype=ST]${color}\n", go2, status);
+			fprintf(fp,"${voffset -6}${color0}${font ConkyColors:size=15}G${font}${color}${voffset -2}${goto %d}%s:${alignr}${color2}[--datatype=ST]${color}\n", go2, status);
 			fprintf(fp,"${voffset 4}${color0}${color0}${font Musicelements:size=19}z${font}${color}${voffset -8}${goto %d}%s:${alignr}${color2}[--datatype=AR]${color}\n", go2, song);
 			fprintf(fp,"${color2}${alignr}[--datatype=AL]${color}\n");
 			fprintf(fp,"${color2}${alignr}[--datatype=TI]${color}\n");
 			fprintf(fp,"${voffset -7}${color0}${font Martin Vogel's Symbols:size=19}U${font}${color}${voffset -4}${goto %d}%s:${alignr}${color2}[--datatype=PT]/[--datatype=LE]${color}${voffset 2}", go2, tempo);
 			fprintf(fp,"$else\n");
-			fprintf(fp,"${voffset -12}${color0}${font Webdings:size=16}U${font}${color}${voffset -2}${goto 32}Status:${alignr}${color2}off${color}\n");
+			fprintf(fp,"${voffset -6}${color0}${font ConkyColors:size=15}G${font}${color}${voffset -2}${goto 32}Status:${alignr}${color2}off${color}\n");
 			fprintf(fp,"${voffset 12}$alignc${font Droid Sans:style=Bold:size=8}${color2}%s${color}${font}${voffset -10}\n", player);
 			fprintf(fp,"$endif");
 		}
