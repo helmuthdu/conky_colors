@@ -264,7 +264,7 @@ void conkyrc_default () {
 			fprintf(fp,"# - CALENDAR - #\n");
 			fprintf(fp,"################\n");
 			if (set_calendar == 1) {
-				fprintf(fp,"${voffset -2}${color0}${font ConkyColors:size=15}n${font}${voffset -8}${offset 1}${font Ubuntu:style=Bold:size=7}${offset -17}${voffset 4}${time %%d}${font}${color}${voffset -1}${font Monospace:size=7}${execpi 300 DJS=`date +%%_d`; ");
+				fprintf(fp,"${voffset 2}${color0}${font ConkyColors:size=15}n${font}${voffset -10}${offset 1}${font Ubuntu:style=Bold:size=7}${offset -17}${voffset 4}${time %%d}${font}${color}${voffset -1}${font Monospace:size=7}${execpi 300 DJS=`date +%%_d`; ");
 				if (ubuntufix == 'y')
 					fprintf(fp,"ncal -h -S -b");
                                 else
@@ -430,25 +430,31 @@ void conkyrc_default () {
 		fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totalup wlan%d}${color}${font}\n", go2, total, wlan);
 		fprintf(fp,"${voffset 2}${color0}${font ConkyColors:size=15}t${font}${color}${goto %d}${voffset -12}%s: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed wlan%d}${color}${font} ${alignr}${color2}${downspeedgraph wlan%d 8,60 %s}${color}\n", go2, down, wlan, wlan, color4);
 		fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totaldown wlan%d}${color}${font}\n", go2, total, wlan);
-		fprintf(fp,"${voffset 2}${color0}${font ConkyColors:size=15}j${font}${color}${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${wireless_link_qual_perc wlan%d}%%${color}${font} ${alignr}${color2}${wireless_link_bar 8,60 wlan%d}${color}\n", go2, sinal, wlan, wlan);
-		fprintf(fp,"${voffset 2}${color0}${font Webdings:size=16}¬${font}${color}${goto %d}${voffset -8}%s: ${alignr}${color2}${addr wlan%d}${color}\n", go2, localip, wlan);
-		fprintf(fp,"${goto %d}%s: ${alignr}${color2}${execi 10800 curl ifconfig.me}${color}\n", go2, publicip);
+		fprintf(fp,"${color0}${font ConkyColors:size=15}j${font}${color}${voffset -6}${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${wireless_link_qual_perc wlan%d}%%${color}${font} ${alignr}${color2}${wireless_link_bar 8,60 wlan%d}${color}\n", go2, sinal, wlan, wlan);
+		fprintf(fp,"${voffset 2}${color0}${font ConkyColors:size=15}B${font}${color}${goto %d}${voffset -6}%s: ${alignr}${color2}${addr wlan%d}${color}\n", go2, localip, wlan);
 		fprintf(fp,"# |--ETH%d\n", eth);
 		fprintf(fp,"${else}${if_up eth%d}\n", eth);
 		fprintf(fp,"${voffset -5}${color0}${font ConkyColors:size=15}s${font}${color}${goto %d}${voffset -12}%s: ${font Ubuntu:style=Bold:size=8}${color1}${upspeed eth%d}${color}${font} ${alignr}${color2}${upspeedgraph eth%d 8,60 %s}${color}\n", go2, up, eth, eth, color4);
 		fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totalup eth%d}${color}${font}\n", go2, total, eth);
 		fprintf(fp,"${voffset 2}${color0}${font ConkyColors:size=15}t${font}${color}${goto %d}${voffset -12}%s: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed eth%d}${color}${font} ${alignr}${color2}${downspeedgraph eth%d 8,60 %s}${color}\n", go2, down, eth, eth, color4);
 		fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totaldown eth%d}${color}${font}\n", go2, total, eth);
-		fprintf(fp,"${voffset 2}${color0}${font Webdings:size=16}¬${font}${color}${goto %d}${voffset -4}%s: ${alignr}${color2}${addr eth%d}${color}\n", go2, localip, eth);
-		fprintf(fp,"${goto %d}%s: ${alignr}${color2}${execi 10800 curl ifconfig.me}${color}\n", go2, publicip);
+		fprintf(fp,"${voffset 2}${color0}${font ConkyColors:size=15}B${font}${color}${goto %d}${voffset -6}%s: ${alignr}${color2}${addr eth%d}${color}\n", go2, localip, eth);
+		fprintf(fp,"# |--ETH%d\n", eth+1);
+		fprintf(fp,"${else}${if_up eth%d}\n", eth+1);
+		fprintf(fp,"${voffset -5}${color0}${font ConkyColors:size=15}s${font}${color}${goto %d}${voffset -12}%s: ${font Ubuntu:style=Bold:size=8}${color1}${upspeed eth%d}${color}${font} ${alignr}${color2}${upspeedgraph eth%d 8,60 %s}${color}\n", go2, up, eth+1, eth+1, color4);
+		fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totalup eth%d}${color}${font}\n", go2, total, eth+1);
+		fprintf(fp,"${voffset 2}${color0}${font ConkyColors:size=15}t${font}${color}${goto %d}${voffset -12}%s: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed eth%d}${color}${font} ${alignr}${color2}${downspeedgraph eth%d 8,60 %s}${color}\n", go2, down, eth+1, eth+1, color4);
+		fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totaldown eth%d}${color}${font}\n", go2, total, eth+1);
+		fprintf(fp,"${color0}${font ConkyColors:size=15}j${font}${color}${voffset -6}${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${wireless_link_qual_perc eth%d}%%${color}${font} ${alignr}${color2}${wireless_link_bar 8,60 eth%d}${color}\n", go2, sinal, eth+1, eth+1);
+		fprintf(fp,"${voffset 4}${color0}${font ConkyColors:size=15}B${font}${color}${goto %d}${voffset -6}%s: ${alignr}${color2}${addr eth%d}${color}\n", go2, localip, eth+1);
 		fprintf(fp,"# |--PPP%d\n", ppp);
 		fprintf(fp,"${else}${if_up ppp%d}\n", ppp);
 		fprintf(fp,"${voffset -5}${color0}${font ConkyColors:size=15}s${font}${color}${goto %d}${voffset -12}%s: ${font Ubuntu:style=Bold:size=8}${color1}${upspeed ppp%d}${color}${font} ${alignr}${color2}${upspeedgraph ppp%d 8,60 %s}${color}\n", go2, up, ppp, ppp, color4);
 		fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totalup ppp%d}${color}${font}\n", go2, total, ppp);
 		fprintf(fp,"${voffset 2}${color0}${font ConkyColors:size=15}t${font}${color}${goto %d}${voffset -12}%s: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed ppp%d}${color}${font} ${alignr}${color2}${downspeedgraph ppp%d 8,60 %s}${color}\n", go2, down, ppp, ppp, color4);
 		fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color2}${totaldown ppp%d}${color}${font}\n", go2, total, ppp);
-		fprintf(fp,"${voffset 2}${color0}${font Webdings:size=16}¬${font}${color}${goto %d}${voffset -4}%s: ${alignr}${color2}${addr ppp%d}${color}\n", go2, localip, ppp);
-		fprintf(fp,"${else}${voffset 4}${offset 1}${color0}${font Wingdings:size=20}N${font}${color}${voffset -6}${goto %d}%s${voffset 14}${endif}${endif}${endif}\n", go2, nonet);
+		fprintf(fp,"${voffset 2}${color0}${font ConkyColors:size=15}B${font}${color}${goto %d}${voffset -6}%s: ${alignr}${color2}${addr ppp%d}${color}\n", go2, localip, ppp);
+		fprintf(fp,"${else}${voffset 4}${color0}${font ConkyColors:size=15}q${font}${color}${voffset -6}${goto %d}%s${voffset 14}${endif}${endif}${endif}${endif}\n", go2, nonet);
 	}
 
 	//Weather Widget
@@ -457,22 +463,19 @@ void conkyrc_default () {
 			fprintf(fp,"# - WEATHER - #\n");
 			fprintf(fp,"####################\n");
 			fprintf(fp,"# http://weather.yahoo.com/\n");
-			if (set_network == True)
-				fprintf(fp,"${voffset -8}${font Ubuntu:style=Bold:size=8}%s $stippled_hr${font}\n", Weather);
-			else
-				fprintf(fp,"${voffset -4}${font Ubuntu:style=Bold:size=8}%s $stippled_hr${font}\n", Weather);
+      fprintf(fp,"${voffset -4}${font Ubuntu:style=Bold:size=8}%s $stippled_hr${font}\n", Weather);
 
 			if (unit == True) {
 				fprintf(fp,"${if_gw}${voffset 4}${offset -4}${color0}${font ConkyWeather:size=21}${execi 600 /usr/share/conkycolors/bin/conkyYahooWeather code UKXX1609 f}${font}${color}\n");
 				fprintf(fp,"${voffset -24}${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather cur %s f}°F${color}${font}\n", go2, temperature, yahooweatherdir, weather_code);
 				fprintf(fp,"${goto %d}${voffset -2}${color0}${font Webdings}6${font}${color}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather min %s f}°F${color}${font}  ${voffset -2}${color0}${font Webdings}5${font}${color}${voffset -1}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather max %s f}°F${color}${font}\n", go2, yahooweatherdir, weather_code, yahooweatherdir, weather_code);
-				fprintf(fp,"${else}${voffset 4}${offset 4}${color0}${font Wingdings:size=20}N${font}${color}${voffset -6}${goto %d}%s${voffset 14}${endif}\n", go2, noweather);
+				fprintf(fp,"${else}${voffset 4}${color0}${font ConkyColors:size=15}q${font}${color}${voffset -6}${goto %d}%s${voffset 14}${endif}\n", go2, noweather);
 			}
 			else {
 				fprintf(fp,"${if_gw}${voffset 4}${offset -4}${color0}${font ConkyWeather:size=21}${execi 600 /usr/share/conkycolors/bin/conkyYahooWeather code UKXX1609 c}${font}${color}\n");
 				fprintf(fp,"${voffset -24}${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather cur %s c}°C${color}${font}\n", go2, temperature, yahooweatherdir, weather_code);
 				fprintf(fp,"${goto %d}${voffset -2}${color0}${font Webdings}6${font}${color}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather min %s c}°C${color}${font}  ${voffset -2}${color0}${font Webdings}5${font}${color}${voffset -1}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather max %s c}°C${color}${font}\n", go2, yahooweatherdir, weather_code, yahooweatherdir, weather_code);
-				fprintf(fp,"${else}${voffset 4}${offset 4}${color0}${font Wingdings:size=20}N${font}${color}${voffset -6}${goto %d}%s${voffset 14}${endif}\n", go2, noweather);
+				fprintf(fp,"${else}${voffset 4}${color0}${font ConkyColors:size=15}q${font}${color}${voffset -6}${goto %d}%s${voffset 14}${endif}\n", go2, noweather);
 			}
 	}
 	else
@@ -491,14 +494,14 @@ void conkyrc_default () {
 				fprintf(fp,"${voffset -24}${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather cur %d f}°F${color}${font}\n", go2, temperature, bbcweatherdir, bbccode);
 				fprintf(fp,"${goto %d}${voffset -2}${color0}${font Webdings}6${font}${color}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather min %d f}°F${color}${font}  ${voffset -2}${color0}${font Webdings}5${font}${color}${voffset -1}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather max %d f}°F${color}${font}\n", go2, bbcweatherdir, bbccode, bbcweatherdir, bbccode);
 				fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather hum %d f}%%${color}${font}${alignr}${color2}${execbar %s/bin/conkyBBCWeather hum %d f}%%${color}${font}\n", go2, humidity, bbcweatherdir, bbccode, bbcweatherdir, bbccode);
-				fprintf(fp,"${else}${voffset 4}${offset 4}${color0}${font Wingdings:size=20}N${font}${color}${voffset -6}${goto %d}%s${voffset 14}${endif}\n", go2, noweather);
+				fprintf(fp,"${else}${voffset 4}${color0}${font ConkyColors:size=15}q${font}${color}${voffset -6}${goto %d}%s${voffset 14}${endif}\n", go2, noweather);
 			}
 			else {
 				fprintf(fp,"${if_gw}${voffset 4}${offset -4}${color0}${font Webdings:size=24}·${font}${color}\n");
 				fprintf(fp,"${voffset -24}${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather cur %d c}°C${color}${font}\n", go2, temperature, bbcweatherdir, bbccode);
 				fprintf(fp,"${goto %d}${voffset -2}${color0}${font Webdings}6${font}${color}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather min %d c}°C${color}${font}  ${voffset -2}${color0}${font Webdings}5${font}${color}${voffset -1}${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather max %d c}°C${color}${font}\n", go2, bbcweatherdir, bbccode, bbcweatherdir, bbccode);
 				fprintf(fp,"${goto %d}%s: ${font Ubuntu:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather hum %d c}%%${color}${font}${alignr}${color2}${execbar %s/bin/conkyBBCWeather hum %d c}%%${color}${font}\n", go2, humidity, bbcweatherdir, bbccode, bbcweatherdir, bbccode);
-				fprintf(fp,"${else}${voffset 4}${offset 4}${color0}${font Wingdings:size=20}N${font}${color}${voffset -6}${goto %d}%s${voffset 14}${endif}\n", go2, noweather);
+				fprintf(fp,"${else}${voffset 4}${color0}${font ConkyColors:size=15}q${font}${color}${voffset -6}${goto %d}%s${voffset 14}${endif}\n", go2, noweather);
 			}
 	    }
 	fclose(fp);

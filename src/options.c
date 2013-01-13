@@ -351,7 +351,7 @@ int options (int argc, char *argv[]) {
 		}
 		else OPTION("--gentoo", key)
 		{
-			sprintf(logo_letter, "g");
+			sprintf(logo_letter, "o");
 			logo = True;
 		}
 		else OPTION("--xfce", key)
@@ -361,7 +361,7 @@ int options (int argc, char *argv[]) {
 		}
 		else OPTION("--gnome", key)
 		{
-			sprintf(logo_letter, "e");
+			sprintf(logo_letter, "g");
 			logo = True;
 		}
 		else OPTION("--kde", key)
@@ -443,7 +443,7 @@ int set_default_values()
 	strcpy(user,"<user>");
 	strcpy(password,"<password>");
 	strcpy(weather_code,"BRXX0043");
-	strcpy(logo_letter,"L");
+	strcpy(logo_letter,"l");
 
 	strcpy(defaultcolor, "212526");
 	strcpy(color0, "E6E6E6");
