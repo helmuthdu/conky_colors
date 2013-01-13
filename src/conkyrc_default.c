@@ -183,7 +183,7 @@ void conkyrc_default () {
 	//Swap
 	if (swap == True) {
 		fprintf(fp,"# |--SWAP\n");
-		fprintf(fp,"${voffset 4}${color0}${font ConkyColors:size=15}y${font}${color}${voffset -8}${goto %d}SWAP: ${font Liberation Sans:style=Bold:size=8}${color1}${swapperc}%%${color}${font}\n", go2);
+		fprintf(fp,"${voffset 2}${color0}${font ConkyColors:size=15}z${font}${color}${voffset -8}${goto %d}SWAP: ${font Liberation Sans:style=Bold:size=8}${color1}${swapperc}%%${color}${font}\n", go2);
 		fprintf(fp,"${voffset 2}${offset 1}${color0}${swapbar 4,17}${color}${voffset -2}${goto %d}F: ${font Liberation Sans:style=Bold:size=8}${color2}$swapmax${color}${font} U: ${font Liberation Sans:style=Bold:size=8}${color2}$swap${color}${font}\n", go2);
 	}
 	//Battery
@@ -194,7 +194,7 @@ void conkyrc_default () {
 	//Processes
 	if (set_process == True) {
 		fprintf(fp,"# |--PROC\n");
-		fprintf(fp,"${voffset 4}${color0}${font ConkyColors:size=15}z${font}${color}${goto %d}${voffset -10}%s: ${color2}${alignr 13}CPU${alignr}RAM${color}\n", go2, processes);
+		fprintf(fp,"${voffset 4}${color0}${font ConkyColors:size=15}C${font}${color}${goto %d}${voffset -10}%s: ${color2}${alignr 13}CPU${alignr}RAM${color}\n", go2, processes);
 		for (i = True; i <= proc; i++)
 			fprintf(fp,"${voffset -1}${goto 42}${color2}${top name %d}${color}${font Liberation Sans:style=Bold:size=8}${color1} ${goto 126}${top cpu %d}${alignr }${top mem %d}${color}${font}\n", i, i, i);
 	}
@@ -264,7 +264,7 @@ void conkyrc_default () {
 			fprintf(fp,"# - CALENDAR - #\n");
 			fprintf(fp,"################\n");
 			if (set_calendar == 1) {
-				fprintf(fp,"${voffset 2}${color0}${font ConkyColors:size=15}n${font}${voffset -10}${offset 1}${font Liberation Sans:style=Bold:size=7}${offset -17}${voffset 4}${time %%d}${font}${color}${voffset -1}${font Liberation Mono:size=7}${execpi 300 DJS=`date +%%_d`; ");
+				fprintf(fp,"${voffset 2}${color0}${font ConkyColors:size=15}n${font}${voffset -9}${offset 1}${font Liberation Sans:style=Bold:size=7}${offset -17}${voffset 4}${time %%d}${font}${color}${voffset -1}${font Liberation Mono:size=7}${execpi 300 DJS=`date +%%_d`; ");
 				if (ubuntufix == 'y')
 					fprintf(fp,"ncal -h -S -b");
                                 else
@@ -368,14 +368,14 @@ void conkyrc_default () {
 		fprintf(fp,"# |--HDTEMP1\n");
 			if (hdtemp2 == True || hdtemp3 == True || hdtemp4 == True)
 				if (unit == True)
-					fprintf(fp,"  ${voffset 4}${color0}${font Weather:size=15}y${font}${color}${voffset -8}${goto %d}/dev/%s: ${font Liberation Sans:style=Bold:size=8}${color1}${execi 120 hddtemp /dev/%s -n --unit=F}°F${color}${font}\n", go2, dev1, dev1);
+					fprintf(fp,"${voffset 4}${offset 2}${color0}${font ConkyColors:size=15}8${font}${color}${voffset -8}${goto %d}/dev/%s: ${font Liberation Sans:style=Bold:size=8}${color1}${execi 120 hddtemp /dev/%s -n --unit=F}°F${color}${font}\n", go2, dev1, dev1);
 				else
-					fprintf(fp,"  ${voffset 4}${color0}${font Weather:size=15}y${font}${color}${voffset -8}${goto %d}/dev/%s: ${font Liberation Sans:style=Bold:size=8}${color1}${execi 120 hddtemp /dev/%s -n --unit=C}°C${color}${font}\n", go2, dev1, dev1);
+					fprintf(fp,"${voffset 4}${offset 2}${color0}${font ConkyColors:size=15}8${font}${color}${voffset -8}${goto %d}/dev/%s: ${font Liberation Sans:style=Bold:size=8}${color1}${execi 120 hddtemp /dev/%s -n --unit=C}°C${color}${font}\n", go2, dev1, dev1);
 			else
 				if (unit == True)
-					fprintf(fp,"  ${voffset 4}${color0}${font Weather:size=15}y${font}${color}${voffset -3}${goto %d}%s: ${font Liberation Sans:style=Bold:size=8}${color1}${execi 120 hddtemp /dev/%s -n --unit=F}°F${color}${font}${alignr}${color2}/dev/%s${color}\n", go2, temperature, dev1, dev1);
+					fprintf(fp,"${voffset 4}${offset 2}${color0}${font ConkyColors:size=15}8${font}${color}${voffset -3}${goto %d}%s: ${font Liberation Sans:style=Bold:size=8}${color1}${execi 120 hddtemp /dev/%s -n --unit=F}°F${color}${font}${alignr}${color2}/dev/%s${color}\n", go2, temperature, dev1, dev1);
 				else
-					fprintf(fp,"  ${voffset 4}${color0}${font Weather:size=15}y${font}${color}${voffset -3}${goto %d}%s: ${font Liberation Sans:style=Bold:size=8}${color1}${execi 120 hddtemp /dev/%s -n --unit=C}°C${color}${font}${alignr}${color2}/dev/%s${color}\n", go2, temperature, dev1, dev1);
+					fprintf(fp,"${voffset 4}${offset 2}${color0}${font ConkyColors:size=15}8${font}${color}${voffset -3}${goto %d}%s: ${font Liberation Sans:style=Bold:size=8}${color1}${execi 120 hddtemp /dev/%s -n --unit=C}°C${color}${font}${alignr}${color2}/dev/%s${color}\n", go2, temperature, dev1, dev1);
 		}
 		if (hdtemp2 == True) {
 			fprintf(fp,"# |--HDTEMP2\n");
@@ -468,13 +468,13 @@ void conkyrc_default () {
 			if (unit == True) {
 				fprintf(fp,"${if_gw}${voffset 4}${offset -4}${color0}${font ConkyWeather:size=21}${execi 600 /usr/share/conkycolors/bin/conkyYahooWeather code UKXX1609 f}${font}${color}\n");
 				fprintf(fp,"${voffset -24}${goto %d}%s: ${font Liberation Sans:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather cur %s f}°F${color}${font}\n", go2, temperature, yahooweatherdir, weather_code);
-				fprintf(fp,"${goto %d}${voffset -2}${color0}${font Webdings}6${font}${color}${font Liberation Sans:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather min %s f}°F${color}${font}  ${voffset -2}${color0}${font Webdings}5${font}${color}${voffset -1}${font Liberation Sans:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather max %s f}°F${color}${font}\n", go2, yahooweatherdir, weather_code, yahooweatherdir, weather_code);
+				fprintf(fp,"${goto %d}${color0}${font ConkyColors:size=8}w${font}${color}${font Liberation Sans:style=Bold:size=8}${voffset -1}${color1}${execi 600 %s/bin/conkyYahooWeather min %s f}°F${color}${font}  ${color0}${font ConkyColors:size=8}x${font}${color}${voffset -1}${font Liberation Sans:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather max %s f}°F${color}${font}\n", go2, yahooweatherdir, weather_code, yahooweatherdir, weather_code);
 				fprintf(fp,"${else}${voffset 4}${color0}${font ConkyColors:size=15}q${font}${color}${voffset -6}${goto %d}%s${voffset 14}${endif}\n", go2, noweather);
 			}
 			else {
 				fprintf(fp,"${if_gw}${voffset 4}${offset -4}${color0}${font ConkyWeather:size=21}${execi 600 /usr/share/conkycolors/bin/conkyYahooWeather code UKXX1609 c}${font}${color}\n");
 				fprintf(fp,"${voffset -24}${goto %d}%s: ${font Liberation Sans:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather cur %s c}°C${color}${font}\n", go2, temperature, yahooweatherdir, weather_code);
-				fprintf(fp,"${goto %d}${voffset -2}${color0}${font Webdings}6${font}${color}${font Liberation Sans:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather min %s c}°C${color}${font}  ${voffset -2}${color0}${font Webdings}5${font}${color}${voffset -1}${font Liberation Sans:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather max %s c}°C${color}${font}\n", go2, yahooweatherdir, weather_code, yahooweatherdir, weather_code);
+				fprintf(fp,"${goto %d}${color0}${font ConkyColors:size=8}w${font}${color}${font Liberation Sans:style=Bold:size=8}${voffset -1}${color1}${execi 600 %s/bin/conkyYahooWeather min %s c}°C${color}${font}  ${color0}${font ConkyColors:size=8}x${font}${color}${voffset -1}${font Liberation Sans:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather max %s c}°C${color}${font}\n", go2, yahooweatherdir, weather_code, yahooweatherdir, weather_code);
 				fprintf(fp,"${else}${voffset 4}${color0}${font ConkyColors:size=15}q${font}${color}${voffset -6}${goto %d}%s${voffset 14}${endif}\n", go2, noweather);
 			}
 	}
@@ -492,14 +492,14 @@ void conkyrc_default () {
 			if (unit == True) {
 				fprintf(fp,"${if_gw}${voffset 4}${offset -4}${color0}${font Webdings:size=24}·${font}${color}\n");
 				fprintf(fp,"${voffset -24}${goto %d}%s: ${font Liberation Sans:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather cur %d f}°F${color}${font}\n", go2, temperature, bbcweatherdir, bbccode);
-				fprintf(fp,"${goto %d}${voffset -2}${color0}${font Webdings}6${font}${color}${font Liberation Sans:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather min %d f}°F${color}${font}  ${voffset -2}${color0}${font Webdings}5${font}${color}${voffset -1}${font Liberation Sans:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather max %d f}°F${color}${font}\n", go2, bbcweatherdir, bbccode, bbcweatherdir, bbccode);
+				fprintf(fp,"${goto %d}${color0}${font ConkyColors:size=8}w${font}${color}${font Liberation Sans:style=Bold:size=8}${voffset -1}${color1}${execi 600 %s/bin/conkyBBCWeather min %d f}°F${color}${font}  ${color0}${font ConkyColors:size=8}x${font}${color}${voffset -1}${font Liberation Sans:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather max %d f}°F${color}${font}\n", go2, bbcweatherdir, bbccode, bbcweatherdir, bbccode);
 				fprintf(fp,"${goto %d}%s: ${font Liberation Sans:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather hum %d f}%%${color}${font}${alignr}${color2}${execbar %s/bin/conkyBBCWeather hum %d f}%%${color}${font}\n", go2, humidity, bbcweatherdir, bbccode, bbcweatherdir, bbccode);
 				fprintf(fp,"${else}${voffset 4}${color0}${font ConkyColors:size=15}q${font}${color}${voffset -6}${goto %d}%s${voffset 14}${endif}\n", go2, noweather);
 			}
 			else {
 				fprintf(fp,"${if_gw}${voffset 4}${offset -4}${color0}${font Webdings:size=24}·${font}${color}\n");
 				fprintf(fp,"${voffset -24}${goto %d}%s: ${font Liberation Sans:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather cur %d c}°C${color}${font}\n", go2, temperature, bbcweatherdir, bbccode);
-				fprintf(fp,"${goto %d}${voffset -2}${color0}${font Webdings}6${font}${color}${font Liberation Sans:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather min %d c}°C${color}${font}  ${voffset -2}${color0}${font Webdings}5${font}${color}${voffset -1}${font Liberation Sans:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather max %d c}°C${color}${font}\n", go2, bbcweatherdir, bbccode, bbcweatherdir, bbccode);
+				fprintf(fp,"${goto %d}${color0}${font ConkyColors:size=8}w${font}${color}${font Liberation Sans:style=Bold:size=8}${voffset -1}${color1}${execi 600 %s/bin/conkyBBCWeather min %d c}°C${color}${font}  ${color0}${font ConkyColors:size=8}x${font}${color}${voffset -1}${font Liberation Sans:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather max %d c}°C${color}${font}\n", go2, bbcweatherdir, bbccode, bbcweatherdir, bbccode);
 				fprintf(fp,"${goto %d}%s: ${font Liberation Sans:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyBBCWeather hum %d c}%%${color}${font}${alignr}${color2}${execbar %s/bin/conkyBBCWeather hum %d c}%%${color}${font}\n", go2, humidity, bbcweatherdir, bbccode, bbcweatherdir, bbccode);
 				fprintf(fp,"${else}${voffset 4}${color0}${font ConkyColors:size=15}q${font}${color}${voffset -6}${goto %d}%s${voffset 14}${endif}\n", go2, noweather);
 			}
