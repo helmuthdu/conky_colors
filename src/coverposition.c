@@ -38,7 +38,7 @@ void coverposition () {
 			yc += 76;
 	}
 	if (set_photo == 1 || set_photo == 2) {
-		yc += 124;
+		yc += 126;
 	}
 	if (cover == 3 || cover == 6 || cover == 7)
 		yc -= 2;
