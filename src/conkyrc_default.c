@@ -137,8 +137,8 @@ void conkyrc_default () {
 	fprintf(fp,"##############\n");
 	//Logo
   fprintf(fp,"${color0}${voffset 8}${offset 4}${font ConkyColorsLogos:size=9}%s${font}${color}${voffset -16}\n", logo_letter);
-  fprintf(fp,"${color0}${font ConkyColors:size=16}b${font}${color}");
-  fprintf(fp,"${goto %d}${voffset -10}Kernel:  ${alignr}${color2}${kernel}${color}\n", go2);
+  fprintf(fp,"${color0}${font ConkyColors:size=16}b${font}${color}\n");
+  fprintf(fp,"${goto %d}${voffset -23}Kernel:  ${alignr}${color2}${kernel}${color}\n", go2);
 	fprintf(fp,"${goto %d}%s: ${alignr}${color2}${uptime}${color}\n", go2, uptime);
 	//Updates
 	if (aptget == True) {
@@ -245,7 +245,7 @@ void conkyrc_default () {
 			if (clocktype == 6);
 		//Clock Default Theme
 		else
-			fprintf(fp,"${voffset -10}${alignc 46}${color2}${font Arial Black:size=30}${time %%H:%%M}${font}${color}\n");
+			fprintf(fp,"${voffset -2}${alignc 38}${color2}${font Liberation Sans:style=Bold:size=30}${time %%H:%%M}${font}${color}\n");
 		if (clocktype != 3 && clocktype != 4 && clocktype != 5) {
 			if (clocktype == 1 || clocktype == 2)
 				fprintf(fp,"${voffset 8}${alignc}${time %%d %%B %%Y}\n");
