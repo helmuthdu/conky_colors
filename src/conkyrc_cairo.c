@@ -138,9 +138,9 @@ void conkyrc_cairo () {
 		fprintf(fp,"off ");
 
 	//clock Widget
-	if (clocktype == 7)
+	if (clocktype == 4)
 		fprintf(fp,"cairo ");
-	else if (clocktype == 8)
+	else if (clocktype == 5)
 		fprintf(fp,"bigcairo ");
 	else
 		fprintf(fp,"off ");

@@ -144,24 +144,18 @@ int options (int argc, char *argv[]) {
 		{
 			OPTION("default", value)
 				clocktype = 0;
-			else OPTION("classic", value)
-				clocktype = 1;
-			else OPTION("slim", value)
-				clocktype = 2;
 			else OPTION("modern", value)
-				clocktype = 3;
-			else OPTION("lucky", value)
-				clocktype = 4;
+				clocktype = 1;
 			else OPTION("digital", value)
-				clocktype = 5;
+				clocktype = 2;
 			else OPTION("off", value)
-				clocktype = 6;
+				clocktype = 3;
 			else OPTION("cairo", value)
-				clocktype = 7;
+				clocktype = 4;
 			else OPTION("bigcairo", value)
-				clocktype = 8;
+				clocktype = 5;
 			else OPTION("ring", value)
-				clocktype = 8;
+				clocktype = 6;
 			else
 			{
 				printf("ERRO: CLOCK option unavaliable\n");

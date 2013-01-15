@@ -25,7 +25,6 @@ void conkyrc_default () {
     printf("Liberation Sans/Debian distro? [y/N]: ");
     scanf("%c",&ubuntufix);
 
-	const char *clockdir=finddir("bin/conkyClock");
 	const char *playerdir=finddir("bin/conky%s", player);
 	const char *pltempldir=finddir("templates/conkyPlayer.template");
 	const char *coverdir=finddir("bin/conkyCover");
@@ -205,58 +204,31 @@ void conkyrc_default () {
 		fprintf(fp,"# - CLOCK - #\n");
 		fprintf(fp,"#############\n");
 		fprintf(fp,"${voffset 4}${font Liberation Sans:style=Bold:size=8}%s $stippled_hr${font}\n", date);
-		//Classic Theme
-		if (clocktype == 1) {
-			fprintf(fp,"${voffset 10}${alignc 55}${font aClock:style=_Hour:size=90}${color2}${execpi 120 %s/bin/conkyClock_h}${color}${font}\n", finddir("bin/conkyClock_h") );
-			fprintf(fp,"${voffset -98}${alignc 55}${font aClock:style=_Min:size=90}${color2}${execpi 60 %s/bin/conkyClock_m}${color}${font}\n", finddir("bin/conkyClock_m") );
-			fprintf(fp,"${voffset 12}${alignc}${font Liberation Sans:style=Bold:size=10}${color1}${time %%H:%%M}${color}${font}${voffset -8}\n");
-		}
-		//Slim Theme
-		else
-			if (clocktype == 2) {
-				fprintf(fp,"${voffset 20}${alignc 44}${font zoraclockH:size=70}${color2}${execpi 120 %s/bin/conkyClock hour}${color}${font}\n", clockdir );
-				fprintf(fp,"${voffset -90}${alignc 64}${font zoraclockM:size=100}${color2}${execpi 60 %s/bin/conkyClock minute}${color}${font}\n", clockdir );
-				fprintf(fp,"${voffset 26}${alignc}${font Liberation Sans:style=Bold:size=10}${color1}${time %%H:%%M}${color}${font}${voffset -8}\n");
-			}
-		//Modern Theme
-		else
-			if (clocktype == 3) {
-				fprintf(fp,"${voffset -12}${goto 28}${font Arial Black:size=38}${color2}${time %%H}${color}${font}${voffset -28}${font Liberation Sans:style=Bold:size=11}${color2}${time :%%M}${time :%%S}${color}${font}\n");
-				fprintf(fp,"${voffset -2}${goto 100}${font Liberation Sans:style=Bold:size=8}${color2}${time %%A}${color}${font}\n");
-				fprintf(fp,"${goto 100}${time %%d %%b %%Y}\n");
-			}
-		//Lucky Theme
-		else
-			if (clocktype == 4) {
-				fprintf(fp,"${voffset 4}${goto 32}${font clockfaces:size=40}O${font}\n");
-				fprintf(fp,"${voffset -34}${goto 41}${font zoraclockH:size=30}${color2}${execpi 120 %s/bin/conkyClock hour}${color}${font}\n", clockdir);
-				fprintf(fp,"${voffset -39}${goto 35}${font zoraclockM:size=40}${color2}${execpi 60 %s/bin/conkyClock minute}${color}${font}\n", clockdir);
-				fprintf(fp,"${goto 100}${voffset -40}${font Liberation Sans:style=Bold:size=11}${color2}${time %%H}${time :%%M}${time :%%S}${color}${font}\n");
-				fprintf(fp,"${goto 100}${voffset -2}${goto 100}${font Liberation Sans:style=Bold:size=8}${color2}${time %%A}${color}${font}\n");
-				fprintf(fp,"${goto 100}${time %%d %%b %%Y}${voffset 8}\n");
+    if (clocktype == 1) {
+				fprintf(fp,"${voffset -2}${goto 32}${font Liberation Sans:size=38}${color2}${time %%H}${color}${font}\n");
+				fprintf(fp,"${voffset -40}${goto 90}${font Liberation Sans:style=Bold:size=11}${color2}${time :%%M}${time :%%S}${color}${font}\n");
+				fprintf(fp,"${voffset -2}${goto 90}${font Liberation Sans:style=Bold:size=8}${color2}${time %%A}${color}${font}\n");
+				fprintf(fp,"${goto 90}${time %%d %%b %%Y}\n");
 			}
 		//Digital Theme
 		else
-			if (clocktype == 5) {
-				fprintf(fp,"${font Digital Readout Thick Upright:size=40}${goto 22}${color2}${time %%k}${voffset -9}:${voffset 9}${time %%M}${goto 130}${color2}${voffset -14}${font Digital Readout Thick Upright:size=24}${goto 130}${color2}${time %%d}${font Digital Readout Thick Upright:size=12}${voffset 14}${goto 130}${color2}${time %%m}${goto 144}${color2}${time %%y}${font}\n");
+			if (clocktype == 2) {
+				fprintf(fp,"${font Digital Readout Thick Upright:size=40}${goto 18}${color2}${time %%k}${voffset -9}:${voffset 9}${time %%M}${goto 130}${color2}${voffset -14}${font Digital Readout Thick Upright:size=24}${goto 130}${color2}${time %%d}${font Digital Readout Thick Upright:size=12}${voffset 14}${goto 130}${color2}${time %%m}${goto 144}${color2}${time %%y}${font}\n");
 			}
 		//Clock off
 		else
-			if (clocktype == 6);
+			if (clocktype == 3);
 		//Clock Default Theme
 		else
 			fprintf(fp,"${voffset -2}${alignc 38}${color2}${font Liberation Sans:style=Bold:size=30}${time %%H:%%M}${font}${color}\n");
-		if (clocktype != 3 && clocktype != 4 && clocktype != 5) {
-			if (clocktype == 1 || clocktype == 2)
-				fprintf(fp,"${voffset 8}${alignc}${time %%d %%B %%Y}\n");
-			else
-				if (clocktype == 5)
-					fprintf(fp,"${voffset 4}${alignc}${time %%d %%B %%Y}\n");
-				else
-				if (set_calendar > 0)
-					fprintf(fp,"${voffset 6}${alignc}${time %%d %%B %%Y}${voffset -6}\n");
-				else
-					fprintf(fp,"${alignc}${time %%d %%B %%Y}\n");
+		if (clocktype != 1 && clocktype != 2) {
+      if (clocktype == 2)
+        fprintf(fp,"${voffset 4}${alignc}${time %%d %%B %%Y}\n");
+    else
+      if (set_calendar == 1)
+        fprintf(fp,"${voffset 6}${alignc}${time %%d %%B %%Y}${voffset -6}\n");
+    else
+      fprintf(fp,"${alignc}${time %%d %%B %%Y}\n");
 		}
 		//Calendar
 		if (set_calendar > 0) {
