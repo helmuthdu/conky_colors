@@ -22,7 +22,7 @@ void conkyrc_default () {
 	}
 
     char ubuntufix;
-    printf("Liberation Sans/Debian distro? [y/N]: ");
+    printf("Ubuntu/Debian distro? [y/N]: ");
     scanf("%c",&ubuntufix);
 
 	const char *playerdir=finddir("bin/conky%s", player);

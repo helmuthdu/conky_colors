@@ -34,7 +34,7 @@ void help() {
 	printf("\t--battery-value=<number> - Change battery device number </proc/acpi/battery>\n");
 	printf("\t--updates - Show updates for Debian/Ubuntu\n");
 	printf("\t--proc=<number> - Enable processes [Max = 10]\n");
-	printf("\t--clock=<default|classic|slim|modern|digital|off>\n");
+	printf("\t--clock=<default|modern|digital|off>\n");
 	printf("\t--nodata - disable Data\n");
 	printf("\t--calendar - Enable calendar\n");
 	printf("\t--calendarm - Enable calendar with monday as first day\n");
