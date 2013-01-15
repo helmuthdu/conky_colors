@@ -28,18 +28,9 @@ void coverposition () {
 			yc += 150;
 			else
 				if (clocktype == 2)
-					yc += 168;
-			else
-				if (clocktype == 3)
-					yc += 58;
-			else
-				if (clocktype == 4)
-					yc += 78;
-			else
-				if (clocktype == 5)
 					yc += 60;
 			else
-				if (clocktype == 6)
+				if (clocktype == 3)
 					yc += 28;
 			else
 				yc += 62;

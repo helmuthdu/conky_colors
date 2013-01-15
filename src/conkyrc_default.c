@@ -137,7 +137,7 @@ void conkyrc_default () {
 	//Logo
   fprintf(fp,"${color0}${voffset 8}${offset 4}${font ConkyColorsLogos:size=9}%s${font}${color}${voffset -16}\n", logo_letter);
   fprintf(fp,"${color0}${font ConkyColors:size=16}b${font}${color}\n");
-  fprintf(fp,"${goto %d}${voffset -23}Kernel:  ${alignr}${color2}${kernel}${color}\n", go2);
+  fprintf(fp,"${goto %d}${voffset -23}Kernel: ${alignr}${color2}${kernel}${color}\n", go2);
 	fprintf(fp,"${goto %d}%s: ${alignr}${color2}${uptime}${color}\n", go2, uptime);
 	//Updates
 	if (aptget == True) {
