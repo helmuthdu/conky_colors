@@ -6,7 +6,7 @@
 source="/usr/share/backgrounds/"
 photo="/tmp/conkyPhoto.png"
 template="/usr/share/conkycolors/icons/ConkyPhoto"
-filename=`find $source -type f | shuf -n1`
+filename=`find $source \( -iname "*.png" -o -iname "*.jpg" \) | shuf -n1`
 
 #choose your theme: 1,2 or 3
 theme=3
@@ -24,28 +24,38 @@ elif [[ $dim == "big" ]]; then
   geometry_crop="396x312"
 fi
 
-cp "$filename" "$photo"
+rm ${photo}
+cp ${filename} ${photo}
 
-convert "$filename" -resize $geometry\> -size $geometry xc:black +swap -gravity center -composite "$photo"
+convert ${filename} -resize ${geometry}\> \
+  -size ${geometry} xc:black +swap \
+  -gravity center -composite ${photo}
 
-if [[ $theme -eq 1 ]]; then
-# Theme 1
-	convert -page +2+2 "$photo"\
-		-bordercolor snow -border 4.5\
-		-bordercolor gray55 -border 1 \
-		-background  black  \( +clone -shadow 40x2+1+1 \) +swap \
-		-background  none -flatten \
-	"$photo"
-elif [[ $theme -eq 2 ]]; then
-# Theme 2
-	convert -page +4+4 "$photo"\
-		-bordercolor gray10 -border 1\
-		-background  black  \( +clone -shadow 40x4+2+2 \) +swap \
-		-background  none -flatten \
-	"$photo"
-elif [[ $theme -eq 3 ]]; then
-# Theme 3
-    convert "$template"/photobg_bg_$dim.png "$photo" -geometry +11+11 -composite "$photo"
-    convert "$photo" "$template"/photobg_shadow_$dim.png -composite "$photo"
+if [[ -f ${photo} ]]; then
+  if [[ $theme -eq 1 ]]; then
+    # Theme 1
+    convert -page +2+2 ${photo} \
+      -bordercolor snow -border 4.5 \
+      -bordercolor gray55 -border 1 \
+      -background  black  \( +clone -shadow 40x2+1+1 \) +swap \
+      -background  none -flatten \
+      ${photo}
+  elif [[ $theme -eq 2 ]]; then
+    # Theme 2
+    convert -page +4+4 ${photo} \
+      -bordercolor gray10 -border 1 \
+      -background  black  \( +clone -shadow 40x4+2+2 \) +swap \
+      -background  none -flatten \
+      ${photo}
+  elif [[ $theme -eq 3 ]]; then
+    # Theme 3
+    convert ${template}/photobg_bg_${dim}.png ${photo} \
+      -geometry +11+11 -composite ${photo}
+    convert ${photo} ${template}/photobg_shadow_${dim}.png \
+      -composite ${photo}
+  fi
+else
+  cp ${imagenotfound} ${photo}
 fi
+
 exit
