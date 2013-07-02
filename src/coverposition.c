@@ -44,7 +44,6 @@ void coverposition () {
 		yc -= 2;
 }
 
-
 void coverposition_cairo () {
 	if (cpu == 1 || cputype == True)
 		yc += 278;
@@ -59,7 +58,6 @@ void coverposition_cairo () {
 		yc += 64;
 	else if(clocktype == 5)
 		yc += 104;
-
 }
 
 void coverposition_ring () {

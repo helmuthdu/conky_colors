@@ -45,29 +45,25 @@ void create_conkyrc () {
 		conkyplayer();
 		conkyrc_cairo();
 	}
-	else
-		if (ring == True)
-		{
-			coverposition_ring();
-			conkycover();
-			conkyplayer();
-			conkyrc_ring();
-		}
-	else
-		if (board == True)
-		{
-			conkyrc_board();
-		}
-	else
-		if (slim == True)
-		{
-			conkyrc_slim();
-		}
-	else
-		if (sls == True)
-		{
-			conkyrc_sls();
-		}
+	else if (ring == True)
+  {
+    coverposition_ring();
+    conkycover();
+    conkyplayer();
+    conkyrc_ring();
+  }
+	else if (board == True)
+  {
+    conkyrc_board();
+  }
+	else if (slim == True)
+  {
+    conkyrc_slim();
+  }
+	else if (sls == True)
+  {
+    conkyrc_sls();
+  }
 	else
 	{
 		coverposition();
@@ -77,12 +73,10 @@ void create_conkyrc () {
 		conkyplayer();
 		conkyrc_default();
 	}
-
 }
 
 int main(int argc, char *argv[])
 {
-
 
 	if(initialize_finddir() != 0)
 		return -1;
@@ -103,4 +97,3 @@ int main(int argc, char *argv[])
 
 	return 0;
 }
-

@@ -109,9 +109,8 @@ void conkyrc_cairo () {
 		fprintf(fp,"color2 white\n");
 	//COLOR3
     fprintf(fp,"color3 %s\n", color3);
-	fprintf(fp,"\n");
 	// LUA SCRIPTS
-	fprintf(fp,"\nlua_load %s/scripts/conkyCairo.lua\n", conkycairo);
+	fprintf(fp,"lua_load %s/scripts/conkyCairo.lua\n", conkycairo);
 	fprintf(fp,"lua_draw_hook_post conky_main ");
 
     if (dark == True || black == True)

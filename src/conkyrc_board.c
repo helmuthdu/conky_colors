@@ -67,7 +67,7 @@ void conkyrc_board () {
 	fprintf(fp,"\n");
 	fprintf(fp,"alignment top_left\n");
 	fprintf(fp,"gap_x 0\n");
-	fprintf(fp,"gap_y %.0f\n", board_height/4);
+	fprintf(fp,"gap_y 0\n");
 	fprintf(fp,"minimum_size %.0f %.0f\n", board_width, board_height);
 	fprintf(fp,"maximum_width %.0f %.0f\n", board_width, board_height);
 	fprintf(fp,"\n");
