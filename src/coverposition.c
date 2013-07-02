@@ -55,9 +55,9 @@ void coverposition_cairo () {
 	}
 	if (swap == True)
 		yc += 64;
-	if (clocktype == 7)
+	if (clocktype == 4)
 		yc += 64;
-	else if(clocktype == 8)
+	else if(clocktype == 5)
 		yc += 104;
 
 }

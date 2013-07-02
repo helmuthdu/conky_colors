@@ -54,11 +54,9 @@ void conkyrc_cairo () {
 	fprintf(fp,"#############################\n");
 	fprintf(fp,"own_window_class Conky\n");
 	fprintf(fp,"own_window yes\n");
-    fprintf(fp,"own_window_type normal\n");
-    if (cover < 2) {
-        fprintf(fp, "own_window_argb_visual yes\n");
-        fprintf(fp, "own_window_argb_value %d\n", argb_value);
-    }
+  fprintf(fp,"own_window_type normal\n");
+  fprintf(fp,"own_window_argb_visual yes\n");
+  fprintf(fp,"own_window_argb_value %d\n", argb_value);
 	fprintf(fp,"own_window_transparent yes\n");
 	fprintf(fp,"own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager\n");
 	fprintf(fp,"\n");
@@ -220,17 +218,17 @@ void conkyrc_cairo () {
 		fprintf(fp,"${goto 100}U: ${font Ubuntu:style=Bold:size=8}${color2}${swap}${color}${font}\n");
 	}
 	//Clock
-	if (clocktype == 7) {
+	if (clocktype == 4) {
 		fprintf(fp,"#############\n");
 		fprintf(fp,"# - CLOCK - #\n");
 		fprintf(fp,"#############\n");
 		fprintf(fp,"${voffset 15}\n");
-		fprintf(fp,"${alignr 78}${font Ubuntu:style=Bold:size=11}${color2}${time %%H}${time :%%M}${time :%%S}${color}${font}\n");
-		fprintf(fp,"${alignr 66}${voffset -2}${font Ubuntu:style=Bold:size=8}${color2}${time %%A}${color}${font}\n");
+		fprintf(fp,"${alignr 82}${font Ubuntu:style=Bold:size=11}${color2}${time %%H}${time :%%M}${time :%%S}${color}${font}\n");
+		fprintf(fp,"${alignr 65}${voffset -2}${font Ubuntu:style=Bold:size=8}${color2}${time %%A}${color}${font}\n");
 		fprintf(fp,"${alignr 64}${time %%d %%b %%Y}\n");
 	}
 	else
-		if (clocktype == 8) {
+		if (clocktype == 5) {
 		fprintf(fp,"#############\n");
 		fprintf(fp,"# - CLOCK - #\n");
 		fprintf(fp,"#############\n");

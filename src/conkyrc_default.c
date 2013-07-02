@@ -64,9 +64,9 @@ void conkyrc_default () {
     fprintf(fp,"own_window_type override\n");
   else
     fprintf(fp,"own_window_type normal\n");
-  if ((set_photo == 0 && cover < 2) && ubuntufix != 'y') {
-    fprintf(fp, "own_window_argb_visual yes\n");
-    fprintf(fp, "own_window_argb_value %d\n", argb_value);
+  if (ubuntufix != 'y') {
+    fprintf(fp,"own_window_argb_visual yes\n");
+    fprintf(fp,"own_window_argb_value %d\n", argb_value);
   }
   fprintf(fp,"own_window_transparent yes\n");
   fprintf(fp,"own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager\n");

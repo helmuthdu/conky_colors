@@ -8,24 +8,23 @@ UNIT="c"
 CODE="code"
 
 if [ "$1" = "$CUR" ]; then
-	if [ "$3" = "$UNIT" ]; then
-	curl -s --connect-timeout 30 "http://weather.yahooapis.com/forecastrss?p=$2&u=$3" | sed '/Current\ Conditions/,$!d' | sed -e 's/<[^>]*>//g' | sed '2!d' | sed 's/^.*, //' | sed 's/ C.*$//'
-	else
-	curl -s --connect-timeout 30 "http://weather.yahooapis.com/forecastrss?p=$2&u=$3" | sed '/Current\ Conditions/,$!d' | sed -e 's/<[^>]*>//g' | sed '2!d' | sed 's/^.*, //' | sed 's/ F.*$//'
-	fi
+  if [ "$3" = "$UNIT" ]; then
+    curl -s --connect-timeout 30 "http://weather.yahooapis.com/forecastrss?p=$2&u=$3" | sed '/Current\ Conditions/,$!d' | sed -e 's/<[^>]*>//g' | sed '2!d' | sed 's/^.*, //' | sed 's/ C.*$//'
+  else
+    curl -s --connect-timeout 30 "http://weather.yahooapis.com/forecastrss?p=$2&u=$3" | sed '/Current\ Conditions/,$!d' | sed -e 's/<[^>]*>//g' | sed '2!d' | sed 's/^.*, //' | sed 's/ F.*$//'
+  fi
 elif [ "$1" = "$MAX" ]; then
-curl -s --connect-timeout 30 "http://weather.yahooapis.com/forecastrss?p=$2&u=$3" | sed '/Current\ Conditions/,$!d' | sed -e 's/<[^>]*>//g' | sed '4!d' | sed 's/^.*High: //' | sed 's/ Low.*$//'
+  curl -s --connect-timeout 30 "http://weather.yahooapis.com/forecastrss?p=$2&u=$3" | sed '/Current\ Conditions/,$!d' | sed -e 's/<[^>]*>//g' | sed '4!d' | sed 's/^.*High: //' | sed 's/ Low.*$//'
 elif [ "$1" = "$MIN" ]; then
-curl -s --connect-timeout 30 "http://weather.yahooapis.com/forecastrss?p=$2&u=$3" | sed '/Current\ Conditions/,$!d' | sed -e 's/<[^>]*>//g' | sed '4!d' | sed 's/^.*Low: //'
+  curl -s --connect-timeout 30 "http://weather.yahooapis.com/forecastrss?p=$2&u=$3" | sed '/Current\ Conditions/,$!d' | sed -e 's/<[^>]*>//g' | sed '4!d' | sed 's/^.*Low: //'
 elif [ "$1" = "$CODE" ]; then
-YAHOOCODE=$(curl -s --connect-timeout 30 "http://weather.yahooapis.com/forecastrss?p=$2&u=$3" | sed '/<yweather:condition/,1!d' | sed 's/.*code="\([^"]*\)".*/\1/')
-WEATHERCHAR=(1 2 3 n m x x y s h t h i p p 8 q u w 7 0 9 4 6 6 - f D d C c A a B b v 5 k k g j o r r - G 0 K)
-if [ "$YAHOOCODE" == "na" ]; then
-	echo "-"
-elif [ "$YAHOOCODE" == "-" ]; then
-	echo "-"
-else
-	echo ${WEATHERCHAR[$YAHOOCODE]}
+  YAHOOCODE=$(curl -s --connect-timeout 30 "http://weather.yahooapis.com/forecastrss?p=$2&u=$3" | sed '/<yweather:condition/,1!d' | sed 's/.*code="\([^"]*\)".*/\1/')
+  WEATHERCHAR=(1 2 3 n m x x y s h t h i p p 8 q u w 7 0 9 4 6 6 - f D d C c A a B b v 5 k k g j o r r - G 0 K)
+  if [ "$YAHOOCODE" == "na" ]; then
+    echo "-"
+  elif [ "$YAHOOCODE" == "-" ]; then
+    echo "-"
+  else
+    echo ${WEATHERCHAR[$YAHOOCODE]}
+  fi
 fi
-fi
-
