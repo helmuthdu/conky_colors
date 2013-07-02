@@ -83,13 +83,13 @@ void help() {
 	printf("\t--slim - Enable slim-conky mode.\n");
 	printf("\t--w=<width> - Set your screen width\n");
 	printf("\t--h=<height> - Set your screen height\n");
-	printf("\t--nobg - remove the background\n");
+	printf("\t--nobg - Remove background\n");
 	printf("\t--posfix=<number> - fix ring position\n");
 	printf("\t--weather=<AreaID> - Enable weather[Ex: --weather=BRXX0043]\n");
 	printf("\t--unit=<C|F>- Force output temperature either in Celius or Fahrenheit\n");
 	printf("\t-------------- SLS MODE --------------\n");
 	printf("\t--sls - Enable SLS-conky mode.\n");
-	printf("\t--nobg - remove the background\n");
+	printf("\t--nobg - Remove background\n");
 	printf("\t--weather=<AreaID> - Enable weather[Ex: --weather=BRXX0043]\n");
 	printf("\t--user=<username> - Type your gmail username\n");
 	printf("\t--passwd=<password> - Type your gmail password\n");
