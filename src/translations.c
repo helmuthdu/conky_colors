@@ -414,6 +414,43 @@ void translation () {
 		//snprintf(norhythmbox, 31, "Rhythmbox non démarré");
 		snprintf(unknownstatus, 31, "État inconnu");
 	}
+	else OR_OPTION_START("cs", language) OR_OPTION_END("czech", language) {
+		snprintf(sys, 31, "SYSTEM");
+		snprintf(battery, 31, "Baterie");
+		snprintf(uptime, 31, "Uptime");
+		snprintf(processes, 31, "Procesy");
+		snprintf(packages, 31, "Balíčky");
+		snprintf(date, 31, "DATUM");
+		snprintf(photo, 31, "FOTO");
+		snprintf(hd, 31, "DISKY");
+		snprintf(temperature, 31, "Teplota");
+		snprintf(updates, 31, "Aktualizace");
+		snprintf(nouve, 31, "Nové");
+		snprintf(network, 31, "SÍŤ");
+		snprintf(up, 31, "Up.");
+		snprintf(down, 31, "Down.");
+		//snprintf(upload, 31, "Wysłano");
+		//snprintf(download, 31, "Pobrano");
+		snprintf(sinal, 31, "Signál");
+		snprintf(total, 31, "Celkem");
+		snprintf(localip, 31, "Lokální IP");
+		snprintf(publicip, 31, "Veřejná IP");
+		snprintf(nonet, 31, "Síť není dostupná");
+		snprintf(Weather, 31, "POČASÍ");
+		snprintf(noweather, 31, "Počasí není dostupné");
+		//snprintf(station, 31, "Stanice");
+		//snprintf(rain, 31, "Déšť");
+		snprintf(humidity, 31, "Vlhkost");
+		//snprintf(sunrise, 31, "Východ Slunce");
+		//snprintf(sunset, 31, "Západ SLunce");
+		//snprintf(moon, 31, "Měsíc");
+		snprintf(status, 31, "Stav");
+		snprintf(song, 31, "Skladba");
+		snprintf(tempo, 31, "Čas");
+		snprintf(nopidgin, 31, "Pidgin není spuštěn");
+		//snprintf(norhythmbox, 31, "Rhythmbox není spuštěn");
+		snprintf(unknownstatus, 31, "Neznámý stav");
+	}
 	else {
 		snprintf(sys, 31, "SYSTEM");
 		snprintf(battery, 31, "Battery");
