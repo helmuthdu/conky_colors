@@ -429,13 +429,13 @@ void conkyrc_default () {
     fprintf(fp,"${voffset -4}${font Liberation Sans:style=Bold:size=8}%s $stippled_hr${font}\n", Weather);
 
     if (unit == True) {
-      fprintf(fp,"${if_gw}${voffset 7}${offset -2}${color0}${font ConkyWeather:size=19}${execi 600 /usr/share/conkycolors/bin/conkyYahooWeather code %s f}${font}${color}\n", weather_code);
+      fprintf(fp,"${if_gw}${voffset 4}${color0}${font ConkyColorsWeather:size=19}${execpi 600 /usr/share/conkycolors/bin/conkyYahooWeather code %s f}${font}${color}\n", weather_code);
       fprintf(fp,"${voffset -27}${goto %d}%s: ${font Liberation Sans:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather cur %s f}°F${color}${font}\n", go2, temperature, yahooweatherdir, weather_code);
       fprintf(fp,"${goto %d}${color0}${font ConkyColors:size=8}w${font}${color}${font Liberation Sans:style=Bold:size=8}${voffset -1}${color1}${execi 600 %s/bin/conkyYahooWeather min %s f}°F${color}${font}  ${color0}${font ConkyColors:size=8}x${font}${color}${voffset -1}${font Liberation Sans:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather max %s f}°F${color}${font}\n", go2, yahooweatherdir, weather_code, yahooweatherdir, weather_code);
       fprintf(fp,"${else}${voffset 4}${color0}${font ConkyColors:size=15}q${font}${color}${voffset -6}${goto %d}%s${voffset 14}${endif}\n", go2, noweather);
     }
     else {
-      fprintf(fp,"${if_gw}${voffset 7}${offset -2}${color0}${font ConkyWeather:size=19}${execi 600 /usr/share/conkycolors/bin/conkyYahooWeather code %s c}${font}${color}\n", weather_code);
+      fprintf(fp,"${if_gw}${voffset 4}${color0}${font ConkyColorsWeather:size=19}${execpi 600 /usr/share/conkycolors/bin/conkyYahooWeather code %s c}${font}${color}\n", weather_code);
       fprintf(fp,"${voffset -27}${goto %d}%s: ${font Liberation Sans:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather cur %s c}°C${color}${font}\n", go2, temperature, yahooweatherdir, weather_code);
       fprintf(fp,"${goto %d}${color0}${font ConkyColors:size=8}w${font}${color}${font Liberation Sans:style=Bold:size=8}${voffset -1}${color1}${execi 600 %s/bin/conkyYahooWeather min %s c}°C${color}${font}  ${color0}${font ConkyColors:size=8}x${font}${color}${voffset -1}${font Liberation Sans:style=Bold:size=8}${color1}${execi 600 %s/bin/conkyYahooWeather max %s c}°C${color}${font}\n", go2, yahooweatherdir, weather_code, yahooweatherdir, weather_code);
       fprintf(fp,"${else}${voffset 4}${color0}${font ConkyColors:size=15}q${font}${color}${voffset -6}${goto %d}%s${voffset 14}${endif}\n", go2, noweather);
