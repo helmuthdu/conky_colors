@@ -1,73 +1,39 @@
 #!/bin/bash
 
 #put your 10 day weather.com address here
-address10="http://www.weather.com/weather/tenday/$1"
-
-addr_today=$(echo $address10|sed 's/tenday/today/')
+addr_today="http://www.weather.com/weather/today/$1"
 
 [[ ! -d $HOME/.conkycolors/weather/Today/ ]] && mkdir -p $HOME/.conkycolors/weather/Today;
-[[ ! -d $HOME/.conkycolors/weather/10days/ ]] && mkdir -p $HOME/.conkycolors/weather/10days;
-if [[ ! -d $HOME/.conkycolors/weather/images/ ]]; then 
-    mkdir -p $HOME/.conkycolors/weather/images
-    cp /usr/share/conkycolors/icons/Weather/* $HOME/.conkycolors/weather/images/
-fi
 
 wget --user-agent="Firefox" -O $HOME/.conkycolors/weather/Today/raw_td $addr_today
-wget --user-agent="Firefox" -O $HOME/.conkycolors/weather/10days/raw_10 $address10
-
-rm $HOME/.conkycolors/weather/10days/10days_OK
 
 if [[ -s $HOME/.conkycolors/weather/Today/raw_td ]]; then
-	#############################
-	# Right now, Today, Tonight #
-	#############################
-	grep Updated $HOME/.conkycolors/weather/Today/raw_td > $HOME/.conkycolors/weather/updated
-	sed -i -e '/Right Now$/,/Close Weather Details/!d' -e '/wx-social/d' $HOME/.conkycolors/weather/Today/raw_td
-	sed -i '/\/wxicon\/\|&deg;\|wx-phrase\|wx-label\|"wx-data"\|wx-wind-label\|wx-text\|in$\|am\|pm\|wx-moonphase-label/!d' $HOME/.conkycolors/weather/Today/raw_td
-	sed -i -e 's/\r//g' -e 's/^.*\/wxicon\/120\///g' -e 's/\.png.*$/\.png/g' -e 's/^.*fahrenheit">//g' -e 's/^.*temperature">//g' $HOME/.conkycolors/weather/Today/raw_td 
-	sed -i -e 's/^.*wx-label">//g' -e 's/<\/h6>.*$//g' -e '/wx-data">$/d' -e 's/^.*wx-data">//g' -e 's/^.*wx-text">//g' $HOME/.conkycolors/weather/Today/raw_td
-	sed -i -e '/barometric-pressure\|wx-astro-title/d' -e 's/^.*wx-moonphase-label">//g' -e 's/^.*wx-wind-label">//g' $HOME/.conkycolors/weather/Today/raw_td
-	sed -i -e 's/^.*wx-phrase ">//g' -e 's/^.*<dd>//g' -e 's/<.*&deg;.*$//g' -e "s/<span class=.*'>//g" -e 's/<span class=.*">//g' $HOME/.conkycolors/weather/Today/raw_td
-	sed -i -e 's/^<\/span>//g' -e 's/<\/span>$//g' -e 's/<\/div>$//g' -e 's/<\/p>$//g' -e 's/<\/dd>$//g' -e 's/<\/span>$//g' -e 's/&deg;$//g' $HOME/.conkycolors/weather/Today/raw_td
-	sed -i -e '/Snowfall:/,+1d' -e '/Past 24 Hours Snow:/,+1d' $HOME/.conkycolors/weather/Today/raw_td
-	
-	image=$(sed -n 1p $HOME/.conkycolors/weather/Today/raw_td)
-    cp /usr/share/conkycolors/icons/Weather/$image $HOME/.conkycolors/weather/now.png
-    
-    image=$(sed -n 2p $HOME/.conkycolors/weather/Today/raw_td)
-    cp /usr/share/conkycolors/icons/Weather/$image $HOME/.conkycolors/weather/TD.png
+  #############################
+  # Right now, Today, Tonight #
+  #############################
+  grep Updated $HOME/.conkycolors/weather/Today/raw_td > $HOME/.conkycolors/weather/updated
+  sed -i -e '/Right Now$/,/Close Weather Details/!d' -e '/wx-social/d' $HOME/.conkycolors/weather/Today/raw_td
+  sed -i '/\/wxicon\/\|&deg;\|wx-phrase\|wx-label\|"wx-data"\|wx-wind-label\|wx-text\|in$\|am\|pm\|wx-moonphase-label/!d' $HOME/.conkycolors/weather/Today/raw_td
+  sed -i -e 's/\r//g' -e 's/^.*\/wxicon\/120\///g' -e 's/\.png.*$/\.png/g' -e 's/^.*fahrenheit">//g' -e 's/^.*temperature">//g' $HOME/.conkycolors/weather/Today/raw_td
+  sed -i -e 's/^.*wx-label">//g' -e 's/<\/h6>.*$//g' -e '/wx-data">$/d' -e 's/^.*wx-data">//g' -e 's/^.*wx-text">//g' $HOME/.conkycolors/weather/Today/raw_td
+  sed -i -e '/barometric-pressure\|wx-astro-title/d' -e 's/^.*wx-moonphase-label">//g' -e 's/^.*wx-wind-label">//g' $HOME/.conkycolors/weather/Today/raw_td
+  sed -i -e 's/^.*wx-phrase ">//g' -e 's/^.*<dd>//g' -e 's/<.*&deg;.*$//g' -e "s/<span class=.*'>//g" -e 's/<span class=.*">//g' $HOME/.conkycolors/weather/Today/raw_td
+  sed -i -e 's/^<\/span>//g' -e 's/<\/span>$//g' -e 's/<\/div>$//g' -e 's/<\/p>$//g' -e 's/<\/dd>$//g' -e 's/<\/span>$//g' -e 's/&deg;$//g' $HOME/.conkycolors/weather/Today/raw_td
+  sed -i -e '/Snowfall:/,+1d' -e '/Past 24 Hours Snow:/,+1d' $HOME/.conkycolors/weather/Today/raw_td
 
-	image=$(sed -n 3p $HOME/.conkycolors/weather/Today/raw_td)
-    cp /usr/share/conkycolors/icons/Weather/$image $HOME/.conkycolors/weather/TN.png
-fi
+  image=$(sed -n 1p $HOME/.conkycolors/weather/Today/raw_td)
+  cp /usr/share/conkycolors/icons/Weather/$image $HOME/.conkycolors/weather/now.png
 
-if [[ -s $HOME/.conkycolors/weather/10days/raw_10 ]]; then
-	#############
-	#  10 days  #
-	#############
-	grep Updated $HOME/.conkycolors/weather/10days/raw_10 >> $HOME/.conkycolors/weather/updated
-	sed -i '/"wx-daypart"/,/Print 10 Day Forecast/!d' $HOME/.conkycolors/weather/10days/raw_10
-	sed -i -e '/^[ \t]*$/d' -e 's/\r//g' -e '/^$/d' -e 's/^[ \t]*//g' -e '/Average\|Record/d' $HOME/.conkycolors/weather/10days/raw_10
-	sed -i -e 's/^.*wxicon\/70\///g' -e 's/\.png.*$/\.png/g' $HOME/.conkycolors/weather/10days/raw_10
-	sed -i -e 's/^.*"wx-temp"> \|"wx-temp-alt"> \|"wx-phrase">\|wx-severe">\|<dt>\|<dd>\|<h3>\|<p class=//g' $HOME/.conkycolors/weather/10days/raw_10
-	sed -i -e 's/<sup>&deg;.*$//g' -e 's/<\/p>\|<\/dd>.*$//g' -e 's/<span class=.*$//g' -e '/<\|>\|^$/d' -e 's/ at / /g' $HOME/.conkycolors/weather/10days/raw_10
-	sed -i 's/ mph/mph/g' $HOME/.conkycolors/weather/10days/raw_10
-	
-	for (( i=2; i<=65; i+=7 ))
-	    do
-	        image=$(sed -n ${i}p $HOME/.conkycolors/weather/10days/raw_10)
-	        cp /usr/share/conkycolors/icons/Weather/$image $HOME/.conkycolors/weather/10_${i}.png
-	    done
-fi
+  image=$(sed -n 2p $HOME/.conkycolors/weather/Today/raw_td)
+  cp /usr/share/conkycolors/icons/Weather/$image $HOME/.conkycolors/weather/TD.png
 
-line_count=$(cat $HOME/.conkycolors/weather/10days/raw_10|wc -l)
-if [[ $line_count == 70 ]]; then
-	touch $HOME/.conkycolors/weather/10days/10days_OK
+  image=$(sed -n 3p $HOME/.conkycolors/weather/Today/raw_td)
+  cp /usr/share/conkycolors/icons/Weather/$image $HOME/.conkycolors/weather/TN.png
 fi
 
 if [[ -s $HOME/.conkycolors/weather/updated ]]; then
-	##################
-	#  Update times  #
-	##################
-	sed -i -e 's/^.*last-updated">//g' -e 's/^.*Updated: //g' -e 's/<.*$//g' $HOME/.conkycolors/weather/updated
+  ##################
+  #  Update times  #
+  ##################
+  sed -i -e 's/^.*last-updated">//g' -e 's/^.*Updated: //g' -e 's/<.*$//g' $HOME/.conkycolors/weather/updated
 fi

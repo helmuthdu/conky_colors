@@ -840,7 +840,7 @@ function conky_main(color, theme, drawbg, weather_code, battery_value)
 
 	local swapperc = tonumber(conky_parse("${swapperc}"))
 	if swapperc then
-		swapperc = swapperc .. '%'		
+		swapperc = swapperc .. '%'
 	else
 		swapperc = "N/A"
 	end
@@ -962,9 +962,9 @@ function conky_main(color, theme, drawbg, weather_code, battery_value)
 
 	-- PROCESSES ICON
 	settings = {
-		txt='n', font='conkySymbols',
-		x=xp+12           , y=yp+25        ,
-		txt_weight=0      , txt_size=30    ,
+		txt='C', font='conkyColors',
+		x=xp+16           , y=yp+36        ,
+		txt_weight=0      , txt_size=44    ,
 		txt_fg_colour=bgc , txt_fg_alpha=1 ,
 	};display_text(settings)
 
@@ -1019,27 +1019,8 @@ function conky_main(color, theme, drawbg, weather_code, battery_value)
 		};display_text(settings)
 	end
 
-	yp=yp+72
+	yp=yp+78
 	xp=25
-
-	-- MAIL ICON
-	settings = {
-		txt='c', font='conkySymbols',
-		x=xp+12           , y=yp-25        ,
-		txt_weight=0      , txt_size=30    ,
-		txt_fg_colour=bgc , txt_fg_alpha=1 ,
-	};display_text(settings)
-	settings = {
-		value=100         , value_max = 100 ,
-		x = xp+25         , y = yp-50       ,
-		bg_colour = bgc   , bg_alpha = 0.4  ,
-		fg_colour = theme , fg_alpha = 1    ,
-		radius = 4        , thickness = 11  ,
-		start_angle = 0   , end_angle = 360 ,
-		lr = 0            ,
-	};draw_ring(settings)
-
-	yp=yp+50
 
 	-- WIRELESS SIGNAL
 	j=0
