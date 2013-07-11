@@ -36,7 +36,7 @@ extern char 	player[32],
 extern const char *datadir;
 
 #define LEN_CHAR 256
-#define ARGB_VALUE 180
+#define ARGB_VALUE 200
 
 #endif // #ifndef _variables_
 

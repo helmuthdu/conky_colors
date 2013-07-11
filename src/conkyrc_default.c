@@ -22,8 +22,11 @@ void conkyrc_default () {
   }
 
   char ubuntufix;
-  printf("Ubuntu/Debian distro? [y/N]: ");
-  scanf("%c",&ubuntufix);
+  if (set_calendar > 0)
+  {
+    printf("Ubuntu/Debian distro? [y/N]: ");
+    scanf("%c",&ubuntufix);
+  }
 
   const char *playerdir=finddir("bin/conky%s", player);
   const char *pltempldir=finddir("templates/conkyPlayer.template");
@@ -60,15 +63,10 @@ void conkyrc_default () {
   fprintf(fp,"#############################\n");
   fprintf(fp,"own_window_class Conky\n");
   fprintf(fp,"own_window yes\n");
-  if (ubuntufix == 'y')
-    fprintf(fp,"own_window_type override\n");
-  else
-    fprintf(fp,"own_window_type normal\n");
-  if (ubuntufix != 'y') {
-    fprintf(fp,"own_window_argb_visual yes\n");
-    fprintf(fp,"own_window_argb_value %d\n", argb_value);
-  }
+  fprintf(fp,"own_window_type normal\n");
   fprintf(fp,"own_window_transparent yes\n");
+  fprintf(fp,"own_window_argb_visual yes\n");
+  fprintf(fp,"own_window_argb_value %d\n", argb_value);
   fprintf(fp,"own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager\n");
   fprintf(fp,"\n");
   if(strcmp("left",side) == 0)
@@ -402,14 +400,13 @@ void conkyrc_default () {
     fprintf(fp,"${voffset 4}${color0}${font ConkyColors:size=15}t${font}${color}${goto %d}${voffset -12}%s: ${font Liberation Sans:style=Bold:size=8}${color1}${downspeed eth%d}${color}${font} ${alignr}${color2}${downspeedgraph eth%d 8,60 %s}${color}\n", go2, down, eth, eth, color4);
     fprintf(fp,"${goto %d}%s: ${font Liberation Sans:style=Bold:size=8}${color2}${totaldown eth%d}${color}${font}\n", go2, total, eth);
     fprintf(fp,"${voffset 2}${color0}${font ConkyColors:size=15}B${font}${color}${goto %d}${voffset -6}%s: ${alignr}${color2}${addr eth%d}${color}\n", go2, localip, eth);
-    fprintf(fp,"# |--ETH%d\n", eth+1);
-    fprintf(fp,"${else}${if_up eth%d}\n", eth+1);
-    fprintf(fp,"${voffset -5}${color0}${font ConkyColors:size=15}s${font}${color}${goto %d}${voffset -12}%s: ${font Liberation Sans:style=Bold:size=8}${color1}${upspeed eth%d}${color}${font} ${alignr}${color2}${upspeedgraph eth%d 8,60 %s}${color}\n", go2, up, eth+1, eth+1, color4);
-    fprintf(fp,"${goto %d}%s: ${font Liberation Sans:style=Bold:size=8}${color2}${totalup eth%d}${color}${font}\n", go2, total, eth+1);
-    fprintf(fp,"${voffset 2}${color0}${font ConkyColors:size=15}t${font}${color}${goto %d}${voffset -12}%s: ${font Liberation Sans:style=Bold:size=8}${color1}${downspeed eth%d}${color}${font} ${alignr}${color2}${downspeedgraph eth%d 8,60 %s}${color}\n", go2, down, eth+1, eth+1, color4);
-    fprintf(fp,"${goto %d}%s: ${font Liberation Sans:style=Bold:size=8}${color2}${totaldown eth%d}${color}${font}\n", go2, total, eth+1);
-    fprintf(fp,"${color0}${font ConkyColors:size=15}j${font}${color}${voffset -6}${goto %d}%s: ${font Liberation Sans:style=Bold:size=8}${color1}${wireless_link_qual_perc eth%d}%%${color}${font} ${alignr}${color2}${wireless_link_bar 8,60 eth%d}${color}\n", go2, sinal, eth+1, eth+1);
-    fprintf(fp,"${voffset 4}${color0}${font ConkyColors:size=15}B${font}${color}${goto %d}${voffset -6}%s: ${alignr}${color2}${addr eth%d}${color}\n", go2, localip, eth+1);
+    fprintf(fp,"# |--ENP4S%d\n", eth);
+    fprintf(fp,"${else}${if_up enp4s%d}\n", eth);
+    fprintf(fp,"${voffset -5}${color0}${font ConkyColors:size=15}s${font}${color}${goto %d}${voffset -12}%s: ${font Liberation Sans:style=Bold:size=8}${color1}${upspeed enp4s%d}${color}${font} ${alignr}${color2}${upspeedgraph enp4s%d 8,60 %s}${color}\n", go2, up, eth, eth, color4);
+    fprintf(fp,"${goto %d}%s: ${font Liberation Sans:style=Bold:size=8}${color2}${totalup enp4s%d}${color}${font}\n", go2, total, eth);
+    fprintf(fp,"${voffset 2}${color0}${font ConkyColors:size=15}t${font}${color}${goto %d}${voffset -12}%s: ${font Liberation Sans:style=Bold:size=8}${color1}${downspeed enp4s%d}${color}${font} ${alignr}${color2}${downspeedgraph enp4s%d 8,60 %s}${color}\n", go2, down, eth, eth, color4);
+    fprintf(fp,"${goto %d}%s: ${font Liberation Sans:style=Bold:size=8}${color2}${totaldown enp4s%d}${color}${font}\n", go2, total, eth);
+    fprintf(fp,"${voffset 4}${color0}${font ConkyColors:size=15}B${font}${color}${goto %d}${voffset -6}%s: ${alignr}${color2}${addr enp4s%d}${color}\n", go2, localip, eth);
     fprintf(fp,"# |--PPP%d\n", ppp);
     fprintf(fp,"${else}${if_up ppp%d}\n", ppp);
     fprintf(fp,"${voffset -5}${color0}${font ConkyColors:size=15}s${font}${color}${goto %d}${voffset -12}%s: ${font Liberation Sans:style=Bold:size=8}${color1}${upspeed ppp%d}${color}${font} ${alignr}${color2}${upspeedgraph ppp%d 8,60 %s}${color}\n", go2, up, ppp, ppp, color4);
