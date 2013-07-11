@@ -2,15 +2,6 @@
 DIR=$(conky-colors --finddir=scripts/conkyHD3.py)
 pythoncmd="$DIR/scripts/conkyHD3.py $@"
 
-if [ -f /usr/bin/python2 ]; then
-	cmd="/usr/bin/python2 $pythoncmd"
-elif [ -f /usr/bin/python2.7 ] ; then
-	cmd="/usr/bin/python2.7 $pythoncmd"
-elif [ -f /usr/bin/python2.6 ] ; then
-	cmd="/usr/bin/python2.6 $pythoncmd"
-else
-	# here's hoping!
-	cmd="/usr/bin/python $pythoncmd"
-fi
+cmd="/usr/bin/python $pythoncmd"
 
 exec $cmd
