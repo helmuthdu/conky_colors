@@ -429,8 +429,8 @@ void translation () {
 		snprintf(network, 31, "SÍŤ");
 		snprintf(up, 31, "Up.");
 		snprintf(down, 31, "Down.");
-		//snprintf(upload, 31, "Wysłano");
-		//snprintf(download, 31, "Pobrano");
+		//snprintf(upload, 31, "Odesláno");
+		//snprintf(download, 31, "Staženo");
 		snprintf(sinal, 31, "Signál");
 		snprintf(total, 31, "Celkem");
 		snprintf(localip, 31, "Lokální IP");
