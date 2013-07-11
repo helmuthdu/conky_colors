@@ -15,9 +15,9 @@ for device in devices.stdout:
 
     # start calculation dec value (for the pie chart symbol)
     statb = subprocess.Popen("stat -f -c %b "+device+"", shell=True, stdout=subprocess.PIPE,)
-    statb_value = statb.rstrip().decode("utf-8")
+    statb_value = statb.communicate()[0]
     statf = subprocess.Popen("stat -f -c %f "+device+"", shell=True, stdout=subprocess.PIPE,)
-    statf_value = statf.rstrip().decode("utf-8")
+    statf_value = statf.communicate()[0]
     total = int(statb_value)
     used = total - int(statf_value)
     dec = int((((used * 100) / total) + 5) / 10)
