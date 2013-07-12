@@ -185,7 +185,7 @@ void conkyrc_default () {
   //Processes
   if (set_process == True) {
     fprintf(fp,"# |--PROC\n");
-    fprintf(fp,"${voffset 4}${color0}${font ConkyColors:size=15}C${font}${color}${goto %d}${voffset -10}%s: ${color2}${alignr 13}CPU${alignr}RAM${color}\n", go2, processes);
+    fprintf(fp,"${voffset 4}${color0}${font ConkyColors:size=16}C${font}${color}${goto %d}${voffset -10}%s: ${color2}${alignr 13}CPU${alignr}RAM${color}\n", go2, processes);
     for (i = True; i <= proc; i++)
       fprintf(fp,"${voffset -1}${goto 42}${color2}${top name %d}${color}${font Liberation Sans:style=Bold:size=8}${color1} ${goto 126}${top cpu %d}${alignr }${top mem %d}${color}${font}\n", i, i, i);
   }

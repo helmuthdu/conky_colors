@@ -156,10 +156,10 @@ void conkyrc_sls () {
 	char *ucs = NULL;
 	for(ucs=processes;*ucs;ucs++)
 		*ucs=toupper(*ucs);
-	fprintf(fp,"${goto 65}${color0}${font Ubuntu:style=Bold:size=8}%s${color}${font}${voffset 5}\n", processes);
+	fprintf(fp,"${goto 30}${color0}${font Ubuntu:style=Bold:size=8}%s${color}${font}${voffset 5}\n", processes);
 	for (i = 1; i <= 3; i++)
-		fprintf(fp,"${goto 65}${voffset -5}${font Ubuntu:size=6}${top name %d}${color}${goto 150}${top cpu %d}${alignr 10}${top mem %d}${font}\n", i, i, i);
-	fprintf(fp,"${voffset 52}\n");
+		fprintf(fp,"${goto 30}${voffset -5}${font Ubuntu:size=6}${top name %d}${color}${goto 150}${top cpu %d}${alignr 10}${top mem %d}${font}\n", i, i, i);
+	fprintf(fp,"${voffset 60}\n");
 	fprintf(fp,"###############\n");
 	fprintf(fp,"# - NETWORK - #\n");
 	fprintf(fp,"###############\n");

@@ -957,18 +957,7 @@ function conky_main(color, theme, drawbg, weather_code, battery_value)
 		txt_fg_colour=bgc , txt_fg_alpha=0.6 ,
 	};display_text(settings)
 
-	yp=yp+20
-	xp=25
-
-	-- PROCESSES ICON
-	settings = {
-		txt='C', font='conkyColors',
-		x=xp+16           , y=yp+36        ,
-		txt_weight=0      , txt_size=44    ,
-		txt_fg_colour=bgc , txt_fg_alpha=1 ,
-	};display_text(settings)
-
-	yp=yp+100
+	yp=yp+120
 	xp=25
 
 	-- DISKS
@@ -1019,7 +1008,7 @@ function conky_main(color, theme, drawbg, weather_code, battery_value)
 		};display_text(settings)
 	end
 
-	yp=yp+78
+	yp=yp+85
 	xp=25
 
 	-- WIRELESS SIGNAL
