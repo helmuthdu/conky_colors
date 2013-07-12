@@ -8,11 +8,12 @@ print ("${voffset 4}${color0}${font ConkyColors:size=18}h${font}${color}${voffse
 
 for device in devices.stdout:
     device = device.rstrip().decode("utf-8")
-    if (device is "/"):
-        devicename="Root"
-    else:
-        devicename = basename(normpath(device)).capitalize()
+    if (ismount(device)):
+        if (device is "/"):
+            devicename="Root"
+        else:
+            devicename = basename(normpath(device)).capitalize()
 
-    print ("${voffset -10}${goto 32}"+devicename+": ${font Ubuntu:style=Bold:size=8}${color1}${fs_free_perc "+device+"}%${color}${font} ${alignr}${font Ubuntu:style=Bold:size=8}${color2}${fs_free "+device+"}${color}${font}\n")
+        print ("${voffset -10}${goto 32}"+devicename+": ${font Ubuntu:style=Bold:size=8}${color1}${fs_free_perc "+device+"}%${color}${font} ${alignr}${font Ubuntu:style=Bold:size=8}${color2}${fs_free "+device+"}${color}${font}\n")
 
 print ("${voffset -10}")
