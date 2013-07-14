@@ -95,7 +95,7 @@ int options (int argc, char *argv[]) {
 			OR_OPTION("italian", value) OR_OPTION("it", value) OR_OPTION("polish", value) OR_OPTION("pl", value)
 			OR_OPTION("estonian", value) OR_OPTION("et", value) OR_OPTION("russian", value) OR_OPTION("ru", value)
 			OR_OPTION("french", value) OR_OPTION("fr", value) OR_OPTION("bulgarian", value) OR_OPTION("bg", value)
-			OR_OPTION("ukrainian", value) OR_OPTION_END("uk", value)
+			OR_OPTION("ukrainian", value) OR_OPTION("czech", value) OR_OPTION("cs", value) OR_OPTION_END("uk", value)
 				snprintf(language, 31, "%s", value);
 			else
 			{
