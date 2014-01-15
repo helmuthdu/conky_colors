@@ -451,6 +451,43 @@ void translation () {
 		//snprintf(norhythmbox, 31, "Rhythmbox není spuštěn");
 		snprintf(unknownstatus, 31, "Neznámý stav");
 	}
+	else OR_OPTION_START("el", language) OR_OPTION_END("greek", language) {
+		snprintf(sys, 31, "ΣΥΣΤΗΜΑ");
+		snprintf(battery, 31, "Μπαταρία");
+		snprintf(uptime, 31, "Uptime");
+		snprintf(processes, 31, "Διεργασίες");
+		snprintf(packages, 31, "Πακέτα");
+		snprintf(date, 31, "ΗΜ/ΝΙΑ");
+		snprintf(photo, 31, "ΦΩΤΟΓΡΑΦΙΑ");
+		snprintf(hd, 31, "ΔΙΣΚΟΣ");
+		snprintf(temperature, 31, "Θερμοκρασία");
+		snprintf(updates, 31, "Ενημερώσεις");
+		snprintf(nouve, 31, "Νέο");
+		snprintf(network, 31, "ΔΙΚΤΥΟ");
+		snprintf(up, 31, "Φόρτωση");
+		snprintf(down, 31, "Λήψη");
+		//snprintf(upload, 31, "Odesláno");
+		//snprintf(download, 31, "Staženo");
+		snprintf(sinal, 31, "Σήμα");
+		snprintf(total, 31, "Σύνολο");
+		snprintf(localip, 31, "Τοπική IP");
+		snprintf(publicip, 31, "Δημόσια IP");
+		snprintf(nonet, 31, "Δίκτυο μη διαθέσιμο");
+		snprintf(Weather, 31, "ΚΑΙΡΟΣ");
+		snprintf(noweather, 31, "Καιρός μη διαθέσιμος");
+		//snprintf(station, 31, "Stanice");
+		//snprintf(rain, 31, "Déšť");
+		snprintf(humidity, 31, "Υγρασία");
+		//snprintf(sunrise, 31, "Východ Slunce");
+		//snprintf(sunset, 31, "Západ SLunce");
+		//snprintf(moon, 31, "Měsíc");
+		snprintf(status, 31, "Κατάσταση");
+		snprintf(song, 31, "Τραγούδι");
+		snprintf(tempo, 31, "Χρόνος");
+		snprintf(nopidgin, 31, "Το Pidgin δεν είναι ενεργό");
+		//snprintf(norhythmbox, 31, "Rhythmbox není spuštěn");
+		snprintf(unknownstatus, 31, "Άγνωστη κατάσταση");
+	}
 	else {
 		snprintf(sys, 31, "SYSTEM");
 		snprintf(battery, 31, "Battery");
