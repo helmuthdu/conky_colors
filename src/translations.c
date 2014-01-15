@@ -466,8 +466,8 @@ void translation () {
 		snprintf(network, 31, "ΔΙΚΤΥΟ");
 		snprintf(up, 31, "Φόρτωση");
 		snprintf(down, 31, "Λήψη");
-		//snprintf(upload, 31, "Odesláno");
-		//snprintf(download, 31, "Staženo");
+		//snprintf(upload, 31, "Φόρτωση");
+		//snprintf(download, 31, "Λήψη");
 		snprintf(sinal, 31, "Σήμα");
 		snprintf(total, 31, "Σύνολο");
 		snprintf(localip, 31, "Τοπική IP");
@@ -475,17 +475,17 @@ void translation () {
 		snprintf(nonet, 31, "Δίκτυο μη διαθέσιμο");
 		snprintf(Weather, 31, "ΚΑΙΡΟΣ");
 		snprintf(noweather, 31, "Καιρός μη διαθέσιμος");
-		//snprintf(station, 31, "Stanice");
-		//snprintf(rain, 31, "Déšť");
+		//snprintf(station, 31, "Σταθμός");
+		//snprintf(rain, 31, "Βροχή");
 		snprintf(humidity, 31, "Υγρασία");
-		//snprintf(sunrise, 31, "Východ Slunce");
-		//snprintf(sunset, 31, "Západ SLunce");
-		//snprintf(moon, 31, "Měsíc");
+		//snprintf(sunrise, 31, "Ανατολή ηλίου");
+		//snprintf(sunset, 31, "Δύση ηλίου");
+		//snprintf(moon, 31, "Φεγγάρι");
 		snprintf(status, 31, "Κατάσταση");
 		snprintf(song, 31, "Τραγούδι");
 		snprintf(tempo, 31, "Χρόνος");
 		snprintf(nopidgin, 31, "Το Pidgin δεν είναι ενεργό");
-		//snprintf(norhythmbox, 31, "Rhythmbox není spuštěn");
+		//snprintf(norhythmbox, 31, "Το Rhythmbox δεν είναι ενεργό");
 		snprintf(unknownstatus, 31, "Άγνωστη κατάσταση");
 	}
 	else {
