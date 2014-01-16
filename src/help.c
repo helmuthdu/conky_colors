@@ -10,7 +10,7 @@ void help() {
 	printf("\toptions:\n");
 	printf("\t-------------- LANGUAGES --------------\n");
 	printf("\t--lang=<language> - Set default language\n");
-	printf("\tLanguages: bg|de|en*|et|fr|it|pl|pt|ru|es|uk\n");
+	printf("\tLanguages: bg|de|el|en*|et|fr|it|pl|pt|ru|es|uk\n");
 	printf("\t-------------- THEMES --------------\n");
 	printf("\t--theme=<theme> - Set default theme color\n");
 	printf("\tThemes: brave|carbonite|dust|human*|noble|tribute|wine|wise|\n");
