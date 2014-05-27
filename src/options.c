@@ -225,7 +225,7 @@ int options (int argc, char *argv[]) {
 		else OR_OPTION_START("--rhythmbox", key) OR_OPTION("--clementine", key) OR_OPTION_END("--banshee", key)
 		{
 			// Copy key to player without "--".
-			snprintf(player, 31, key+2);
+			snprintf(player, 31, "%s", key+2);
 			// Capitalize the first character.
 			player[0]=toupper(player[0]);
 
