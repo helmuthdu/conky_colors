@@ -138,7 +138,7 @@ void themes () {
 		}
 	else
 		if(custom == True)
-			snprintf(color3, 31, color1);
+			snprintf(color3, 31, "%s", color1);
 	else {
 		snprintf(color1, 31, "CE5C00 ");
 		snprintf(color3, 31, "E07A1F");
