@@ -8,8 +8,10 @@ print ("${voffset 4}")
 
 for device in devices.stdout:
     device = device.rstrip().decode("utf-8")
+    if device == u'/boot/efi':
+        continue
     if (ismount(device)):
-        if (device is "/"):
+        if (device == u"/"):
             devicename="Root"
         else:
             devicename = basename(normpath(device)).capitalize()
