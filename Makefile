@@ -1,3 +1,4 @@
+PREFIX=/usr/local
 VPATH=src/
 CFLAGS=-Wall -std=c99
 CWD:=$(shell pwd)
@@ -9,13 +10,13 @@ conky-colors: conky-colors.c conkycover.c conkyplayer.c \
 	confinstall.c utils.c initialize.c
 
 install: conky-colors conkyrc
-	install -Dm755 conky-colors $(DESTDIR)/bin/conky-colors
-	find conkycolors/bin -type f -exec install -Dm755 {} $(DESTDIR)/usr/share/{} \;
-	find conkycolors/scripts -type f -exec install -Dm755 {} $(DESTDIR)/usr/share/{} \;
-	find conkycolors/icons -type f -exec install -Dm644 {} $(DESTDIR)/usr/share/{} \;
-	find conkycolors/templates -type f -exec install -Dm644 {} $(DESTDIR)/usr/share/{} \;
-	find fonts/conkycolors -type f -exec install -Dm644 {} $(DESTDIR)/usr/share/{} \;
-	ln -fs $(DESTDIR)/usr/share/conkycolors/bin/conkyTask $(DESTDIR)/usr/bin/ct
+	install -Dm755 conky-colors $(DESTDIR)$(PREFIX)/bin/conky-colors
+	find conkycolors/bin -type f -exec install -Dm755 {} $(DESTDIR)$(PREFIX)/share/{} \;
+	find conkycolors/scripts -type f -exec install -Dm755 {} $(DESTDIR)$(PREFIX)/share/{} \;
+	find conkycolors/icons -type f -exec install -Dm644 {} $(DESTDIR)$(PREFIX)/share/{} \;
+	find conkycolors/templates -type f -exec install -Dm644 {} $(DESTDIR)$(PREFIX)/share/{} \;
+	find fonts/conkycolors -type f -exec install -Dm644 {} $(DESTDIR)$(PREFIX)/share/{} \;
+	ln -fs $(DESTDIR)$(PREFIX)/share/conkycolors/bin/conkyTask $(DESTDIR)$(PREFIX)/bin/ct
 
 conkyrc: conky-colors
 
@@ -23,10 +24,10 @@ clean:
 	rm -f conky-colors
 
 uninstall:
-	rm -rf $(DESTDIR)/usr/share/conkycolors
-	rm -fr $(DESTDIR)/usr/share/fonts/conkycolors
-	rm $(DESTDIR)/usr/bin/conky-colors
-	rm $(DESTDIR)/usr/bin/ct
+	rm -rf $(DESTDIR)$(PREFIX)/share/conkycolors
+	rm -fr $(DESTDIR)$(PREFIX)/share/fonts/conkycolors
+	rm $(DESTDIR)$(PREFIX)/bin/conky-colors
+	rm $(DESTDIR)$(PREFIX)/bin/ct
 
 .PHONY: all clean install uninstall
 
