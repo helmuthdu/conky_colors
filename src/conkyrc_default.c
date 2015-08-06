@@ -315,10 +315,10 @@ void conkyrc_default () {
     fprintf(fp,"##############\n");
     fprintf(fp,"${voffset 4}${font Liberation Sans:style=Bold:size=8}NVIDIA $stippled_hr${font}\n");
     fprintf(fp,"${color0}${voffset 2}${font ConkyColorsLogos:size=16}n${font}${color}");
-    fprintf(fp,"${goto %d}${voffset -8}GPU Temp:${alignr}${font Liberation Sans:style=Bold:size=8}${color1} ${exec nvidia-settings -q GPUCoreTemp | grep Attribute | cut -d ' ' -f 6 | cut -c 1-2}${font}${color}°C\n", go2);
-    fprintf(fp,"${goto %d}GPU Clock:${alignr}${font Liberation Sans:style=Bold:size=8}${color1} ${exec nvidia-settings -q GPU2DClockFreqs -t}${font}${color}MHz\n", go2);
-    fprintf(fp,"${goto %d}Video RAM:${alignr}${font Liberation Sans:style=Bold:size=8}${color1} ${exec nvidia-settings -q VideoRam -t}${font}${color}KiB\n", go2);
-    fprintf(fp,"${goto %d}Driver Version:${alignr}${font Liberation Sans:style=Bold:size=8}${color1} ${exec nvidia-settings -q NvidiaDriverVersion -t}${font}${color}\n", go2);
+    fprintf(fp,"${goto %d}${voffset -8}GPU Temp:${alignr}${font Liberation Sans:style=Bold:size=8}${color1} ${exec nvidia-settings -q [gpu:0]/GPUCoreTemp | grep Attribute | cut -d ' ' -f 6 | cut -c 1-2}${font}${color}°C\n", go2);
+    fprintf(fp,"${goto %d}GPU Clock:${alignr}${font Liberation Sans:style=Bold:size=8}${color1} ${exec nvidia-settings -q [gpu:0]/GPU2DClockFreqs -t}${font}${color}MHz\n", go2);
+    fprintf(fp,"${goto %d}Video RAM:${alignr}${font Liberation Sans:style=Bold:size=8}${color1} ${exec nvidia-settings -q [gpu:0]/VideoRam -t}${font}${color}KiB\n", go2);
+    fprintf(fp,"${goto %d}Driver Version:${alignr}${font Liberation Sans:style=Bold:size=8}${color1} ${exec nvidia-settings -q [gpu:0]/NvidiaDriverVersion -t}${font}${color}\n", go2);
   }
 
   //HD Widget
