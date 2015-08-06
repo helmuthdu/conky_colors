@@ -3,6 +3,8 @@
 #put your 10 day weather.com address here
 addr_today="http://www.weather.com/weather/today/$1"
 
+systemdir=$( conky-colors --systemdir )
+
 [[ ! -d $HOME/.conkycolors/weather/Today/ ]] && mkdir -p $HOME/.conkycolors/weather/Today;
 
 wget --user-agent="Firefox" -O $HOME/.conkycolors/weather/Today/raw_td $addr_today
@@ -22,13 +24,13 @@ if [[ -s $HOME/.conkycolors/weather/Today/raw_td ]]; then
   sed -i -e '/Snowfall:/,+1d' -e '/Past 24 Hours Snow:/,+1d' $HOME/.conkycolors/weather/Today/raw_td
 
   image=$(sed -n 1p $HOME/.conkycolors/weather/Today/raw_td)
-  cp /usr/share/conkycolors/icons/Weather/$image $HOME/.conkycolors/weather/now.png
+  cp $systemdir/icons/Weather/$image $HOME/.conkycolors/weather/now.png
 
   image=$(sed -n 2p $HOME/.conkycolors/weather/Today/raw_td)
-  cp /usr/share/conkycolors/icons/Weather/$image $HOME/.conkycolors/weather/TD.png
+  cp $systemdir/icons/Weather/$image $HOME/.conkycolors/weather/TD.png
 
   image=$(sed -n 3p $HOME/.conkycolors/weather/Today/raw_td)
-  cp /usr/share/conkycolors/icons/Weather/$image $HOME/.conkycolors/weather/TN.png
+  cp $systemdir/icons/Weather/$image $HOME/.conkycolors/weather/TN.png
 fi
 
 if [[ -s $HOME/.conkycolors/weather/updated ]]; then

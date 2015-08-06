@@ -35,7 +35,7 @@ int initialize_finddir()
 
 	info.datadir[FINDDIR_CUSTOM][0] = '\0';
 	snprintf(info.datadir[FINDDIR_LOCAL], FINDDIR_CHAR_LEN, "%s/.conkycolors", path);
-	snprintf(info.datadir[FINDDIR_SYSTEM], FINDDIR_CHAR_LEN, "/usr/share/conkycolors");
+	snprintf(info.datadir[FINDDIR_SYSTEM], FINDDIR_CHAR_LEN, "%s/share/conkycolors", DESTDIR);
 	snprintf(info.tempdir, FINDDIR_CHAR_LEN, "/tmp/conkycolors");
 
 	if(systemf("if ! test -d %s; then mkdir -p %s; fi", info.tempdir, info.tempdir) != 0)
