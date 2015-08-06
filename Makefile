@@ -9,15 +9,13 @@ conky-colors: conky-colors.c conkycover.c conkyplayer.c \
 	confinstall.c utils.c initialize.c
 
 install: conky-colors conkyrc
-	mkdir -p $(DESTDIR)/usr/share
-	mkdir -p $(DESTDIR)/usr/bin
-	cp -v conky-colors $(DESTDIR)/usr/bin
-	cp -v -r conkycolors $(DESTDIR)/usr/share
-	cp -v -r fonts/conkycolors $(DESTDIR)/usr/share/fonts
+	install -Dm755 conky-colors $(DESTDIR)/bin/conky-colors
+	find conkycolors/bin -type f -exec install -Dm755 {} $(DESTDIR)/usr/share/{} \;
+	find conkycolors/scripts -type f -exec install -Dm755 {} $(DESTDIR)/usr/share/{} \;
+	find conkycolors/icons -type f -exec install -Dm644 {} $(DESTDIR)/usr/share/{} \;
+	find conkycolors/templates -type f -exec install -Dm644 {} $(DESTDIR)/usr/share/{} \;
+	find fonts/conkycolors -type f -exec install -Dm644 {} $(DESTDIR)/usr/share/{} \;
 	ln -fs $(DESTDIR)/usr/share/conkycolors/bin/conkyTask $(DESTDIR)/usr/bin/ct
-	chmod +x $(DESTDIR)/usr/share/conkycolors/scripts/*
-	chmod +x $(DESTDIR)/usr/share/conkycolors/bin/*
-	chmod -R 755 $(DESTDIR)/usr/share/conkycolors/
 
 conkyrc: conky-colors
 
