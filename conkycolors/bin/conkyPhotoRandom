@@ -5,7 +5,8 @@
 
 source="/usr/share/backgrounds/"
 photo="/tmp/conkyPhoto.png"
-template="/usr/share/conkycolors/icons/ConkyPhoto"
+systemdir=$( conky-colors --systemdir )
+template="$systemdir/icons/ConkyPhoto"
 filename=`find $source \( -iname "*.png" -o -iname "*.jpg" \) | shuf -n1`
 
 #choose your theme: 1,2

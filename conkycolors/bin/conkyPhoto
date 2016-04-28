@@ -7,7 +7,8 @@
 filename="/usr/share/backgrounds/159.jpg"
 
 photo="/tmp/conkyPhoto.png"
-template="/usr/share/conkycolors/icons"
+systemdir=$(conky-colors --systemdir)
+template="$systemdir/icons"
 
 #choose your theme: 1,2
 theme=1

@@ -26,14 +26,22 @@ function get_user_dir()
 end
 
 -------------------------------------------------------------------------------
+--                                                             get_system_dir
+-- return system directory
+--
+function get_system_dir(dataType, dataLocation, dataUnit)
+	local f = assert(io.popen("conky-colors --systemdir"))
+	local s = assert(f:read('*l'))
+	f:close()
+	return s
+end
+
+-------------------------------------------------------------------------------
 --                                                             get_weather_info
 -- return yahoo weather info
 --
 function get_yahoo_weather_info(dataType, dataLocation, dataUnit)
-	local f = assert(io.popen("conky-colors --systemdir"))
-	local s = assert(f:read('*l'))
-	f:close()
-	f = assert(io.popen("sh " .. s .. "/bin/conkyYahooWeather " .. dataType .. " " .. dataLocation .. " " .. dataUnit)) -- runs command
+	f = assert(io.popen("sh " .. get_system_dir() .. "/bin/conkyYahooWeather " .. dataType .. " " .. dataLocation .. " " .. dataUnit)) -- runs command
 	s = assert(f:read('*l'))
 	f:close()
 	return s
@@ -728,9 +736,9 @@ function conky_main(color, theme, drawbg, weather_code, battery_value)
 
 	-- IMAGE
 	if color == "white" then
-		image = cairo_image_surface_create_from_png ("/usr/share/conkycolors/icons/SLS/Cover.png")
+		image = cairo_image_surface_create_from_png (get_system_dir() .. "/icons/SLS/Cover.png")
 	else
-		image = cairo_image_surface_create_from_png ("/usr/share/conkycolors/icons/SLS/Cover_white.png")
+		image = cairo_image_surface_create_from_png (get_system_dir() .. "/icons/SLS/Cover_white.png")
 	end
 	cairo_set_source_surface (cr, image, -5, 90)
 	cairo_paint (cr);
