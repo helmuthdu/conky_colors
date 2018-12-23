@@ -95,34 +95,34 @@ void conkyrc_board () {
 		fprintf(fp,"\ndefault_color cccccc\n");
 	fprintf(fp,"\n");
 	//COLOR0
-    if (dark == True || black == True)
-        fprintf(fp,"color0 1E1C1A\n");
-    else
-        if (custom == True || radiance == True || ambiance == True || elementary == True)
-            fprintf(fp,"color0 %s\n", color0);
-    else
-        fprintf(fp,"color0 white\n");
-	//COLOR1
-    fprintf(fp,"color1 %s\n", color1);
-	//COLOR2
-    if (dark == True || black == True)
-        fprintf(fp,"color2 1E1C1A\n");
+	if (dark == True || black == True)
+		fprintf(fp,"color0 1E1C1A\n");
 	else
-        if (custom == True || radiance == True || ambiance == True || (elementary == True && dark != True))
-            fprintf(fp,"color2 %s\n", color2);
+		if (custom == True || radiance == True || ambiance == True || elementary == True)
+			fprintf(fp,"color0 %s\n", color0);
+	else
+		fprintf(fp,"color0 white\n");
+	//COLOR1
+	fprintf(fp,"color1 %s\n", color1);
+	//COLOR2
+	if (dark == True || black == True)
+		fprintf(fp,"color2 1E1C1A\n");
+	else
+		if (custom == True || radiance == True || ambiance == True || (elementary == True && dark != True))
+			fprintf(fp,"color2 %s\n", color2);
 	else
 		fprintf(fp,"color2 white\n");
 	//COLOR3
-    fprintf(fp,"color3 %s\n", color3);
+	fprintf(fp,"color3 %s\n", color3);
 	fprintf(fp,"\n");
 	// LUA SCRIPTS
 	fprintf(fp,"\nlua_load %s/scripts/conkyBoard.lua\n", finddir("scripts/conkyBoard.lua") );
 	fprintf(fp,"lua_draw_hook_pre main ");
 
-    if (dark == True || white == True || radiance == True)
-        fprintf(fp,"white ");
-    else
-        fprintf(fp,"black ");
+	if (dark == True || white == True || radiance == True)
+		fprintf(fp,"white ");
+	else
+		fprintf(fp,"black ");
 
 	fprintf(fp,"%s ", color3);
 	fprintf(fp,"%s ", color1);
