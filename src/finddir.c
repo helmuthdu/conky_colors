@@ -24,7 +24,7 @@ int install=FINDDIR_LOCAL;
 
 int initialize_finddir()
 {
-	char path[FINDDIR_CHAR_LEN];
+	char path[FINDDIR_CHAR_LEN - strlen("/." BINARY_NAME)];
 
 	info.nofilecheck=0;
 
@@ -34,9 +34,10 @@ int initialize_finddir()
 		return -1;
 
 	info.datadir[FINDDIR_CUSTOM][0] = '\0';
-	snprintf(info.datadir[FINDDIR_LOCAL], FINDDIR_CHAR_LEN, "%s/.conkycolors", path);
-	snprintf(info.datadir[FINDDIR_SYSTEM], FINDDIR_CHAR_LEN, "%s/share/conkycolors", DESTDIR);
-	snprintf(info.tempdir, FINDDIR_CHAR_LEN, "/tmp/conkycolors");
+	snprintf(info.datadir[FINDDIR_LOCAL], FINDDIR_CHAR_LEN, "%s/." BINARY_NAME, path);
+	snprintf(info.datadir[FINDDIR_SYSTEM], FINDDIR_CHAR_LEN,
+	         "%s/share/" BINARY_NAME, DESTDIR);
+	snprintf(info.tempdir, FINDDIR_CHAR_LEN, "/tmp/" BINARY_NAME);
 
 	if(systemf("if ! test -d %s; then mkdir -p %s; fi", info.tempdir, info.tempdir) != 0)
 	{
