@@ -19,9 +19,9 @@ extern char 	sys[31],
 		sinal[31],
 		localip[31],
 		publicip[31],
-		nonet[31],
+		nonet[40],
 		Weather[31],
-		noweather[31],
+		noweather[62],
 		//station[31],
 		//rain[31],
 		humidity[31],
@@ -33,9 +33,9 @@ extern char 	sys[31],
 		status[31],
 		song[31],
 		tempo[31],
-		nopidgin[31],
+		nopidgin[43],
 		//norhythmbox[31],
-		unknownstatus[31];
+		unknownstatus[34];
 
 extern char 	language[31];
 
