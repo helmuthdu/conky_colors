@@ -22,9 +22,9 @@ char 	sys[31],
 		sinal[31],
 		localip[31],
 		publicip[31],
-		nonet[31],
+		nonet[40],
 		Weather[31],
-		noweather[31],
+		noweather[62],
 		//station[31],
 		//rain[31],
 		humidity[31],
@@ -36,9 +36,9 @@ char 	sys[31],
 		status[31],
 		song[31],
 		tempo[31],
-		nopidgin[31],
+		nopidgin[43],
 		//norhythmbox[31],
-		unknownstatus[31];
+		unknownstatus[34];
 
 char 	language[31];
 
@@ -289,7 +289,7 @@ void translation () {
 		snprintf(publicip, 31, "Внешний IP");
 		snprintf(nonet, 31, "Сеть недоступна");
 		snprintf(Weather, 31, "ПОГОДА");
-		snprintf(noweather, 31, "Информация о погоде недоступна");
+		snprintf(noweather, 59, "Информация о погоде недоступна");
 		//snprintf(station, 31, "Станция");
 		//snprintf(rain, 31, "Дождь");
 		snprintf(humidity, 31, "Влажность");
@@ -324,9 +324,9 @@ void translation () {
 		snprintf(total, 31, "Общо");
 		snprintf(localip, 31, "Локален IP");
 		snprintf(publicip, 31, "Външен IP");
-		snprintf(nonet, 31, "Мрежата е недостъпна");
+		snprintf(nonet, 39, "Мрежата е недостъпна");
 		snprintf(Weather, 31, "ВРЕМЕТО");
-		snprintf(noweather, 31, "Няма информация за времето");
+		snprintf(noweather, 50, "Няма информация за времето");
 		//snprintf(station, 31, "станция");
 		//snprintf(rain, 31, "дъжд");
 		snprintf(humidity, 31, "влажност");
@@ -336,7 +336,7 @@ void translation () {
 		snprintf(status, 31, "Статус");
 		snprintf(song, 31, "Песен");
 		snprintf(tempo, 31, "Време");
-		snprintf(nopidgin, 31, "Pidgin не е стартиран");
+		snprintf(nopidgin, 34, "Pidgin не е стартиран");
 		//snprintf(norhythmbox, 31, "Rhythmbox не е стартиран");
 		snprintf(unknownstatus, 31, "Unknown Status");
 	}
@@ -361,9 +361,9 @@ void translation () {
 		snprintf(total, 31, "Всього");
 		snprintf(localip, 31, "Локальний IP");
 		snprintf(publicip, 31, "Зовнішній IP");
-		snprintf(nonet, 31, "Мережа недоступна");
+		snprintf(nonet, 34, "Мережа недоступна");
 		snprintf(Weather, 31, "ПОГОДА");
-		snprintf(noweather, 31, "Інформация про погоду недоступна");
+		snprintf(noweather, 62, "Інформация про погоду недоступна");
 		//snprintf(station, 31, "Станція");
 		//snprintf(rain, 31, "Дощ");
 		snprintf(humidity, 31, "Вологість");
@@ -410,7 +410,7 @@ void translation () {
 		snprintf(status, 31, "Status");
 		snprintf(song, 31, "Morceau");
 		snprintf(tempo, 31, "Temps");
-		snprintf(nopidgin, 31, "Pidgin non démarré");	
+		snprintf(nopidgin, 31, "Pidgin non démarré");
 		//snprintf(norhythmbox, 31, "Rhythmbox non démarré");
 		snprintf(unknownstatus, 31, "État inconnu");
 	}
@@ -472,9 +472,9 @@ void translation () {
 		snprintf(total, 31, "Σύνολο");
 		snprintf(localip, 31, "Τοπική IP");
 		snprintf(publicip, 31, "Δημόσια IP");
-		snprintf(nonet, 31, "Δίκτυο μη διαθέσιμο");
+		snprintf(nonet, 37, "Δίκτυο μη διαθέσιμο");
 		snprintf(Weather, 31, "ΚΑΙΡΟΣ");
-		snprintf(noweather, 31, "Καιρός μη διαθέσιμος");
+		snprintf(noweather, 39, "Καιρός μη διαθέσιμος");
 		//snprintf(station, 31, "Σταθμός");
 		//snprintf(rain, 31, "Βροχή");
 		snprintf(humidity, 31, "Υγρασία");
@@ -484,9 +484,9 @@ void translation () {
 		snprintf(status, 31, "Κατάσταση");
 		snprintf(song, 31, "Τραγούδι");
 		snprintf(tempo, 31, "Χρόνος");
-		snprintf(nopidgin, 31, "Το Pidgin δεν είναι ενεργό");
+		snprintf(nopidgin, 43, "Το Pidgin δεν είναι ενεργό");
 		//snprintf(norhythmbox, 31, "Το Rhythmbox δεν είναι ενεργό");
-		snprintf(unknownstatus, 31, "Άγνωστη κατάσταση");
+		snprintf(unknownstatus, 35, "Άγνωστη κατάσταση");
 	}
 	else {
 		snprintf(sys, 31, "SYSTEM");

@@ -90,33 +90,33 @@ void conkyrc_cairo () {
 		fprintf(fp,"\ndefault_color cccccc\n");
 	fprintf(fp,"\n");
 	//COLOR0
-    if (dark == True || black == True)
-        fprintf(fp,"color0 1E1C1A\n");
-    else
-        if (custom == True || radiance == True || ambiance == True || elementary == True)
-            fprintf(fp,"color0 %s\n", color0);
-    else
-        fprintf(fp,"color0 white\n");
-	//COLOR1
-    fprintf(fp,"color1 %s\n", color1);
-	//COLOR2
-    if (dark == True || black == True)
-        fprintf(fp,"color2 1E1C1A\n");
+	if (dark == True || black == True)
+		fprintf(fp,"color0 1E1C1A\n");
 	else
-        if (custom == True || radiance == True || ambiance == True || (elementary == True && dark != True))
-            fprintf(fp,"color2 %s\n", color2);
+		if (custom == True || radiance == True || ambiance == True || elementary == True)
+			fprintf(fp,"color0 %s\n", color0);
+	else
+		fprintf(fp,"color0 white\n");
+	//COLOR1
+	fprintf(fp,"color1 %s\n", color1);
+	//COLOR2
+	if (dark == True || black == True)
+		fprintf(fp,"color2 1E1C1A\n");
+	else
+		if (custom == True || radiance == True || ambiance == True || (elementary == True && dark != True))
+			fprintf(fp,"color2 %s\n", color2);
 	else
 		fprintf(fp,"color2 white\n");
 	//COLOR3
-    fprintf(fp,"color3 %s\n", color3);
+	fprintf(fp,"color3 %s\n", color3);
 	// LUA SCRIPTS
 	fprintf(fp,"lua_load %s/scripts/conkyCairo.lua\n", conkycairo);
 	fprintf(fp,"lua_draw_hook_post conky_main ");
 
-    if (dark == True || black == True)
-        fprintf(fp,"black ");
-    else
-        fprintf(fp,"white ");
+	if (dark == True || black == True)
+		fprintf(fp,"black ");
+	else
+		fprintf(fp,"white ");
 
 	if (dark == True || black == True)
 		fprintf(fp,"000000 ");

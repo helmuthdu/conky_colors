@@ -1,6 +1,7 @@
 #ifndef _finddir_
 #define _finddir_
 
+#define BINARY_NAME "conkycolors"
 #define FINDDIR_CHAR_LEN 256
 #define NUM_DATADIR 3
 
@@ -30,4 +31,3 @@ void set_install_type(int type);
 void print_default_datadir();
 
 #endif // #ifndef _finddir_
-
