@@ -1,6 +1,6 @@
 PREFIX=/usr/local
 VPATH=src/
-CFLAGS:=$(CFLAGS) -DDESTDIR=\"$(DESTDIR)$(PREFIX)\" -Wall -std=c99
+CFLAGS:=$(CFLAGS) -fcommon -DDESTDIR=\"$(DESTDIR)$(PREFIX)\" -Wall -std=c99
 CWD:=$(shell pwd)
 
 all: conky-colors
