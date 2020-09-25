@@ -10,7 +10,7 @@ elif [ -f /usr/bin/python2.6 ] ; then
 	cmd="/usr/bin/python2.6 $pythoncmd"
 else
 	# here's hoping!
-	cmd="/usr/bin/python $pythoncmd"
+	cmd="/usr/bin/python3 $pythoncmd"
 fi
 
 exec $cmd "$@"
