@@ -2,6 +2,6 @@
 DIR=$(conky-colors --finddir=scripts/conkyHD3.py)
 pythoncmd="$DIR/scripts/conkyHD3.py $@"
 
-cmd="/usr/bin/python $pythoncmd"
+cmd="/usr/bin/python3 $pythoncmd"
 
 exec $cmd
