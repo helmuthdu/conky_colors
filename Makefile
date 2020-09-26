@@ -1,4 +1,4 @@
-PREFIX=/usr/local
+PREFIX=/usr
 VPATH=src/
 CFLAGS:=$(CFLAGS) -fcommon -DDESTDIR=\"$(DESTDIR)$(PREFIX)\" -Wall -std=c99
 CWD:=$(shell pwd)
